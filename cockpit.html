@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>TSH Beyond-Dashboard | フロー月次LIVE ＆ ストック10年データ資産カルテ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* =========================================================
+       TCC Executive Cockpit (Design System v2.0 Dark)
+       ========================================================= */
+    :root {
+      --bg: #05080d;
+      --card: #0d1520;
+      --card-sub: #080d14;
+      --card-hover: #141f30;
+      --border: #182538;
+      --border-strong: #283c56;
+
+      --navy: #1B4D6B;
+      --navy-light: #2c6e96;
+      --gold: #C9A961;
+      --gold-bg: rgba(201, 169, 97, 0.18);
+
+      --c-green: #10b981;
+      --c-green-bg: rgba(16, 185, 129, 0.22);
+      --c-green-text: #34d399;
+      --c-yellow: #f59e0b;
+      --c-yellow-bg: rgba(245, 158, 11, 0.22);
+      --c-yellow-text: #fbbf24;
+      --c-red: #ef4444;
+      --c-red-bg: rgba(239, 68, 68, 0.22);
+      --c-red-text: #f87171;
+
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --radius: 12px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 16px 12px 100px 12px;
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 14px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
+    }
+    .brand-group { display: flex; align-items: center; gap: 14px; }
+    .brand-crest {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--gold) 100%);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; color: #fff; font-size: 20px;
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 14px rgba(201, 169, 97, 0.4);
+      flex-shrink: 0;
+    }
+    .brand-title { font-size: 21px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .brand-sub { font-size: 14px; color: var(--gold); font-weight: 700; margin-top: 2px; }
+
+    /* =========================================================
+       MASTER MODE SWITCHER: フロー (月次LIVE) vs ストック (10年カルテ)
+       ========================================================= */
+    .master-mode-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: #060a10;
+      border: 2.5px solid var(--gold);
+      border-radius: 14px;
+      padding: 6px;
+      margin-bottom: 22px;
+      gap: 8px;
+      box-shadow: 0 0 20px rgba(201, 169, 97, 0.2);
+    }
+    .master-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 14px 16px;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 900;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      transition: all 0.2s ease;
+      text-align: center;
+    }
+    .master-btn:hover { color: #fff; background: rgba(255,255,255,0.05); }
+    .master-btn.active {
+      background: linear-gradient(135deg, #1B4D6B 0%, #132738 100%);
+      color: #fff;
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 16px rgba(201, 169, 97, 0.35);
+    }
+    .master-btn-sub { font-size: 12px; font-weight: 700; opacity: 0.85; }
+
+    .master-view { display: none; }
+    .master-view.active { display: block; animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* =========================================================
+       HERO: 最新月度（4月度確定） 経営コックピット
+       ========================================================= */
+    .equation-hero {
+      background: linear-gradient(180deg, #101a2b 0%, #0a111c 100%);
+      border: 2.5px solid var(--gold);
+      border-radius: 16px;
+      padding: 22px 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 0 28px rgba(201, 169, 97, 0.25);
+    }
+    .equation-title {
+      font-size: 19px;
+      font-weight: 900;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .equation-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.1fr 1fr 0.1fr 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+    .operator {
+      font-size: 34px;
+      font-weight: 900;
+      color: var(--gold);
+      text-align: center;
+    }
+    .eq-card {
+      background: var(--card-sub);
+      border: 2px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 18px 20px;
+      position: relative;
+    }
+    .eq-card.main-target {
+      border: 2.5px solid var(--gold);
+      background: rgba(27, 77, 107, 0.3);
+      box-shadow: 0 0 20px rgba(201, 169, 97, 0.15);
+    }
+
+    .eq-header-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .eq-icon { font-size: 30px; line-height: 1; }
+    .eq-label-text {
+      font-size: 21px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+    .eq-label-sub {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-left: auto;
+      background: rgba(201,169,97,0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .eq-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 34px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin: 6px 0 8px 0;
+      letter-spacing: -0.02em;
+    }
+    .eq-unit { font-size: 18px; font-weight: 800; color: #cbd5e1; margin-left: 4px; }
+
+    /* Embedded Hero Bullet Graph */
+    .hero-bullet {
+      position: relative;
+      height: 18px;
+      background: #151e2b;
+      border-radius: 4px;
+      margin: 8px 0;
+      border: 1px solid #24354d;
+    }
+    .hero-bullet-prev {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      background: #334155;
+      border-radius: 3px;
+    }
+    .hero-bullet-act {
+      position: absolute;
+      top: 4px; bottom: 4px; left: 0;
+      border-radius: 2px;
+    }
+    .hero-bullet-target {
+      position: absolute;
+      top: -3px; bottom: -3px; width: 3.5px;
+      background: #ffffff;
+      border-radius: 1px;
+      transform: translateX(-1.5px);
+      box-shadow: 0 0 6px #fff;
+      z-index: 2;
+    }
+    
+    .eq-sub {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-top: 1.5px solid var(--border-strong);
+      padding-top: 8px;
+      margin-top: 6px;
+    }
+
+    /* 3-Color Badges */
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .bg-green { background: var(--c-green-bg); color: var(--c-green-text); border: 1.5px solid var(--c-green); }
+    .bg-yellow { background: var(--c-yellow-bg); color: var(--c-yellow-text); border: 1.5px solid var(--c-yellow); }
+    .bg-red { background: var(--c-red-bg); color: var(--c-red-text); border: 1.5px solid var(--c-red); }
+    .bg-gold { background: var(--gold-bg); color: var(--gold); border: 1.5px solid var(--gold); }
+
+    /* Perspective Tabs */
+    .perspective-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      background: var(--card-sub);
+      border: 2px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 6px;
+      margin-bottom: 22px;
+      gap: 8px;
+    }
+    .pers-tab {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      transition: all 0.15s ease;
+      text-align: center;
+    }
+    .pers-tab:hover { color: #fff; background: rgba(255,255,255,0.04); }
+    .pers-tab.active {
+      background: var(--navy);
+      color: #fff;
+      box-shadow: 0 0 16px rgba(27, 77, 107, 0.6);
+      border: 1.5px solid var(--gold);
+    }
+    .pers-desc { font-size: 12px; font-weight: 600; opacity: 0.85; }
+
+    .view-content { display: none; }
+    .view-content.active { display: block; }
+
+    .card {
+      background: var(--card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .section-header {
+      font-size: 19px;
+      font-weight: 900;
+      color: #fff;
+      border-left: 5px solid var(--gold);
+      padding-left: 12px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .section-en { font-size: 13px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; }
+
+    /* Infographic Box */
+    .infographic-box {
+      background: var(--card-sub);
+      border: 2px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 22px;
+    }
+    .info-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+    }
+
+    .bullet-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 8px 0;
+    }
+    .bullet-label {
+      width: 50px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #cbd5e1;
+      flex-shrink: 0;
+      text-align: right;
+    }
+    .bullet-track {
+      position: relative;
+      flex: 1;
+      height: 28px;
+      background: #151e2b;
+      border-radius: 4px;
+      border: 1px solid #24354d;
+    }
+    .bullet-bar-prev { position: absolute; top: 0; bottom: 0; left: 0; background: #334155; border-radius: 3px; }
+    .bullet-bar-actual { position: absolute; top: 7px; bottom: 7px; left: 0; border-radius: 3px; }
+    .bullet-line-target {
+      position: absolute;
+      top: -3px; bottom: -3px; width: 4px;
+      background: #ffffff;
+      border-radius: 2px;
+      transform: translateX(-2px);
+      box-shadow: 0 0 6px #fff;
+      z-index: 2;
+    }
+    .bullet-num {
+      width: 170px;
+      flex-shrink: 0;
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .variance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .var-card { background: #0f1824; border: 1.5px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+    .var-head { display: flex; justify-content: space-between; font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+
+    .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .risk-card { background: #141215; border: 1.5px solid rgba(239, 68, 68, 0.4); border-radius: 10px; padding: 14px 16px; }
+    .action-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+    .action-pillar { background: #0d1c1a; border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 10px; padding: 16px; }
+
+    /* Sticky Month Table */
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      position: relative;
+    }
+    table.exec-table {
+      width: 100%;
+      min-width: 980px;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+    .th-major-rev { background: #13243a !important; border-left: 3px solid var(--gold) !important; border-bottom: 2px solid var(--gold) !important; padding: 12px 14px !important; }
+    .th-major-vis { background: #0f1c2d !important; border-left: 3px solid var(--navy-light) !important; border-bottom: 2px solid var(--navy-light) !important; padding: 12px 14px !important; }
+    .th-major-unit { background: #1f1b13 !important; border-left: 3px solid var(--c-yellow) !important; border-bottom: 2px solid var(--c-yellow) !important; padding: 12px 14px !important; }
+    .th-major-content { display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .th-major-icon { font-size: 22px; line-height: 1; }
+    .th-major-text { font-size: 18px; font-weight: 900; color: #ffffff; letter-spacing: -0.01em; }
+    .th-major-unit-label { font-size: 12px; font-weight: 700; color: var(--text-muted); }
+
+    table.exec-table th {
+      background: #090e17;
+      color: #cbd5e1;
+      font-weight: 800;
+      font-size: 13.5px;
+      padding: 10px 10px;
+      border-bottom: 2px solid var(--border-strong);
+      border-right: 1px solid var(--border);
+      text-align: right;
+      white-space: nowrap;
+    }
+    table.exec-table td {
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      background: #0b121c;
+      white-space: nowrap;
+    }
+    
+    table.exec-table th.col-sticky-month,
+    table.exec-table td.col-sticky-month {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      text-align: center;
+      background: #080d15 !important;
+      border-right: 2.5px solid var(--gold) !important;
+      box-shadow: 4px 0 12px rgba(0,0,0,0.6);
+      width: 80px;
+      min-width: 80px;
+    }
+    table.exec-table th.col-sticky-month { background: #060a10 !important; z-index: 20; }
+    tr.total-row td.col-sticky-month { background: #0f1c2d !important; color: var(--gold) !important; font-weight: 900; }
+    .cell-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; }
+    tr.total-row { background: rgba(27, 77, 107, 0.45) !important; border-top: 2.5px solid var(--gold); border-bottom: 2.5px solid var(--gold); font-weight: 900; }
+    tr.total-row td { font-size: 16px; color: #fff; padding: 14px 10px; }
+
+    /* =========================================================
+       STOCK VIEW STYLES (RFM / Decile / 10-Year Macro)
+       ========================================================= */
+    .rfm-matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .rfm-card {
+      background: var(--card-sub);
+      border: 2px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+    }
+    .rfm-card.champ { border-color: var(--gold); background: rgba(201, 169, 97, 0.08); }
+    .rfm-card.at-risk { border-color: var(--c-red); background: rgba(239, 68, 68, 0.08); }
+    .rfm-card.promising { border-color: var(--c-green); background: rgba(16, 185, 129, 0.08); }
+    .rfm-card.hibernating { border-color: #64748b; background: rgba(100, 116, 139, 0.08); }
+
+    .rfm-title { font-size: 17px; font-weight: 900; display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .rfm-count { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 900; line-height: 1.1; margin-bottom: 6px; }
+    .rfm-sub { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; }
+
+    @media (max-width: 900px) {
+      .equation-grid { grid-template-columns: 1fr; text-align: center; }
+      .operator { font-size: 24px; margin: 4px 0; }
+    }
+    @media (max-width: 768px) {
+      body { padding: 10px 8px 90px 8px; font-size: 15.5px; }
+      .header { padding: 12px; }
+      .brand-title { font-size: 18px; }
+      .eq-val { font-size: 28px; }
+      .eq-label-text { font-size: 18px; }
+      .bullet-row { flex-wrap: wrap; }
+      .bullet-track { flex: 0 0 100%; order: 3; }
+      .bullet-num { margin-left: auto; }
+      table.exec-table { min-width: 860px; font-size: 13px; }
+      table.exec-table th { padding: 8px 6px; font-size: 12px; }
+      table.exec-table td { padding: 9px 6px; }
+      .th-major-text { font-size: 15px; }
+      .th-major-icon { font-size: 18px; }
+      .badge { font-size: 11.5px; padding: 2px 6px; }
+      table.exec-table th.col-sticky-month,
+      table.exec-table td.col-sticky-month { width: 70px; min-width: 70px; font-size: 13.5px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <!-- TOP NAV -->
+  <div class="header">
+    <div class="brand-group">
+      <div class="brand-crest">TCC</div>
+      <div>
+        <div class="brand-title">
+          <span>TSH Beyond-Dashboard</span>
+          <span style="font-size:13px; font-weight:900; color:var(--gold); background:var(--gold-bg); padding:3px 8px; border-radius:6px; border:1px solid var(--gold);">Executive Standard</span>
+        </div>
+        <div class="brand-sub">津カントリー倶楽部 経営コックピット（フロー月次LIVE ＆ ストック10年データ資産カルテ）</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       MASTER MODE SWITCHER: フロー (月次速報) vs ストック (10年カルテ)
+       ========================================================= -->
+  <div class="master-mode-nav">
+    <button class="master-btn active" id="btn-mode-flow" onclick="switchMasterMode('mode-flow')">
+      <span>⚡ ① フロー（月次LIVE速報）</span>
+      <span class="master-btn-sub">【日常の意思決定・4月度予実・空雨傘・3層視座】</span>
+    </button>
+    <button class="master-btn" id="btn-mode-stock" onclick="switchMasterMode('mode-stock')">
+      <span>🏛️ ② ストック（10年データ資産カルテ）</span>
+      <span class="master-btn-sub">【ワンタイム50万円診断・RFM/デシル会員分析・10年マクロ】</span>
+    </button>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- ⚡ MODE 1: フロー（月次LIVE速報コックピット）                       -->
+  <!-- ================================================================= -->
+  <div id="mode-flow" class="master-view active">
+
+    <!-- HERO: 最新月度（4月度確定） 経営コックピット ＆ ブレット進捗 -->
+    <div class="equation-hero">
+      <div class="equation-title">
+        <span>📊 2026年 4月度 月次経営サマリー 【当月実績 ＆ ブレット予実判定】</span>
+      </div>
+      <div class="equation-grid">
+        
+        <!-- 1. 営業売上高 (4月度) -->
+        <div class="eq-card main-target">
+          <div class="eq-header-label">
+            <span class="eq-icon">💰</span>
+            <span class="eq-label-text">営業売上高</span>
+            <span class="eq-label-sub">4月度</span>
+          </div>
+          <div class="eq-val">¥34,617<span class="eq-unit">千円</span></div>
+          
+          <!-- ブレットグラフ (実績 vs 予算ライン vs 前年帯) -->
+          <div class="hero-bullet">
+            <div class="hero-bullet-prev" style="width: 80%;"></div>
+            <div class="hero-bullet-act" style="width: 86.5%; background: var(--c-yellow);"></div>
+            <div class="hero-bullet-target" style="left: 87%;"></div>
+          </div>
+
+          <div class="eq-sub">
+            <span>対予算: <b class="badge bg-yellow">99.6% (▲13万)</b></span>
+            <span>対前年: <b class="badge bg-green">+8.1% (+260万)</b></span>
+          </div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:4px; text-align:right;">
+            1〜4月累計: <b style="color:#fff;">¥127,398千円</b> (<b style="color:var(--c-green-text);">100.9% 達成</b>)
+          </div>
+        </div>
+
+        <div class="operator">＝</div>
+
+        <!-- 2. 来場客数 (4月度) -->
+        <div class="eq-card">
+          <div class="eq-header-label">
+            <span class="eq-icon">⛳</span>
+            <span class="eq-label-text">来場客数</span>
+            <span class="eq-label-sub">4月度</span>
+          </div>
+          <div class="eq-val">2,807<span class="eq-unit">名</span></div>
+
+          <!-- ブレットグラフ (実績 vs 予算ライン vs 前年帯) -->
+          <div class="hero-bullet">
+            <div class="hero-bullet-prev" style="width: 80%;"></div>
+            <div class="hero-bullet-act" style="width: 90%; background: var(--c-green);"></div>
+            <div class="hero-bullet-target" style="left: 89%;"></div>
+          </div>
+
+          <div class="eq-sub">
+            <span>対予算: <b class="badge bg-green">101.0% (+27名)</b></span>
+            <span>対前年: <b class="badge bg-green">+12.7% (+316名)</b></span>
+          </div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:4px; text-align:right;">
+            1〜4月累計: <b style="color:#fff;">11,450名</b> (<b style="color:var(--c-green-text);">105.7% 達成</b>)
+          </div>
+        </div>
+
+        <div class="operator">×</div>
+
+        <!-- 3. 客単価 (4月度) -->
+        <div class="eq-card" style="border: 2.5px solid var(--c-yellow); background: rgba(245,158,11,0.06);">
+          <div class="eq-header-label">
+            <span class="eq-icon">🍽️</span>
+            <span class="eq-label-text" style="color:var(--c-yellow-text);">客単価</span>
+            <span class="eq-label-sub" style="color:var(--c-yellow-text); background:rgba(245,158,11,0.15); border:1px solid var(--c-yellow);">4月度</span>
+          </div>
+          <div class="eq-val" style="color:var(--c-yellow-text);">¥12,332<span class="eq-unit">/人</span></div>
+
+          <!-- ブレットグラフ (実績 vs 予算ライン vs 前年帯) -->
+          <div class="hero-bullet">
+            <div class="hero-bullet-prev" style="width: 92%;"></div>
+            <div class="hero-bullet-act" style="width: 88%; background: var(--c-yellow);"></div>
+            <div class="hero-bullet-target" style="left: 89%;"></div>
+          </div>
+
+          <div class="eq-sub">
+            <span>対予算: <b class="badge bg-yellow">98.7% (-168円)</b></span>
+            <span>対前年: <b class="badge bg-yellow">-4.1% (-521円)</b></span>
+          </div>
+          <div style="font-size:12px; color:var(--text-muted); margin-top:4px; text-align:right;">
+            1〜4月累計: <b style="color:var(--c-yellow-text);">¥11,126</b> (<b style="color:var(--c-yellow-text);">95.4% 未達</b>)
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PERSPECTIVE TABS (3 TIERS) -->
+    <div class="perspective-nav">
+      <button class="pers-tab active" onclick="setPerspective('view-exec')">
+        <span>🎖️ ① 経営者・役員の視座</span>
+        <span class="pers-desc">【KGI・時系列ブレット・因果分解】</span>
+      </button>
+      <button class="pers-tab" onclick="setPerspective('view-gm')">
+        <span>👔 ② 支配人・部門長の視座</span>
+        <span class="pers-desc">【それでどうする？ 4つの傘戦術】</span>
+      </button>
+      <button class="pers-tab" onclick="setPerspective('view-lead')">
+        <span>🏃 ③ 現場リーダーの視座</span>
+        <span class="pers-desc">【何の数字が未達か？ 今日の必達ToDo】</span>
+      </button>
+    </div>
+
+    <!-- 1. 経営者・役員の視座 -->
+    <div id="view-exec" class="view-content active">
+      <!-- ☀️ 【空】Fact: 時系列ブレットグラフ ＆ 数量vs単価 因果分解 -->
+      <div class="infographic-box" style="border-left: 5px solid var(--navy-light);">
+        <div class="info-header">
+          <span style="font-size:24px;">☀️</span>
+          <span>【空】経営Fact: 月次売上ブレットグラフ ＆ 予実因果分解</span>
+          <span style="font-size:13px; font-weight:700; color:var(--text-muted); margin-left:auto;">
+            🟩実績 / ░前年 / ┃予算目標
+          </span>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <!-- 1月 -->
+          <div class="bullet-row">
+            <div class="bullet-label">1月</div>
+            <div class="bullet-track">
+              <div class="bullet-bar-prev" style="width: 63%;"></div>
+              <div class="bullet-bar-actual" style="width: 79%; background: var(--c-green);"></div>
+              <div class="bullet-line-target" style="left: 74%;"></div>
+            </div>
+            <div class="bullet-num">
+              <span style="font-size:16px; font-weight:900; color:var(--c-green-text);">¥31,592千円</span>
+              <span class="badge bg-green" style="margin-left:6px; font-size:12px;">106.8%</span>
+            </div>
+          </div>
+          <!-- 2月 -->
+          <div class="bullet-row">
+            <div class="bullet-label">2月</div>
+            <div class="bullet-track">
+              <div class="bullet-bar-prev" style="width: 57%;"></div>
+              <div class="bullet-bar-actual" style="width: 67%; background: var(--c-green);"></div>
+              <div class="bullet-line-target" style="left: 66%;"></div>
+            </div>
+            <div class="bullet-num">
+              <span style="font-size:16px; font-weight:900; color:var(--c-green-text);">¥26,814千円</span>
+              <span class="badge bg-green" style="margin-left:6px; font-size:12px;">101.6%</span>
+            </div>
+          </div>
+          <!-- 3月 -->
+          <div class="bullet-row">
+            <div class="bullet-label">3月</div>
+            <div class="bullet-track">
+              <div class="bullet-bar-prev" style="width: 83%;"></div>
+              <div class="bullet-bar-actual" style="width: 86%; background: var(--c-yellow);"></div>
+              <div class="bullet-line-target" style="left: 89%;"></div>
+            </div>
+            <div class="bullet-num">
+              <span style="font-size:16px; font-weight:900; color:var(--c-yellow-text);">¥34,375千円</span>
+              <span class="badge bg-yellow" style="margin-left:6px; font-size:12px;">96.8%</span>
+            </div>
+          </div>
+          <!-- 4月 -->
+          <div class="bullet-row">
+            <div class="bullet-label">4月</div>
+            <div class="bullet-track">
+              <div class="bullet-bar-prev" style="width: 80%;"></div>
+              <div class="bullet-bar-actual" style="width: 86.5%; background: var(--c-yellow);"></div>
+              <div class="bullet-line-target" style="left: 87%;"></div>
+            </div>
+            <div class="bullet-num">
+              <span style="font-size:16px; font-weight:900; color:var(--c-yellow-text);">¥34,617千円</span>
+              <span class="badge bg-yellow" style="margin-left:6px; font-size:12px;">99.6%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variance-grid">
+          <div class="var-card" style="border-left: 4px solid var(--c-green);">
+            <div class="var-head">
+              <span style="color:#cbd5e1;">📈 数量要因（来場客数 +620名）</span>
+              <span style="color:var(--c-green-text); font-family:'JetBrains Mono'; font-weight:900; font-size:18px;">+722 万円</span>
+            </div>
+            <div style="height:8px; background:#1e293b; border-radius:4px; overflow:hidden;">
+              <div style="width:100%; height:100%; background:var(--c-green);"></div>
+            </div>
+            <div style="font-size:13px; color:var(--text-muted); margin-top:6px;">
+              来場増（11,450名 / 予算比105.7%）が売上を大きく押し上げ
+            </div>
+          </div>
+
+          <div class="var-card" style="border-left: 4px solid var(--c-yellow);">
+            <div class="var-head">
+              <span style="color:#cbd5e1;">📉 単価要因（客単価 ▲534円）</span>
+              <span style="color:var(--c-yellow-text); font-family:'JetBrains Mono'; font-weight:900; font-size:18px;">▲606 万円</span>
+            </div>
+            <div style="height:8px; background:#1e293b; border-radius:4px; overflow:hidden;">
+              <div style="width:84%; height:100%; background:var(--c-yellow);"></div>
+            </div>
+            <div style="font-size:13px; color:var(--text-muted); margin-top:6px;">
+              平日ビジター増による単価下落（¥11,126 / 予算比95.4%）が利益を侵食
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🌧️ 雨 ＆ ☂️ 傘 -->
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap:20px; margin-bottom:24px;">
+        <div class="infographic-box" style="border-left: 5px solid var(--c-yellow); margin-bottom:0;">
+          <div class="info-header">
+            <span style="font-size:24px;">🌧️</span>
+            <span>【雨】構造的リスク（収益の急所）</span>
+          </div>
+          <div class="risk-grid">
+            <div class="risk-card">
+              <div style="font-size:14px; font-weight:800; color:#cbd5e1; margin-bottom:4px;">👤 平日ビジター偏重</div>
+              <div style="font-size:22px; font-weight:900; color:var(--c-yellow-text); font-family:'JetBrains Mono';">68% <span style="font-size:14px; color:#cbd5e1;">(+12pt増)</span></div>
+              <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">プレー代は取れるが昼食・ショップ消費が低調</div>
+            </div>
+            <div class="risk-card">
+              <div style="font-size:14px; font-weight:800; color:#cbd5e1; margin-bottom:4px;">⚠️ 会員の休眠化</div>
+              <div style="font-size:22px; font-weight:900; color:var(--c-red-text); font-family:'JetBrains Mono';">38 名 <span style="font-size:14px; color:#cbd5e1;">(離脱高リスク)</span></div>
+              <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">直近3ヶ月来場なしの正会員（年間潜在損失 ¥840万）</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="infographic-box" style="border-left: 5px solid var(--c-green); margin-bottom:0;">
+          <div class="info-header">
+            <span style="font-size:24px;">☂️</span>
+            <span>【傘】3大アクション ＆ 期待効果</span>
+          </div>
+          <div class="action-grid">
+            <div class="action-pillar">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;">
+                <span style="font-size:15px; font-weight:900; color:var(--c-green-text);">🏆 ① コア会員防衛</span>
+                <span style="font-size:16px; font-weight:900; color:var(--gold); font-family:'JetBrains Mono';">¥5,300万維持</span>
+              </div>
+              <div style="font-size:13px; color:#cbd5e1;">年12回来場コア194名の週末枠確保</div>
+            </div>
+            <div class="action-pillar">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;">
+                <span style="font-size:15px; font-weight:900; color:var(--c-green-text);">🚨 ② 休眠38名 復帰</span>
+                <span style="font-size:16px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">+¥280万リフト</span>
+              </div>
+              <div style="font-size:13px; color:#cbd5e1;">役員・支配人手書き状と同伴優待券送付</div>
+            </div>
+            <div class="action-pillar">
+              <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px;">
+                <span style="font-size:15px; font-weight:900; color:var(--c-green-text);">📈 ③ 来場後単価 改善</span>
+                <span style="font-size:16px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">+¥450万リフト</span>
+              </div>
+              <div style="font-size:13px; color:#cbd5e1;">レストラン冷麺セット＆特製土産コンペ予約</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 予実テーブル (左端Sticky固定) -->
+      <div class="card">
+        <div class="section-header" style="justify-content:space-between; align-items:center;">
+          <div>
+            <span>📊 2026年 1〜4月 経営予実・前年対比テーブル（売上・来場・単価 統一軸）</span>
+            <span class="section-en">FINANCIAL HEATMAP TABLE</span>
+          </div>
+          <div style="font-size:12.5px; font-weight:700; color:var(--gold); background:rgba(201,169,97,0.15); padding:4px 10px; border-radius:6px; border:1px solid var(--gold);">
+            👉 左右スクロール可（月度固定）
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="exec-table">
+            <thead>
+              <tr>
+                <th rowspan="2" class="col-sticky-month" style="vertical-align:middle; font-size:15px; font-weight:900;">月度</th>
+                <th colspan="5" class="th-major-rev">
+                  <div class="th-major-content"><span class="th-major-icon">💰</span><span class="th-major-text">営業売上高</span><span class="th-major-unit-label">(千円)</span></div>
+                </th>
+                <th colspan="5" class="th-major-vis">
+                  <div class="th-major-content"><span class="th-major-icon">⛳</span><span class="th-major-text">来場客数</span><span class="th-major-unit-label">(名)</span></div>
+                </th>
+                <th colspan="5" class="th-major-unit">
+                  <div class="th-major-content"><span class="th-major-icon">🍽️</span><span class="th-major-text" style="color:var(--c-yellow-text);">客単価</span><span class="th-major-unit-label">(円/人)</span></div>
+                </th>
+              </tr>
+              <tr>
+                <th style="border-left:3px solid var(--gold);">実績</th><th>予算</th><th>対予算</th><th>前年</th><th>対前年</th>
+                <th style="border-left:3px solid var(--navy-light);">実績</th><th>予算</th><th>対予算</th><th>前年</th><th>対前年</th>
+                <th style="border-left:3px solid #f59e0b;">実績</th><th>予算</th><th>対予算</th><th>前年</th><th>対前年</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-sticky-month" style="font-weight:800;">1月度</td>
+                <td class="cell-num" style="border-left:3px solid var(--gold);">¥31,592</td><td class="cell-num">¥29,580</td><td><span class="badge bg-green">106.8%</span></td><td class="cell-num">¥25,358</td><td><span class="badge bg-green">+24.6%</span></td>
+                <td class="cell-num" style="border-left:3px solid var(--navy-light);">2,865</td><td class="cell-num">2,690</td><td><span class="badge bg-green">106.5%</span></td><td class="cell-num">2,370</td><td><span class="badge bg-green">+20.9%</span></td>
+                <td class="cell-num" style="border-left:3px solid #f59e0b;">¥11,027</td><td class="cell-num">¥11,000</td><td><span class="badge bg-green">100.2%</span></td><td class="cell-num">¥10,700</td><td><span class="badge bg-green">+3.1%</span></td>
+              </tr>
+              <tr>
+                <td class="col-sticky-month" style="font-weight:800;">2月度</td>
+                <td class="cell-num" style="border-left:3px solid var(--gold);">¥26,814</td><td class="cell-num">¥26,390</td><td><span class="badge bg-green">101.6%</span></td><td class="cell-num">¥23,138</td><td><span class="badge bg-green">+15.9%</span></td>
+                <td class="cell-num" style="border-left:3px solid var(--navy-light);">2,673</td><td class="cell-num">2,400</td><td><span class="badge bg-green">111.4%</span></td><td class="cell-num">2,142</td><td><span class="badge bg-green">+24.8%</span></td>
+                <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid #f59e0b;">¥10,031</td><td class="cell-num">¥11,000</td><td><span class="badge bg-yellow">91.2%</span></td><td class="cell-num">¥10,802</td><td><span class="badge bg-yellow">-7.1%</span></td>
+              </tr>
+              <tr>
+                <td class="col-sticky-month" style="font-weight:800;">3月度</td>
+                <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid var(--gold);">¥34,375</td><td class="cell-num">¥35,510</td><td><span class="badge bg-yellow">96.8%</span></td><td class="cell-num">¥33,214</td><td><span class="badge bg-green">+3.5%</span></td>
+                <td class="cell-num" style="border-left:3px solid var(--navy-light);">3,105</td><td class="cell-num">2,960</td><td><span class="badge bg-green">104.9%</span></td><td class="cell-num">2,658</td><td><span class="badge bg-green">+16.8%</span></td>
+                <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid #f59e0b;">¥11,071</td><td class="cell-num">¥12,000</td><td><span class="badge bg-yellow">92.3%</span></td><td class="cell-num">¥12,495</td><td><span class="badge bg-yellow">-11.4%</span></td>
+              </tr>
+              <tr>
+                <td class="col-sticky-month" style="font-weight:800;">4月度</td>
+                <td class="cell-num" style="border-left:3px solid var(--gold);">¥34,617</td><td class="cell-num">¥34,750</td><td><span class="badge bg-yellow">99.6%</span></td><td class="cell-num">¥32,019</td><td><span class="badge bg-green">+8.1%</span></td>
+                <td class="cell-num" style="border-left:3px solid var(--navy-light);">2,807</td><td class="cell-num">2,780</td><td><span class="badge bg-green">101.0%</span></td><td class="cell-num">2,491</td><td><span class="badge bg-green">+12.7%</span></td>
+                <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid #f59e0b;">¥12,332</td><td class="cell-num">¥12,500</td><td><span class="badge bg-yellow">98.7%</span></td><td class="cell-num">¥12,853</td><td><span class="badge bg-yellow">-4.1%</span></td>
+              </tr>
+              <tr class="total-row">
+                <td class="col-sticky-month" style="color:var(--gold); font-size:16px;">4ヶ月累計</td>
+                <td class="cell-num" style="color:var(--gold); font-size:17px; border-left:3px solid var(--gold);">¥127,398</td><td class="cell-num">¥126,230</td><td><span class="badge bg-green" style="font-size:14px;">100.9%</span></td><td class="cell-num">¥113,729</td><td><span class="badge bg-green" style="font-size:14px;">+14.2%</span></td>
+                <td class="cell-num" style="color:#fff; font-size:17px; border-left:3px solid var(--navy-light);">11,450</td><td class="cell-num">10,830</td><td><span class="badge bg-green" style="font-size:14px;">105.7%</span></td><td class="cell-num">9,661</td><td><span class="badge bg-green" style="font-size:14px;">+18.5%</span></td>
+                <td class="cell-num" style="color:var(--c-yellow-text); font-size:17px; border-left:3px solid #f59e0b;">¥11,126</td><td class="cell-num">¥11,660</td><td><span class="badge bg-yellow" style="font-size:14px;">95.4%</span></td><td class="cell-num">¥11,544</td><td><span class="badge bg-yellow" style="font-size:14px;">-3.6%</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 支配人・部門長の視座 -->
+    <div id="view-gm" class="view-content">
+      <div class="card">
+        <div class="section-header">
+          <span>👔 支配人の問い：「客単価98.7%（黄色アラート）をどう埋める？ 今月どう手を打つ？」</span>
+          <span class="section-en">TACTICAL ACTIONS & 4 UMBRELLAS</span>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+          <div style="background:var(--card-sub); border-top:5px solid var(--c-green); border-radius:10px; padding:18px; border:1px solid var(--border);">
+            <div style="font-weight:900; font-size:17px; color:var(--c-green-text); margin-bottom:8px;">🏆 守る (Champion会員維持)</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">・<b>現状</b>: 年12回以上来場のコア会員194名が売上の42%を創出。<br>・<b>打ち手</b>: 週末スタート枠の優先確保と開場記念杯の特別案内状を個別発送。</div>
+          </div>
+          <div style="background:var(--card-sub); border-top:5px solid var(--c-red); border-radius:10px; padding:18px; border:1px solid var(--border);">
+            <div style="font-weight:900; font-size:17px; color:var(--c-red-text); margin-bottom:8px;">🚨 取り戻す (高額離反の再活性)</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">・<b>現状</b>: 直近3ヶ月来場なしの正会員が<b>38名</b>（離脱リスク大）。<br>・<b>打ち手</b>: 支配人・役員の手書き挨拶状と同伴優待券を送付し復帰を促進。</div>
+          </div>
+          <div style="background:var(--card-sub); border-top:5px solid var(--c-yellow); border-radius:10px; padding:18px; border:1px solid var(--border);">
+            <div style="font-weight:900; font-size:17px; color:var(--c-yellow-text); margin-bottom:8px;">📈 深耕 (客単価+534円回復)</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">・<b>現状</b>: ビジターの昼食単価が¥1,450と低調（目標: ¥1,800）。<br>・<b>打ち手</b>: レストラン冷麺フェアと特製スイーツ土産（¥2,200）の予約販売。</div>
+          </div>
+          <div style="background:var(--card-sub); border-top:5px solid var(--text-muted); border-radius:10px; padding:18px; border:1px solid var(--border);">
+            <div style="font-weight:900; font-size:17px; color:#cbd5e1; margin-bottom:8px;">✂️ 追わない (低価格OTAの抑制)</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">・<b>現状</b>: 楽天GORA・GDOの直前安売り枠を50%削減。<br>・<b>打ち手</b>: 自社Web・LINE予約枠（比率46.5%）へシフトし送客手数料を削減。</div>
+          </div>
+        </div>
+
+        <!-- 🍺 フロー内にもドリルダウン実例を直接配置 -->
+        <div style="margin-top: 20px; background: linear-gradient(180deg, #101c2d 0%, #0a111c 100%); border: 2px solid var(--gold); border-radius: 12px; padding: 18px 20px; box-shadow: 0 0 20px rgba(201,169,97,0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 17px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">🔍</span>
+              <span>部門ドリルダウン実戦実例：【レストラン】生ビール価格改定の弾力性分析</span>
+            </div>
+            <span class="badge bg-gold" style="font-size: 13px;">年間粗利 +113万円 LIFT</span>
+          </div>
+          <p style="font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 14px;">
+            「値上げすると客離れが起きる」という現場の恐怖を、SwingClub POSデータの<b>価格弾力性シミュレーション</b>で解消したTCCの実戦実例。出数微減を単価増が圧倒し、客離れゼロで年間113万円の粗利を純増。
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+            <div style="background: #080d14; border: 1.5px solid #334155; border-radius: 8px; padding: 12px 14px;">
+              <div style="font-size: 13px; font-weight: 800; color: #94a3b8;">🍺 改定前（旧価格 ¥750）</div>
+              <div style="font-size: 13.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.7;">
+                ・月間出数: <b>1,200 杯</b> ｜ 月商: <b>¥900,000</b><br>
+                ・原価率: <b>35.0%</b> ｜ 月間粗利: <b style="color:#fff;">¥585,000</b>
+              </div>
+            </div>
+            <div style="background: rgba(16,185,129,0.08); border: 1.5px solid var(--c-green); border-radius: 8px; padding: 12px 14px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--c-green-text);">🚀 改定後（新価格 ¥880 / +130円）</div>
+              <div style="font-size: 13.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.7;">
+                ・月間出数: <b>1,130 杯</b> (<b style="color:var(--c-yellow-text);">-5.8% 軽微な減少</b>)<br>
+                ・月間売上: <b style="color:#fff;">¥994,400</b> ｜ 月間粗利: <b style="color:var(--c-green-text);">¥679,400 (+¥94,400/月)</b>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- 3. 現場リーダーの視座 -->
+    <div id="view-lead" class="view-content">
+      <div class="card">
+        <div class="section-header">
+          <span>🏃 現場リーダーの視座：「何の数字ができなかったか？ 今日何をしなくちゃいけないか？」</span>
+          <span class="section-en">GAP ANALYSIS & TODAY'S ACTION</span>
+        </div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
+          <div>
+            <div style="font-size:18px; font-weight:900; color:var(--c-red-text); margin-bottom:12px;">🔴 先週・前日 できなかった数字（Gap分析）</div>
+            <div style="background:var(--c-red-bg); border:1.5px solid var(--c-red); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
+              <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ レストラン客単価: 目標 ¥6,500 ➔ 実績 ¥6,086 (<b style="color:var(--c-red-text);">-414円未達</b>)</div>
+              <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">・<b>原因</b>: ランチ時の「おすすめサイドメニュー」とお声がけがホールで3割程度しか実施できていなかった。</div>
+            </div>
+            <div style="background:var(--c-red-bg); border:1.5px solid var(--c-red); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
+              <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⏱️ 木曜雨天時の稼働率: 目標 85% ➔ 実績 55% (<b style="color:var(--c-red-text);">-30pt未達</b>)</div>
+              <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">・<b>原因</b>: 雨天キャンセル（4組）に対し、スループレー希望者への電話振り替え案内が遅れた。</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:18px; font-weight:900; color:var(--c-green-text); margin-bottom:12px;">🟢 本日・今週 現場リーダーの必達アクション（ToDo）</div>
+            <div style="background:var(--c-green-bg); border:1.5px solid var(--c-green); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
+              <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ 【レストラン】昼食時のセットメニュー声掛け100%徹底</div>
+              <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">・<b>目標</b>: 単価¥6,500回復。<br>・<b>行動</b>: 朝礼で共有した「冷やし担々麺＋デザートセット（+450円）」のおすすめを全席・全組で笑顔で実施。</div>
+            </div>
+            <div style="background:var(--c-green-bg); border:1.5px solid var(--c-green); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
+              <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⛳ 【マスター室】ハーフ2時間15分運行死守 ＆ 詰まり先回り</div>
+              <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">・<b>本日の組数</b>: 48組（満枠）。<br>・<b>行動</b>: 8時台のインコース3番・4番で詰まり兆候を先回り検知しマーシャルカートが誘導。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ================================================================= -->
+  <!-- 🏛️ MODE 2: ストック（10年データ資産カルテ / 50万円診断パック）    -->
+  <!-- ================================================================= -->
+  <div id="mode-stock" class="master-view">
+
+    <!-- 診断パック ヒーロー -->
+    <div style="background: linear-gradient(135deg, #13243a 0%, #080d14 100%); border: 2.5px solid var(--gold); border-radius: 16px; padding: 22px 20px; margin-bottom: 24px; box-shadow: 0 0 28px rgba(201, 169, 97, 0.25);">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+        <div>
+          <span style="font-size:12.5px; font-weight:900; color:var(--gold); background:var(--gold-bg); padding:4px 10px; border-radius:6px; border:1px solid var(--gold);">TSH Swing-BI ワンタイム導入診断（¥500,000）</span>
+          <h2 style="font-size:22px; font-weight:900; color:#fff; margin-top:6px;">🏛️ 過去10年 データ資産総点検カルテ ＆ 会員ポートフォリオ診断</h2>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:13px; color:var(--text-muted);">対象データ期間</div>
+          <div style="font-family:'JetBrains Mono'; font-size:18px; font-weight:900; color:#fff;">2017年1月 〜 2026年4月（10年間）</div>
+        </div>
+      </div>
+      <p style="font-size:15px; color:#cbd5e1; line-height:1.7;">
+        基幹システム（SwingClub / Yardage）に蓄積された<b>延べ32.8万人の来場明細・会員マスタ</b>を一括解析。日常の月報では見えない「会員資産の高齢化」「デシル偏重」「休眠離反による潜在損失」を可視化し、即座に回収可能なリフト施策を特定します。
+      </p>
+    </div>
+
+    <!-- 1. 会員資産 RFM 4象限 ＆ デシルパレート図 -->
+    <div class="card">
+      <div class="section-header">
+        <span>🏆 ① 会員資産のRFMポートフォリオ ＆ デシル分析（パレート曲線）</span>
+        <span class="section-en">MEMBER PORTFOLIO & DECILE PARETO</span>
+      </div>
+
+      <!-- RFM 4象限カード -->
+      <div class="rfm-matrix-grid">
+        <div class="rfm-card champ">
+          <div class="rfm-title">
+            <span style="color:var(--gold);">👑 Champions (神会員)</span>
+            <span class="badge bg-gold">デシル 1</span>
+          </div>
+          <div class="rfm-count" style="color:var(--gold);">194 <span style="font-size:16px;">名 (16.2%)</span></div>
+          <div class="rfm-sub">
+            ・<b>年間売上貢献</b>: ¥5,340 万円 (全売上の42.1%)<br>
+            ・<b>年間来場数</b>: 12.8 回 / 平均単価: ¥15,800<br>
+            ・<b>経営指針</b>: 最優先の週末枠確保・開場記念杯特別招待
+          </div>
+        </div>
+
+        <div class="rfm-card at-risk">
+          <div class="rfm-title">
+            <span style="color:var(--c-red-text);">🚨 At Risk (休眠寸前・緊急)</span>
+            <span class="badge bg-red">即効リフト</span>
+          </div>
+          <div class="rfm-count" style="color:var(--c-red-text);">86 <span style="font-size:16px;">名 (7.2%)</span></div>
+          <div class="rfm-sub">
+            ・<b>過去売上</b>: 年間 ¥1,850 万円 (現在ゼロ)<br>
+            ・<b>状態</b>: 過去優良客だったが直近6ヶ月来場なし<br>
+            ・<b>期待リフト</b>: 支配人手書き状で<b>+¥620万 即時回復</b>
+          </div>
+        </div>
+
+        <div class="rfm-card promising">
+          <div class="rfm-title">
+            <span style="color:var(--c-green-text);">🌿 Promising (次世代コア)</span>
+            <span class="badge bg-green">デシル 2-3</span>
+          </div>
+          <div class="rfm-count" style="color:var(--c-green-text);">145 <span style="font-size:16px;">名 (12.1%)</span></div>
+          <div class="rfm-sub">
+            ・<b>年間売上貢献</b>: ¥2,480 万円 (単価伸長中)<br>
+            ・<b>状態</b>: 40〜50代・年6〜11回来場・平日コンペ積極参加<br>
+            ・<b>経営指針</b>: クラブ競技参加促進・ステップアップ特典
+          </div>
+        </div>
+
+        <div class="rfm-card hibernating">
+          <div class="rfm-title">
+            <span style="color:#94a3b8;">💤 Hibernating (完全休眠)</span>
+            <span class="badge" style="background:#334155; color:#cbd5e1;">要名変検討</span>
+          </div>
+          <div class="rfm-count" style="color:#94a3b8;">210 <span style="font-size:16px;">名 (17.5%)</span></div>
+          <div class="rfm-sub">
+            ・<b>状態</b>: 1年以上来場なし（年会費のみ納入）<br>
+            ・<b>年齢層</b>: 75歳以上が78%を占める<br>
+            ・<b>経営指針</b>: 親子名義書換キャンペーン / 会員権整理
+          </div>
+        </div>
+      </div>
+
+      <!-- デシル分析 パレート図 (Chart.js) -->
+      <div style="background:#090e17; border:1px solid var(--border); border-radius:10px; padding:18px;">
+        <div style="font-size:16px; font-weight:800; color:#fff; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center;">
+          <span>📊 デシル分析パレート図（会員上位10%が売上の42.1%を創出する偏重構造）</span>
+          <span style="font-size:12px; color:var(--text-muted);">SwingClub 10年累計データ解析</span>
+        </div>
+        <div style="position:relative; height:320px;">
+          <canvas id="chartDecilePareto"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. 10年間 超時系列マクロトレンド (2017〜2026) -->
+    <div class="card">
+      <div class="section-header">
+        <span>📈 ② 10年間 超時系列マクロトレンド（売上・来場・客単価の構造変遷）</span>
+        <span class="section-en">10-YEAR MACRO HISTORICAL TREND</span>
+      </div>
+      <div style="background:#090e17; border:1px solid var(--border); border-radius:10px; padding:18px;">
+        <div style="position:relative; height:360px;">
+          <canvas id="chartTenYearMacro"></canvas>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:12px; margin-top:16px; padding-top:14px; border-top:1px solid var(--border);">
+          <div style="font-size:13.5px; color:#cbd5e1;">
+            <b>2017-2019 (安定期)</b><br>
+            年商約3.8億円、来場3.2万人、客単価¥11,800で推移。
+          </div>
+          <div style="font-size:13.5px; color:#cbd5e1;">
+            <b>2020 (コロナ打撃 ➔ 特需)</b><br>
+            2020春の休業を経て、屋外スポーツ人気で来場急増（3.6万人）。
+          </div>
+          <div style="font-size:13.5px; color:#cbd5e1;">
+            <b>2024-2026 (現在: 単価高付加価値)</b><br>
+            来場数を3.4万人に制御しつつ客単価¥12,400へ引き上げ、年商4.4億円達成。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. 会員数推移 ＆ 年齢ピラミッドの危機 -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(420px, 1fr)); gap:20px; margin-bottom:20px;">
+      
+      <!-- 会員数 ＆ 平均年齢推移 -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="section-header">
+          <span>👥 ③ 会員数 ＆ 平均年齢の10年推移</span>
+          <span class="section-en">MEMBERSHIP AGING CRISIS</span>
+        </div>
+        <div style="background:#090e17; border:1px solid var(--border); border-radius:10px; padding:16px;">
+          <div style="position:relative; height:280px;">
+            <canvas id="chartMemberAge"></canvas>
+          </div>
+          <div style="font-size:13px; color:var(--c-red-text); font-weight:700; margin-top:10px;">
+            ⚠️ 平均年齢が61.2歳 ➔ 68.4歳へ急上昇。あと5年で年間約35名が75歳超リタイア。
+          </div>
+        </div>
+      </div>
+
+      <!-- 部門別売上構成比 ABC推移（年会費・名義書換料を完全統合） -->
+      <div class="card" style="margin-bottom:0;">
+        <div class="section-header">
+          <span>🍽️ ④ 部門別売上構成比（10年変遷 ＆ ストック収益）</span>
+          <span class="section-en">DEPARTMENT REVENUE SHARE & STOCK DUES</span>
+        </div>
+        <div style="background:#090e17; border:1px solid var(--border); border-radius:10px; padding:16px;">
+          <div style="position:relative; height:280px;">
+            <canvas id="chartDeptShare"></canvas>
+          </div>
+          <div style="font-size:13.5px; color:var(--gold); font-weight:700; margin-top:12px; line-height:1.6; background:rgba(201,169,97,0.1); border:1px solid var(--gold); border-radius:6px; padding:8px 10px;">
+            🏛️ <b>会員年会費（4,800万 / 11%）＋ 名義書換料（2,200万 / 5%）＝ 計7,000万円（全社売上の16%）</b> が「来場に左右されない強固なストック固定収益」。休眠会員の退会防止と世代交代名変が、この7,000万円の絶対防衛線。
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 5. 部門ドリルダウン実戦実例：レストラン生ビール値上げ（プライシング科学） -->
+    <div class="card" style="border: 2px solid var(--gold); background: linear-gradient(180deg, #101c2d 0%, #0a111c 100%); box-shadow: 0 0 24px rgba(201, 169, 97, 0.2);">
+      <div class="section-header" style="border-left-color: var(--gold); margin-bottom: 12px;">
+        <span>🔍 部門ドリルダウン実例：【レストラン】生ビール価格改定の弾力性分析</span>
+        <span class="section-en">PRICING ELASTICITY DRILL-DOWN (TCC REAL CASE)</span>
+      </div>
+      
+      <p style="font-size: 14.5px; color: #cbd5e1; line-height: 1.65; margin-bottom: 18px;">
+        「値上げすると客離れが起きるのではないか？」という現場の恐怖を、SwingClub POSデータの<b>価格弾力性シミュレーション</b>で解消したTCCの実戦実例。出数の微減を単価アップが完全に凌駕し、年間113万円の営業利益を純増させました。
+      </p>
+
+      <!-- Before vs After 比較グリッド -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 18px;">
+        
+        <!-- 改定前 -->
+        <div style="background: #080d14; border: 1.5px solid #334155; border-radius: 10px; padding: 16px 18px;">
+          <div style="font-size: 13.5px; font-weight: 800; color: #94a3b8; margin-bottom: 6px;">🍺 改定前（旧価格）</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 10px;">
+            ¥750 <span style="font-size: 15px; color: #94a3b8;">/ 杯</span>
+          </div>
+          <div style="font-size: 14px; color: #cbd5e1; line-height: 1.8;">
+            ・月間出数: <b>1,200 杯</b><br>
+            ・月間売上: <b>¥900,000</b><br>
+            ・原価率: <b>35.0%</b> (原価 ¥262.5)<br>
+            ・月間粗利: <b style="color: #fff;">¥585,000</b>
+          </div>
+        </div>
+
+        <!-- 改定後 -->
+        <div style="background: rgba(16, 185, 129, 0.08); border: 2px solid var(--c-green); border-radius: 10px; padding: 16px 18px; position: relative;">
+          <div style="position: absolute; top: 12px; right: 14px;">
+            <span class="badge bg-green" style="font-size: 12px;">+130円改定</span>
+          </div>
+          <div style="font-size: 13.5px; font-weight: 800; color: var(--c-green-text); margin-bottom: 6px;">🚀 改定後（新価格 ＆ 実績）</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 900; color: var(--c-green-text); margin-bottom: 10px;">
+            ¥880 <span style="font-size: 15px; color: #cbd5e1;">/ 杯 (+17.3%)</span>
+          </div>
+          <div style="font-size: 14px; color: #cbd5e1; line-height: 1.8;">
+            ・月間出数: <b>1,130 杯</b> (<b style="color: var(--c-yellow-text);">-5.8% 軽微な減少</b>)<br>
+            ・月間売上: <b style="color: #fff;">¥994,400</b> (<b style="color: var(--c-green-text);">+10.5% 増収</b>)<br>
+            ・原価率: <b>29.8%</b> (<b style="color: var(--c-green-text);">粗利率 +5.2pt改善</b>)<br>
+            ・月間粗利: <b style="color: var(--c-green-text); font-size: 16px;">¥679,400</b> (<b style="color: var(--c-green-text);">+¥94,400/月</b>)
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 結論バッジ -->
+      <div style="background: rgba(201, 169, 97, 0.12); border: 1.5px solid var(--gold); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 24px;">🏆</span>
+          <div>
+            <div style="font-size: 16px; font-weight: 900; color: #fff;">生ビール1品だけで【年間粗利 +¥1,132,800 純増】</div>
+            <div style="font-size: 12.5px; color: var(--gold); font-weight: 700;">客離れ（出数減）を単価アップが圧倒。SwingClub POSから単品弾力性を即座にシミュレーション可能</div>
+          </div>
+        </div>
+        <span class="badge bg-gold" style="font-size: 14px; padding: 6px 12px;">年間 +113万円 LIFT</span>
+      </div>
+
+    </div>
+
+
+</div>
+
+<script>
+  // マスターモード切替（フロー vs ストック）
+  function switchMasterMode(modeId) {
+    document.querySelectorAll('.master-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.master-view').forEach(v => v.classList.remove('active'));
+
+    if (modeId === 'mode-flow') {
+      document.getElementById('btn-mode-flow').classList.add('active');
+      document.getElementById('mode-flow').classList.add('active');
+    } else {
+      document.getElementById('btn-mode-stock').classList.add('active');
+      document.getElementById('mode-stock').classList.add('active');
+      initStockCharts(); // ストックグラフ初回描画
+    }
+  }
+
+  // 視座切替（経営者 / 支配人 / リーダー）
+  function setPerspective(viewId) {
+    document.querySelectorAll('.pers-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view-content').forEach(s => s.classList.remove('active'));
+
+    event.currentTarget.classList.add('active');
+    document.getElementById(viewId).classList.add('active');
+  }
+
+  // ストックグラフ初期化フラグ
+  let stockChartsInitialized = false;
+
+  function initStockCharts() {
+    if (stockChartsInitialized) return;
+    stockChartsInitialized = true;
+
+    // 1. デシル分析 パレート図
+    const ctxDecile = document.getElementById('chartDecilePareto').getContext('2d');
+    new Chart(ctxDecile, {
+      type: 'bar',
+      data: {
+        labels: ['デシル1(神会員)', 'デシル2', 'デシル3', 'デシル4', 'デシル5', 'デシル6', 'デシル7', 'デシル8', 'デシル9', 'デシル10'],
+        datasets: [
+          {
+            type: 'line',
+            label: '累積売上構成比 (%)',
+            data: [42.1, 61.8, 74.5, 83.2, 89.4, 93.6, 96.5, 98.3, 99.4, 100.0],
+            borderColor: '#C9A961',
+            borderWidth: 3,
+            pointBackgroundColor: '#C9A961',
+            pointRadius: 5,
+            yAxisID: 'y1'
+          },
+          {
+            type: 'bar',
+            label: 'グループ別売上高 (百万円)',
+            data: [53.4, 25.0, 16.1, 11.0, 7.9, 5.3, 3.7, 2.3, 1.4, 0.8],
+            backgroundColor: [
+              '#C9A961', '#2c6e96', '#2c6e96', '#182538', '#182538',
+              '#182538', '#182538', '#182538', '#182538', '#182538'
+            ],
+            borderRadius: 4,
+            yAxisID: 'y'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { color: '#94a3b8', font: { size: 12, weight: 700 } }, grid: { display: false } },
+          y: {
+            title: { display: true, text: '売上高 (百万円)', color: '#94a3b8' },
+            ticks: { color: '#94a3b8' },
+            grid: { color: 'rgba(255,255,255,0.05)' }
+          },
+          y1: {
+            position: 'right',
+            max: 100,
+            min: 0,
+            title: { display: true, text: '累積比率 (%)', color: '#C9A961' },
+            ticks: { color: '#C9A961', callback: v => v + '%' },
+            grid: { display: false }
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#cbd5e1', font: { weight: 700 } } }
+        }
+      }
+    });
+
+    // 2. 10年間 超時系列マクロトレンド
+    const ctxMacro = document.getElementById('chartTenYearMacro').getContext('2d');
+    new Chart(ctxMacro, {
+      data: {
+        labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026(見込)'],
+        datasets: [
+          {
+            type: 'line',
+            label: '客単価 (円)',
+            data: [11850, 11720, 11890, 10950, 11200, 11450, 11800, 12150, 12380, 12450],
+            borderColor: '#f59e0b',
+            borderWidth: 3,
+            pointBackgroundColor: '#f59e0b',
+            yAxisID: 'yUnitPrice'
+          },
+          {
+            type: 'bar',
+            label: '年間来場客数 (千名)',
+            data: [32.1, 32.5, 31.8, 28.5, 35.2, 36.4, 35.8, 34.5, 34.8, 35.2],
+            backgroundColor: 'rgba(27, 77, 107, 0.65)',
+            borderColor: '#2c6e96',
+            borderWidth: 1.5,
+            borderRadius: 4,
+            yAxisID: 'yVisitors'
+          },
+          {
+            type: 'line',
+            label: '年間営業売上高 (百万円)',
+            data: [380, 381, 378, 312, 394, 417, 422, 419, 431, 438],
+            borderColor: '#10b981',
+            backgroundColor: 'rgba(16, 185, 129, 0.12)',
+            fill: true,
+            borderWidth: 2.5,
+            tension: 0.3,
+            yAxisID: 'yRevenue'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { color: '#94a3b8', font: { weight: 700 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+          yRevenue: {
+            position: 'left',
+            title: { display: true, text: '売上高 (百万円)', color: '#10b981' },
+            ticks: { color: '#10b981' },
+            grid: { color: 'rgba(255,255,255,0.05)' }
+          },
+          yVisitors: {
+            position: 'right',
+            title: { display: true, text: '来場客数 (千名)', color: '#2c6e96' },
+            ticks: { color: '#2c6e96' },
+            grid: { display: false }
+          },
+          yUnitPrice: {
+            position: 'right',
+            display: false,
+            min: 9000,
+            max: 14000
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#cbd5e1', font: { weight: 700 } } }
+        }
+      }
+    });
+
+    // 3. 会員数 ＆ 平均年齢推移
+    const ctxAge = document.getElementById('chartMemberAge').getContext('2d');
+    new Chart(ctxAge, {
+      data: {
+        labels: ['2017', '2019', '2021', '2023', '2025', '2026'],
+        datasets: [
+          {
+            type: 'line',
+            label: '平均年齢 (歳)',
+            data: [61.2, 62.8, 64.5, 66.1, 67.8, 68.4],
+            borderColor: '#ef4444',
+            borderWidth: 3,
+            pointBackgroundColor: '#ef4444',
+            yAxisID: 'yAge'
+          },
+          {
+            type: 'bar',
+            label: '正会員数 (名)',
+            data: [1200, 1140, 1080, 1020, 970, 950],
+            backgroundColor: 'rgba(201, 169, 97, 0.4)',
+            borderColor: '#C9A961',
+            borderWidth: 1.5,
+            borderRadius: 4,
+            yAxisID: 'yCount'
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+          yCount: {
+            position: 'left',
+            min: 800,
+            max: 1300,
+            ticks: { color: '#C9A961' },
+            grid: { color: 'rgba(255,255,255,0.05)' }
+          },
+          yAge: {
+            position: 'right',
+            min: 55,
+            max: 75,
+            ticks: { color: '#ef4444' },
+            grid: { display: false }
+          }
+        },
+        plugins: {
+          legend: { labels: { color: '#cbd5e1' } }
+        }
+      }
+    });
+
+    // 4. 部門別売上構成比（年会費・名義書換料を完全統合したストック収益オントロジー）
+    const ctxDept = document.getElementById('chartDeptShare').getContext('2d');
+    new Chart(ctxDept, {
+      type: 'doughnut',
+      data: {
+        labels: [
+          '⛳ プレー代 (52% / ¥228M)',
+          '🍽️ レストラン (22% / ¥96M)',
+          '🏛️ 会員年会費 (11% / ¥48M)',
+          '🛍️ プロショップ (7% / ¥31M)',
+          '🏆 名義書換料・入会金 (5% / ¥22M)',
+          '✨ その他付帯 (3% / ¥15M)'
+        ],
+        datasets: [{
+          data: [52, 22, 11, 7, 5, 3],
+          backgroundColor: [
+            '#1B4D6B', // Navy
+            '#2c6e96', // Navy-light
+            '#C9A961', // Gold (年会費)
+            '#10b981', // Teal (ショップ)
+            '#f59e0b', // Amber (名義書換)
+            '#64748b'  // Slate (その他)
+          ],
+          borderColor: '#0d1520',
+          borderWidth: 2.5
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 12.5, weight: 700 }, padding: 10 } }
+        }
+      }
+    });
+
+  // ページ読み込み時のURL判定（?tab=stock または #stock で自動切替）
+  window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hash = window.location.hash;
+    if (urlParams.get('tab') === 'stock' || hash === '#stock') {
+      switchMasterMode('mode-stock');
+    }
+  });
+</script>
+
+
+</body>
+</html>
