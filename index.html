@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>【TSH × osAKen】Swing-BI 事業計画＆多層レベニューシェア ROIシミュレーター</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>【TSH × osAKen】Swing-BI ROIシミュレーター</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
@@ -22,12 +22,12 @@
       --rose: #e11d48;
       --rose-soft: #ffe4e6;
       --text-main: #0f172a;
-      --text-muted: #475569;
-      --bg: #f1f5f9;
+      --text-muted: #64748b;
+      --bg: #f8fafc;
       --card-bg: #ffffff;
-      --border: #cbd5e1;
-      --radius: 14px;
-      --shadow: 0 4px 8px -1px rgba(0,0,0,0.08), 0 2px 4px -1px rgba(0,0,0,0.04);
+      --border: #e2e8f0;
+      --radius: 12px;
+      --shadow: 0 2px 4px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
@@ -35,126 +35,172 @@
       font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text-main);
-      padding: 20px 12px;
-      font-size: 16px;
-      line-height: 1.6;
+      padding: 12px 10px 80px 10px; /* 下部余白（スティッキーバー用） */
+      font-size: 15px;
+      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 1400px;
+      max-width: 1200px;
       margin: 0 auto;
     }
 
-    .header-bar {
-      background: linear-gradient(135deg, #064e3b 0%, #047857 50%, #0f766e 100%);
+    /* Sticky Bottom Quick Bar for iPhone */
+    .sticky-kpi-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       color: #ffffff;
-      border-radius: var(--radius);
-      padding: 24px 20px;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
+      padding: 10px 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      z-index: 9999;
+      box-shadow: 0 -4px 12px rgba(0,0,0,0.15);
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .sticky-item { display: flex; flex-direction: column; }
+    .sticky-label { font-size: 11px; opacity: 0.8; }
+    .sticky-val { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; color: #34d399; }
+    .sticky-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Header */
+    .header-bar {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+      color: #ffffff;
+      border-radius: var(--radius);
+      padding: 16px 14px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    .header-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+    .header-bar h1 { font-size: 18px; font-weight: 700; line-height: 1.3; }
+    .header-bar p { font-size: 12px; opacity: 0.9; margin-top: 4px; }
+    .header-market-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,0,0,0.25);
+      padding: 4px 8px;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+
+    /* Main Grid */
+    .main-grid {
+      display: flex;
+      flex-direction: column;
       gap: 14px;
     }
-    .header-bar h1 { font-size: 24px; font-weight: 700; line-height: 1.3; }
-    .header-bar p { font-size: 14px; opacity: 0.92; margin-top: 4px; }
-
-    /* Layout Grid */
-    .main-grid {
-      display: grid;
-      grid-template-columns: 520px 1fr;
-      gap: 20px;
-    }
-    @media (max-width: 1100px) {
-      .main-grid { grid-template-columns: 1fr; }
+    @media (min-width: 900px) {
+      .main-grid {
+        display: grid;
+        grid-template-columns: 480px 1fr;
+        gap: 20px;
+      }
     }
 
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 20px 16px;
-      margin-bottom: 20px;
+      padding: 16px 14px;
       box-shadow: var(--shadow);
     }
     .card h2 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--text-main);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 4px;
     }
 
-    /* Form & Sliders */
+    /* Form Controls */
     .input-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      font-size: 15px;
-      flex-wrap: wrap;
+      margin-bottom: 12px;
+      font-size: 14px;
       gap: 8px;
     }
-    .input-label { font-weight: 600; color: var(--text-main); }
+    .input-label { font-weight: 600; color: var(--text-main); flex: 1; }
     .input-val-box {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     
-    /* 🟡 入力可能な箱の背景を薄い黄色 #FFFFE0 に設定 */
+    /* 🟡 黄色い入力箱（スマホ対応） */
     .num-input {
-      width: 100px;
-      padding: 8px 10px;
+      width: 85px;
+      padding: 6px 8px;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 700;
       text-align: right;
       color: #0f172a;
       background-color: #FFFFE0 !important;
-      border: 2px solid #eab308;
-      border-radius: 8px;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
-      transition: all 0.15s ease;
+      border: 1.5px solid #eab308;
+      border-radius: 6px;
       -webkit-appearance: none;
     }
     .num-input:focus {
       background-color: #fef08a !important;
       border-color: #ca8a04;
-      box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.25);
       outline: none;
     }
 
-    /* Plan Slider Row */
+    /* Plan Rows */
     .plan-card-row {
       background: #f8fafc;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 12px;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
     }
     .plan-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
-      flex-wrap: wrap;
+      margin-bottom: 8px;
       gap: 6px;
     }
     .plan-badge {
-      font-size: 13px;
+      font-size: 11px;
       font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
+      padding: 3px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
     }
     .badge-tsuru { background: var(--purple-soft); color: var(--purple); border: 1px solid #ddd6fe; }
     .badge-matsu { background: var(--rose-soft); color: var(--rose); border: 1px solid #fecdd3; }
@@ -162,65 +208,68 @@
     .badge-ume { background: var(--blue-soft); color: var(--blue); border: 1px solid #bfdbfe; }
     .badge-kame { background: #f1f5f9; color: var(--text-muted); border: 1px solid #cbd5e1; }
 
-    .slider-container { display: flex; align-items: center; gap: 12px; }
+    .slider-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
     input[type=range] {
       flex: 1;
-      height: 10px;
+      height: 8px;
       accent-color: var(--primary);
       cursor: pointer;
     }
-    /* iPhone用タッチしやすい大きめスライダー */
     input[type=range]::-webkit-slider-thumb {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
     }
     .slider-count {
-      width: 75px;
+      min-width: 55px;
       text-align: right;
       font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 14px;
     }
 
-    /* Presets */
+    /* Presets (2x2 Grid on Mobile) */
     .preset-btns {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-    @media (min-width: 600px) {
-      .preset-btns { display: flex; flex-wrap: wrap; }
+      gap: 6px;
+      margin-bottom: 14px;
     }
     .btn-chip {
       background: #ffffff;
-      border: 1.5px solid var(--border);
-      padding: 10px 14px;
-      border-radius: 8px;
-      font-size: 14px;
+      border: 1px solid var(--border);
+      padding: 8px 6px;
+      border-radius: 6px;
+      font-size: 12.5px;
       font-weight: 700;
       cursor: pointer;
       text-align: center;
       transition: all 0.15s ease;
     }
-    .btn-chip:hover { background: var(--primary-soft); border-color: var(--primary); color: var(--primary); }
-    .btn-chip.active { background: var(--primary); color: #ffffff; border-color: var(--primary); box-shadow: 0 2px 4px rgba(4,120,87,0.3); }
+    .btn-chip:hover { background: var(--primary-soft); border-color: var(--primary); }
+    .btn-chip.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
 
     /* Results Dashboard Grid */
     .results-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
-    @media (max-width: 700px) {
-      .results-grid { grid-template-columns: 1fr; }
+    @media (min-width: 600px) {
+      .results-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     .res-box {
-      border-radius: 12px;
-      padding: 16px;
-      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      border: 1.5px solid var(--border);
     }
     .res-box.tsh { background: #eff6ff; border-color: #93c5fd; }
     .res-box.osaken { background: #ecfdf5; border-color: #6ee7b7; }
@@ -229,20 +278,20 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 14px;
     }
     .res-kpi-row {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 8px;
-      font-size: 14.5px;
+      margin-bottom: 6px;
+      font-size: 13px;
     }
     .kpi-big {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 700;
     }
 
@@ -251,30 +300,30 @@
       width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      margin-top: 10px;
+      margin-top: 8px;
     }
     table {
       width: 100%;
-      min-width: 540px;
+      min-width: 480px;
       border-collapse: collapse;
-      font-size: 14.5px;
+      font-size: 13px;
     }
     th, td {
-      padding: 9px 10px;
+      padding: 7px 8px;
       border: 1px solid var(--border);
       text-align: right;
     }
-    th { background: #f8fafc; font-weight: 700; color: var(--text-muted); font-size: 13.5px; }
+    th { background: #f8fafc; font-weight: 700; color: var(--text-muted); font-size: 12px; }
     th:first-child, td:first-child { text-align: left; }
     tr:nth-child(even) { background: #fafafa; }
 
     /* Chart Simulation Bar */
     .bar-container {
       display: flex;
-      height: 28px;
-      border-radius: 8px;
+      height: 24px;
+      border-radius: 6px;
       overflow: hidden;
-      margin: 12px 0;
+      margin: 8px 0;
       background: #e2e8f0;
     }
     .bar-seg {
@@ -282,38 +331,50 @@
       align-items: center;
       justify-content: center;
       color: #fff;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       transition: width 0.3s ease;
     }
 
-    /* Grounding Cards */
+    /* Grounding */
     .grounding-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
     }
     .grounding-box {
-      padding: 16px;
-      border-radius: 10px;
+      padding: 12px;
+      border-radius: 8px;
       border: 1px solid var(--border);
       background: #ffffff;
+      font-size: 13px;
     }
   </style>
 </head>
 <body>
 
+<!-- Sticky KPI Bar for iPhone -->
+<div class="sticky-kpi-bar">
+  <div class="sticky-item">
+    <span class="sticky-label">TSH 初年度純利益</span>
+    <span class="sticky-val" id="sticky-tsh-val">+1,212 万円</span>
+  </div>
+  <div class="sticky-item">
+    <span class="sticky-label">投資回収期間</span>
+    <span class="sticky-val" id="sticky-payback-val" style="color:#fbbf24;">約 3 ヶ月</span>
+  </div>
+  <button class="sticky-btn" onclick="document.getElementById('section-results').scrollIntoView({behavior:'smooth'})">📊 試算詳細</button>
+</div>
+
 <div class="container">
   <div class="header-bar">
-    <div>
-      <span style="background: rgba(255,255,255,0.25); font-size: 12px; font-weight: 700; padding: 3px 8px; border-radius: 6px;">TSH × osAKen 共同事業</span>
-      <h1 style="margin-top: 6px;">Swing-BI 事業計画＆多層レベニューシェア ROIシミュレーター</h1>
-      <p>iPhone・PC両対応 / 5段階プラン、既納・Yardage市場規模、着手・完了金、AIパック配分率の完全動的シミュレーション</p>
-    </div>
-    <div style="text-align: right;">
-      <div style="font-size: 12px; opacity: 0.85;">対象市場規模（既納＋Yardage）</div>
-      <div style="font-family: 'JetBrains Mono'; font-size: 22px; font-weight: 700;" id="header-market-size">Max 240 コース</div>
+    <span class="header-tag">TSH × osAKen 共同事業</span>
+    <h1>Swing-BI ROIシミュレーター</h1>
+    <p>5段階プラン・市場規模・着手金・配分率の完全連動シミュレーション</p>
+    <div class="header-market-badge">
+      <span>対象市場:</span>
+      <b style="font-family:'JetBrains Mono';" id="header-market-size">Max 240 コース</b>
     </div>
   </div>
 
@@ -322,28 +383,28 @@
     <div>
 
       <!-- 1. Target Customer Base Input -->
-      <div class="card" style="background: #fdfdfd; border-color: #facc15;">
+      <div class="card" style="border-color: #facc15; background: #fffdf5;">
         <h2>
-          <span>🎯 対象市場基盤（自由に変更可能）</span>
-          <span style="font-size:11px; font-weight:600; color:#854d0e; background:#fef9c3; padding:2px 8px; border-radius:4px; border:1px solid #fde047;">🟡 黄色い箱をタップで入力</span>
+          <span>🎯 対象市場基盤（変更可能）</span>
+          <span style="font-size:10px; font-weight:700; color:#854d0e; background:#fef9c3; padding:2px 6px; border-radius:4px;">🟡 タップして入力</span>
         </h2>
         <div class="input-row">
-          <span class="input-label">🥇 TSH既納コース数（SwingClub）</span>
+          <span class="input-label">🥇 TSH既納 (SwingClub)</span>
           <div class="input-val-box">
             <input type="number" id="base-tsh-kinou" class="num-input" value="200" oninput="onMarketBaseChange()">
-            <span style="font-weight:700;">コース</span>
+            <span style="font-size:13px;">件</span>
           </div>
         </div>
         <div class="input-row">
-          <span class="input-label">🥈 Yardage買収＋SQL基幹コース数</span>
+          <span class="input-label">🥈 Yardage買収＋SQL基幹</span>
           <div class="input-val-box">
             <input type="number" id="base-yardage" class="num-input" value="40" oninput="onMarketBaseChange()">
-            <span style="font-weight:700;">コース</span>
+            <span style="font-size:13px;">件</span>
           </div>
         </div>
-        <div style="display:flex; justify-content:space-between; font-size:14px; background:#fefce8; padding:8px 12px; border-radius:8px; border:1px solid #fef08a; font-weight:700; color:#854d0e; margin-top:4px;">
-          <span>対象市場 合計分母:</span>
-          <span id="disp-total-market-base" style="font-family:'JetBrains Mono'; font-size:16px;">240 コース</span>
+        <div style="display:flex; justify-content:space-between; font-size:13px; background:#fefce8; padding:6px 10px; border-radius:6px; border:1px solid #fef08a; font-weight:700; color:#854d0e;">
+          <span>合計市場規模:</span>
+          <span id="disp-total-market-base" style="font-family:'JetBrains Mono';">240 コース</span>
         </div>
       </div>
 
@@ -357,51 +418,49 @@
 
       <!-- Development Contract Fees -->
       <div class="card">
-        <h2>
-          <span>💰 開発受託費（TSH ➔ osAKen 一括）</span>
-        </h2>
+        <h2>💰 開発受託費（TSH ➔ osAKen）</h2>
         <div class="input-row">
           <span class="input-label">初期着手金（一般化開発）</span>
           <div class="input-val-box">
             <input type="number" id="fee-start" class="num-input" value="300" oninput="recalc()">
-            <span style="font-weight:700;">万円</span>
+            <span style="font-size:13px;">万円</span>
           </div>
         </div>
         <div class="input-row">
-          <span class="input-label">検収・完了金（本番リリース時）</span>
+          <span class="input-label">検収・完了金（本番時）</span>
           <div class="input-val-box">
             <input type="number" id="fee-finish" class="num-input" value="100" oninput="recalc()">
-            <span style="font-weight:700;">万円</span>
+            <span style="font-size:13px;">万円</span>
           </div>
         </div>
       </div>
 
       <!-- Setup & Options -->
       <div class="card">
-        <h2>🛠️ 初期設定費 ＆ AI質問パック（コースごと）</h2>
+        <h2>🛠️ 初期設定費 ＆ AI質問パック</h2>
         <div class="input-row">
-          <span class="input-label">コース初期導入・設定費（定価）</span>
+          <span class="input-label">コース設定費（定価）</span>
           <div class="input-val-box">
             <input type="number" id="setup-price" class="num-input" value="50" oninput="recalc()">
-            <span style="font-weight:700;">万円</span>
+            <span style="font-size:13px;">万円</span>
           </div>
         </div>
-        <div class="input-row" style="font-size: 13.5px; color: var(--text-muted); background: #f8fafc; padding: 8px 12px; border-radius: 8px;">
-          <span>└ TSH: <b id="disp-tsh-setup" style="color:var(--blue); font-size:15px;">15</b>万 / osA: <b id="disp-osaken-setup" style="color:var(--primary); font-size:15px;">35</b>万</span>
-          <input type="range" id="split-setup" min="0" max="100" value="70" style="width: 100px;" oninput="recalc()">
+        <div class="input-row" style="font-size: 12px; color: var(--text-muted); background: #f8fafc; padding: 6px 10px; border-radius: 6px;">
+          <span>TSH: <b id="disp-tsh-setup" style="color:var(--blue);">15</b>万 / osA: <b id="disp-osaken-setup" style="color:var(--primary);">35</b>万</span>
+          <input type="range" id="split-setup" min="0" max="100" value="70" style="width: 80px;" oninput="recalc()">
         </div>
 
-        <div style="border-top: 1px dashed var(--border); margin: 12px 0; padding-top: 12px;"></div>
+        <div style="border-top: 1px dashed var(--border); margin: 10px 0; padding-top: 10px;"></div>
 
         <div class="input-row">
-          <span class="input-label">🧠 AI質問パック（月額オプション）</span>
+          <span class="input-label">🧠 AIパック（月額定価）</span>
           <div class="input-val-box">
             <input type="number" id="ai-price" class="num-input" value="2" oninput="recalc()">
-            <span style="font-weight:700;">万円/月</span>
+            <span style="font-size:13px;">万円/月</span>
           </div>
         </div>
         <div class="input-row">
-          <span class="input-label">AIパック 導入比率</span>
+          <span class="input-label">AIパック導入率</span>
           <div class="slider-container" style="flex:1; justify-content: flex-end;">
             <input type="range" id="ai-rate" min="0" max="100" value="40" oninput="recalc()">
             <span class="slider-count" id="disp-ai-rate" style="color:var(--purple);">40 %</span>
@@ -413,21 +472,20 @@
       <div class="card">
         <h2>
           <span>🏷️ 5段階プラン別 設定 ＆ コース数</span>
-          <span style="font-size: 14px; color: var(--primary); font-family: 'JetBrains Mono';" id="disp-total-courses">合計: 36 コース</span>
+          <span style="font-size: 13px; color: var(--primary); font-family: 'JetBrains Mono';" id="disp-total-courses">計 36件</span>
         </h2>
 
         <!-- Tsuru -->
         <div class="plan-card-row">
           <div class="plan-header">
-            <span class="plan-badge badge-tsuru">【鶴 / 極】TCC特装RAG</span>
+            <span class="plan-badge badge-tsuru">【鶴】TCC特装RAG</span>
             <div class="input-val-box">
-              <span style="font-size:12px; font-weight:600;">月額:</span>
-              <input type="number" id="price-tsuru" class="num-input" style="width:70px;" value="15" oninput="recalc()">
-              <span style="font-size:12px;">万 (TSH <span id="split-tsuru-tsh">7.5</span> / osA <span id="split-tsuru-osa">7.5</span>)</span>
+              <span style="font-size:11px;">月額:</span>
+              <input type="number" id="price-tsuru" class="num-input" style="width:65px; font-size:14px; padding:4px;" value="15" oninput="recalc()">
+              <span style="font-size:11px;">万(T<span id="split-tsuru-tsh">7.5</span>/o<span id="split-tsuru-osa">7.5</span>)</span>
             </div>
           </div>
           <div class="slider-container">
-            <span style="font-size:13px; width:55px; font-weight:600;">コース数:</span>
             <input type="range" id="count-tsuru" min="0" max="80" value="4" oninput="recalc()">
             <span class="slider-count" id="disp-count-tsuru">4 件</span>
           </div>
@@ -436,15 +494,14 @@
         <!-- Matsu -->
         <div class="plan-card-row">
           <div class="plan-header">
-            <span class="plan-badge badge-matsu">【松】プロフェッショナル</span>
+            <span class="plan-badge badge-matsu">【松】プロ</span>
             <div class="input-val-box">
-              <span style="font-size:12px; font-weight:600;">月額:</span>
-              <input type="number" id="price-matsu" class="num-input" style="width:70px;" value="10" oninput="recalc()">
-              <span style="font-size:12px;">万 (TSH <span id="split-matsu-tsh">5.0</span> / osA <span id="split-matsu-osa">5.0</span>)</span>
+              <span style="font-size:11px;">月額:</span>
+              <input type="number" id="price-matsu" class="num-input" style="width:65px; font-size:14px; padding:4px;" value="10" oninput="recalc()">
+              <span style="font-size:11px;">万(T<span id="split-matsu-tsh">5.0</span>/o<span id="split-matsu-osa">5.0</span>)</span>
             </div>
           </div>
           <div class="slider-container">
-            <span style="font-size:13px; width:55px; font-weight:600;">コース数:</span>
             <input type="range" id="count-matsu" min="0" max="100" value="6" oninput="recalc()">
             <span class="slider-count" id="disp-count-matsu">6 件</span>
           </div>
@@ -453,15 +510,14 @@
         <!-- Take -->
         <div class="plan-card-row" style="background:#f0fdf4; border-color:#a7f3d0;">
           <div class="plan-header">
-            <span class="plan-badge badge-take">【竹】標準パッケージ（★推奨）</span>
+            <span class="plan-badge badge-take">【竹】標準（★推奨）</span>
             <div class="input-val-box">
-              <span style="font-size:12px; font-weight:600;">月額:</span>
-              <input type="number" id="price-take" class="num-input" style="width:70px;" value="6" oninput="recalc()">
-              <span style="font-size:12px;">万 (TSH <span id="split-take-tsh">3.0</span> / osA <span id="split-take-osa">3.0</span>)</span>
+              <span style="font-size:11px;">月額:</span>
+              <input type="number" id="price-take" class="num-input" style="width:65px; font-size:14px; padding:4px;" value="6" oninput="recalc()">
+              <span style="font-size:11px;">万(T<span id="split-take-tsh">3.0</span>/o<span id="split-take-osa">3.0</span>)</span>
             </div>
           </div>
           <div class="slider-container">
-            <span style="font-size:13px; width:55px; font-weight:600;">コース数:</span>
             <input type="range" id="count-take" min="0" max="150" value="14" oninput="recalc()">
             <span class="slider-count" id="disp-count-take" style="color:var(--primary);">14 件</span>
           </div>
@@ -472,13 +528,12 @@
           <div class="plan-header">
             <span class="plan-badge badge-ume">【梅】ライト</span>
             <div class="input-val-box">
-              <span style="font-size:12px; font-weight:600;">月額:</span>
-              <input type="number" id="price-ume" class="num-input" style="width:70px;" value="3" oninput="recalc()">
-              <span style="font-size:12px;">万 (TSH <span id="split-ume-tsh">1.0</span> / osA <span id="split-ume-osa">2.0</span>)</span>
+              <span style="font-size:11px;">月額:</span>
+              <input type="number" id="price-ume" class="num-input" style="width:65px; font-size:14px; padding:4px;" value="3" oninput="recalc()">
+              <span style="font-size:11px;">万(T<span id="split-ume-tsh">1.0</span>/o<span id="split-ume-osa">2.0</span>)</span>
             </div>
           </div>
           <div class="slider-container">
-            <span style="font-size:13px; width:55px; font-weight:600;">コース数:</span>
             <input type="range" id="count-ume" min="0" max="150" value="10" oninput="recalc()">
             <span class="slider-count" id="disp-count-ume">10 件</span>
           </div>
@@ -489,13 +544,12 @@
           <div class="plan-header">
             <span class="plan-badge badge-kame">【亀】ミニマム</span>
             <div class="input-val-box">
-              <span style="font-size:12px; font-weight:600;">月額:</span>
-              <input type="number" id="price-kame" class="num-input" style="width:70px;" value="2" oninput="recalc()">
-              <span style="font-size:12px;">万 (TSH <span id="split-kame-tsh">0.8</span> / osA <span id="split-kame-osa">1.2</span>)</span>
+              <span style="font-size:11px;">月額:</span>
+              <input type="number" id="price-kame" class="num-input" style="width:65px; font-size:14px; padding:4px;" value="2" oninput="recalc()">
+              <span style="font-size:11px;">万(T<span id="split-kame-tsh">0.8</span>/o<span id="split-kame-osa">1.2</span>)</span>
             </div>
           </div>
           <div class="slider-container">
-            <span style="font-size:13px; width:55px; font-weight:600;">コース数:</span>
             <input type="range" id="count-kame" min="0" max="100" value="2" oninput="recalc()">
             <span class="slider-count" id="disp-count-kame">2 件</span>
           </div>
@@ -505,12 +559,12 @@
     </div>
 
     <!-- RIGHT COLUMN: DASHBOARD RESULTS -->
-    <div>
+    <div id="section-results">
       <!-- Total Course Ratio Visual Bar -->
-      <div class="card" style="padding: 16px;">
-        <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; color: var(--text-muted);">
-          <span>導入プラン構成比</span>
-          <span id="disp-market-share" style="color:var(--text-main);">市場占有率: 15% / 240コース</span>
+      <div class="card" style="padding: 14px;">
+        <div style="display: flex; justify-content: space-between; font-size: 12.5px; font-weight: 700; color: var(--text-muted);">
+          <span>プラン構成比</span>
+          <span id="disp-market-share" style="color:var(--text-main);">シェア: 15% / 240件</span>
         </div>
         <div class="bar-container">
           <div id="bar-tsuru" class="bar-seg" style="background: var(--purple);">鶴</div>
@@ -526,73 +580,73 @@
         <!-- TSH Side -->
         <div class="res-box tsh">
           <div class="res-header">
-            <span style="color: var(--blue);">🏢 TSH様（販売元・一次窓口）</span>
-            <span style="font-size:11.5px; background:#fff; padding:2px 6px; border-radius:6px; border:1px solid #bfdbfe; font-weight:700;">投資対効果</span>
+            <span style="color: var(--blue);">🏢 TSH様（販売元）</span>
+            <span style="font-size:11px; background:#fff; padding:2px 5px; border-radius:4px; border:1px solid #bfdbfe;">ROI</span>
           </div>
           <div class="res-kpi-row">
-            <span>月額ストック売上:</span>
+            <span>月額ストック:</span>
             <span class="kpi-big" id="tsh-monthly" style="color: var(--blue);">--</span>
           </div>
           <div class="res-kpi-row">
-            <span>年間ストック売上:</span>
-            <span class="kpi-big" id="tsh-yearly" style="font-size:20px;">--</span>
+            <span>年間ストック:</span>
+            <span class="kpi-big" id="tsh-yearly" style="font-size:17px;">--</span>
           </div>
           <div class="res-kpi-row">
-            <span>設定費利益 (初年度):</span>
-            <span style="font-family:'JetBrains Mono'; font-weight:700; font-size:16px;" id="tsh-setup-profit">--</span>
+            <span>設定費利益:</span>
+            <span style="font-family:'JetBrains Mono'; font-weight:700;" id="tsh-setup-profit">--</span>
           </div>
-          <div class="res-kpi-row" style="border-top:2px solid #bfdbfe; padding-top:8px; margin-top:8px;">
-            <span style="font-weight:700; font-size:14px;">初年度 純利益 (投資相殺後):</span>
-            <span class="kpi-big" id="tsh-net-year1" style="color:var(--primary); font-size:22px;">--</span>
+          <div class="res-kpi-row" style="border-top:1.5px solid #bfdbfe; padding-top:6px; margin-top:6px;">
+            <span style="font-weight:700; font-size:13px;">初年度 純利益:</span>
+            <span class="kpi-big" id="tsh-net-year1" style="color:var(--primary); font-size:19px;">--</span>
           </div>
           <div class="res-kpi-row">
-            <span>開発投資回収期間:</span>
-            <span style="font-weight:700; color:var(--accent); font-size:16px;" id="tsh-payback">--</span>
+            <span>投資回収:</span>
+            <span style="font-weight:700; color:var(--accent);" id="tsh-payback">--</span>
           </div>
         </div>
 
         <!-- osAKen Side -->
         <div class="res-box osaken">
           <div class="res-header">
-            <span style="color: var(--primary-dark);">💻 osAKen（開発・運用基盤）</span>
-            <span style="font-size:11.5px; background:#fff; padding:2px 6px; border-radius:6px; border:1px solid #a7f3d0; font-weight:700;">開発受託＆SaaS</span>
+            <span style="color: var(--primary-dark);">💻 osAKen（開発基盤）</span>
+            <span style="font-size:11px; background:#fff; padding:2px 5px; border-radius:4px; border:1px solid #a7f3d0;">SaaS</span>
           </div>
           <div class="res-kpi-row">
-            <span>月額ストック売上:</span>
+            <span>月額ストック:</span>
             <span class="kpi-big" id="osa-monthly" style="color: var(--primary);">--</span>
           </div>
           <div class="res-kpi-row">
-            <span>年間ストック売上:</span>
-            <span class="kpi-big" id="osa-yearly" style="font-size:20px;">--</span>
+            <span>年間ストック:</span>
+            <span class="kpi-big" id="osa-yearly" style="font-size:17px;">--</span>
           </div>
           <div class="res-kpi-row">
-            <span>初期開発＋設定費売上:</span>
-            <span style="font-family:'JetBrains Mono'; font-weight:700; font-size:16px;" id="osa-initial-total">--</span>
+            <span>初期開発＋設定費:</span>
+            <span style="font-family:'JetBrains Mono'; font-weight:700;" id="osa-initial-total">--</span>
           </div>
-          <div class="res-kpi-row" style="border-top:2px solid #a7f3d0; padding-top:8px; margin-top:8px;">
-            <span style="font-weight:700; font-size:14px;">初年度 総合売上:</span>
-            <span class="kpi-big" id="osa-net-year1" style="color:var(--primary-dark); font-size:22px;">--</span>
+          <div class="res-kpi-row" style="border-top:1.5px solid #a7f3d0; padding-top:6px; margin-top:6px;">
+            <span style="font-weight:700; font-size:13px;">初年度 総合売上:</span>
+            <span class="kpi-big" id="osa-net-year1" style="color:var(--primary-dark); font-size:19px;">--</span>
           </div>
           <div class="res-kpi-row">
-            <span>継続ストック比率:</span>
-            <span style="font-weight:700; color:var(--primary); font-size:16px;" id="osa-stock-ratio">--</span>
+            <span>ストック比率:</span>
+            <span style="font-weight:700; color:var(--primary);" id="osa-stock-ratio">--</span>
           </div>
         </div>
       </div>
 
       <!-- 5-Year Cashflow Table -->
       <div class="card">
-        <h2>📈 5カ年 累積収益シミュレーション（TSH ＆ osAKen）</h2>
+        <h2>📈 5カ年 累積収益シミュレーション</h2>
         <div class="table-scroll">
           <table>
             <thead>
               <tr>
                 <th>年度</th>
-                <th>導入コース</th>
-                <th>TSH 年間純利益</th>
-                <th>TSH 累積純利益</th>
-                <th>osAKen 年間売上</th>
-                <th>osAKen 累積売上</th>
+                <th>コース</th>
+                <th>TSH年純益</th>
+                <th>TSH累積</th>
+                <th>osA年売上</th>
+                <th>osA累積</th>
               </tr>
             </thead>
             <tbody id="multi-year-table">
@@ -602,9 +656,9 @@
       </div>
 
       <!-- Executive Pitch Summary Card -->
-      <div class="card" style="background: #faf5ff; border: 2px solid #ddd6fe;">
-        <h2 style="color: var(--purple);">💡 北村部長・役員会への刺さるキートーク</h2>
-        <div id="executive-summary" style="font-size: 14.5px; color: #4c1d95; line-height: 1.7;">
+      <div class="card" style="background: #faf5ff; border: 1.5px solid #ddd6fe;">
+        <h2 style="color: var(--purple);">💡 北村部長・役員会へのキートーク</h2>
+        <div id="executive-summary" style="font-size: 13.5px; color: #4c1d95; line-height: 1.6;">
           計算中...
         </div>
       </div>
@@ -614,38 +668,36 @@
 
   <!-- GROUNDING & TARGET COURSES ANALYSIS -->
   <div class="card" style="margin-top: 10px;">
-    <h2>🎯 既納客・準既納客の選定マップ ＆ シナリオ達成根拠</h2>
+    <h2>🎯 既納客・準既納客の選定 ＆ 達成根拠</h2>
     
     <div class="grounding-grid">
       <!-- 既納客 -->
-      <div class="grounding-box" style="border-top: 4px solid var(--primary);">
-        <div style="font-weight: 700; font-size: 16px; color: var(--primary); margin-bottom: 6px;">🥇 既納客（SwingClub稼働コース）</div>
-        <div style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          ・<b>設定規模</b>：<b id="grounding-kinou-count">200</b> コース（入力値に連動）<br>
-          ・<b>顧客属性</b>：TSHが長年保守・運用する最重要既存顧客。<br>
-          ・<b>営業アプローチ</b>：サーバー更新時・クラウド版移行時の「標準同梱BI」として提案。<br>
-          ・<b>キラー訴求</b>：毎朝の売上・来場速報、週報の完全自動化、4支配人AIサマリー。
+      <div class="grounding-box" style="border-left: 4px solid var(--primary);">
+        <div style="font-weight: 700; font-size: 14px; color: var(--primary); margin-bottom: 4px;">🥇 既納客（SwingClub稼働コース）</div>
+        <div style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5;">
+          ・<b>規模</b>：<b id="grounding-kinou-count">200</b> コース（入力連動）<br>
+          ・<b>提案契機</b>：サーバー更新・クラウド移行時の「標準同梱BI」。<br>
+          ・<b>訴求</b>：毎朝の売上・来場速報、週報の完全自動化、4支配人AI。
         </div>
       </div>
 
       <!-- 準既納客 -->
-      <div class="grounding-box" style="border-top: 4px solid var(--blue);">
-        <div style="font-weight: 700; font-size: 16px; color: var(--blue); margin-bottom: 6px;">🥈 準既納客（Yardage買収 ＆ SQL-Server系）</div>
-        <div style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          ・<b>設定規模</b>：<b id="grounding-yardage-count">40</b> コース（入力値に連動）<br>
-          ・<b>顧客属性</b>：TSHが買収したYardageユーザーおよびリプレイス検討コース。<br>
-          ・<b>営業アプローチ</b>：SwingClub統合キャンペーンの最大の目玉機能としてSwing-BIを付与。<br>
-          ・<b>キラー訴求</b>：「他社にはない次世代AI経営ダッシュボードが手に入る」決定打。
+      <div class="grounding-box" style="border-left: 4px solid var(--blue);">
+        <div style="font-weight: 700; font-size: 14px; color: var(--blue); margin-bottom: 4px;">🥈 準既納客（Yardage買収 ＆ SQL基幹）</div>
+        <div style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5;">
+          ・<b>規模</b>：<b id="grounding-yardage-count">40</b> コース（入力連動）<br>
+          ・<b>提案契機</b>：SwingClub統合キャンペーンの目玉機能。<br>
+          ・<b>訴求</b>：他社基幹にない最先端AI経営ダッシュボード。
         </div>
       </div>
 
       <!-- シナリオ根拠 -->
-      <div class="grounding-box" style="border-top: 4px solid var(--purple);">
-        <div style="font-weight: 700; font-size: 16px; color: var(--purple); margin-bottom: 6px;">📊 シナリオ別の獲得ロジック</div>
-        <div style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
-          ・<b>🛡️ 堅実（市場の約7.5%）</b>：TCC近隣・親密コース＋先行DX意欲の高い名門だけで自然達成。<br>
-          ・<b>🎯 標準（市場の約15%）</b>：年間のクラウド移行案件＋Yardage統合案件で確実達成。<br>
-          ・<b>🚀 拡大（市場の約40%）</b>：全国の基幹導入コースの約4割に普及した標準インフラ化期。
+      <div class="grounding-box" style="border-left: 4px solid var(--purple);">
+        <div style="font-weight: 700; font-size: 14px; color: var(--purple); margin-bottom: 4px;">📊 シナリオ獲得ロジック</div>
+        <div style="font-size: 12.5px; color: var(--text-muted); line-height: 1.5;">
+          ・<b>🛡️ 堅実 (約7.5%)</b>：TCC親密＋先行DX名門で自然達成。<br>
+          ・<b>🎯 標準 (約15%)</b>：年間クラウド移行＋Yardage統合で確実達成。<br>
+          ・<b>🚀 拡大 (約40%)</b>：全国の基幹の約4割に普及した標準インフラ期。
         </div>
       </div>
     </div>
@@ -704,7 +756,6 @@
     const total = getTotalMarketBase();
 
     if (type === 'standard') {
-      // 15% target
       const target = Math.round(total * 0.15);
       document.getElementById('count-tsuru').value = Math.max(1, Math.round(target * 0.10));
       document.getElementById('count-matsu').value = Math.max(1, Math.round(target * 0.18));
@@ -712,7 +763,6 @@
       document.getElementById('count-ume').value = Math.max(1, Math.round(target * 0.26));
       document.getElementById('count-kame').value = Math.max(1, target - (Math.round(target*0.10)+Math.round(target*0.18)+Math.round(target*0.40)+Math.round(target*0.26)));
     } else if (type === 'conservative') {
-      // 7.5% target
       const target = Math.round(total * 0.075);
       document.getElementById('count-tsuru').value = Math.max(1, Math.round(target * 0.10));
       document.getElementById('count-matsu').value = Math.max(1, Math.round(target * 0.15));
@@ -720,7 +770,6 @@
       document.getElementById('count-ume').value = Math.max(1, Math.round(target * 0.25));
       document.getElementById('count-kame').value = Math.max(1, Math.round(target * 0.10));
     } else if (type === 'aggressive') {
-      // 40% target
       const target = Math.round(total * 0.40);
       document.getElementById('count-tsuru').value = Math.round(target * 0.10);
       document.getElementById('count-matsu').value = Math.round(target * 0.18);
@@ -728,7 +777,6 @@
       document.getElementById('count-ume').value = Math.round(target * 0.24);
       document.getElementById('count-kame').value = Math.round(target * 0.06);
     } else if (type === 'max') {
-      // 100% target
       const target = total;
       document.getElementById('count-tsuru').value = Math.round(target * 0.10);
       document.getElementById('count-matsu').value = Math.round(target * 0.20);
@@ -792,8 +840,8 @@
     document.getElementById('split-kame-osa').innerText = (pKame * 0.6).toFixed(1);
 
     const totalCourses = cTsuru + cMatsu + cTake + cUme + cKame;
-    document.getElementById('disp-total-courses').innerText = '合計: ' + totalCourses + ' コース';
-    document.getElementById('disp-market-share').innerText = `市場占有率: ${((totalCourses/(totalMarketBase||1))*100).toFixed(1)}% / ${totalMarketBase}コース`;
+    document.getElementById('disp-total-courses').innerText = '計 ' + totalCourses + ' 件';
+    document.getElementById('disp-market-share').innerText = `シェア: ${((totalCourses/(totalMarketBase||1))*100).toFixed(1)}% / ${totalMarketBase}件`;
 
     // Bar ratios
     if (totalCourses > 0) {
@@ -833,6 +881,10 @@
     // Payback period for TSH
     const monthlyCashflowTsh = (yearlyStockTsh + totalSetupTsh) / 12;
     let paybackMonths = monthlyCashflowTsh > 0 ? Math.ceil(initialDevTotal / monthlyCashflowTsh) : 999;
+
+    // Sticky Bar Update
+    document.getElementById('sticky-tsh-val').innerText = (netYear1Tsh >= 0 ? '+' : '') + formatMan(netYear1Tsh);
+    document.getElementById('sticky-payback-val').innerText = paybackMonths <= 12 ? `約 ${paybackMonths} ヶ月` : `約 ${(paybackMonths/12).toFixed(1)} 年`;
 
     // Display TSH KPIs
     document.getElementById('tsh-monthly').innerText = formatMan(monthlyTsh) + ' /月';
@@ -877,11 +929,11 @@
       rowsHtml += `
         <tr>
           <td><b>${yr}年目</b></td>
-          <td><b>${curCourses}</b> コース</td>
+          <td><b>${curCourses}</b> 件</td>
           <td style="color:var(--blue); font-weight:600;">${formatMan(yrNetTsh)}</td>
-          <td style="font-weight:700; color:var(--primary); font-size:15px;">${formatMan(cumTsh)}</td>
+          <td style="font-weight:700; color:var(--primary);">${formatMan(cumTsh)}</td>
           <td style="color:var(--primary-dark); font-weight:600;">${formatMan(yrGrossOsa)}</td>
-          <td style="font-weight:700; color:var(--primary-dark); font-size:15px;">${formatMan(cumOsa)}</td>
+          <td style="font-weight:700; color:var(--primary-dark);">${formatMan(cumOsa)}</td>
         </tr>
       `;
     }
