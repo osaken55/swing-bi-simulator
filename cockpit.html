@@ -2256,12 +2256,28 @@
     }
   }
 
+  // AI書き直しトーンインデックス
+  let aiToneIndex = 0;
+  const aiToneDrafts = {
+    'last-minute': [
+      `【TCC会員様限定・緊急シークレット配信】\n\n2026-05-07（木）に特別プランのご案内です。\n\n🎁 昼食付・生ビール付 通常¥13,800 ➔ ¥10,800（先着6組様）\n🎁 バッグサーブ付 ＆ スループレー優先\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`,
+      `【特別ご優待】5/7(木) 名匠ジャンボ尾崎設計コースを特別価格で。\n\n新緑薫る絶好のコンディション。GW明けの静かなコースで贅沢な1日を。\n\n✨ 平日特別プラン: ¥10,800（絶品名物ランチ＆生ビール1杯付）\n✨ キャディ付ご相談可・快適スムーズ進行\n\n▼ Web即時予約（シークレット枠）\nhttps://tcc-golf.jp/secret-promo`,
+      `🔥【直前タイムセール】5/7(木) 緊急空き枠解放！\n\n通常価格 ¥13,800 ➔ ⚡ 3,000円OFF【¥10,800 (昼食付)】\n限定【先着6組様】限りの特別枠です。\n\n早い者勝ちとなりますので、お早めにどうぞ！\n今すぐ予約 ➔ https://tcc-golf.jp/secret-promo`
+    ],
+    'early-bird': [
+      `【TCC会員様限定・2ヶ月前早期シークレット配信】\n\n2026-06-15（月）に特別プランのご案内です。\n\n🎁 早期先回り優待 通常¥14,500 ➔ ¥12,500（先着8組様）\n🎁 名物ランチ付 ＆ カートフィ込\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`,
+      `【アーリーバード先行予約】6/15(月) 初夏の爽快プレー先行受付\n\n2ヶ月前だからできる特別プライス。\n\n🏌️‍♂️ 早期限定枠: ¥12,500（ランチ付）\n🏌️‍♂️ 8組様限定・お仲間とのコンペにも最適です。\n\n▼ 先行シークレット予約URL\nhttps://tcc-golf.jp/secret-promo`,
+      `✨【6月ベストシーズン早期割】6/15(月) シークレットオファー\n\n通常¥14,500 ➔ 早期特別価格 ¥12,500（▲¥2,000優待）\n名物ランチ付の充実プラン。\n\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`
+    ]
+  };
+
+  // 印鑑ステータス
+  let stampState = { osada: false, kitamura: false, kojima: false };
+
   // LINEシークレット配信モーダル制御
   function openLinePromoModal() {
     const titleEl = document.getElementById('dp-target-title');
-    const dateText = titleEl ? titleEl.textContent.replace('📅 ', '').trim() : '指定日';
-    const specialPriceEl = document.getElementById('dp-special-price');
-    const priceText = specialPriceEl ? specialPriceEl.textContent.replace('(昼食付)', '').replace('(早期割)', '').trim() : '¥10,800';
+    const dateText = titleEl ? titleEl.textContent.replace('📅 ', '').trim() : '2026年 5月 7日';
     const modeTagEl = document.getElementById('dp-mode-tag');
     const isEarly = modeTagEl && modeTagEl.textContent.includes('アーリーバード');
 
@@ -2269,11 +2285,17 @@
     
     if (isEarly) {
       document.getElementById('modal-status-text').innerHTML = `現在 5組 / <span style="color:#ef4444; font-weight:800;">🔴 危険</span>  2ヶ月前・早期先回り枠（梅雨期構造的弱日）`;
-      document.getElementById('modal-textarea').value = `【TCC会員様限定・2ヶ月前早期シークレット配信】\n\n${dateText} に特別プランのご案内です。\n\n🎁 早期先回り優待 通常¥14,500 ➔ ${priceText}（先着8組様）\n🎁 名物ランチ付 ＆ カートフィ込\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`;
+      document.getElementById('modal-textarea').value = aiToneDrafts['early-bird'][0];
     } else {
       document.getElementById('modal-status-text').innerHTML = `現在 4組 / <span style="color:#ef4444; font-weight:800;">🔴 危険</span>  直前弱日・降水確率60%（GW明け緊急枠）`;
-      document.getElementById('modal-textarea').value = `【TCC会員様限定・シークレット配信】\n\n${dateText} に特別プランのご案内です。\n\n🎁 昼食付・生ビール付 通常¥13,800 ➔ ${priceText}（先着6組様）\n🎁 バッグサーブ付 ＆ スループレー優先\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`;
+      document.getElementById('modal-textarea').value = aiToneDrafts['last-minute'][0];
     }
+
+    // 印鑑リセット（最初は未捺印）
+    stampState = { osada: false, kitamura: false, kojima: false };
+    updateStampUI('stamp-osada', false, '長田', '担当起案');
+    updateStampUI('stamp-kitamura', false, '北村', '支配人確認');
+    updateStampUI('stamp-kojima', false, '小島', '社長決裁');
 
     const modal = document.getElementById('line-promo-modal');
     if (modal) modal.style.display = 'flex';
@@ -2284,11 +2306,91 @@
     if (modal) modal.style.display = 'none';
   }
 
+  // AIで文面書き直し
+  function rewriteWithAI() {
+    const modeTagEl = document.getElementById('dp-mode-tag');
+    const isEarly = modeTagEl && modeTagEl.textContent.includes('アーリーバード');
+    const drafts = isEarly ? aiToneDrafts['early-bird'] : aiToneDrafts['last-minute'];
+    
+    aiToneIndex = (aiToneIndex + 1) % drafts.length;
+    const toneNames = ['【お得直球トーン】', ['【高級おもてなしトーン】'], ['【緊急タイムセールトーン】']];
+    document.getElementById('modal-textarea').value = drafts[aiToneIndex];
+    
+    const btn = document.getElementById('btn-ai-rewrite');
+    if (btn) {
+      btn.innerHTML = `✨ AI生成完了（トーン切替済）`;
+      setTimeout(() => {
+        btn.innerHTML = `✨ AIで別の文案に書き直す`;
+      }, 1500);
+    }
+  }
+
+  // セグメント変更連動
+  function onSegmentChange(selectEl) {
+    const counts = {
+      'all': '約1,247人',
+      'active': '約680人',
+      'recent': '約420人',
+      'dormant': '約180人'
+    };
+    const targetCountEl = document.getElementById('modal-target-count');
+    if (targetCountEl) {
+      targetCountEl.textContent = counts[selectEl.value] || '約1,247人';
+    }
+  }
+
+  // 印鑑クリック（捺印トグル）
+  function toggleStamp(who) {
+    stampState[who] = !stampState[who];
+    const todayStr = '26.05.07';
+    if (who === 'osada') {
+      updateStampUI('stamp-osada', stampState.osada, '長田', stampState.osada ? todayStr : '担当起案');
+    } else if (who === 'kitamura') {
+      updateStampUI('stamp-kitamura', stampState.kitamura, '北村', stampState.kitamura ? todayStr : '支配人確認');
+    } else if (who === 'kojima') {
+      updateStampUI('stamp-kojima', stampState.kojima, '小島', stampState.kojima ? todayStr : '社長決裁');
+    }
+  }
+
+  function updateStampUI(elId, isApproved, name, subText) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    if (isApproved) {
+      el.style.borderColor = '#dc2626';
+      el.style.color = '#dc2626';
+      el.style.background = 'rgba(220,38,38,0.06)';
+      el.style.transform = 'rotate(-8deg) scale(1.05)';
+      el.style.boxShadow = '0 0 10px rgba(220,38,38,0.3)';
+      el.innerHTML = `
+        <div style="font-size: 10px; font-weight: 800; border-bottom: 1px solid #dc2626; width: 100%; text-align: center; padding-bottom: 1px;">承認</div>
+        <div style="font-size: 15px; font-weight: 900; letter-spacing: 2px; line-height: 1.2;">${name}</div>
+        <div style="font-size: 9px; font-family: monospace; font-weight: 700; border-top: 1px solid #dc2626; width: 100%; text-align: center; padding-top: 1px;">${subText}</div>
+      `;
+    } else {
+      el.style.borderColor = '#cbd5e1';
+      el.style.color = '#94a3b8';
+      el.style.background = '#f8fafc';
+      el.style.transform = 'rotate(0deg) scale(1)';
+      el.style.boxShadow = 'none';
+      el.innerHTML = `
+        <div style="font-size: 10px; font-weight: 700; color: #94a3b8;">未決</div>
+        <div style="font-size: 14px; font-weight: 800; color: #64748b;">${name}</div>
+        <div style="font-size: 9px; color: #94a3b8;">${subText}</div>
+      `;
+    }
+  }
+
   function submitLinePromo() {
+    // 決裁チェック
+    if (!stampState.osada && !stampState.kitamura && !stampState.kojima) {
+      alert('⚠️ 【稟議未決裁】\n\n価格改定配信を行う前に、担当者（長田）、支配人（北村）、または社長（小島）の印鑑をタップして決裁（捺印）してください。');
+      return;
+    }
+
     closeLinePromoModal();
     const titleEl = document.getElementById('dp-target-title');
     const dateText = titleEl ? titleEl.textContent.replace('📅 ', '').trim() : '指定日';
-    alert(`🎉 【LINEシークレット配信 完了】\n\n${dateText} 向けの限定オファーを LINE友だち 1,247名へ送信しました！\n\n📲 支配人・幹部LINEグループへ配信結果レポートを自動共有しました。`);
+    alert(`🎉 【LINEシークレット配信 完了（決裁済）】\n\n${dateText} 向けの限定オファーを LINE友だちへ送信しました！\n\n📋 稟議決裁: 長田(起案) ➔ 北村(支配人) ➔ 小島(社長決裁)\n📲 支配人・幹部LINEグループへ配信完了レポートを自動共有しました。`);
   }
 
   // LINEシークレット配信実行ハンドラ（モーダル立ち上げ）
@@ -2308,28 +2410,49 @@
 </script>
 
 <!-- ================================================================= -->
-<!-- 💬 LINE配信発動モーダルポップアップ（オサケンさん激賞・実戦モック）   -->
+<!-- 💬 LINE配信発動モーダルポップアップ（AI書き直し ＆ 3段稟議決裁スタンプ） -->
 <!-- ================================================================= -->
 <div id="line-promo-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(5px); z-index: 99999; align-items: center; justify-content: center; padding: 16px;" onclick="if(event.target===this) closeLinePromoModal();">
   
-  <div style="background: #ffffff; color: #1e293b; border-radius: 14px; max-width: 580px; width: 100%; padding: 22px 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);">
+  <div style="background: #ffffff; color: #1e293b; border-radius: 14px; max-width: 620px; width: 100%; padding: 22px 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);">
     
     <!-- ヘッダー -->
-    <div style="margin-bottom: 12px;">
-      <h3 style="font-size: 20px; font-weight: 900; color: #0f172a; margin: 0 0 6px 0;" id="modal-target-date">
-        💬 2026-05-07（木） 向け 配信発動
-      </h3>
-      <div style="font-size: 13.5px; color: #64748b;" id="modal-status-text">
-        現在 4組 / <span style="color: #ef4444; font-weight: 800;">🔴 危険</span> 平日・直前弱日
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+      <div>
+        <h3 style="font-size: 20px; font-weight: 900; color: #0f172a; margin: 0 0 4px 0;" id="modal-target-date">
+          💬 2026-05-07（木） 向け 配信発動
+        </h3>
+        <div style="font-size: 13px; color: #64748b;" id="modal-status-text">
+          現在 4組 / <span style="color: #ef4444; font-weight: 800;">🔴 危険</span> 平日・直前弱日
+        </div>
       </div>
+      <button onclick="closeLinePromoModal()" style="background: none; border: none; font-size: 22px; color: #94a3b8; cursor: pointer; padding: 0 4px;">×</button>
+    </div>
+
+    <!-- セグメント選択 ＆ AI書き直しボタン バー -->
+    <div style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 8px 12px; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+      <div style="display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 12.5px; font-weight: 800; color: #475569;">🏷️ セグメント:</span>
+        <select onchange="onSegmentChange(this)" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px 8px; font-size: 12.5px; font-weight: 700; color: #1e293b; outline: none; cursor: pointer;">
+          <option value="all">👥 友達全員（約1,247名）</option>
+          <option value="active">⛳ 平日アクティブ会員（約680名）</option>
+          <option value="recent">🏌️ 直近6ヶ月来場ゲスト（約420名）</option>
+          <option value="dormant">✨ 休眠復帰ターゲット（約180名）</option>
+        </select>
+      </div>
+
+      <button id="btn-ai-rewrite" onclick="rewriteWithAI()" style="background: linear-gradient(135deg, #6366f1 0%, #3b82f6 100%); color: #ffffff; border: none; border-radius: 6px; padding: 5px 12px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; box-shadow: 0 2px 6px rgba(99,102,241,0.3); transition: all 0.15s ease;">
+        <span>✨ AIで別の文案に書き直す</span>
+      </button>
     </div>
 
     <!-- 配信文案（AI生成・編集可） -->
     <div style="margin-bottom: 14px;">
-      <div style="font-size: 13px; font-weight: 800; color: #475569; margin-bottom: 6px;">
-        配信文案（AI生成・編集可）
+      <div style="font-size: 12.5px; font-weight: 800; color: #475569; margin-bottom: 5px; display: flex; justify-content: space-between;">
+        <span>配信文案（AI生成・ブラウザ上で手直し編集可）</span>
+        <span style="font-size: 11.5px; color: #64748b;">※ 限定URLは自動付与</span>
       </div>
-      <textarea id="modal-textarea" style="width: 100%; height: 180px; padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13.5px; line-height: 1.65; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; resize: vertical; box-sizing: border-box; outline: none; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='#10b981'" onblur="this.style.borderColor='#cbd5e1'">
+      <textarea id="modal-textarea" style="width: 100%; height: 145px; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13px; line-height: 1.6; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; resize: vertical; box-sizing: border-box; outline: none; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='#10b981'" onblur="this.style.borderColor='#cbd5e1'">
 【TCC会員様限定・シークレット配信】
 
 2026-05-07（木）に特別プランのご案内です。
@@ -2343,19 +2466,69 @@
       </textarea>
     </div>
 
+    <!-- =========================================================
+         🇯🇵 日本式 3段 電子稟議決裁フロー（印鑑スタンプ・ギミック）
+         ========================================================= -->
+    <div style="background: #fafafa; border: 1.5px dashed #cbd5e1; border-radius: 10px; padding: 10px 14px; margin-bottom: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <div style="font-size: 12px; font-weight: 800; color: #475569; display: flex; align-items: center; gap: 4px;">
+          <span>🛡️ 価格改定・配信稟議決裁（タップして捺印）</span>
+        </div>
+        <span style="font-size: 11px; color: #dc2626; font-weight: 700;">※ 責任の所在を明確化</span>
+      </div>
+
+      <!-- 3つの印鑑（担当者 ➔ 支配人 ➔ 社長） -->
+      <div style="display: flex; justify-content: space-around; align-items: center; gap: 12px;">
+        
+        <!-- ① 担当者: 長田 -->
+        <div style="text-align: center;">
+          <div id="stamp-osada" onclick="toggleStamp('osada')" style="width: 66px; height: 66px; border-radius: 50%; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;">
+            <div style="font-size: 10px; font-weight: 700; color: #94a3b8;">未決</div>
+            <div style="font-size: 14px; font-weight: 800; color: #64748b;">長田</div>
+            <div style="font-size: 9px; color: #94a3b8;">担当起案</div>
+          </div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 4px;">起案：長田</div>
+        </div>
+
+        <div style="font-size: 16px; color: #cbd5e1; font-weight: 900;">➔</div>
+
+        <!-- ② 支配人: 北村 -->
+        <div style="text-align: center;">
+          <div id="stamp-kitamura" onclick="toggleStamp('kitamura')" style="width: 66px; height: 66px; border-radius: 50%; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;">
+            <div style="font-size: 10px; font-weight: 700; color: #94a3b8;">未決</div>
+            <div style="font-size: 14px; font-weight: 800; color: #64748b;">北村</div>
+            <div style="font-size: 9px; color: #94a3b8;">支配人確認</div>
+          </div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 4px;">審査：北村</div>
+        </div>
+
+        <div style="font-size: 16px; color: #cbd5e1; font-weight: 900;">➔</div>
+
+        <!-- ③ 社長: 小島 -->
+        <div style="text-align: center;">
+          <div id="stamp-kojima" onclick="toggleStamp('kojima')" style="width: 66px; height: 66px; border-radius: 50%; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;">
+            <div style="font-size: 10px; font-weight: 700; color: #94a3b8;">未決</div>
+            <div style="font-size: 14px; font-weight: 800; color: #64748b;">小島</div>
+            <div style="font-size: 9px; color: #94a3b8;">社長決裁</div>
+          </div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 4px;">決裁：小島</div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- フッター情報 ＆ ボタン -->
-    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 14px; flex-wrap: wrap; gap: 12px;">
-      <div style="font-size: 12.5px; color: #64748b; display: flex; align-items: center; gap: 8px;">
-        <span>📩 配信対象: <b>約1,247人</b></span>
-        <span>🏷️ セグメント: <b>友達全員</b></span>
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 12px; flex-wrap: wrap; gap: 12px;">
+      <div style="font-size: 12px; color: #64748b; display: flex; align-items: center; gap: 6px;">
+        <span>📩 配信予定: <b style="color:#0f172a;" id="modal-target-count">約1,247人</b></span>
       </div>
 
       <div style="display: flex; gap: 10px;">
-        <button onclick="closeLinePromoModal()" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px 18px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s ease;">
+        <button onclick="closeLinePromoModal()" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px 16px; font-size: 13.5px; font-weight: 700; cursor: pointer; transition: all 0.15s ease;">
           キャンセル
         </button>
-        <button onclick="submitLinePromo()" style="background: #06c755; color: #ffffff; border: none; border-radius: 8px; padding: 9px 20px; font-size: 14px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(6,199,85,0.35); transition: all 0.15s ease;">
-          <span>📩 配信する</span>
+        <button onclick="submitLinePromo()" style="background: #06c755; color: #ffffff; border: none; border-radius: 8px; padding: 9px 22px; font-size: 14px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(6,199,85,0.35); transition: all 0.15s ease;">
+          <span>📩 決裁・配信する</span>
         </button>
       </div>
     </div>
@@ -2373,4 +2546,5 @@
 
 </body>
 </html>
+
 
