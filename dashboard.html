@@ -16,30 +16,30 @@
        - Red: < 90%
        ========================================================= */
     :root {
-      --bg: #06090e;                /* 漆黒 */
-      --card: #0e1622;              /* スレートネイビー */
-      --card-sub: #090e17;
-      --card-hover: #152030;
-      --border: #1a273a;
-      --border-strong: #2a3d58;
+      --bg: #05080d;                /* 漆黒 */
+      --card: #0d1520;              /* スレートネイビー */
+      --card-sub: #080d14;
+      --card-hover: #141f30;
+      --border: #182538;
+      --border-strong: #283c56;
 
       /* TCC ブランド */
       --navy: #1B4D6B;
       --gold: #C9A961;
-      --gold-bg: rgba(201, 169, 97, 0.15);
+      --gold-bg: rgba(201, 169, 97, 0.18);
 
       /* 3色ルール（高輝度） */
       --c-green: #10b981;
-      --c-green-bg: rgba(16, 185, 129, 0.2);
+      --c-green-bg: rgba(16, 185, 129, 0.22);
       --c-green-text: #34d399;
       --c-yellow: #f59e0b;
-      --c-yellow-bg: rgba(245, 158, 11, 0.2);
+      --c-yellow-bg: rgba(245, 158, 11, 0.22);
       --c-yellow-text: #fbbf24;
       --c-red: #ef4444;
-      --c-red-bg: rgba(239, 68, 68, 0.2);
+      --c-red-bg: rgba(239, 68, 68, 0.22);
       --c-red-text: #f87171;
       --c-blue: #3b82f6;
-      --c-blue-bg: rgba(59, 130, 246, 0.2);
+      --c-blue-bg: rgba(59, 130, 246, 0.22);
       --c-blue-text: #60a5fa;
 
       --text-main: #ffffff;
@@ -92,93 +92,119 @@
     .brand-sub { font-size: 14.5px; color: var(--gold); font-weight: 700; margin-top: 2px; }
 
     /* =========================================================
-       HERO: JAY ABRAHAM REVENUE FORMULA (売上 ＝ 来場客数 × 客単価)
+       HERO: JAY ABRAHAM REVENUE EQUATION (巨大アイコン ＆ 超特大ラベル)
        ========================================================= */
     .equation-hero {
       background: linear-gradient(180deg, #101a2b 0%, #0a111c 100%);
-      border: 2px solid var(--gold);
+      border: 2.5px solid var(--gold);
       border-radius: 16px;
-      padding: 22px 20px;
+      padding: 24px 20px;
       margin-bottom: 24px;
-      box-shadow: 0 0 24px rgba(201, 169, 97, 0.2);
+      box-shadow: 0 0 28px rgba(201, 169, 97, 0.25);
     }
     .equation-title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 900;
       color: var(--gold);
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
       letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
     .equation-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.1fr 1fr 0.1fr 1fr;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
     .operator {
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 900;
       color: var(--gold);
       text-align: center;
     }
     .eq-card {
       background: var(--card-sub);
-      border: 1.5px solid var(--border-strong);
-      border-radius: 12px;
-      padding: 18px 20px;
+      border: 2px solid var(--border-strong);
+      border-radius: 14px;
+      padding: 20px 22px;
       position: relative;
     }
     .eq-card.main-target {
-      border: 2px solid var(--gold);
-      background: rgba(27, 77, 107, 0.25);
+      border: 2.5px solid var(--gold);
+      background: rgba(27, 77, 107, 0.3);
+      box-shadow: 0 0 20px rgba(201, 169, 97, 0.15);
     }
-    .eq-label {
-      font-size: 16px;
-      font-weight: 800;
-      color: #cbd5e1;
-      margin-bottom: 4px;
+
+    /* 巨大ラベル＆特大アイコン（一目で分かる） */
+    .eq-header-label {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 12px;
+      margin-bottom: 8px;
     }
+    .eq-icon {
+      font-size: 32px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+    .eq-label-text {
+      font-size: 22px;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+    .eq-label-sub {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      margin-left: auto;
+      background: rgba(201,169,97,0.15);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
     .eq-val {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 32px;
+      font-size: 36px;
       font-weight: 900;
       color: #fff;
       line-height: 1.15;
-      margin-bottom: 8px;
+      margin: 8px 0 10px 0;
+      letter-spacing: -0.02em;
     }
-    .eq-unit { font-size: 17px; font-weight: 700; color: #cbd5e1; margin-left: 4px; }
+    .eq-unit { font-size: 19px; font-weight: 800; color: #cbd5e1; margin-left: 4px; }
     
     .eq-sub {
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 700;
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 6px;
-      border-top: 1px solid var(--border);
-      padding-top: 8px;
-      margin-top: 4px;
+      gap: 8px;
+      border-top: 1.5px solid var(--border-strong);
+      padding-top: 10px;
+      margin-top: 6px;
     }
 
     /* 3-Color Badges */
     .badge {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 900;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 6px;
       display: inline-flex;
       align-items: center;
       gap: 4px;
     }
-    .bg-green { background: var(--c-green-bg); color: var(--c-green-text); border: 1px solid var(--c-green); }
-    .bg-yellow { background: var(--c-yellow-bg); color: var(--c-yellow-text); border: 1px solid var(--c-yellow); }
-    .bg-red { background: var(--c-red-bg); color: var(--c-red-text); border: 1px solid var(--c-red); }
-    .bg-blue { background: var(--c-blue-bg); color: var(--c-blue-text); border: 1px solid var(--c-blue); }
+    .bg-green { background: var(--c-green-bg); color: var(--c-green-text); border: 1.5px solid var(--c-green); }
+    .bg-yellow { background: var(--c-yellow-bg); color: var(--c-yellow-text); border: 1.5px solid var(--c-yellow); }
+    .bg-red { background: var(--c-red-bg); color: var(--c-red-text); border: 1.5px solid var(--c-red); }
+    .bg-blue { background: var(--c-blue-bg); color: var(--c-blue-text); border: 1.5px solid var(--c-blue); }
 
     /* Perspective Tabs */
     .perspective-nav {
@@ -265,9 +291,9 @@
       margin-bottom: 8px;
     }
     .kpi-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: #cbd5e1;
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -323,7 +349,9 @@
       align-items: center;
     }
 
-    /* Strict 3-Color Table */
+    /* =========================================================
+       TABLE HEADER: 巨大アイコン ＆ 超特大ラベル
+       ========================================================= */
     .table-container {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -332,10 +360,41 @@
     }
     table.exec-table {
       width: 100%;
-      min-width: 1020px;
+      min-width: 1060px;
       border-collapse: collapse;
       font-size: 15.5px;
     }
+    
+    /* 大見出し行 */
+    .th-major-rev {
+      background: #13243a !important;
+      border-left: 3px solid var(--gold) !important;
+      border-bottom: 2px solid var(--gold) !important;
+      padding: 14px 16px !important;
+    }
+    .th-major-vis {
+      background: #0f1c2d !important;
+      border-left: 3px solid #3b82f6 !important;
+      border-bottom: 2px solid #3b82f6 !important;
+      padding: 14px 16px !important;
+    }
+    .th-major-unit {
+      background: #1f1b13 !important;
+      border-left: 3px solid #f59e0b !important;
+      border-bottom: 2px solid #f59e0b !important;
+      padding: 14px 16px !important;
+    }
+
+    .th-major-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .th-major-icon { font-size: 24px; line-height: 1; }
+    .th-major-text { font-size: 19px; font-weight: 900; color: #ffffff; letter-spacing: -0.01em; }
+    .th-major-unit-label { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+
     table.exec-table th {
       background: #090e17;
       color: #cbd5e1;
@@ -357,7 +416,7 @@
     .cell-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; }
     
     tr.total-row {
-      background: rgba(27, 77, 107, 0.4) !important;
+      background: rgba(27, 77, 107, 0.45) !important;
       border-top: 2.5px solid var(--gold);
       border-bottom: 2.5px solid var(--gold);
       font-weight: 900;
@@ -391,7 +450,8 @@
       body { padding: 12px 10px 90px 10px; font-size: 16.5px; }
       .header { padding: 14px; }
       .brand-title { font-size: 19px; }
-      .eq-val { font-size: 28px; }
+      .eq-val { font-size: 30px; }
+      .eq-label-text { font-size: 19px; }
     }
   </style>
 </head>
@@ -413,15 +473,21 @@
   </div>
 
   <!-- =========================================================
-       HERO: JAY ABRAHAM REVENUE FORMULA (売上 ＝ 来場客数 × 客単価)
+       HERO: JAY ABRAHAM REVENUE FORMULA (巨大アイコン ＆ 超特大ラベル)
        ========================================================= -->
   <div class="equation-hero">
-    <div class="equation-title">🔥 ジェイ・エイブラハムの売上方程式 【1〜4月累計実績】</div>
+    <div class="equation-title">
+      <span>🔥 ジェイ・エイブラハムの売上方程式 【1〜4月累計実績】</span>
+    </div>
     <div class="equation-grid">
       
       <!-- 1. 営業売上高 -->
       <div class="eq-card main-target">
-        <div class="eq-label">💰 営業売上高 (Revenue)</div>
+        <div class="eq-header-label">
+          <span class="eq-icon">💰</span>
+          <span class="eq-label-text">営業売上高</span>
+          <span class="eq-label-sub">Revenue</span>
+        </div>
         <div class="eq-val">¥127,398<span class="eq-unit">千円</span></div>
         <div class="eq-sub">
           <span>対予算: <b class="badge bg-green">100.9% 達成 (+116万)</b></span>
@@ -433,7 +499,11 @@
 
       <!-- 2. 来場客数 -->
       <div class="eq-card">
-        <div class="eq-label">⛳ 来場客数 (Clients)</div>
+        <div class="eq-header-label">
+          <span class="eq-icon">⛳</span>
+          <span class="eq-label-text">来場客数</span>
+          <span class="eq-label-sub">Clients</span>
+        </div>
         <div class="eq-val">11,450<span class="eq-unit">名</span></div>
         <div class="eq-sub">
           <span>対予算: <b class="badge bg-green">105.7% 達成 (+620名)</b></span>
@@ -444,8 +514,12 @@
       <div class="operator">×</div>
 
       <!-- 3. 客単価 (95.4%: 黄色/オレンジ警告) -->
-      <div class="eq-card" style="border: 2px solid var(--c-yellow); background: rgba(245,158,11,0.05);">
-        <div class="eq-label">🍽️ 客単価 (Average Unit Price)</div>
+      <div class="eq-card" style="border: 2.5px solid var(--c-yellow); background: rgba(245,158,11,0.06);">
+        <div class="eq-header-label">
+          <span class="eq-icon">🍽️</span>
+          <span class="eq-label-text" style="color:var(--c-yellow-text);">客単価</span>
+          <span class="eq-label-sub" style="color:var(--c-yellow-text); background:rgba(245,158,11,0.15); border:1px solid var(--c-yellow);">Unit Price</span>
+        </div>
         <div class="eq-val" style="color:var(--c-yellow-text);">¥11,126<span class="eq-unit">/人</span></div>
         <div class="eq-sub">
           <span>対予算: <b class="badge bg-yellow">95.4% 未達 (-534円)</b></span>
@@ -483,7 +557,7 @@
       <!-- ① 売上高 -->
       <div class="kpi-box">
         <div class="kpi-box-header">
-          <div class="kpi-title">💰 営業売上高 (1〜4月累計)</div>
+          <div class="kpi-title"><span style="font-size:24px;">💰</span> 営業売上高 (1〜4月累計)</div>
           <div class="badge bg-green">100.9% 達成</div>
         </div>
         <div class="kpi-main-val">¥127,398<span style="font-size:18px; color:#cbd5e1;">千円</span></div>
@@ -499,7 +573,7 @@
       <!-- ② 来場者数 -->
       <div class="kpi-box">
         <div class="kpi-box-header">
-          <div class="kpi-title">⛳ 来場者数 (1〜4月累計)</div>
+          <div class="kpi-title"><span style="font-size:24px;">⛳</span> 来場者数 (1〜4月累計)</div>
           <div class="badge bg-green">105.7% 達成</div>
         </div>
         <div class="kpi-main-val">11,450<span style="font-size:18px; color:#cbd5e1;">名</span></div>
@@ -515,7 +589,7 @@
       <!-- ③ 客単価 (95.4% = 黄色/オレンジ枠) -->
       <div class="kpi-box" style="border: 2px solid var(--c-yellow);">
         <div class="kpi-box-header">
-          <div class="kpi-title" style="color:#fff;">🍽️ 客単価 (加重平均)</div>
+          <div class="kpi-title" style="color:#fff;"><span style="font-size:24px;">🍽️</span> 客単価 (加重平均)</div>
           <div class="badge bg-yellow">95.4% 未達</div>
         </div>
         <div class="kpi-main-val" style="color:var(--c-yellow-text);">¥11,126<span style="font-size:18px; color:#cbd5e1;">/人</span></div>
@@ -531,7 +605,7 @@
       <!-- ④ 三重県市場シェア -->
       <div class="kpi-box">
         <div class="kpi-box-header">
-          <div class="kpi-title">🏆 三重県連盟 順位</div>
+          <div class="kpi-title"><span style="font-size:24px;">🏆</span> 三重県連盟 順位</div>
           <div class="badge bg-blue">第 12 位 / 51コース</div>
         </div>
         <div class="kpi-main-val" style="color:var(--c-blue-text);">県平均 +3.2%<span style="font-size:16px; color:#cbd5e1;">に対し</span></div>
@@ -582,7 +656,7 @@
       </div>
     </div>
 
-    <!-- 統一フォーマット・3色カラーヒートマップテーブル -->
+    <!-- 統一フォーマット・3色カラーヒートマップテーブル（特大アイコン＆大見出し） -->
     <div class="card">
       <div class="section-header">
         <span>📊 2026年 1〜4月 経営予実・前年対比テーブル（売上・来場・単価 統一軸）</span>
@@ -592,30 +666,50 @@
       <div class="table-container">
         <table class="exec-table">
           <thead>
+            <!-- 第1行: 特大アイコン＆大見出し（一目で区別） -->
             <tr>
-              <th rowspan="2" style="text-align:center; vertical-align:middle; width:90px;">月度</th>
+              <th rowspan="2" style="text-align:center; vertical-align:middle; width:95px; font-size:16px; font-weight:900;">月度</th>
               <!-- ① 売上高 -->
-              <th colspan="5" style="text-align:center; background:#101d2e; border-left:2px solid var(--border-strong);">① 営業売上高 (千円)</th>
+              <th colspan="5" class="th-major-rev">
+                <div class="th-major-content">
+                  <span class="th-major-icon">💰</span>
+                  <span class="th-major-text">営業売上高</span>
+                  <span class="th-major-unit-label">(千円)</span>
+                </div>
+              </th>
               <!-- ② 来場者数 -->
-              <th colspan="5" style="text-align:center; background:#0d1826; border-left:2px solid var(--border-strong);">② 来場者数 (人)</th>
+              <th colspan="5" class="th-major-vis">
+                <div class="th-major-content">
+                  <span class="th-major-icon">⛳</span>
+                  <span class="th-major-text">来場客数</span>
+                  <span class="th-major-unit-label">(名)</span>
+                </div>
+              </th>
               <!-- ③ 客単価 -->
-              <th colspan="5" style="text-align:center; background:#101d2e; border-left:2px solid var(--border-strong);">③ 客単価 (円)</th>
+              <th colspan="5" class="th-major-unit">
+                <div class="th-major-content">
+                  <span class="th-major-icon">🍽️</span>
+                  <span class="th-major-text" style="color:var(--c-yellow-text);">客単価</span>
+                  <span class="th-major-unit-label">(円/人)</span>
+                </div>
+              </th>
             </tr>
+            <!-- 第2行: 明細項目 -->
             <tr>
               <!-- 売上 -->
-              <th style="border-left:2px solid var(--border-strong);">実績</th>
+              <th style="border-left:3px solid var(--gold);">実績</th>
               <th>予算</th>
               <th>対予算</th>
               <th>前年</th>
               <th>対前年</th>
               <!-- 来場 -->
-              <th style="border-left:2px solid var(--border-strong);">実績</th>
+              <th style="border-left:3px solid #3b82f6;">実績</th>
               <th>予算</th>
               <th>対予算</th>
               <th>前年</th>
               <th>対前年</th>
               <!-- 単価 -->
-              <th style="border-left:2px solid var(--border-strong);">実績</th>
+              <th style="border-left:3px solid #f59e0b;">実績</th>
               <th>予算</th>
               <th>対予算</th>
               <th>前年</th>
@@ -626,19 +720,19 @@
             <!-- 1月 -->
             <tr>
               <td style="text-align:center; font-weight:800;">1月度</td>
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥31,592</td>
+              <td class="cell-num" style="border-left:3px solid var(--gold);">¥31,592</td>
               <td class="cell-num">¥29,580</td>
               <td><span class="badge bg-green">106.8%</span></td>
               <td class="cell-num">¥25,358</td>
               <td><span class="badge bg-green">+24.6%</span></td>
               
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">2,865</td>
+              <td class="cell-num" style="border-left:3px solid #3b82f6;">2,865</td>
               <td class="cell-num">2,690</td>
               <td><span class="badge bg-green">106.5%</span></td>
               <td class="cell-num">2,370</td>
               <td><span class="badge bg-green">+20.9%</span></td>
               
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥11,027</td>
+              <td class="cell-num" style="border-left:3px solid #f59e0b;">¥11,027</td>
               <td class="cell-num">¥11,000</td>
               <td><span class="badge bg-green">100.2%</span></td>
               <td class="cell-num">¥10,700</td>
@@ -648,19 +742,19 @@
             <!-- 2月 -->
             <tr>
               <td style="text-align:center; font-weight:800;">2月度</td>
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥26,814</td>
+              <td class="cell-num" style="border-left:3px solid var(--gold);">¥26,814</td>
               <td class="cell-num">¥26,390</td>
               <td><span class="badge bg-green">101.6%</span></td>
               <td class="cell-num">¥23,138</td>
               <td><span class="badge bg-green">+15.9%</span></td>
               
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">2,673</td>
+              <td class="cell-num" style="border-left:3px solid #3b82f6;">2,673</td>
               <td class="cell-num">2,400</td>
               <td><span class="badge bg-green">111.4%</span></td>
               <td class="cell-num">2,142</td>
               <td><span class="badge bg-green">+24.8%</span></td>
               
-              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥10,031</td>
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid #f59e0b;">¥10,031</td>
               <td class="cell-num">¥11,000</td>
               <td><span class="badge bg-yellow">91.2%</span></td>
               <td class="cell-num">¥10,802</td>
@@ -670,19 +764,19 @@
             <!-- 3月 -->
             <tr>
               <td style="text-align:center; font-weight:800;">3月度</td>
-              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥34,375</td>
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid var(--gold);">¥34,375</td>
               <td class="cell-num">¥35,510</td>
               <td><span class="badge bg-yellow">96.8%</span></td>
               <td class="cell-num">¥33,214</td>
               <td><span class="badge bg-green">+3.5%</span></td>
               
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">3,105</td>
+              <td class="cell-num" style="border-left:3px solid #3b82f6;">3,105</td>
               <td class="cell-num">2,960</td>
               <td><span class="badge bg-green">104.9%</span></td>
               <td class="cell-num">2,658</td>
               <td><span class="badge bg-green">+16.8%</span></td>
               
-              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥11,071</td>
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid #f59e0b;">¥11,071</td>
               <td class="cell-num">¥12,000</td>
               <td><span class="badge bg-yellow">92.3%</span></td>
               <td class="cell-num">¥12,495</td>
@@ -692,19 +786,19 @@
             <!-- 4月 -->
             <tr>
               <td style="text-align:center; font-weight:800;">4月度</td>
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥34,617</td>
+              <td class="cell-num" style="border-left:3px solid var(--gold);">¥34,617</td>
               <td class="cell-num">¥34,750</td>
               <td><span class="badge bg-yellow">99.6%</span></td>
               <td class="cell-num">¥32,019</td>
               <td><span class="badge bg-green">+8.1%</span></td>
               
-              <td class="cell-num" style="border-left:2px solid var(--border-strong);">2,807</td>
+              <td class="cell-num" style="border-left:3px solid #3b82f6;">2,807</td>
               <td class="cell-num">2,780</td>
               <td><span class="badge bg-green">101.0%</span></td>
               <td class="cell-num">2,491</td>
               <td><span class="badge bg-green">+12.7%</span></td>
               
-              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥12,332</td>
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid #f59e0b;">¥12,332</td>
               <td class="cell-num">¥12,500</td>
               <td><span class="badge bg-yellow">98.7%</span></td>
               <td class="cell-num">¥12,853</td>
@@ -715,19 +809,19 @@
             <tr class="total-row">
               <td style="text-align:center; color:var(--gold); font-size:18px;">4ヶ月累計</td>
               <!-- 売上 🟢 -->
-              <td class="cell-num" style="color:var(--gold); font-size:18px; border-left:2px solid var(--border-strong);">¥127,398</td>
+              <td class="cell-num" style="color:var(--gold); font-size:18px; border-left:3px solid var(--gold);">¥127,398</td>
               <td class="cell-num">¥126,230</td>
               <td><span class="badge bg-green" style="font-size:15px;">100.9%</span></td>
               <td class="cell-num">¥113,729</td>
               <td><span class="badge bg-green" style="font-size:15px;">+14.2%</span></td>
               <!-- 来場 🟢 -->
-              <td class="cell-num" style="color:#fff; font-size:18px; border-left:2px solid var(--border-strong);">11,450</td>
+              <td class="cell-num" style="color:#fff; font-size:18px; border-left:3px solid #3b82f6;">11,450</td>
               <td class="cell-num">10,830</td>
               <td><span class="badge bg-green" style="font-size:15px;">105.7%</span></td>
               <td class="cell-num">9,661</td>
               <td><span class="badge bg-green" style="font-size:15px;">+18.5%</span></td>
               <!-- 単価 🟡 (黄色) -->
-              <td class="cell-num" style="color:var(--c-yellow-text); font-size:18px; border-left:2px solid var(--border-strong);">¥11,126</td>
+              <td class="cell-num" style="color:var(--c-yellow-text); font-size:18px; border-left:3px solid #f59e0b;">¥11,126</td>
               <td class="cell-num">¥11,660</td>
               <td><span class="badge bg-yellow" style="font-size:15px;">95.4%</span></td>
               <td class="cell-num">¥11,544</td>
