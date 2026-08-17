@@ -3,45 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>TSH Beyond-Dashboard | ゴルフ場次世代AI経営コックピット</title>
+  <title>TSH Beyond-Dashboard | ジェイ・エイブラハム売上方程式 ＆ 経営コックピット</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800;900&display=swap" rel="stylesheet">
   <style>
     /* =========================================================
-       TCC Executive Cockpit Tokens (High Contrast Dark Edition)
-       Stephen Few / Edward Tufte / TCC Design Tokens v2.0
+       TCC Executive Cockpit (Jay Abraham Formula & Strict 3-Color)
+       - Green: >= 100%
+       - Yellow: 90% - 99.9%
+       - Red: < 90%
        ========================================================= */
     :root {
-      --bg: #070a10;                /* 最深層漆黒 */
-      --card-bg: #0f1724;           /* 高品位スレートネイビー */
-      --card-sub: #0a0f18;          /* サブコンテナ */
-      --card-hover: #172233;
-      --border: #1e2c40;            /* コントラスト境界 */
-      --border-light: #2c3f58;
+      --bg: #06090e;                /* 漆黒 */
+      --card: #0e1622;              /* スレートネイビー */
+      --card-sub: #090e17;
+      --card-hover: #152030;
+      --border: #1a273a;
+      --border-strong: #2a3d58;
 
-      /* 正統TCCブランド色 */
+      /* TCC ブランド */
       --navy: #1B4D6B;
-      --navy-bright: #256b94;
       --gold: #C9A961;
       --gold-bg: rgba(201, 169, 97, 0.15);
 
-      /* セマンティック・ステータス（高視認・メリハリ） */
-      --teal: #1D9E75;              /* 達成・好調 */
-      --teal-bg: rgba(29, 158, 117, 0.22);
-      --teal-text: #34d399;
-      --amber: #EF9F27;             /* 注意・微減 */
-      --amber-bg: rgba(239, 159, 39, 0.22);
-      --amber-text: #fbbf24;
-      --red: #E24B4A;               /* 未達・危険 */
-      --red-bg: rgba(226, 75, 74, 0.22);
-      --red-text: #f87171;
-      --blue: #378ADD;              /* 進行・情報 */
-      --blue-bg: rgba(55, 138, 221, 0.2);
-      --blue-text: #60a5fa;
+      /* 3色ルール（高輝度） */
+      --c-green: #10b981;
+      --c-green-bg: rgba(16, 185, 129, 0.2);
+      --c-green-text: #34d399;
+      --c-yellow: #f59e0b;
+      --c-yellow-bg: rgba(245, 158, 11, 0.2);
+      --c-yellow-text: #fbbf24;
+      --c-red: #ef4444;
+      --c-red-bg: rgba(239, 68, 68, 0.2);
+      --c-red-text: #f87171;
 
       --text-main: #ffffff;
-      --text-body: #e2e8f0;
       --text-muted: #94a3b8;
       --radius: 12px;
     }
@@ -58,61 +55,130 @@
     }
 
     .container {
-      max-width: 1360px;
+      max-width: 1380px;
       margin: 0 auto;
     }
 
-    /* Top Navigation */
+    /* Header */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--card-bg);
+      background: var(--card);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
       padding: 16px 22px;
       margin-bottom: 20px;
       flex-wrap: wrap;
       gap: 14px;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.7);
     }
-    .brand-group {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .brand-badge {
-      width: 44px;
-      height: 44px;
+    .brand-group { display: flex; align-items: center; gap: 14px; }
+    .brand-crest {
+      width: 44px; height: 44px;
       background: linear-gradient(135deg, var(--navy) 0%, var(--gold) 100%);
       border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      color: #fff;
-      font-size: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 900; color: #fff; font-size: 20px;
       border: 1.5px solid var(--gold);
       box-shadow: 0 0 14px rgba(201, 169, 97, 0.4);
       flex-shrink: 0;
     }
-    .brand-title {
-      font-size: 22px;
-      font-weight: 900;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+    .brand-title { font-size: 22px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .brand-sub { font-size: 14.5px; color: var(--gold); font-weight: 700; margin-top: 2px; }
 
-    /* Perspective Selector Tabs (3 Tiers) */
+    /* =========================================================
+       JAY ABRAHAM REVENUE EQUATION HERO CARD
+       Revenue = Clients (来場数) x Unit Price (客単価)
+       ========================================================= */
+    .equation-hero {
+      background: linear-gradient(180deg, #101a2b 0%, #0a111c 100%);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 24px rgba(201, 169, 97, 0.2);
+    }
+    .equation-title {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+    .equation-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.1fr 1fr 0.1fr 1fr;
+      align-items: center;
+      gap: 12px;
+    }
+    .operator {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--gold);
+      text-align: center;
+    }
+    .eq-card {
+      background: var(--card-sub);
+      border: 1.5px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 18px 20px;
+      position: relative;
+    }
+    .eq-card.main-target {
+      border: 2px solid var(--gold);
+      background: rgba(27, 77, 107, 0.25);
+    }
+    .eq-label {
+      font-size: 15px;
+      font-weight: 800;
+      color: #cbd5e1;
+      margin-bottom: 4px;
+    }
+    .eq-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 34px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .eq-unit { font-size: 18px; font-weight: 700; color: #cbd5e1; margin-left: 4px; }
+    
+    .eq-sub {
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+      margin-top: 4px;
+    }
+
+    /* 3-Color Badges */
+    .badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .bg-green { background: var(--c-green-bg); color: var(--c-green-text); border: 1px solid var(--c-green); }
+    .bg-yellow { background: var(--c-yellow-bg); color: var(--c-yellow-text); border: 1px solid var(--c-yellow); }
+    .bg-red { background: var(--c-red-bg); color: var(--c-red-text); border: 1px solid var(--c-red); }
+
+    /* Perspective Tabs */
     .perspective-nav {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       background: var(--card-sub);
-      border: 2px solid var(--border-light);
+      border: 2px solid var(--border-strong);
       border-radius: 12px;
       padding: 6px;
       margin-bottom: 24px;
@@ -150,7 +216,7 @@
 
     /* Cards */
     .card {
-      background: var(--card-bg);
+      background: var(--card);
       border: 1.5px solid var(--border);
       border-radius: var(--radius);
       padding: 22px 20px;
@@ -172,90 +238,8 @@
     .section-en { font-size: 13.5px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; }
 
     /* =========================================================
-       HIGH-CONTRAST EXECUTIVE KPI CARDS (Few / Tufte Style)
-       ========================================================= */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .kpi-box {
-      background: var(--card-sub);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 22px;
-      position: relative;
-    }
-    .kpi-box-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
-    .kpi-title {
-      font-size: 16px;
-      font-weight: 800;
-      color: #cbd5e1;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .status-badge {
-      font-size: 13.5px;
-      font-weight: 900;
-      padding: 4px 10px;
-      border-radius: 6px;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .badge-teal { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal); }
-    .badge-red { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red); }
-    .badge-blue { background: var(--blue-bg); color: var(--blue-text); border: 1px solid var(--blue); }
-    .badge-amber { background: var(--amber-bg); color: var(--amber-text); border: 1px solid var(--amber); }
-
-    /* Giant Numbers with Clear Units */
-    .kpi-main-val {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 34px;
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1.1;
-      margin: 8px 0 12px 0;
-      letter-spacing: -0.02em;
-    }
-    .kpi-unit { font-size: 18px; font-weight: 700; color: #cbd5e1; margin-left: 4px; }
-
-    /* Bullet Gauge (Progress vs Budget Bar) */
-    .bullet-gauge {
-      margin-top: 10px;
-      background: #172233;
-      height: 12px;
-      border-radius: 6px;
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #24354d;
-    }
-    .bullet-fill {
-      height: 100%;
-      border-radius: 5px;
-      transition: width 0.3s ease;
-    }
-    .bullet-teal { background: var(--teal); }
-    .bullet-red { background: var(--red); }
-
-    .kpi-sub-line {
-      display: flex;
-      justify-content: space-between;
-      font-size: 14.5px;
-      color: var(--text-muted);
-      margin-top: 8px;
-      font-weight: 600;
-    }
-
-    /* =========================================================
-       HIGH-CONTRAST FINANCIAL TABLE (Heatmap & Visual Contrast)
+       STRICT 3-COLOR HEATMAP TABLE
+       Order: 売上 (実/予/率/前/率) ➔ 来場 (実/予/率/前/率) ➔ 客単価 (実/予/率/前/率)
        ========================================================= */
     .table-container {
       overflow-x: auto;
@@ -265,54 +249,42 @@
     }
     table.exec-table {
       width: 100%;
-      min-width: 780px;
+      min-width: 1020px;
       border-collapse: collapse;
-      font-size: 16px;
+      font-size: 15.5px;
     }
     table.exec-table th {
-      background: #0d1420;
+      background: #090e17;
       color: #cbd5e1;
       font-weight: 800;
-      font-size: 15px;
-      padding: 14px 16px;
-      border-bottom: 2px solid var(--border-light);
+      font-size: 14.5px;
+      padding: 12px 14px;
+      border-bottom: 2px solid var(--border-strong);
+      border-right: 1px solid var(--border);
       text-align: right;
     }
     table.exec-table td {
-      padding: 15px 16px;
+      padding: 14px 14px;
       border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
       text-align: right;
       font-variant-numeric: tabular-nums;
     }
     table.exec-table th:first-child, table.exec-table td:first-child { text-align: left; }
     
-    /* Table Heatmap Visuals */
     .cell-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; }
-    .cell-achieved { color: var(--teal-text); font-weight: 900; }
-    .cell-missed { color: var(--red-text); font-weight: 900; }
     
-    .pill-rate {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 900;
-      padding: 3px 8px;
-      border-radius: 5px;
-      font-size: 14.5px;
-      display: inline-block;
-    }
-    .pill-green { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal); }
-    .pill-red { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red); }
-
-    /* Total Highlight Row */
+    /* Super Total Highlight Row */
     tr.total-row {
-      background: rgba(27, 77, 107, 0.35) !important;
-      border-top: 2px solid var(--gold);
-      border-bottom: 2px solid var(--gold);
+      background: rgba(27, 77, 107, 0.4) !important;
+      border-top: 2.5px solid var(--gold);
+      border-bottom: 2.5px solid var(--gold);
       font-weight: 900;
     }
     tr.total-row td {
-      font-size: 17.5px;
+      font-size: 17px;
       color: #fff;
-      padding: 16px;
+      padding: 16px 14px;
     }
 
     /* Diagnosis Box */
@@ -333,29 +305,19 @@
       margin-bottom: 8px;
     }
 
-    /* Action Checklist Box */
-    .gap-card {
-      background: rgba(226, 75, 74, 0.08);
-      border: 2px solid var(--red);
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 16px;
-    }
-    .act-card {
-      background: rgba(29, 158, 117, 0.08);
-      border: 2px solid var(--teal);
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin-bottom: 16px;
-    }
-
     /* Responsive */
+    @media (max-width: 900px) {
+      .equation-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .operator { font-size: 24px; margin: 4px 0; }
+    }
     @media (max-width: 768px) {
       body { padding: 12px 10px 90px 10px; font-size: 16.5px; }
       .header { padding: 14px; }
       .brand-title { font-size: 19px; }
-      .kpi-main-val { font-size: 28px; }
-      .section-header { font-size: 19px; }
+      .eq-val { font-size: 28px; }
     }
   </style>
 </head>
@@ -365,14 +327,58 @@
   <!-- TOP NAV -->
   <div class="header">
     <div class="brand-group">
-      <div class="brand-badge">TCC</div>
+      <div class="brand-crest">TCC</div>
       <div>
         <div class="brand-title">
           <span>TSH Beyond-Dashboard</span>
           <span style="font-size:13px; font-weight:900; color:var(--gold); background:var(--gold-bg); padding:3px 8px; border-radius:6px; border:1px solid var(--gold);">Executive Standard</span>
         </div>
-        <div class="brand-sub">津カントリー倶楽部 経営コックピット（KGI・予算・昨年対比・現場連動）</div>
+        <div class="brand-sub">津カントリー倶楽部 経営コックピット（ジェイ・エイブラハム売上方程式 ＆ 3色予実管理）</div>
       </div>
+    </div>
+  </div>
+
+  <!-- =========================================================
+       HERO: JAY ABRAHAM REVENUE FORMULA (売上 ＝ 来場客数 × 客単価)
+       ========================================================= -->
+  <div class="equation-hero">
+    <div class="equation-title">🔥 ジェイ・エイブラハムの売上方程式 【1〜4月累計実績】</div>
+    <div class="equation-grid">
+      
+      <!-- 1. 営業売上高 -->
+      <div class="eq-card main-target">
+        <div class="eq-label">① 営業売上高 (Revenue)</div>
+        <div class="eq-val">¥127,398<span class="eq-unit">千円</span></div>
+        <div class="eq-sub">
+          <span>対予算: <b class="badge bg-green">100.9% 達成 (+116万)</b></span>
+          <span>対前年: <b class="badge bg-green">+14.2% (+1,580万)</b></span>
+        </div>
+      </div>
+
+      <div class="operator">＝</div>
+
+      <!-- 2. 来場客数 -->
+      <div class="eq-card">
+        <div class="eq-label">② 来場客数 (Clients)</div>
+        <div class="eq-val">11,450<span class="eq-unit">名</span></div>
+        <div class="eq-sub">
+          <span>対予算: <b class="badge bg-green">105.7% 達成 (+620名)</b></span>
+          <span>対前年: <b class="badge bg-green">+18.5% (+1,789名)</b></span>
+        </div>
+      </div>
+
+      <div class="operator">×</div>
+
+      <!-- 3. 客単価 (未達90%台: イエロー警告) -->
+      <div class="eq-card" style="border: 2px solid var(--c-yellow);">
+        <div class="eq-label">③ 客単価 (Average Unit Price)</div>
+        <div class="eq-val" style="color:var(--c-yellow-text);">¥11,126<span class="eq-unit">/人</span></div>
+        <div class="eq-sub">
+          <span>対予算: <b class="badge bg-yellow">95.4% 未達 (-534円)</b></span>
+          <span>対前年: <b class="badge bg-yellow">-3.6% (-418円)</b></span>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -393,190 +399,175 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- 1. 経営者・役員の視座 (KGI ➔ 来場 ➔ 単価 ➔ 三重県市場)    -->
+  <!-- 1. 経営者・役員の視座 (売上 ➔ 来場 ➔ 客単価 3色テーブル)    -->
   <!-- ======================================================== -->
   <div id="view-exec" class="view-content active">
-
-    <!-- Top 4 Giant KPI Cards (サマリーの順番と下の表の列順が完全一致) -->
-    <div class="kpi-grid">
-      
-      <!-- ① 売上高 (最重要KGI) -->
-      <div class="kpi-box">
-        <div class="kpi-box-header">
-          <div class="kpi-title">① 営業売上高 (1〜4月累計)</div>
-          <div class="status-badge badge-teal">達成率 100.9%</div>
-        </div>
-        <div class="kpi-main-val">¥127,398<span class="kpi-unit">千円</span></div>
-        <div class="bullet-gauge">
-          <div class="bullet-fill bullet-teal" style="width: 100%;"></div>
-        </div>
-        <div class="kpi-sub-line">
-          <span>予算: ¥126,230千円 (<b style="color:var(--teal-text);">+116万円</b>)</span>
-          <span>前年: ¥113,729千円 (<b style="color:var(--teal-text);">+14.2%</b>)</span>
-        </div>
-      </div>
-
-      <!-- ② 来場者数 -->
-      <div class="kpi-box">
-        <div class="kpi-box-header">
-          <div class="kpi-title">② 来場者数 (1〜4月累計)</div>
-          <div class="status-badge badge-teal">達成率 105.7%</div>
-        </div>
-        <div class="kpi-main-val">11,450<span class="kpi-unit">名</span></div>
-        <div class="bullet-gauge">
-          <div class="bullet-fill bullet-teal" style="width: 100%;"></div>
-        </div>
-        <div class="kpi-sub-line">
-          <span>予算: 10,830名 (<b style="color:var(--teal-text);">+620名</b>)</span>
-          <span>前年: 9,661名 (<b style="color:var(--teal-text);">+18.5%</b>)</span>
-        </div>
-      </div>
-
-      <!-- ③ 客単価 (危機要因・赤字ハイライト) -->
-      <div class="kpi-box" style="border: 2px solid var(--red);">
-        <div class="kpi-box-header">
-          <div class="kpi-title" style="color:#fff;">③ 客単価 (加重平均)</div>
-          <div class="status-badge badge-red">未達 95.4%</div>
-        </div>
-        <div class="kpi-main-val" style="color:var(--red-text);">¥11,126<span class="kpi-unit">/人</span></div>
-        <div class="bullet-gauge">
-          <div class="bullet-fill bullet-red" style="width: 95.4%;"></div>
-        </div>
-        <div class="kpi-sub-line">
-          <span>予算: ¥11,660 (<b style="color:var(--red-text);">-534円</b>)</span>
-          <span>前年: ¥11,544 (<b style="color:var(--red-text);">-3.6%</b>)</span>
-        </div>
-      </div>
-
-      <!-- ④ 外部市場シェア (三重県全51コース中) -->
-      <div class="kpi-box">
-        <div class="kpi-box-header">
-          <div class="kpi-title">④ 三重県連盟 来場順位</div>
-          <div class="status-badge badge-blue">第 12 位 / 51コース</div>
-        </div>
-        <div class="kpi-main-val" style="color:var(--blue-text);">県平均 +3.2%<span class="kpi-unit">に対し</span></div>
-        <div class="bullet-gauge">
-          <div class="bullet-fill" style="width: 100%; background:var(--blue);"></div>
-        </div>
-        <div class="kpi-sub-line">
-          <span>TCCの伸び: <b style="color:var(--teal-text); font-size:16px;">+18.5%</b></span>
-          <span>市場シェア急拡大中</span>
-        </div>
-      </div>
-
-    </div>
 
     <!-- 経営陣 意思決定サマリー -->
     <div class="diag-card">
       <div class="diag-title">
-        <span>🦅 経営陣・役員会 診断サマリー（KGI・市場対比）</span>
+        <span>🦅 経営陣・役員会 診断サマリー（3色判定基準: 🟢≥100% / 🟡90〜99% / 🔴<90%）</span>
       </div>
       <div style="font-size:16.5px; color:#f1f5f9; line-height:1.8;">
-        ・<b>業績総括</b>: 4ヶ月累計売上は<b>¥127,398千円（予算比100.9% / 前年比+14.2%）</b>。来場者は<b>+1,789名（+18.5%）</b>と絶好調。<br>
-        ・<b>市場比較</b>: 三重県全51コースの市場平均伸び率が+3.2%にとどまる中、TCCは<b>+18.5%</b>と他コースから圧倒的にシェアを奪取。<br>
-        ・<b>経営の急所（ボトルネック）</b>: 来場増が平日ビジター中心のため、客単価（¥11,126）が予算（¥11,660）を<b>-534円下回っている</b>。下期に向けた経営課題は<b>「客単価の改善」</b>に集中する。
+        ・<b>売上高 🟢 (100.9%) ＆ 来場客数 🟢 (105.7%)</b>: ともに予算オーバーで大達成。前年比でも売上+14.2%、来場+18.5%と三重県市場（平均+3.2%）を大きく凌駕。<br>
+        ・<b>客単価 🟡 (95.4%)</b>: 平日ビジター比率が高まったため、予算¥11,660に対し<b>¥11,126（-534円の黄色アラート）</b>。下期の経営焦点は「客単価の改善」に完全集中する。
       </div>
     </div>
 
-    <!-- メリハリある財務・予実テーブル（列順は上のKPIと完全一致） -->
+    <!-- 統一フォーマット・3色カラーヒートマップテーブル -->
     <div class="card">
       <div class="section-header">
-        <span>📊 2026年 1〜4月 月次予実・前年対比・客単価テーブル</span>
-        <span class="section-en">MONTHLY FINANCIAL BREAKDOWN</span>
+        <span>📊 2026年 1〜4月 経営予実・前年対比テーブル（売上・来場・単価 統一軸）</span>
+        <span class="section-en">FINANCIAL HEATMAP TABLE</span>
       </div>
 
       <div class="table-container">
         <table class="exec-table">
           <thead>
             <tr>
-              <th style="width:110px;">月度</th>
+              <th rowspan="2" style="text-align:center; vertical-align:middle; width:90px;">月度</th>
               <!-- ① 売上高 -->
-              <th>売上実績 (千円)</th>
-              <th>売上予算</th>
-              <th>売上前年</th>
-              <th>売上達成率</th>
+              <th colspan="5" style="text-align:center; background:#101d2e; border-left:2px solid var(--border-strong);">① 営業売上高 (千円)</th>
               <!-- ② 来場者数 -->
-              <th>来場実績 (人)</th>
-              <th>来場予算</th>
-              <th>来場前年</th>
-              <th>来場達成率</th>
+              <th colspan="5" style="text-align:center; background:#0d1826; border-left:2px solid var(--border-strong);">② 来場者数 (人)</th>
               <!-- ③ 客単価 -->
-              <th>客単価実績</th>
-              <th>客単価予算</th>
-              <th>単価差額</th>
+              <th colspan="5" style="text-align:center; background:#101d2e; border-left:2px solid var(--border-strong);">③ 客単価 (円)</th>
+            </tr>
+            <tr>
+              <!-- 売上 -->
+              <th style="border-left:2px solid var(--border-strong);">実績</th>
+              <th>予算</th>
+              <th>対予算</th>
+              <th>前年</th>
+              <th>対前年</th>
+              <!-- 来場 -->
+              <th style="border-left:2px solid var(--border-strong);">実績</th>
+              <th>予算</th>
+              <th>対予算</th>
+              <th>前年</th>
+              <th>対前年</th>
+              <!-- 単価 -->
+              <th style="border-left:2px solid var(--border-strong);">実績</th>
+              <th>予算</th>
+              <th>対予算</th>
+              <th>前年</th>
+              <th>対前年</th>
             </tr>
           </thead>
           <tbody>
+            <!-- 1月 -->
             <tr>
-              <td><b>1月度</b></td>
-              <td class="cell-num cell-achieved">¥31,592</td>
+              <td style="text-align:center; font-weight:800;">1月度</td>
+              <!-- 売上 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥31,592</td>
               <td class="cell-num">¥29,580</td>
+              <td><span class="badge bg-green">106.8%</span></td>
               <td class="cell-num">¥25,358</td>
-              <td><span class="pill-rate pill-green">106.8%</span></td>
-              <td class="cell-num cell-achieved">2,865</td>
+              <td><span class="badge bg-green">+24.6%</span></td>
+              <!-- 来場 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">2,865</td>
               <td class="cell-num">2,690</td>
+              <td><span class="badge bg-green">106.5%</span></td>
               <td class="cell-num">2,370</td>
-              <td><span class="pill-rate pill-green">106.5%</span></td>
-              <td class="cell-num">¥11,027</td>
+              <td><span class="badge bg-green">+20.9%</span></td>
+              <!-- 単価 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥11,027</td>
               <td class="cell-num">¥11,000</td>
-              <td class="cell-achieved">+27円</td>
+              <td><span class="badge bg-green">100.2%</span></td>
+              <td class="cell-num">¥10,700</td>
+              <td><span class="badge bg-green">+3.1%</span></td>
             </tr>
+
+            <!-- 2月 -->
             <tr>
-              <td><b>2月度</b></td>
-              <td class="cell-num cell-achieved">¥26,814</td>
+              <td style="text-align:center; font-weight:800;">2月度</td>
+              <!-- 売上 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥26,814</td>
               <td class="cell-num">¥26,390</td>
+              <td><span class="badge bg-green">101.6%</span></td>
               <td class="cell-num">¥23,138</td>
-              <td><span class="pill-rate pill-green">101.6%</span></td>
-              <td class="cell-num cell-achieved">2,673</td>
+              <td><span class="badge bg-green">+15.9%</span></td>
+              <!-- 来場 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">2,673</td>
               <td class="cell-num">2,400</td>
+              <td><span class="badge bg-green">111.4%</span></td>
               <td class="cell-num">2,142</td>
-              <td><span class="pill-rate pill-green">111.4%</span></td>
-              <td class="cell-num cell-missed">¥10,031</td>
+              <td><span class="badge bg-green">+24.8%</span></td>
+              <!-- 単価 (イエロー) -->
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥10,031</td>
               <td class="cell-num">¥11,000</td>
-              <td class="cell-missed">-969円</td>
+              <td><span class="badge bg-yellow">91.2%</span></td>
+              <td class="cell-num">¥10,802</td>
+              <td><span class="badge bg-yellow">-7.1%</span></td>
             </tr>
+
+            <!-- 3月 (売上イエロー) -->
             <tr>
-              <td><b>3月度</b></td>
-              <td class="cell-num cell-missed">¥34,375</td>
+              <td style="text-align:center; font-weight:800;">3月度</td>
+              <!-- 売上 (イエロー) -->
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥34,375</td>
               <td class="cell-num">¥35,510</td>
+              <td><span class="badge bg-yellow">96.8%</span></td>
               <td class="cell-num">¥33,214</td>
-              <td><span class="pill-rate pill-red">96.8%</span></td>
-              <td class="cell-num cell-achieved">3,105</td>
+              <td><span class="badge bg-green">+3.5%</span></td>
+              <!-- 来場 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">3,105</td>
               <td class="cell-num">2,960</td>
+              <td><span class="badge bg-green">104.9%</span></td>
               <td class="cell-num">2,658</td>
-              <td><span class="pill-rate pill-green">104.9%</span></td>
-              <td class="cell-num cell-missed">¥11,071</td>
+              <td><span class="badge bg-green">+16.8%</span></td>
+              <!-- 単価 (イエロー) -->
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥11,071</td>
               <td class="cell-num">¥12,000</td>
-              <td class="cell-missed">-929円</td>
+              <td><span class="badge bg-yellow">92.3%</span></td>
+              <td class="cell-num">¥12,495</td>
+              <td><span class="badge bg-yellow">-11.4%</span></td>
             </tr>
+
+            <!-- 4月 -->
             <tr>
-              <td><b>4月度</b></td>
-              <td class="cell-num cell-achieved">¥34,617</td>
+              <td style="text-align:center; font-weight:800;">4月度</td>
+              <!-- 売上 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">¥34,617</td>
               <td class="cell-num">¥34,750</td>
+              <td><span class="badge bg-yellow">99.6%</span></td>
               <td class="cell-num">¥32,019</td>
-              <td><span class="pill-rate pill-green">99.6%</span></td>
-              <td class="cell-num cell-achieved">2,807</td>
+              <td><span class="badge bg-green">+8.1%</span></td>
+              <!-- 来場 -->
+              <td class="cell-num" style="border-left:2px solid var(--border-strong);">2,807</td>
               <td class="cell-num">2,780</td>
+              <td><span class="badge bg-green">101.0%</span></td>
               <td class="cell-num">2,491</td>
-              <td><span class="pill-rate pill-green">101.0%</span></td>
-              <td class="cell-num cell-missed">¥12,332</td>
+              <td><span class="badge bg-green">+12.7%</span></td>
+              <!-- 単価 (イエロー) -->
+              <td class="cell-num" style="color:var(--c-yellow-text); border-left:2px solid var(--border-strong);">¥12,332</td>
               <td class="cell-num">¥12,500</td>
-              <td class="cell-missed">-168円</td>
+              <td><span class="badge bg-yellow">98.7%</span></td>
+              <td class="cell-num">¥12,853</td>
+              <td><span class="badge bg-yellow">-4.1%</span></td>
             </tr>
-            <!-- 4ヶ月累計 合計行（太枠・強調ハイライト） -->
+
+            <!-- 4ヶ月累計 (太枠・ハイライト) -->
             <tr class="total-row">
-              <td><b>4ヶ月累計</b></td>
-              <td style="color:var(--gold); font-size:19px;">¥127,398</td>
-              <td>¥126,230</td>
-              <td style="color:var(--teal-text);">¥113,729 (+14.2%)</td>
-              <td><span class="pill-rate pill-green" style="font-size:16px;">100.9%</span></td>
-              <td style="color:#fff; font-size:19px;">11,450</td>
-              <td>10,830</td>
-              <td style="color:var(--teal-text);">9,661 (+18.5%)</td>
-              <td><span class="pill-rate pill-green" style="font-size:16px;">105.7%</span></td>
-              <td style="color:var(--red-text); font-size:19px;">¥11,126</td>
-              <td>¥11,660</td>
-              <td style="color:var(--red-text);">-534円</td>
+              <td style="text-align:center; color:var(--gold); font-size:18px;">4ヶ月累計</td>
+              <!-- 売上 🟢 -->
+              <td class="cell-num" style="color:var(--gold); font-size:18px; border-left:2px solid var(--border-strong);">¥127,398</td>
+              <td class="cell-num">¥126,230</td>
+              <td><span class="badge bg-green" style="font-size:15px;">100.9%</span></td>
+              <td class="cell-num">¥113,729</td>
+              <td><span class="badge bg-green" style="font-size:15px;">+14.2%</span></td>
+              <!-- 来場 🟢 -->
+              <td class="cell-num" style="color:#fff; font-size:18px; border-left:2px solid var(--border-strong);">11,450</td>
+              <td class="cell-num">10,830</td>
+              <td><span class="badge bg-green" style="font-size:15px;">105.7%</span></td>
+              <td class="cell-num">9,661</td>
+              <td><span class="badge bg-green" style="font-size:15px;">+18.5%</span></td>
+              <!-- 単価 🟡 -->
+              <td class="cell-num" style="color:var(--c-yellow-text); font-size:18px; border-left:2px solid var(--border-strong);">¥11,126</td>
+              <td class="cell-num">¥11,660</td>
+              <td><span class="badge bg-yellow" style="font-size:15px;">95.4%</span></td>
+              <td class="cell-num">¥11,544</td>
+              <td><span class="badge bg-yellow" style="font-size:15px;">-3.6%</span></td>
             </tr>
           </tbody>
         </table>
@@ -586,35 +577,35 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- 2. 支配人・部門長の視座 (それでどうする？ 4つの傘戦術)      -->
+  <!-- 2. 支配人・部門長の視座 (4つの傘 ＆ 戦術)                  -->
   <!-- ======================================================== -->
   <div id="view-gm" class="view-content">
     <div class="card">
       <div class="section-header">
-        <span>👔 支配人の問い：「客単価-534円をどう埋める？ 今月どう手を打つ？」</span>
+        <span>👔 支配人の問い：「客単価95.4%（黄色アラート）をどう埋める？ 今月どう手を打つ？」</span>
         <span class="section-en">TACTICAL ACTIONS & 4 UMBRELLAS</span>
       </div>
 
       <!-- 4つの傘 戦術カード -->
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:24px;">
-        <div style="background:var(--card-sub); border-top:5px solid var(--teal); border-radius:10px; padding:18px; border:1px solid var(--border);">
-          <div style="font-weight:900; font-size:17px; color:var(--teal-text); margin-bottom:8px;">🏆 守る (Champion会員維持)</div>
+        <div style="background:var(--card-sub); border-top:5px solid var(--c-green); border-radius:10px; padding:18px; border:1px solid var(--border);">
+          <div style="font-weight:900; font-size:17px; color:var(--c-green-text); margin-bottom:8px;">🏆 守る (Champion会員維持)</div>
           <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">
             ・<b>現状</b>: 年12回以上来場のコア会員194名が売上の42%を創出。<br>
             ・<b>打ち手</b>: 週末スタート枠の優先確保と、開場記念杯の特別案内状を個別発送。
           </div>
         </div>
 
-        <div style="background:var(--card-sub); border-top:5px solid var(--red); border-radius:10px; padding:18px; border:1px solid var(--border);">
-          <div style="font-weight:900; font-size:17px; color:var(--red-text); margin-bottom:8px;">🚨 取り戻す (高額離反の再活性)</div>
+        <div style="background:var(--card-sub); border-top:5px solid var(--c-red); border-radius:10px; padding:18px; border:1px solid var(--border);">
+          <div style="font-weight:900; font-size:17px; color:var(--c-red-text); margin-bottom:8px;">🚨 取り戻す (高額離反の再活性)</div>
           <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">
             ・<b>現状</b>: 直近3ヶ月来場なしの正会員が<b>38名</b>（離脱リスク大）。<br>
             ・<b>打ち手</b>: 支配人・役員の手書き挨拶状と同伴優待券を送付し復帰を促進。
           </div>
         </div>
 
-        <div style="background:var(--card-sub); border-top:5px solid var(--amber); border-radius:10px; padding:18px; border:1px solid var(--border);">
-          <div style="font-weight:900; font-size:17px; color:var(--amber-text); margin-bottom:8px;">📈 深耕 (客単価+534円回復)</div>
+        <div style="background:var(--card-sub); border-top:5px solid var(--c-yellow); border-radius:10px; padding:18px; border:1px solid var(--border);">
+          <div style="font-weight:900; font-size:17px; color:var(--c-yellow-text); margin-bottom:8px;">📈 深耕 (客単価+534円回復)</div>
           <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">
             ・<b>現状</b>: ビジターの昼食単価が¥1,450と低調（目標: ¥1,800）。<br>
             ・<b>打ち手</b>: レストラン冷麺フェアと特製スイーツ土産（¥2,200）の予約販売。
@@ -645,19 +636,19 @@
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
         <!-- 🔴 先週・昨日できなかった数字（Gap分析） -->
         <div>
-          <div style="font-size:18px; font-weight:900; color:var(--red-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <div style="font-size:18px; font-weight:900; color:var(--c-red-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
             <span>🔴 先週・前日 できなかった数字（Gap分析）</span>
           </div>
 
-          <div class="gap-card">
-            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ レストラン客単価: 目標 ¥6,500 ➔ 実績 ¥6,086 (-414円未達)</div>
+          <div style="background:var(--c-red-bg); border:1.5px solid var(--c-red); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
+            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ レストラン客単価: 目標 ¥6,500 ➔ 実績 ¥6,086 (<b style="color:var(--c-red-text);">-414円未達</b>)</div>
             <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
               ・<b>原因</b>: ランチ時の「おすすめサイドメニュー（特製唐揚げ等）」と「昼食時アルコール」のお声がけがホールで3割程度しか実施できていなかった。
             </div>
           </div>
 
-          <div class="gap-card">
-            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⏱️ 木曜雨天時の稼働率: 目標 85% ➔ 実績 55% (-30pt未達)</div>
+          <div style="background:var(--c-red-bg); border:1.5px solid var(--c-red); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
+            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⏱️ 木曜雨天時の稼働率: 目標 85% ➔ 実績 55% (<b style="color:var(--c-red-text);">-30pt未達</b>)</div>
             <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
               ・<b>原因</b>: 雨天キャンセル（4組）に対し、スループレー希望者への電話振り替え案内が1時間遅れ、空き枠を埋められなかった。
             </div>
@@ -666,11 +657,11 @@
 
         <!-- 🟢 今日・今週 現場リーダーがやること（Action Checklist） -->
         <div>
-          <div style="font-size:18px; font-weight:900; color:var(--teal-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+          <div style="font-size:18px; font-weight:900; color:var(--c-green-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
             <span>🟢 本日・今週 現場リーダーの必達アクション（ToDo）</span>
           </div>
 
-          <div class="act-card">
+          <div style="background:var(--c-green-bg); border:1.5px solid var(--c-green); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
             <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ 【レストラン】昼食時のセットメニュー声掛け100%徹底</div>
             <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
               ・<b>目標</b>: 単価¥6,500回復。<br>
@@ -678,7 +669,7 @@
             </div>
           </div>
 
-          <div class="act-card">
+          <div style="background:var(--c-green-bg); border:1.5px solid var(--c-green); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
             <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⛳ 【マスター室】ハーフ2時間15分運行死守 ＆ 詰まり先回り</div>
             <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
               ・<b>本日の組数</b>: 48組（満枠）。<br>
