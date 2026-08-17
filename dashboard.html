@@ -6,16 +6,16 @@
   <title>TSH Beyond-Dashboard | ゴルフ場次世代AI経営コックピット</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
-      --bg-dark: #090d16;
+      --bg-dark: #080c14;
       --bg-card: #111827;
-      --bg-card-hover: #1e293b;
-      --bg-card-sub: #0f172a;
-      --border: #1e293b;
-      --border-accent: #334155;
+      --bg-card-hover: #1f293d;
+      --bg-card-sub: #0c1322;
+      --border: #1f293d;
+      --border-accent: #374151;
       --primary: #10b981;
       --primary-glow: rgba(16, 185, 129, 0.2);
       --cyan: #06b6d4;
@@ -26,7 +26,7 @@
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-sub: #64748b;
-      --radius: 12px;
+      --radius: 14px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
@@ -34,9 +34,10 @@
       font-family: 'Inter', 'Noto Sans JP', sans-serif;
       background: var(--bg-dark);
       color: var(--text-main);
-      padding: 16px 12px 60px 12px;
-      font-size: 14.5px;
-      line-height: 1.5;
+      padding: 16px 12px 80px 12px;
+      /* 基本フォントサイズを2割増し（14px ➔ 17.5px） */
+      font-size: 17.5px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -53,95 +54,113 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 12px 18px;
-      margin-bottom: 16px;
+      padding: 16px 20px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
     }
     .brand-logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
     .brand-icon {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
-      border-radius: 8px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      color: #090d16;
-      font-size: 16px;
+      font-weight: 800;
+      color: #080c14;
+      font-size: 20px;
+      flex-shrink: 0;
     }
-    .brand-title { font-size: 17px; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
-    .brand-subtitle { font-size: 11px; color: var(--text-muted); }
+    .brand-title { 
+      font-size: 21px; 
+      font-weight: 800; 
+      color: #fff; 
+      letter-spacing: -0.02em; 
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .brand-subtitle { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
 
     /* Course / Group Switcher */
     .view-switcher {
       display: flex;
       background: var(--bg-dark);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 3px;
+      border-radius: 10px;
+      padding: 4px;
+      width: 100%;
+      max-width: 400px;
     }
     .switch-btn {
+      flex: 1;
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 12.5px;
-      font-weight: 600;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
+      text-align: center;
     }
     .switch-btn.active {
       background: var(--primary);
-      color: #090d16;
-      font-weight: 700;
+      color: #080c14;
+      font-weight: 800;
     }
 
     /* Tab Navigation (5 Modules) */
     .module-tabs {
       display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 20px;
       overflow-x: auto;
-      padding-bottom: 4px;
+      padding-bottom: 8px;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
     }
+    .module-tabs::-webkit-scrollbar { display: none; }
+
     .tab-btn {
       background: var(--bg-card);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       color: var(--text-muted);
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 600;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: 16.5px;
+      font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       transition: all 0.15s ease;
+      flex-shrink: 0;
     }
     .tab-btn:hover { border-color: var(--border-accent); color: #fff; }
     .tab-btn.active {
-      background: rgba(16, 185, 129, 0.12);
+      background: rgba(16, 185, 129, 0.15);
       border-color: var(--primary);
-      color: var(--primary);
-      font-weight: 700;
+      color: #fff;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
     }
     .tab-badge {
-      font-size: 10px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 700;
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 800;
     }
-    .badge-std { background: #334155; color: #cbd5e1; }
-    .badge-pro { background: rgba(245, 158, 11, 0.2); color: var(--amber); border: 1px solid var(--amber); }
+    .badge-std { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
+    .badge-pro { background: rgba(245, 158, 11, 0.25); color: #fde68a; border: 1px solid var(--amber); }
 
     /* Module Section */
     .module-section {
@@ -152,7 +171,7 @@
       animation: fadeIn 0.2s ease-in-out;
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -161,63 +180,77 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 18px 16px;
-      margin-bottom: 16px;
+      padding: 22px 20px;
+      margin-bottom: 20px;
     }
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
-      padding-bottom: 10px;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 12px;
     }
-    .card-title { font-size: 15.5px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .card-title { 
+      font-size: 20px; 
+      font-weight: 800; 
+      color: #fff; 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+    }
 
     /* KPI Highlight Grid */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
-      margin-bottom: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
     }
     .kpi-card {
       background: var(--bg-card-sub);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
+      border-radius: 12px;
+      padding: 18px 20px;
       position: relative;
       overflow: hidden;
     }
     .kpi-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; width: 4px; height: 100%;
+      top: 0; left: 0; width: 5px; height: 100%;
     }
     .kpi-green::before { background: var(--primary); }
     .kpi-cyan::before { background: var(--cyan); }
     .kpi-amber::before { background: var(--amber); }
     .kpi-purple::before { background: var(--purple); }
 
-    .kpi-label { font-size: 12px; color: var(--text-muted); font-weight: 600; }
-    .kpi-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; color: #fff; margin: 4px 0; }
-    .kpi-diff { font-size: 12px; font-weight: 600; }
-    .diff-up { color: var(--primary); }
-    .diff-down { color: var(--rose); }
+    .kpi-label { font-size: 14.5px; color: var(--text-muted); font-weight: 700; }
+    .kpi-val { 
+      font-family: 'JetBrains Mono', monospace; 
+      font-size: 32px; 
+      font-weight: 800; 
+      color: #fff; 
+      margin: 6px 0; 
+      letter-spacing: -0.02em;
+    }
+    .kpi-diff { font-size: 14.5px; font-weight: 700; }
+    .diff-up { color: #34d399; }
+    .diff-down { color: #fb7185; }
 
     /* AI 4 Manager Cards Grid */
     .ai-manager-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 18px;
     }
     .ai-card {
       background: var(--bg-card-sub);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -225,85 +258,106 @@
     .ai-card-header {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
     .ai-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 24px;
+      flex-shrink: 0;
     }
-    .ai-name { font-size: 14px; font-weight: 700; color: #fff; }
-    .ai-role { font-size: 11px; color: var(--text-muted); }
-    .ai-body { font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 12px; }
+    .ai-name { font-size: 18px; font-weight: 800; color: #fff; }
+    .ai-role { font-size: 13.5px; color: var(--text-muted); }
+    .ai-body { 
+      font-size: 16.5px; 
+      color: #e2e8f0; 
+      line-height: 1.75; 
+      margin-bottom: 16px; 
+    }
     .ai-action {
-      background: rgba(255,255,255,0.04);
-      border-left: 3px solid var(--primary);
-      padding: 8px 10px;
-      border-radius: 4px;
-      font-size: 12.5px;
-      color: #e2e8f0;
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid var(--primary);
+      padding: 12px 14px;
+      border-radius: 6px;
+      font-size: 15px;
+      color: #f1f5f9;
+      line-height: 1.6;
     }
 
     /* Tables */
     .table-wrap {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
+      border-radius: 10px;
+      border: 1px solid var(--border);
     }
     table {
       width: 100%;
-      min-width: 600px;
+      min-width: 650px;
       border-collapse: collapse;
-      font-size: 13.5px;
+      font-size: 16px;
     }
     th, td {
-      padding: 10px 12px;
+      padding: 14px 16px;
       border-bottom: 1px solid var(--border);
       text-align: right;
     }
     th {
       background: var(--bg-card-sub);
       color: var(--text-muted);
-      font-weight: 600;
-      font-size: 12.5px;
+      font-weight: 700;
+      font-size: 15px;
     }
     th:first-child, td:first-child { text-align: left; }
-    tr:hover { background: rgba(255,255,255,0.02); }
+    tr:hover { background: rgba(255,255,255,0.03); }
 
     /* Action Buttons */
     .btn-row {
       display: flex;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
     .btn {
       background: var(--bg-card-hover);
       color: #fff;
       border: 1px solid var(--border-accent);
-      padding: 8px 14px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 600;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 15.5px;
+      font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       transition: all 0.15s ease;
     }
-    .btn:hover { background: var(--primary); color: #090d16; border-color: var(--primary); }
-    .btn-primary { background: var(--primary); color: #090d16; border-color: var(--primary); font-weight: 700; }
+    .btn:hover { background: var(--primary); color: #080c14; border-color: var(--primary); }
+    .btn-primary { background: var(--primary); color: #080c14; border-color: var(--primary); font-weight: 800; }
 
     /* CRM Pipeline Box */
     .crm-box {
-      background: rgba(168, 85, 247, 0.08);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      border-radius: 10px;
-      padding: 16px;
-      margin-top: 14px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1.5px solid rgba(168, 85, 247, 0.4);
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 18px;
+    }
+
+    /* Responsive Mobile Tweaks */
+    @media (max-width: 768px) {
+      body { padding: 12px 10px 90px 10px; font-size: 16.5px; }
+      .top-nav { padding: 14px 14px; }
+      .brand-title { font-size: 19px; }
+      .view-switcher { max-width: 100%; }
+      .card { padding: 16px 14px; }
+      .card-title { font-size: 18px; }
+      .kpi-val { font-size: 28px; }
+      .ai-manager-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -315,7 +369,10 @@
     <div class="brand-logo">
       <div class="brand-icon">8</div>
       <div>
-        <div class="brand-title">TSH Beyond-Dashboard <span style="font-size:11px; font-weight:700; color:var(--primary); background:rgba(16,185,129,0.15); padding:2px 6px; border-radius:4px; border:1px solid var(--primary);">v2.5 Live</span></div>
+        <div class="brand-title">
+          <span>TSH Beyond-Dashboard</span>
+          <span style="font-size:13px; font-weight:800; color:var(--primary); background:rgba(16,185,129,0.18); padding:3px 8px; border-radius:6px; border:1px solid var(--primary);">v2.5 Live</span>
+        </div>
         <div class="brand-subtitle">8Angels.ai — ゴルフ場次世代AI経営コックピット</div>
       </div>
     </div>
@@ -339,7 +396,7 @@
     </button>
     <button class="tab-btn" onclick="switchTab('tab-ai-managers')">
       <span>🧠 ③ 4支配人AIサマリー</span>
-      <span class="tab-badge badge-pro" style="background:rgba(16,185,129,0.2); color:var(--primary); border:1px solid var(--primary);">★目玉機能</span>
+      <span class="tab-badge badge-pro" style="background:rgba(16,185,129,0.25); color:#a7f3d0; border:1px solid var(--primary);">★目玉機能</span>
     </button>
     <button class="tab-btn" onclick="switchTab('tab-customers')">
       <span>👥 ④ 顧客・リピート分析</span>
@@ -347,7 +404,7 @@
     </button>
     <button class="tab-btn" onclick="switchTab('tab-crm')">
       <span>🔮 ⑤ AI売上予測＆CRM</span>
-      <span class="tab-badge badge-pro" style="background:rgba(168,85,247,0.2); color:var(--purple); border:1px solid var(--purple);">松・鶴</span>
+      <span class="tab-badge badge-pro" style="background:rgba(168,85,247,0.25); color:#e9d5ff; border:1px solid var(--purple);">松・鶴</span>
     </button>
   </div>
 
@@ -364,13 +421,13 @@
       </div>
       <div class="kpi-card kpi-cyan">
         <div class="kpi-label">来場人数 / 組数</div>
-        <div class="kpi-val" id="live-players">184 <span style="font-size:16px;">名</span> / 48 <span style="font-size:16px;">組</span></div>
-        <div class="kpi-diff diff-up">▲ 稼働率 96.0% (満枠)</div>
+        <div class="kpi-val" id="live-players">184 <span style="font-size:20px;">名</span> / 48 <span style="font-size:20px;">組</span></div>
+        <div class="kpi-diff diff-up">▲ 稼働率 96.0% (満枠稼働)</div>
       </div>
       <div class="kpi-card kpi-amber">
         <div class="kpi-label">客単価（総合）</div>
         <div class="kpi-val" id="live-unit-price">¥23,260</div>
-        <div class="kpi-diff diff-up">▲ 昼食＋物販単価上昇</div>
+        <div class="kpi-diff diff-up">▲ 昼食＋物販単価が上昇</div>
       </div>
       <div class="kpi-card kpi-purple">
         <div class="kpi-label">自社予約比率 (Web/LINE)</div>
@@ -380,12 +437,12 @@
     </div>
 
     <!-- Charts & Department Breakdown -->
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:18px;">
       <!-- Department Sales Card -->
       <div class="card">
         <div class="card-header">
           <div class="card-title">🛍️ 部門別 売上構成（リアルタイム集計）</div>
-          <span style="font-size:12px; color:var(--primary);">Swing-CLOUD 自動同期</span>
+          <span style="font-size:14px; font-weight:700; color:var(--primary);">Swing-CLOUD 自動同期</span>
         </div>
         <table style="min-width: 100%;">
           <thead>
@@ -399,19 +456,19 @@
           <tbody>
             <tr>
               <td>⛳ プレーフィ・諸経費</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700;">¥2,640,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥2,640,000</td>
               <td>¥14,348</td>
               <td class="diff-up">+8.5%</td>
             </tr>
             <tr>
               <td>🍽️ レストラン飲食</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700; color:var(--amber);">¥1,120,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--amber);">¥1,120,000</td>
               <td>¥6,086</td>
               <td class="diff-up">+16.2%</td>
             </tr>
             <tr>
               <td>🏌️ プロショップ・物販</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700; color:var(--cyan);">¥520,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--cyan);">¥520,000</td>
               <td>¥2,826</td>
               <td class="diff-up">+18.0%</td>
             </tr>
@@ -423,9 +480,9 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title">⏱️ スタート時間帯別 進行＆来場ペース</div>
-          <span style="font-size:12px; color:var(--text-muted);">ハーフ平均: 2時間12分 (良好)</span>
+          <span style="font-size:14px; color:var(--text-muted);">ハーフ平均: 2時間12分 (良好)</span>
         </div>
-        <div style="height: 180px; position: relative;">
+        <div style="height: 220px; position: relative;">
           <canvas id="timeHourlyChart"></canvas>
         </div>
       </div>
@@ -440,7 +497,7 @@
       <div class="card-header">
         <div>
           <div class="card-title">📑 2026年 第33週（8/10〜8/16）営業実績＆前年対比週報</div>
-          <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">SwingClubデータからワンクリック完全自動生成（支配人のExcel手作業ゼロ）</div>
+          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px;">SwingClubデータからワンクリック完全自動生成（支配人のExcel手作業ゼロ）</div>
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" onclick="alert('PDFレポートを出力しました（A4・3枚）')">📥 PDFレポート出力</button>
@@ -469,7 +526,7 @@
               <td>☀️ 晴</td>
               <td>52組</td>
               <td>204名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700;">¥4,820,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥4,820,000</td>
               <td>¥23,627</td>
               <td class="diff-up">112%</td>
               <td class="diff-up">+14.2%</td>
@@ -479,7 +536,7 @@
               <td>☀️ 晴</td>
               <td>38組</td>
               <td>146名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700;">¥2,840,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥2,840,000</td>
               <td>¥19,452</td>
               <td class="diff-up">104%</td>
               <td class="diff-up">+6.8%</td>
@@ -489,7 +546,7 @@
               <td>⛅ 曇</td>
               <td>35組</td>
               <td>138名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700;">¥2,690,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥2,690,000</td>
               <td>¥19,492</td>
               <td class="diff-up">101%</td>
               <td class="diff-up">+3.5%</td>
@@ -499,7 +556,7 @@
               <td>🌧️ 雨</td>
               <td>24組</td>
               <td>92名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700; color:var(--rose);">¥1,740,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--rose);">¥1,740,000</td>
               <td>¥18,913</td>
               <td class="diff-down">82%</td>
               <td class="diff-down">-12.0%</td>
@@ -509,7 +566,7 @@
               <td>☀️ 晴</td>
               <td>42組</td>
               <td>164名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700;">¥3,480,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥3,480,000</td>
               <td>¥21,219</td>
               <td class="diff-up">108%</td>
               <td class="diff-up">+9.4%</td>
@@ -519,7 +576,7 @@
               <td>☀️ 晴</td>
               <td>56組</td>
               <td>220名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700;">¥5,640,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥5,640,000</td>
               <td>¥25,636</td>
               <td class="diff-up">115%</td>
               <td class="diff-up">+16.8%</td>
@@ -529,20 +586,20 @@
               <td>☀️ 晴</td>
               <td>54組</td>
               <td>212名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:700;">¥5,380,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥5,380,000</td>
               <td>¥25,377</td>
               <td class="diff-up">110%</td>
               <td class="diff-up">+12.1%</td>
             </tr>
-            <tr style="background: rgba(16,185,129,0.08); font-weight:700;">
+            <tr style="background: rgba(16,185,129,0.12); font-weight:800;">
               <td>当週 週間合計</td>
               <td>—</td>
               <td>301組</td>
               <td>1,176名</td>
-              <td style="font-family:'JetBrains Mono'; color:var(--primary); font-size:15px;">¥26,590,000</td>
+              <td style="font-family:'JetBrains Mono'; color:#34d399; font-size:18px;">¥26,590,000</td>
               <td>¥22,610</td>
-              <td class="diff-up" style="font-size:15px;">107.5%</td>
-              <td class="diff-up" style="font-size:15px;">+9.8%</td>
+              <td class="diff-up" style="font-size:18px;">107.5%</td>
+              <td class="diff-up" style="font-size:18px;">+9.8%</td>
             </tr>
           </tbody>
         </table>
@@ -558,14 +615,14 @@
       <div class="card-header">
         <div>
           <div class="card-title">🧠 4支配人 AIサマリー（AI経営参謀エージェント）</div>
-          <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">Gemini 2.5 Flashが蓄積データを多角的に深層分析し、次週の具体的アクションを提示</div>
+          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px;">Gemini 2.5 Flashが蓄積データを多角的に深層分析し、次週の具体的アクションを提示</div>
         </div>
-        <span style="font-size:12px; background:rgba(16,185,129,0.15); color:var(--primary); padding:3px 8px; border-radius:4px; font-weight:700;">8Angels.ai Engine</span>
+        <span style="font-size:13px; background:rgba(16,185,129,0.2); color:#34d399; padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--primary);">8Angels.ai Engine</span>
       </div>
 
       <div class="ai-manager-grid">
         <!-- 1. Strategy Manager -->
-        <div class="ai-card" style="border-top: 3px solid var(--cyan);">
+        <div class="ai-card" style="border-top: 4px solid var(--cyan);">
           <div>
             <div class="ai-card-header">
               <div class="ai-avatar" style="background:rgba(6,182,212,0.2); color:var(--cyan);">🦅</div>
@@ -584,7 +641,7 @@
         </div>
 
         <!-- 2. Sales Manager -->
-        <div class="ai-card" style="border-top: 3px solid var(--amber);">
+        <div class="ai-card" style="border-top: 4px solid var(--amber);">
           <div>
             <div class="ai-card-header">
               <div class="ai-avatar" style="background:rgba(245,158,11,0.2); color:var(--amber);">🎯</div>
@@ -603,7 +660,7 @@
         </div>
 
         <!-- 3. Operations Manager -->
-        <div class="ai-card" style="border-top: 3px solid var(--primary);">
+        <div class="ai-card" style="border-top: 4px solid var(--primary);">
           <div>
             <div class="ai-card-header">
               <div class="ai-avatar" style="background:rgba(16,185,129,0.2); color:var(--primary);">⚙️</div>
@@ -622,7 +679,7 @@
         </div>
 
         <!-- 4. Financial Manager -->
-        <div class="ai-card" style="border-top: 3px solid var(--purple);">
+        <div class="ai-card" style="border-top: 4px solid var(--purple);">
           <div>
             <div class="ai-card-header">
               <div class="ai-avatar" style="background:rgba(168,85,247,0.2); color:var(--purple);">💰</div>
@@ -650,27 +707,27 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">👥 顧客属性 ＆ リピート分析（会員/ビジター動向）</div>
-        <span style="font-size:12px; color:var(--cyan);">総登録顧客: 34,200名</span>
+        <span style="font-size:14px; font-weight:700; color:var(--cyan);">総登録顧客: 34,200名</span>
       </div>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:18px;">
         <!-- Pie Chart -->
-        <div style="background:var(--bg-card-sub); padding:16px; border-radius:10px; border:1px solid var(--border);">
-          <div style="font-weight:700; font-size:13px; margin-bottom:10px; color:#fff;">会員区分別 来場比率</div>
-          <div style="height: 180px; position: relative;">
+        <div style="background:var(--bg-card-sub); padding:20px; border-radius:12px; border:1px solid var(--border);">
+          <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:#fff;">会員区分別 来場比率</div>
+          <div style="height: 220px; position: relative;">
             <canvas id="memberPieChart"></canvas>
           </div>
         </div>
 
         <!-- Dormant Member Alert -->
-        <div style="background:var(--bg-card-sub); padding:16px; border-radius:10px; border:1px solid var(--border);">
-          <div style="font-weight:700; font-size:13px; margin-bottom:10px; color:var(--rose);">⚠️ 休眠会員・離脱リスク検知</div>
-          <div style="font-size:13px; color:#cbd5e1; line-height:1.6;">
-            ・<b>直近3ヶ月来場なしの正会員</b>: <b style="color:var(--rose);">38名</b>（前月比 +4名）<br>
+        <div style="background:var(--bg-card-sub); padding:20px; border-radius:12px; border:1px solid var(--border);">
+          <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:#fb7185;">⚠️ 休眠会員・離脱リスク検知</div>
+          <div style="font-size:15.5px; color:#cbd5e1; line-height:1.75;">
+            ・<b>直近3ヶ月来場なしの正会員</b>: <b style="color:#fb7185; font-size:17px;">38名</b>（前月比 +4名）<br>
             ・<b>年配アクティブ会員（平日中心）</b>: 平均月2.4回 ➔ 1.8回へ微減<br>
             ・<b>AI推奨アクション</b>: 秋季開場記念杯の特別ご案内状を個別発送
           </div>
-          <button class="btn" style="margin-top:12px; width:100%; justify-content:center;" onclick="alert('休眠会員38名へアプローチリストを出力しました')">📋 休眠会員アプローチリスト出力</button>
+          <button class="btn" style="margin-top:16px; width:100%; justify-content:center; padding:12px;" onclick="alert('休眠会員38名へアプローチリストを出力しました')">📋 休眠会員アプローチリスト出力</button>
         </div>
       </div>
     </div>
@@ -684,20 +741,20 @@
       <div class="card-header">
         <div>
           <div class="card-title">🔮 8月度 月末売上着地 AI予測 ＆ CRM自動追客連携</div>
-          <div style="font-size:12px; color:var(--text-muted); margin-top:2px;">予約先食いデータと天候予測・過去実績から着地数値を高精度AIシミュレーション</div>
+          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px;">予約先食いデータと天候予測・過去実績から着地数値を高精度AIシミュレーション</div>
         </div>
-        <span style="font-size:12px; background:rgba(168,85,247,0.2); color:var(--purple); padding:3px 8px; border-radius:4px; font-weight:700;">AI Forecast Engine</span>
+        <span style="font-size:13px; background:rgba(168,85,247,0.2); color:#e9d5ff; padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--purple);">AI Forecast Engine</span>
       </div>
 
       <div class="kpi-grid">
         <div class="kpi-card kpi-purple">
           <div class="kpi-label">8月末 着地売上予測（AI）</div>
-          <div class="kpi-val" style="color:var(--purple);">¥48,500,000</div>
+          <div class="kpi-val" style="color:#d8b4fe;">¥48,500,000</div>
           <div class="kpi-diff diff-up">▲ 予算達成見込 103.2%</div>
         </div>
         <div class="kpi-card kpi-cyan">
           <div class="kpi-label">月間着地 来場人数予測</div>
-          <div class="kpi-val">2,240 <span style="font-size:16px;">名</span></div>
+          <div class="kpi-val">2,240 <span style="font-size:20px;">名</span></div>
           <div class="kpi-diff diff-up">▲ 前年同月比 +6.5%</div>
         </div>
         <div class="kpi-card kpi-green">
@@ -709,11 +766,11 @@
 
       <!-- CRM Campaign Box -->
       <div class="crm-box">
-        <div style="font-weight:700; color:#fff; font-size:14px; margin-bottom:6px; display:flex; align-items:center; gap:8px;">
+        <div style="font-weight:800; color:#fff; font-size:17px; margin-bottom:8px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
           <span>📲 LINE公式アカウント CRM自動追客シナリオ連動</span>
-          <span style="font-size:11px; background:var(--purple); color:#fff; padding:2px 6px; border-radius:4px;">Staged 承認待ち</span>
+          <span style="font-size:12px; background:var(--purple); color:#fff; padding:3px 8px; border-radius:4px; font-weight:700;">Staged 承認待ち</span>
         </div>
-        <div style="font-size:13px; color:#e2e8f0; line-height:1.6; margin-bottom:10px;">
+        <div style="font-size:15.5px; color:#f1f5f9; line-height:1.75; margin-bottom:14px;">
           【AI検知】8月27日(木)・28日(金)の午後スタート枠に空き枠が発生しています。<br>
           過去6ヶ月以内に平日午後枠を利用した同伴ビジター<b>128名</b>へ、特別優待クーポン付きLINEメッセージを自動配信します。
         </div>
@@ -744,12 +801,12 @@
     if (mode === 'single') {
       document.getElementById('btn-view-single').classList.add('active');
       document.getElementById('live-total-sales').innerText = '¥4,280,000';
-      document.getElementById('live-players').innerHTML = '184 <span style="font-size:16px;">名</span> / 48 <span style="font-size:16px;">組</span>';
+      document.getElementById('live-players').innerHTML = '184 <span style="font-size:20px;">名</span> / 48 <span style="font-size:20px;">組</span>';
       document.getElementById('live-unit-price').innerText = '¥23,260';
     } else {
       document.getElementById('btn-view-group').classList.add('active');
       document.getElementById('live-total-sales').innerText = '¥34,800,000';
-      document.getElementById('live-players').innerHTML = '1,480 <span style="font-size:16px;">名</span> / 384 <span style="font-size:16px;">組</span>';
+      document.getElementById('live-players').innerHTML = '1,480 <span style="font-size:20px;">名</span> / 384 <span style="font-size:20px;">組</span>';
       document.getElementById('live-unit-price').innerText = '¥23,510';
       alert('🏢 リソルグループ全8コース横断統括コックピットビューへ切り替えました（合算集計中）');
     }
@@ -768,7 +825,7 @@
           label: 'スタート組数',
           data: [6, 12, 14, 8, 4, 3, 1],
           backgroundColor: '#10b981',
-          borderRadius: 4
+          borderRadius: 6
         }]
       },
       options: {
@@ -776,8 +833,8 @@
         maintainAspectRatio: false,
         plugins: { legend: { display: false } },
         scales: {
-          x: { grid: { display: false }, ticks: { color: '#94a3b8' } },
-          y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8' } }
+          x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 13 } } },
+          y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 13 } } }
         }
       }
     });
@@ -802,7 +859,7 @@
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 11 } } }
+          legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 13, weight: 'bold' } } }
         }
       }
     });
