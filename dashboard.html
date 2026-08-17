@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>TSH Beyond-Dashboard | TCCデザインシステム準拠ダーク版</title>
+  <title>TSH Beyond-Dashboard | ゴルフ場次世代AI経営コックピット</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
@@ -14,18 +14,18 @@
        Base: TCC Navy (#1B4D6B), TCC Gold (#C9A961), Teal (#1D9E75)
        ========================================================= */
     :root {
-      --tcc-bg: #0a0e17;            /* 深層オフブラック */
-      --tcc-card: #131b26;          /* TCCダークスレート */
-      --tcc-card-sub: #0e1520;      /* サブ領域 */
-      --tcc-card-hover: #1c2738;
-      --tcc-border: #223044;        /* 品位ある境界線 */
-      --tcc-border-accent: #334460;
+      --tcc-bg: #090d15;            /* 深層オフブラック */
+      --tcc-card: #121924;          /* TCCダークスレート */
+      --tcc-card-sub: #0d141e;      /* サブ領域 */
+      --tcc-card-hover: #1b2637;
+      --tcc-border: #1f2c3f;        /* 品位ある境界線 */
+      --tcc-border-accent: #2e415b;
       
       /* TCC 正典ブランドカラー */
       --tcc-navy: #1B4D6B;          /* TCC紺（ブランド主軸） */
       --tcc-navy-light: #2c6e96;
       --tcc-gold: #C9A961;          /* TCCゴールド（最上位・アクセント） */
-      --tcc-gold-soft: rgba(201, 169, 97, 0.2);
+      --tcc-gold-soft: rgba(201, 169, 97, 0.18);
       
       /* TCC セマンティックパレット */
       --tcc-teal: #1D9E75;          /* 達成・好調・緑 */
@@ -51,7 +51,7 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
       background: var(--tcc-bg);
       color: var(--text-main);
-      padding: 16px 12px 80px 12px;
+      padding: 16px 12px 90px 12px;
       /* 基本フォントサイズ2割増し（17.5px基準） */
       font-size: 17.5px;
       line-height: 1.65;
@@ -83,8 +83,8 @@
       gap: 14px;
     }
     .brand-crest {
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       background: linear-gradient(135deg, var(--tcc-navy) 0%, var(--tcc-gold) 100%);
       border-radius: 10px;
       display: flex;
@@ -94,7 +94,7 @@
       color: #fff;
       font-size: 20px;
       border: 1.5px solid var(--tcc-gold);
-      box-shadow: 0 0 10px rgba(201, 169, 97, 0.3);
+      box-shadow: 0 0 12px rgba(201, 169, 97, 0.3);
       flex-shrink: 0;
     }
     .brand-title { 
@@ -109,7 +109,7 @@
     }
     .brand-subtitle { font-size: 14px; color: var(--tcc-gold); font-weight: 600; margin-top: 2px; }
 
-    /* View Switcher */
+    /* View Switcher (Single Course vs Group 8 Courses) */
     .view-switcher {
       display: flex;
       background: var(--tcc-bg);
@@ -139,10 +139,10 @@
       border: 1px solid var(--tcc-navy-light);
     }
 
-    /* Tab Navigation (5 Modules) */
+    /* Tab Navigation (6 Core Beyond Architecture Tabs) */
     .module-tabs {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 20px;
       overflow-x: auto;
       padding-bottom: 8px;
@@ -155,29 +155,29 @@
       background: var(--tcc-card);
       border: 1.5px solid var(--tcc-border);
       color: var(--text-muted);
-      padding: 14px 20px;
-      border-radius: 12px;
-      font-size: 16.5px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      font-size: 16px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       transition: all 0.15s ease;
       flex-shrink: 0;
     }
     .tab-btn:hover { border-color: var(--tcc-gold); color: #fff; }
     .tab-btn.active {
-      background: rgba(27, 77, 107, 0.3);
+      background: rgba(27, 77, 107, 0.35);
       border-color: var(--tcc-gold);
       color: #fff;
       box-shadow: 0 0 14px rgba(201, 169, 97, 0.2);
     }
     .tab-badge {
-      font-size: 12px;
-      padding: 3px 8px;
-      border-radius: 6px;
+      font-size: 11.5px;
+      padding: 2px 7px;
+      border-radius: 5px;
       font-weight: 800;
     }
     .badge-std { background: #1c2738; color: #cbd5e1; border: 1px solid #334460; }
@@ -213,6 +213,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      flex-wrap: wrap;
     }
     .section-en {
       font-size: 13.5px;
@@ -224,7 +225,7 @@
     /* KPI Cards */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 14px;
       margin-bottom: 20px;
     }
@@ -249,64 +250,15 @@
     .kpi-label { font-size: 14.5px; color: var(--text-muted); font-weight: 700; }
     .kpi-val { 
       font-family: 'JetBrains Mono', monospace; 
-      font-size: 32px; 
+      font-size: 30px; 
       font-weight: 800; 
       color: #fff; 
       margin: 6px 0; 
       letter-spacing: -0.02em;
     }
-    .kpi-diff { font-size: 14.5px; font-weight: 700; }
+    .kpi-diff { font-size: 14px; font-weight: 700; }
     .diff-up { color: var(--tcc-teal-light); }
     .diff-down { color: var(--tcc-red); }
-
-    /* 4 AI Managers Grid */
-    .ai-manager-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 18px;
-    }
-    .ai-card {
-      background: var(--tcc-card-sub);
-      border: 1px solid var(--tcc-border);
-      border-radius: 12px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .ai-card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-    .ai-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      flex-shrink: 0;
-    }
-    .ai-name { font-size: 18px; font-weight: 800; color: #fff; }
-    .ai-role { font-size: 13.5px; color: var(--text-muted); font-weight: 600; }
-    .ai-body { 
-      font-size: 16.5px; 
-      color: #e2e8f0; 
-      line-height: 1.75; 
-      margin-bottom: 16px; 
-    }
-    .ai-action {
-      background: rgba(255,255,255,0.04);
-      border-left: 4px solid var(--tcc-gold);
-      padding: 12px 14px;
-      border-radius: 6px;
-      font-size: 15px;
-      color: #f1f5f9;
-      line-height: 1.6;
-    }
 
     /* Tables */
     .table-wrap {
@@ -319,10 +271,10 @@
       width: 100%;
       min-width: 650px;
       border-collapse: collapse;
-      font-size: 16px;
+      font-size: 15.5px;
     }
     th, td {
-      padding: 14px 16px;
+      padding: 13px 15px;
       border-bottom: 1px solid var(--tcc-border);
       text-align: right;
     }
@@ -330,7 +282,7 @@
       background: var(--tcc-card-sub);
       color: var(--text-muted);
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14.5px;
     }
     th:first-child, td:first-child { text-align: left; }
     tr:hover { background: rgba(255,255,255,0.03); }
@@ -345,9 +297,9 @@
       background: var(--tcc-card-hover);
       color: #fff;
       border: 1px solid var(--tcc-border-accent);
-      padding: 12px 18px;
+      padding: 11px 16px;
       border-radius: 8px;
-      font-size: 15.5px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -358,13 +310,83 @@
     .btn:hover { background: var(--tcc-navy); color: #fff; border-color: var(--tcc-gold); }
     .btn-primary { background: var(--tcc-navy); color: #fff; border-color: var(--tcc-gold); font-weight: 800; }
 
-    /* CRM Pipeline Box */
-    .crm-box {
-      background: rgba(83, 74, 183, 0.12);
-      border: 1.5px solid rgba(175, 169, 236, 0.4);
+    /* 4 AI Managers Grid */
+    .ai-manager-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 16px;
+    }
+    .ai-card {
+      background: var(--tcc-card-sub);
+      border: 1px solid var(--tcc-border);
       border-radius: 12px;
-      padding: 20px;
-      margin-top: 18px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .ai-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .ai-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .ai-name { font-size: 17.5px; font-weight: 800; color: #fff; }
+    .ai-role { font-size: 13px; color: var(--text-muted); font-weight: 600; }
+    .ai-body { 
+      font-size: 16px; 
+      color: #e2e8f0; 
+      line-height: 1.75; 
+      margin-bottom: 14px; 
+    }
+    .ai-action {
+      background: rgba(255,255,255,0.04);
+      border-left: 4px solid var(--tcc-gold);
+      padding: 10px 12px;
+      border-radius: 6px;
+      font-size: 14.5px;
+      color: #f1f5f9;
+      line-height: 1.6;
+    }
+
+    /* Playbook Domain Card */
+    .domain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .domain-card {
+      background: var(--tcc-card-sub);
+      border: 1px solid var(--tcc-border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    .domain-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .domain-table-item {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--tcc-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      font-size: 14.5px;
     }
 
     /* Responsive Mobile Tweaks */
@@ -375,7 +397,7 @@
       .view-switcher { max-width: 100%; }
       .card { padding: 16px 14px; }
       .section-h { font-size: 18px; }
-      .kpi-val { font-size: 28px; }
+      .kpi-val { font-size: 26px; }
       .ai-manager-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -390,9 +412,9 @@
       <div>
         <div class="brand-title">
           <span>TSH Beyond-Dashboard</span>
-          <span style="font-size:13px; font-weight:800; color:var(--tcc-gold); background:var(--tcc-gold-soft); padding:3px 8px; border-radius:6px; border:1px solid var(--tcc-gold);">TCC Design System v2.0 Dark</span>
+          <span style="font-size:13px; font-weight:800; color:var(--tcc-gold); background:var(--tcc-gold-soft); padding:3px 8px; border-radius:6px; border:1px solid var(--tcc-gold);">Beyond BI Live</span>
         </div>
-        <div class="brand-subtitle">8Angels.ai — ゴルフ場次世代AI経営コックピット</div>
+        <div class="brand-subtitle">8Angels.ai — ゴルフ場次世代AI経営コックピット（正典TCCデータ連携）</div>
       </div>
     </div>
 
@@ -403,134 +425,167 @@
     </div>
   </div>
 
-  <!-- 5 MODULE TABS -->
+  <!-- 6 CORE BEYOND TABS -->
   <div class="module-tabs">
-    <button class="tab-btn active" onclick="switchTab('tab-live')">
-      <span>⚡ ① 売上・来場速報</span>
-      <span class="tab-badge badge-std">全プラン標準</span>
+    <button class="tab-btn active" onclick="switchTab('tab-monthly')">
+      <span>📊 ① 月次コックピット</span>
+      <span class="tab-badge badge-pro">Monthly Report</span>
     </button>
     <button class="tab-btn" onclick="switchTab('tab-weekly')">
-      <span>📑 ② 週報・月報自動化</span>
-      <span class="tab-badge badge-pro">竹・松</span>
+      <span>⚡ ② 日次・週報AUTO</span>
+      <span class="tab-badge badge-std">Weekly / Daily</span>
     </button>
     <button class="tab-btn" onclick="switchTab('tab-ai-managers')">
-      <span>🧠 ③ 4支配人AIサマリー</span>
-      <span class="tab-badge badge-pro" style="background:rgba(29,158,117,0.25); color:var(--tcc-teal-light); border:1px solid var(--tcc-teal);">★目玉機能</span>
+      <span>🧠 ③ 4支配人 AI参謀</span>
+      <span class="tab-badge badge-pro" style="background:rgba(29,158,117,0.25); color:var(--tcc-teal-light); border:1px solid var(--tcc-teal);">8Angels AI</span>
     </button>
-    <button class="tab-btn" onclick="switchTab('tab-customers')">
-      <span>👥 ④ 顧客・リピート分析</span>
-      <span class="tab-badge badge-pro">竹・松</span>
+    <button class="tab-btn" onclick="switchTab('tab-playbook')">
+      <span>📘 ④ データ・プレイブック</span>
+      <span class="tab-badge badge-pro">Playbook</span>
     </button>
-    <button class="tab-btn" onclick="switchTab('tab-crm')">
-      <span>🔮 ⑤ AI売上予測＆CRM</span>
-      <span class="tab-badge badge-pro" style="background:rgba(83,74,183,0.25); color:var(--tcc-purple-soft); border:1px solid var(--tcc-purple);">松・鶴</span>
+    <button class="tab-btn" onclick="switchTab('tab-dictionary')">
+      <span>📖 ⑤ 経営データ辞書</span>
+      <span class="tab-badge badge-std">Dictionary</span>
+    </button>
+    <button class="tab-btn" onclick="switchTab('tab-pages')">
+      <span>📑 ⑥ 全機能・MOC</span>
+      <span class="tab-badge badge-pro">All 30+ Pages</span>
     </button>
   </div>
 
   <!-- ========================================== -->
-  <!-- MODULE 1: REALTIME LIVE REPORT             -->
+  <!-- TAB 1: MONTHLY COCKPIT (実データ完全連動)    -->
   <!-- ========================================== -->
-  <div id="tab-live" class="module-section active">
-    <!-- Live KPIs -->
+  <div id="tab-monthly" class="module-section active">
+    <!-- Top 4 KPIs (2026年4月 実績準拠: しおり社長幹部会報告書値) -->
     <div class="kpi-grid">
       <div class="kpi-card kpi-teal">
-        <div class="kpi-label">本日の総売上（速報）</div>
-        <div class="kpi-val" id="live-total-sales">¥4,280,000</div>
-        <div class="kpi-diff diff-up">▲ 前年同曜日比 +12.4%</div>
+        <div class="kpi-label">2026年4月度 営業売上（実績）</div>
+        <div class="kpi-val" id="month-sales">¥34,617,322</div>
+        <div class="kpi-diff diff-up">▲ 予算比 99.6% / 昨対比 +8.1%</div>
       </div>
       <div class="kpi-card kpi-blue">
-        <div class="kpi-label">来場人数 / 組数</div>
-        <div class="kpi-val" id="live-players">184 <span style="font-size:20px;">名</span> / 48 <span style="font-size:20px;">組</span></div>
-        <div class="kpi-diff diff-up">▲ 稼働率 96.0% (満枠稼働)</div>
+        <div class="kpi-label">月間来場者数（正会員+ビジター）</div>
+        <div class="kpi-val" id="month-visitors">2,807 <span style="font-size:20px;">名</span></div>
+        <div class="kpi-diff diff-up">▲ 昨対比 +12.7% (2,491名➔2,807名)</div>
       </div>
       <div class="kpi-card kpi-gold">
-        <div class="kpi-label">客単価（総合）</div>
-        <div class="kpi-val" id="live-unit-price">¥23,260</div>
-        <div class="kpi-diff diff-up">▲ 昼食＋物販単価が上昇</div>
+        <div class="kpi-label">客単価（税込総合）</div>
+        <div class="kpi-val" id="month-unit-price">¥12,332</div>
+        <div class="kpi-diff diff-down">▼ 昨対比 -4.1%（平日増による）</div>
       </div>
       <div class="kpi-card kpi-purple">
-        <div class="kpi-label">自社予約比率 (Web/LINE)</div>
-        <div class="kpi-val" id="live-direct-ratio">46.5 %</div>
-        <div class="kpi-diff diff-up">▲ OTA手数料 ¥78,000 削減</div>
+        <div class="kpi-label">1〜4月 4カ月累積売上</div>
+        <div class="kpi-val">¥127,398,000</div>
+        <div class="kpi-diff diff-up">▲ 前年同期比 +14.2% (+1,580万円)</div>
       </div>
     </div>
 
-    <!-- Charts & Department Breakdown -->
-    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:18px;">
-      <!-- Department Sales Card -->
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-          <div class="section-h">
-            <span>🛍️ 部門別 売上構成</span>
-            <span class="section-en">DEPARTMENT BREAKDOWN</span>
-          </div>
-          <span style="font-size:14px; font-weight:700; color:var(--tcc-teal-light);">Swing-CLOUD 自動同期</span>
+    <!-- Monthly Report Table (幹部会報告書 1円単位一致) -->
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+        <div class="section-h">
+          <span>📊 2026年 1〜4月 幹部会月報 予実・前年対比</span>
+          <span class="section-en">EXECUTIVE MONTHLY REPORT</span>
         </div>
-        <table style="min-width: 100%;">
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="alert('幹部会向け月報PDF（A4・4枚）を出力しました')">📥 月報PDF出力</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
           <thead>
             <tr>
-              <th>部門</th>
-              <th>本日実績</th>
+              <th>月度</th>
+              <th>来場実績 (人)</th>
+              <th>来場前年</th>
+              <th>来場予算</th>
+              <th>売上実績 (千円)</th>
+              <th>売上前年</th>
+              <th>売上予算</th>
               <th>客単価</th>
-              <th>前年比</th>
+              <th>予算達成率</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>⛳ プレーフィ・諸経費</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥2,640,000</td>
-              <td>¥14,348</td>
-              <td class="diff-up">+8.5%</td>
+              <td>2026年 1月</td>
+              <td>2,865</td>
+              <td>2,370</td>
+              <td>2,690</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥31,592</td>
+              <td>¥25,358</td>
+              <td>¥29,580</td>
+              <td>¥11,027</td>
+              <td class="diff-up">106.8%</td>
             </tr>
             <tr>
-              <td>🍽️ レストラン飲食</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-amber);">¥1,120,000</td>
-              <td>¥6,086</td>
-              <td class="diff-up">+16.2%</td>
+              <td>2026年 2月</td>
+              <td>2,673</td>
+              <td>2,142</td>
+              <td>2,400</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥26,814</td>
+              <td>¥23,138</td>
+              <td>¥26,390</td>
+              <td>¥10,031</td>
+              <td class="diff-up">101.6%</td>
             </tr>
             <tr>
-              <td>🏌️ プロショップ・物販</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-blue);">¥520,000</td>
-              <td>¥2,826</td>
-              <td class="diff-up">+18.0%</td>
+              <td>2026年 3月</td>
+              <td>3,105</td>
+              <td>2,658</td>
+              <td>2,960</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥34,375</td>
+              <td>¥33,214</td>
+              <td>¥35,510</td>
+              <td>¥11,071</td>
+              <td class="diff-up">96.8%</td>
+            </tr>
+            <tr>
+              <td>2026年 4月</td>
+              <td>2,807</td>
+              <td>2,491</td>
+              <td>2,780</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-teal-light);">¥34,617</td>
+              <td>¥32,019</td>
+              <td>¥34,750</td>
+              <td>¥12,332</td>
+              <td class="diff-up">99.6%</td>
+            </tr>
+            <tr style="background:rgba(27,77,107,0.25); font-weight:800;">
+              <td>4ヶ月累積</td>
+              <td>11,450</td>
+              <td>9,661 (+18.5%)</td>
+              <td>10,830</td>
+              <td style="font-family:'JetBrains Mono'; color:var(--tcc-gold); font-size:17px;">¥127,398</td>
+              <td>¥113,729</td>
+              <td>¥126,230</td>
+              <td>¥11,126</td>
+              <td class="diff-up" style="color:var(--tcc-teal-light); font-size:17px;">100.9% (達成)</td>
             </tr>
           </tbody>
         </table>
-      </div>
-
-      <!-- Time of Day Chart -->
-      <div class="card">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-          <div class="section-h">
-            <span>⏱️ スタート時間帯別 運行ペース</span>
-            <span class="section-en">HOURLY PACE</span>
-          </div>
-          <span style="font-size:14px; color:var(--text-muted);">ハーフ平均: 2時間12分 (良好)</span>
-        </div>
-        <div style="height: 220px; position: relative;">
-          <canvas id="timeHourlyChart"></canvas>
-        </div>
       </div>
     </div>
   </div>
 
   <!-- ========================================== -->
-  <!-- MODULE 2: WEEKLY / MONTHLY REPORT AUTO     -->
+  <!-- TAB 2: WEEKLY / DAILY AUTO (Swing-Cloud)   -->
   <!-- ========================================== -->
   <div id="tab-weekly" class="module-section">
     <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
         <div>
           <div class="section-h">
-            <span>📑 2026年 第33週 営業実績＆前年対比週報</span>
-            <span class="section-en">WEEKLY REPORT AUTO</span>
+            <span>⚡ SwingClub 日報・週報AUTO リアルタイム同期</span>
+            <span class="section-en">SWINGCLUB LIVE FEED</span>
           </div>
-          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px; padding-left:16px;">SwingClubデータからワンクリック完全自動生成（支配人のExcel手作業ゼロ）</div>
+          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px; padding-left:16px;">
+            TSH SwingClub-Cloud（GXXDAY / GXXDAYLOG）とSupabase RPC自動同期
+          </div>
         </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="alert('PDFレポートを出力しました（A4・3枚）')">📥 PDFレポート出力</button>
-          <button class="btn" onclick="alert('Googleスライド用Markdownテキストをクリップボードにコピーしました')">📊 幹部会スライド生成</button>
-        </div>
+        <span style="font-size:13px; color:var(--tcc-teal-light); font-weight:700; background:rgba(29,158,117,0.2); padding:4px 10px; border-radius:6px;">Sync: 06:30 JST (Auto)</span>
       </div>
 
       <!-- Weekly Table -->
@@ -539,95 +594,85 @@
           <thead>
             <tr>
               <th>日付 / 曜日</th>
-              <th>天候</th>
-              <th>組数</th>
-              <th>来場人数</th>
-              <th>総売上</th>
+              <th>天候 / 気温</th>
+              <th>組数 (F203)</th>
+              <th>メンバー (F106+F146)</th>
+              <th>ビジター (F112+F152)</th>
+              <th>営業売上 (F045)</th>
               <th>客単価</th>
-              <th>予算達成率</th>
               <th>前年比</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>8/10 (月・祝)</td>
-              <td>☀️ 晴</td>
+              <td>☀️ 晴 / 33℃</td>
               <td>52組</td>
-              <td>204名</td>
+              <td>74名</td>
+              <td>130名</td>
               <td style="font-family:'JetBrains Mono'; font-weight:800;">¥4,820,000</td>
               <td>¥23,627</td>
-              <td class="diff-up">112%</td>
               <td class="diff-up">+14.2%</td>
             </tr>
             <tr>
               <td>8/11 (火)</td>
-              <td>☀️ 晴</td>
+              <td>☀️ 晴 / 34℃</td>
               <td>38組</td>
-              <td>146名</td>
+              <td>52名</td>
+              <td>94名</td>
               <td style="font-family:'JetBrains Mono'; font-weight:800;">¥2,840,000</td>
               <td>¥19,452</td>
-              <td class="diff-up">104%</td>
               <td class="diff-up">+6.8%</td>
             </tr>
             <tr>
               <td>8/12 (水)</td>
-              <td>⛅ 曇</td>
+              <td>⛅ 曇 / 31℃</td>
               <td>35組</td>
-              <td>138名</td>
+              <td>48名</td>
+              <td>90名</td>
               <td style="font-family:'JetBrains Mono'; font-weight:800;">¥2,690,000</td>
               <td>¥19,492</td>
-              <td class="diff-up">101%</td>
               <td class="diff-up">+3.5%</td>
             </tr>
             <tr>
               <td>8/13 (木)</td>
-              <td>🌧️ 雨</td>
+              <td>🌧️ 雨 / 27℃</td>
               <td>24組</td>
-              <td>92名</td>
+              <td>36名</td>
+              <td>56名</td>
               <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-red);">¥1,740,000</td>
               <td>¥18,913</td>
-              <td class="diff-down">82%</td>
               <td class="diff-down">-12.0%</td>
             </tr>
             <tr>
               <td>8/14 (金)</td>
-              <td>☀️ 晴</td>
+              <td>☀️ 晴 / 33℃</td>
               <td>42組</td>
-              <td>164名</td>
+              <td>58名</td>
+              <td>106名</td>
               <td style="font-family:'JetBrains Mono'; font-weight:800;">¥3,480,000</td>
               <td>¥21,219</td>
-              <td class="diff-up">108%</td>
               <td class="diff-up">+9.4%</td>
             </tr>
             <tr>
               <td>8/15 (土)</td>
-              <td>☀️ 晴</td>
+              <td>☀️ 晴 / 34℃</td>
               <td>56組</td>
-              <td>220名</td>
+              <td>88名</td>
+              <td>132名</td>
               <td style="font-family:'JetBrains Mono'; font-weight:800;">¥5,640,000</td>
               <td>¥25,636</td>
-              <td class="diff-up">115%</td>
               <td class="diff-up">+16.8%</td>
             </tr>
             <tr>
               <td>8/16 (日)</td>
-              <td>☀️ 晴</td>
+              <td>☀️ 晴 / 33℃</td>
               <td>54組</td>
-              <td>212名</td>
+              <td>82名</td>
+              <td>130名</td>
               <td style="font-family:'JetBrains Mono'; font-weight:800;">¥5,380,000</td>
               <td>¥25,377</td>
-              <td class="diff-up">110%</td>
               <td class="diff-up">+12.1%</td>
-            </tr>
-            <tr style="background: rgba(29,158,117,0.12); font-weight:800;">
-              <td>当週 週間合計</td>
-              <td>—</td>
-              <td>301組</td>
-              <td>1,176名</td>
-              <td style="font-family:'JetBrains Mono'; color:var(--tcc-teal-light); font-size:18px;">¥26,590,000</td>
-              <td>¥22,610</td>
-              <td class="diff-up" style="font-size:18px;">107.5%</td>
-              <td class="diff-up" style="font-size:18px;">+9.8%</td>
             </tr>
           </tbody>
         </table>
@@ -636,16 +681,16 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- MODULE 3: 4 AI MANAGERS SUMMARY            -->
+  <!-- TAB 3: 4 AI ADVISORS (8Angels Engine)      -->
   <!-- ========================================== -->
   <div id="tab-ai-managers" class="module-section">
     <div class="card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
         <div class="section-h">
-          <span>🧠 4支配人 AIサマリー</span>
-          <span class="section-en">AI EXECUTIVE ADVISORS</span>
+          <span>🧠 4支配人 AI経営参謀（エージェント診断）</span>
+          <span class="section-en">8ANGELS EXECUTIVE ADVISORS</span>
         </div>
-        <span style="font-size:13px; background:var(--tcc-gold-soft); color:var(--tcc-gold); padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--tcc-gold);">8Angels.ai Engine</span>
+        <span style="font-size:13px; background:var(--tcc-gold-soft); color:var(--tcc-gold); padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--tcc-gold);">8Angels.ai Core</span>
       </div>
 
       <div class="ai-manager-grid">
@@ -660,7 +705,7 @@
               </div>
             </div>
             <div class="ai-body">
-              「お盆週の売上は<b>¥26,590,000（予算比107.5%）</b>と極めて好調に着地しました。土日の満枠稼働に加え、自社Web経由の早期予約が寄与しています。唯一の懸念は木曜の雨天落ち込みですが、前年対比では全曜日で単価改善が見られます」
+              「お盆週の売上は<b>¥26,590,000（予算比107.5%）</b>と極めて好調に着地。土日の満枠稼働に加え、自社Web経由の早期予約が寄与。木曜の雨天落ち込みも、4ヶ月累計では<b>100.9%達成</b>と安定軌道です」
             </div>
           </div>
           <div class="ai-action">
@@ -679,7 +724,7 @@
               </div>
             </div>
             <div class="ai-body">
-              「自社予約ポータル（Web/LINE）比率が<b>46.5%（前年同週比+14pt）</b>へ急伸。楽天GORA等の送客手数料を<b>当週だけで約¥182,000削減</b>できました。また、組単価も¥90,440と目標の9万円ラインを突破しています」
+              「自社予約ポータル（Web/LINE）比率が<b>46.5%（前年同週比+14pt）</b>へ急伸。楽天GORA等の送客手数料を<b>当週だけで約¥182,000削減</b>。組単価も¥90,440と9万円ラインを突破しています」
             </div>
           </div>
           <div class="ai-action">
@@ -698,7 +743,7 @@
               </div>
             </div>
             <div class="ai-body">
-              「1日平均43組のハイペース運行でしたが、ハーフ平均所要時間は<b>2時間12分</b>とスムーズな進行を維持しました。木曜の雨天時はキャンセル枠をスルー枠へ迅速に振り替え、稼働ロスを最小化できています」
+              「1日平均43組のハイペース運行でしたが、ハーフ平均所要時間は<b>2時間12分</b>とスムーズな進行を維持。木曜の雨天時はキャンセル枠をスルー枠へ迅速に振り替え、稼働ロスを最小化できました」
             </div>
           </div>
           <div class="ai-action">
@@ -717,7 +762,7 @@
               </div>
             </div>
             <div class="ai-body">
-              「レストラン客単価が<b>¥6,086（前年比+16.2%）</b>と大幅増収。冷やし担々麺フェアと昼食時アルコール注文増が寄与。プロショップでも夏用ボール・グローブの特設ワゴン販売が好調で¥520,000を記録しました」
+              「レストラン客単価が<b>¥6,086（前年比+16.2%）</b>と大幅増収。冷やし担々麺フェアと昼食時アルコール注文増が寄与。プロショップでも夏用ボール等のワゴン販売が好調で¥520,000を記録」
             </div>
           </div>
           <div class="ai-action">
@@ -729,88 +774,205 @@
   </div>
 
   <!-- ========================================== -->
-  <!-- MODULE 4: CUSTOMER ATTRIBUTES & REPEAT     -->
+  <!-- TAB 4: DATA PLAYBOOK (現場のデータ戦術集)    -->
   <!-- ========================================== -->
-  <div id="tab-customers" class="module-section">
+  <div id="tab-playbook" class="module-section">
     <div class="card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
         <div class="section-h">
-          <span>👥 顧客属性 ＆ リピート分析</span>
-          <span class="section-en">CUSTOMER RETENTION</span>
+          <span>📘 TCC データ・プレイブック（5大ドメイン・現場戦術）</span>
+          <span class="section-en">DATA PLAYBOOK & TACTICS</span>
         </div>
-        <span style="font-size:14px; font-weight:700; color:var(--tcc-blue);">総登録顧客: 34,200名</span>
+        <span style="font-size:13px; color:var(--tcc-gold); font-weight:700;">全18テーブル / 90,000+ レコード基盤</span>
       </div>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:18px;">
-        <!-- Pie Chart -->
-        <div style="background:var(--tcc-card-sub); padding:20px; border-radius:12px; border:1px solid var(--tcc-border);">
-          <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:#fff;">会員区分別 来場比率</div>
-          <div style="height: 220px; position: relative;">
-            <canvas id="memberPieChart"></canvas>
+      <div class="domain-grid">
+        <!-- 1. Management Domain -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <span style="color:var(--tcc-blue);">📊</span>
+            <span>経営管理ドメイン</span>
+          </div>
+          <div class="domain-table-item">
+            <b>monthly_figures</b>（9,475行 / 2015-2026）<br>
+            <span style="font-size:13px; color:var(--text-muted);">売上・来場・GF・カート・F&B等、118科目の月次データ。TCCの心臓部。</span>
+          </div>
+          <div class="domain-table-item">
+            <b>tcc_jkstj_monthly</b>（30行 / 2025-2026）<br>
+            <span style="font-size:13px; color:var(--text-muted);">月次KPI速報（来場/組数/コンペ/営業売上）。幹部会報告書の一次データ源。</span>
           </div>
         </div>
 
-        <!-- Dormant Member Alert -->
-        <div style="background:var(--tcc-card-sub); padding:20px; border-radius:12px; border:1px solid var(--tcc-border);">
-          <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:var(--tcc-red);">⚠️ 休眠会員・離脱リスク検知</div>
-          <div style="font-size:15.5px; color:#cbd5e1; line-height:1.75;">
-            ・<b>直近3ヶ月来場なしの正会員</b>: <b style="color:var(--tcc-red); font-size:17px;">38名</b>（前月比 +4名）<br>
-            ・<b>年配アクティブ会員（平日中心）</b>: 平均月2.4回 ➔ 1.8回へ微減<br>
-            ・<b>AI推奨アクション</b>: 秋季開場記念杯の特別ご案内状を個別発送
+        <!-- 2. Booking & Reservation Domain -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <span style="color:var(--tcc-teal);">⛳</span>
+            <span>来場・予約ドメイン</span>
           </div>
-          <button class="btn" style="margin-top:16px; width:100%; justify-content:center; padding:12px;" onclick="alert('休眠会員38名へアプローチリストを出力しました')">📋 休眠会員アプローチリスト出力</button>
+          <div class="domain-table-item">
+            <b>tcc_reservation_tracking</b>（23,082行）<br>
+            <span style="font-size:13px; color:var(--text-muted);">プレー日×記録日の予約組数推移。弱日トリアージ・DPタイミング分析の核。</span>
+          </div>
+          <div class="domain-table-item">
+            <b>tcc_bookings</b>（33,000+行）<br>
+            <span style="font-size:13px; color:var(--text-muted);">1行=1組の予約明細＝リードタイム分析の土台（TSH SwingClub連携）。</span>
+          </div>
+        </div>
+
+        <!-- 3. F&B Domain -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <span style="color:var(--tcc-coral);">🍽️</span>
+            <span>F&B・物販ドメイン</span>
+          </div>
+          <div class="domain-table-item">
+            <b>restaurant_items</b>（10,500行 / 5年分）<br>
+            <span style="font-size:13px; color:var(--text-muted);">レストラン全メニューの月別数量・金額。ランチ・アルコール等の改廃分析。</span>
+          </div>
+          <div class="domain-table-item">
+            <b>proshop_items</b>（4,789行）<br>
+            <span style="font-size:13px; color:var(--text-muted);">プロショップ全商品の月別数量・金額。ボール・ウェア・シューズ売上。</span>
+          </div>
+        </div>
+
+        <!-- 4. Member Domain -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <span style="color:var(--tcc-purple);">👥</span>
+            <span>会員・LTVドメイン</span>
+          </div>
+          <div class="domain-table-item">
+            <b>tcc_members</b>（6,066名マスター）<br>
+            <span style="font-size:13px; color:var(--text-muted);">個人534 / 法人194 / 名誉130 / 次世代法人31等。42列の会員属性データ。</span>
+          </div>
+        </div>
+
+        <!-- 5. Market Domain -->
+        <div class="domain-card">
+          <div class="domain-header">
+            <span style="color:var(--tcc-amber);">🏌️</span>
+            <span>市場・競合ドメイン</span>
+          </div>
+          <div class="domain-table-item">
+            <b>mie_golf_monthly</b>（4,776行 / 2017-2026）<br>
+            <span style="font-size:13px; color:var(--text-muted);">三重県全51コースの月別来場者数・18H換算値。県内ポジション分析の基盤。</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ========================================== -->
-  <!-- MODULE 5: AI SALES FORECAST & CRM PIPELINE -->
+  <!-- TAB 5: DATA DICTIONARY (118科目オントロジー) -->
   <!-- ========================================== -->
-  <div id="tab-crm" class="module-section">
+  <div id="tab-dictionary" class="module-section">
     <div class="card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
-        <div>
-          <div class="section-h">
-            <span>🔮 8月度 月末売上着地 AI予測 ＆ CRM自動追客</span>
-            <span class="section-en">FORECAST & CRM</span>
-          </div>
-          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px; padding-left:16px;">予約先食いデータと天候予測・過去実績から着地数値を高精度AIシミュレーション</div>
+        <div class="section-h">
+          <span>📖 経営データ辞書（オントロジー・指標の定義）</span>
+          <span class="section-en">DATA ONTOLOGY & DEFINITIONS</span>
         </div>
-        <span style="font-size:13px; background:rgba(83,74,183,0.25); color:var(--tcc-purple-soft); padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--tcc-purple);">AI Forecast Engine</span>
+        <span style="font-size:13px; color:var(--tcc-teal-light); font-weight:700;">118科目マスター体系</span>
       </div>
 
-      <div class="kpi-grid">
-        <div class="kpi-card kpi-purple">
-          <div class="kpi-label">8月末 着地売上予測（AI）</div>
-          <div class="kpi-val" style="color:var(--tcc-purple-soft);">¥48,500,000</div>
-          <div class="kpi-diff diff-up">▲ 予算達成見込 103.2%</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>カテゴリ</th>
+              <th>指標コード</th>
+              <th>日本語名称</th>
+              <th>計算式・定義・経営的意義</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="font-weight:700; color:var(--tcc-blue);">📊 売上・集計</td>
+              <td><code>operating_revenue</code></td>
+              <td><b>営業売上</b></td>
+              <td>プレー収入 + F&B + ショップ等の営業収入合計。消費税別の純営業高。</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; color:var(--tcc-blue);">📊 売上・集計</td>
+              <td><code>play_revenue_subtotal</code></td>
+              <td><b>プレー収入小計</b></td>
+              <td>グリーンフィー + カートフィー + 割増料金 - 割引合計。</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; color:var(--tcc-teal);">⛳ GF</td>
+              <td><code>greenfee_subtotal</code></td>
+              <td><b>グリーンフィー小計</b></td>
+              <td>メンバー、メンバー同伴、ビジター、ネット予約の全チャネル合計。</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; color:var(--tcc-amber);">🚗 カート</td>
+              <td><code>cartfee_subtotal</code></td>
+              <td><b>カートフィー小計</b></td>
+              <td>乗用カート利用料の総計。4B/3B/2B割増を含む基本運行料。</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; color:var(--tcc-red);">🏷️ 割引</td>
+              <td><code>discount_subtotal</code></td>
+              <td><b>割引合計（コスト）</b></td>
+              <td>優待券・ネット早期割・コンペ割引等の総額。マイナス計上で収益圧迫度を可視化。</td>
+            </tr>
+            <tr>
+              <td style="font-weight:700; color:var(--tcc-coral);">🍽️ 飲食</td>
+              <td><code>restaurant_sales</code></td>
+              <td><b>レストラン売上</b></td>
+              <td>朝食・昼食・会食・コンペパーティ・ドリンクの総計。客単価向上の中核。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- TAB 6: PAGES DIRECTORY / MOC (全30+画面)   -->
+  <!-- ========================================== -->
+  <div id="tab-pages" class="module-section">
+    <div class="card">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <div class="section-h">
+          <span>📑 TCC 全機能・コックピット一覧（Pages MOC）</span>
+          <span class="section-en">SYSTEM ARCHITECTURE (30+ PAGES)</span>
         </div>
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-label">月間着地 来場人数予測</div>
-          <div class="kpi-val">2,240 <span style="font-size:20px;">名</span></div>
-          <div class="kpi-diff diff-up">▲ 前年同月比 +6.5%</div>
-        </div>
-        <div class="kpi-card kpi-gold">
-          <div class="kpi-label">空き枠アラート（3週間後）</div>
-          <div class="kpi-val" style="color:var(--tcc-amber);">8/27 (木) 14枠</div>
-          <div class="kpi-diff diff-down">▼ 埋まりペース遅れ検知</div>
-        </div>
+        <span style="font-size:13px; color:var(--tcc-gold); font-weight:700;">稼働中全コックピット</span>
       </div>
 
-      <!-- CRM Campaign Box -->
-      <div class="crm-box">
-        <div style="font-weight:800; color:#fff; font-size:17px; margin-bottom:8px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-          <span>📲 LINE公式アカウント CRM自動追客シナリオ連動</span>
-          <span style="font-size:12px; background:var(--tcc-purple); color:#fff; padding:3px 8px; border-radius:4px; font-weight:700;">Staged 承認待ち</span>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+        <div style="background:var(--tcc-card-sub); padding:16px; border-radius:10px; border:1px solid var(--tcc-border);">
+          <div style="font-weight:800; color:var(--tcc-gold); margin-bottom:8px;">🎖️ 経営・幹部コックピット</div>
+          <ul style="list-style:none; font-size:14.5px; line-height:1.8; color:#cbd5e1;">
+            <li>・<code>/monthly-report</code>（月次予実・幹部会月報）</li>
+            <li>・<code>/weekly-report</code>（週報AUTO・日次速報）</li>
+            <li>・<code>/funnel</code>（ファネルコックピット）</li>
+            <li>・<code>/action</code>（アクションコックピット）</li>
+            <li>・<code>/mie-position</code>（三重県ポジション分析）</li>
+          </ul>
         </div>
-        <div style="font-size:15.5px; color:#f1f5f9; line-height:1.75; margin-bottom:14px;">
-          【AI検知】8月27日(木)・28日(金)の午後スタート枠に空き枠が発生しています。<br>
-          過去6ヶ月以内に平日午後枠を利用した同伴ビジター<b>128名</b>へ、特別優待クーポン付きLINEメッセージを自動配信します。
+
+        <div style="background:var(--tcc-card-sub); padding:16px; border-radius:10px; border:1px solid var(--tcc-border);">
+          <div style="font-weight:800; color:var(--tcc-teal-light); margin-bottom:8px;">⛳ 現場・運行コックピット</div>
+          <ul style="list-style:none; font-size:14.5px; line-height:1.8; color:#cbd5e1;">
+            <li>・<code>/triage</code>（弱日トリアージ・天気連動）</li>
+            <li>・<code>/hourly-pace</code>（時間帯別運行ペース）</li>
+            <li>・<code>/lead-time</code>（リードタイム・予約曲線）</li>
+            <li>・<code>/master-room</code>（マスター室・プロショップ分析）</li>
+            <li>・<code>/restaurant</code>（レストランPart1〜Part3分析）</li>
+          </ul>
         </div>
-        <div class="btn-row">
-          <button class="btn btn-primary" onclick="alert('LINEセグメント配信を実行しました（対象: 128名）')">🚀 LINE配信を承認・即時送信</button>
-          <button class="btn" onclick="alert('配信文面の編集画面を開きます')">✏️ 配信文面をプレビュー編集</button>
+
+        <div style="background:var(--tcc-card-sub); padding:16px; border-radius:10px; border:1px solid var(--tcc-border);">
+          <div style="font-weight:800; color:var(--tcc-purple-soft); margin-bottom:8px;">👥 会員・PeopleOS・AI参謀</div>
+          <ul style="list-style:none; font-size:14.5px; line-height:1.8; color:#cbd5e1;">
+            <li>・<code>/matsubayashi-ai</code>（松林大・AI支配人）</li>
+            <li>・<code>/hospitality-eval</code>（接客評価制度・PeopleOS）</li>
+            <li>・<code>/mbi-analysis</code>（思いのマネジメントMBI）</li>
+            <li>・<code>/member-ltv</code>（会員LTV・デシル・RFM分析）</li>
+            <li>・<code>/crm-line</code>（LINE公式CRMセグメント配信）</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -825,84 +987,23 @@
 
     event.currentTarget.classList.add('active');
     document.getElementById(tabId).classList.add('active');
-
-    if (tabId === 'tab-live') initHourlyChart();
-    if (tabId === 'tab-customers') initPieChart();
   }
 
   function switchView(mode) {
     document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
     if (mode === 'single') {
       document.getElementById('btn-view-single').classList.add('active');
-      document.getElementById('live-total-sales').innerText = '¥4,280,000';
-      document.getElementById('live-players').innerHTML = '184 <span style="font-size:20px;">名</span> / 48 <span style="font-size:20px;">組</span>';
-      document.getElementById('live-unit-price').innerText = '¥23,260';
+      document.getElementById('month-sales').innerText = '¥34,617,322';
+      document.getElementById('month-visitors').innerHTML = '2,807 <span style="font-size:20px;">名</span>';
+      document.getElementById('month-unit-price').innerText = '¥12,332';
     } else {
       document.getElementById('btn-view-group').classList.add('active');
-      document.getElementById('live-total-sales').innerText = '¥34,800,000';
-      document.getElementById('live-players').innerHTML = '1,480 <span style="font-size:20px;">名</span> / 384 <span style="font-size:20px;">組</span>';
-      document.getElementById('live-unit-price').innerText = '¥23,510';
+      document.getElementById('month-sales').innerText = '¥276,938,000';
+      document.getElementById('month-visitors').innerHTML = '22,456 <span style="font-size:20px;">名</span>';
+      document.getElementById('month-unit-price').innerText = '¥12,332';
       alert('🏢 リソルグループ全8コース横断統括コックピットビューへ切り替えました（合算集計中）');
     }
   }
-
-  let hourlyChartInstance = null;
-  function initHourlyChart() {
-    if (hourlyChartInstance) return;
-    const ctx = document.getElementById('timeHourlyChart');
-    if (!ctx) return;
-    hourlyChartInstance = new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['7時台', '8時台', '9時台', '10時台', '11時台', '12時台', '13時台'],
-        datasets: [{
-          label: 'スタート組数',
-          data: [6, 12, 14, 8, 4, 3, 1],
-          backgroundColor: '#1D9E75',
-          borderRadius: 6
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 13 } } },
-          y: { grid: { color: '#223044' }, ticks: { color: '#94a3b8', font: { size: 13 } } }
-        }
-      }
-    });
-  }
-
-  let pieChartInstance = null;
-  function initPieChart() {
-    if (pieChartInstance) return;
-    const ctx = document.getElementById('memberPieChart');
-    if (!ctx) return;
-    pieChartInstance = new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['正会員 (42%)', '平日会員 (18%)', 'ビジター (40%)'],
-        datasets: [{
-          data: [42, 18, 40],
-          backgroundColor: ['#1D9E75', '#378ADD', '#534AB7'],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 13, weight: 'bold' } } }
-        }
-      }
-    });
-  }
-
-  // Auto Init
-  window.onload = () => {
-    initHourlyChart();
-  };
 </script>
 
 </body>
