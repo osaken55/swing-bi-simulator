@@ -415,61 +415,88 @@
       -webkit-overflow-scrolling: touch;
       border-radius: 10px;
       border: 1.5px solid var(--border);
+      position: relative;
     }
     table.exec-table {
       width: 100%;
-      min-width: 1060px;
+      min-width: 980px;
       border-collapse: collapse;
-      font-size: 15.5px;
+      font-size: 15px;
     }
     
     .th-major-rev {
       background: #13243a !important;
       border-left: 3px solid var(--gold) !important;
       border-bottom: 2px solid var(--gold) !important;
-      padding: 14px 16px !important;
+      padding: 12px 14px !important;
     }
     .th-major-vis {
       background: #0f1c2d !important;
       border-left: 3px solid var(--navy-light) !important;
       border-bottom: 2px solid var(--navy-light) !important;
-      padding: 14px 16px !important;
+      padding: 12px 14px !important;
     }
     .th-major-unit {
       background: #1f1b13 !important;
       border-left: 3px solid var(--c-yellow) !important;
       border-bottom: 2px solid var(--c-yellow) !important;
-      padding: 14px 16px !important;
+      padding: 12px 14px !important;
     }
 
     .th-major-content {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
     }
-    .th-major-icon { font-size: 24px; line-height: 1; }
-    .th-major-text { font-size: 19px; font-weight: 900; color: #ffffff; letter-spacing: -0.01em; }
-    .th-major-unit-label { font-size: 13px; font-weight: 700; color: var(--text-muted); }
+    .th-major-icon { font-size: 22px; line-height: 1; }
+    .th-major-text { font-size: 18px; font-weight: 900; color: #ffffff; letter-spacing: -0.01em; }
+    .th-major-unit-label { font-size: 12px; font-weight: 700; color: var(--text-muted); }
 
     table.exec-table th {
       background: #090e17;
       color: #cbd5e1;
       font-weight: 800;
-      font-size: 14.5px;
-      padding: 12px 14px;
+      font-size: 13.5px;
+      padding: 10px 10px;
       border-bottom: 2px solid var(--border-strong);
       border-right: 1px solid var(--border);
       text-align: right;
+      white-space: nowrap;
     }
     table.exec-table td {
-      padding: 14px 14px;
+      padding: 12px 10px;
       border-bottom: 1px solid var(--border);
       border-right: 1px solid var(--border);
       text-align: right;
       font-variant-numeric: tabular-nums;
+      background: #0b121c;
+      white-space: nowrap;
     }
-    table.exec-table th:first-child, table.exec-table td:first-child { text-align: left; }
+    
+    /* 🔴 左端「月度」列のSticky固定（横スクロールしても常に固定表示） */
+    table.exec-table th.col-sticky-month,
+    table.exec-table td.col-sticky-month {
+      position: sticky;
+      left: 0;
+      z-index: 10;
+      text-align: center;
+      background: #080d15 !important;
+      border-right: 2.5px solid var(--gold) !important;
+      box-shadow: 4px 0 12px rgba(0,0,0,0.6);
+      width: 80px;
+      min-width: 80px;
+    }
+    table.exec-table th.col-sticky-month {
+      background: #060a10 !important;
+      z-index: 20;
+    }
+    tr.total-row td.col-sticky-month {
+      background: #0f1c2d !important;
+      color: var(--gold) !important;
+      font-weight: 900;
+    }
+
     .cell-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; }
     
     tr.total-row {
@@ -478,22 +505,37 @@
       border-bottom: 2.5px solid var(--gold);
       font-weight: 900;
     }
-    tr.total-row td { font-size: 17px; color: #fff; padding: 16px 14px; }
+    tr.total-row td { font-size: 16px; color: #fff; padding: 14px 10px; }
 
     @media (max-width: 900px) {
       .equation-grid { grid-template-columns: 1fr; text-align: center; }
       .operator { font-size: 24px; margin: 4px 0; }
     }
     @media (max-width: 768px) {
-      body { padding: 12px 10px 90px 10px; font-size: 16.5px; }
-      .header { padding: 14px; }
-      .brand-title { font-size: 19px; }
-      .eq-val { font-size: 30px; }
-      .eq-label-text { font-size: 19px; }
+      body { padding: 10px 8px 90px 8px; font-size: 15.5px; }
+      .header { padding: 12px; }
+      .brand-title { font-size: 18px; }
+      .eq-val { font-size: 28px; }
+      .eq-label-text { font-size: 18px; }
       .bullet-row { flex-wrap: wrap; }
       .bullet-track { flex: 0 0 100%; order: 3; }
       .bullet-num { margin-left: auto; }
+
+      /* スマホ時のテーブル圧縮 ＆ 最適化 */
+      table.exec-table { min-width: 860px; font-size: 13px; }
+      table.exec-table th { padding: 8px 6px; font-size: 12px; }
+      table.exec-table td { padding: 9px 6px; }
+      .th-major-text { font-size: 15px; }
+      .th-major-icon { font-size: 18px; }
+      .badge { font-size: 11.5px; padding: 2px 6px; }
+      table.exec-table th.col-sticky-month,
+      table.exec-table td.col-sticky-month {
+        width: 70px;
+        min-width: 70px;
+        font-size: 13.5px;
+      }
     }
+
   </style>
 </head>
 <body>
@@ -788,18 +830,23 @@
 
     </div>
 
-    <!-- 統一フォーマット・3色カラーヒートマップテーブル -->
+    <!-- 統一フォーマット・3色カラーヒートマップテーブル (左端Sticky固定) -->
     <div class="card">
-      <div class="section-header">
-        <span>📊 2026年 1〜4月 経営予実・前年対比テーブル（売上・来場・単価 統一軸）</span>
-        <span class="section-en">FINANCIAL HEATMAP TABLE</span>
+      <div class="section-header" style="justify-content:space-between; align-items:center;">
+        <div>
+          <span>📊 2026年 1〜4月 経営予実・前年対比テーブル（売上・来場・単価 統一軸）</span>
+          <span class="section-en">FINANCIAL HEATMAP TABLE</span>
+        </div>
+        <div style="font-size:12.5px; font-weight:700; color:var(--gold); background:rgba(201,169,97,0.15); padding:4px 10px; border-radius:6px; border:1px solid var(--gold);">
+          👉 左右スクロール可（月度固定）
+        </div>
       </div>
 
       <div class="table-container">
         <table class="exec-table">
           <thead>
             <tr>
-              <th rowspan="2" style="text-align:center; vertical-align:middle; width:95px; font-size:16px; font-weight:900;">月度</th>
+              <th rowspan="2" class="col-sticky-month" style="vertical-align:middle; font-size:15px; font-weight:900;">月度</th>
               <!-- ① 売上高 -->
               <th colspan="5" class="th-major-rev">
                 <div class="th-major-content">
@@ -845,7 +892,7 @@
           </thead>
           <tbody>
             <tr>
-              <td style="text-align:center; font-weight:800;">1月度</td>
+              <td class="col-sticky-month" style="font-weight:800;">1月度</td>
               <td class="cell-num" style="border-left:3px solid var(--gold);">¥31,592</td>
               <td class="cell-num">¥29,580</td>
               <td><span class="badge bg-green">106.8%</span></td>
@@ -866,7 +913,7 @@
             </tr>
 
             <tr>
-              <td style="text-align:center; font-weight:800;">2月度</td>
+              <td class="col-sticky-month" style="font-weight:800;">2月度</td>
               <td class="cell-num" style="border-left:3px solid var(--gold);">¥26,814</td>
               <td class="cell-num">¥26,390</td>
               <td><span class="badge bg-green">101.6%</span></td>
@@ -887,7 +934,7 @@
             </tr>
 
             <tr>
-              <td style="text-align:center; font-weight:800;">3月度</td>
+              <td class="col-sticky-month" style="font-weight:800;">3月度</td>
               <td class="cell-num" style="color:var(--c-yellow-text); border-left:3px solid var(--gold);">¥34,375</td>
               <td class="cell-num">¥35,510</td>
               <td><span class="badge bg-yellow">96.8%</span></td>
@@ -908,7 +955,7 @@
             </tr>
 
             <tr>
-              <td style="text-align:center; font-weight:800;">4月度</td>
+              <td class="col-sticky-month" style="font-weight:800;">4月度</td>
               <td class="cell-num" style="border-left:3px solid var(--gold);">¥34,617</td>
               <td class="cell-num">¥34,750</td>
               <td><span class="badge bg-yellow">99.6%</span></td>
@@ -929,29 +976,30 @@
             </tr>
 
             <tr class="total-row">
-              <td style="text-align:center; color:var(--gold); font-size:18px;">4ヶ月累計</td>
-              <td class="cell-num" style="color:var(--gold); font-size:18px; border-left:3px solid var(--gold);">¥127,398</td>
+              <td class="col-sticky-month" style="color:var(--gold); font-size:16px;">4ヶ月累計</td>
+              <td class="cell-num" style="color:var(--gold); font-size:17px; border-left:3px solid var(--gold);">¥127,398</td>
               <td class="cell-num">¥126,230</td>
-              <td><span class="badge bg-green" style="font-size:15px;">100.9%</span></td>
+              <td><span class="badge bg-green" style="font-size:14px;">100.9%</span></td>
               <td class="cell-num">¥113,729</td>
-              <td><span class="badge bg-green" style="font-size:15px;">+14.2%</span></td>
+              <td><span class="badge bg-green" style="font-size:14px;">+14.2%</span></td>
               
-              <td class="cell-num" style="color:#fff; font-size:18px; border-left:3px solid var(--navy-light);">11,450</td>
+              <td class="cell-num" style="color:#fff; font-size:17px; border-left:3px solid var(--navy-light);">11,450</td>
               <td class="cell-num">10,830</td>
-              <td><span class="badge bg-green" style="font-size:15px;">105.7%</span></td>
+              <td><span class="badge bg-green" style="font-size:14px;">105.7%</span></td>
               <td class="cell-num">9,661</td>
-              <td><span class="badge bg-green" style="font-size:15px;">+18.5%</span></td>
+              <td><span class="badge bg-green" style="font-size:14px;">+18.5%</span></td>
               
-              <td class="cell-num" style="color:var(--c-yellow-text); font-size:18px; border-left:3px solid #f59e0b;">¥11,126</td>
+              <td class="cell-num" style="color:var(--c-yellow-text); font-size:17px; border-left:3px solid #f59e0b;">¥11,126</td>
               <td class="cell-num">¥11,660</td>
-              <td><span class="badge bg-yellow" style="font-size:15px;">95.4%</span></td>
+              <td><span class="badge bg-yellow" style="font-size:14px;">95.4%</span></td>
               <td class="cell-num">¥11,544</td>
-              <td><span class="badge bg-yellow" style="font-size:15px;">-3.6%</span></td>
+              <td><span class="badge bg-yellow" style="font-size:14px;">-3.6%</span></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
 
   </div>
 
