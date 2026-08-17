@@ -1410,8 +1410,77 @@
               <span class="badge bg-red" id="dp-target-badge" style="font-size: 14px; padding: 6px 14px;">🔴 弱日 (現在4組 / ☔60%)</span>
             </div>
 
+            <!-- =========================================================
+                 🏢 しおり社長構想：近隣・仮想競合レート比較（納得のプライシング根拠）
+                 ========================================================= -->
+            <div style="background: #070c14; border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
+                <div style="font-size: 13.5px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 6px;">
+                  <span>🏢 近隣・仮想競合レート比較（同日・同時間帯 リアルタイム相場）</span>
+                  <span class="badge bg-green" id="comp-tcc-advantage" style="font-size: 11px;">TCC 圧倒的お得感</span>
+                </div>
+                <span style="font-size: 12px; color: var(--cyan-accent); font-weight: 700;" id="comp-persuade-text">
+                  💡 現場・幹部への説得根拠: 「同格名門より▲¥1,700安く、大衆コース+¥1,000で名門ランチ付！」
+                </span>
+              </div>
+
+              <!-- 4社並列比較グリッド -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+                
+                <!-- 自社: TCC（勝負DP価格） -->
+                <div style="background: #092618; border: 1.5px solid var(--c-green); border-radius: 8px; padding: 10px; box-shadow: 0 0 12px rgba(16,185,129,0.25);">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px; font-weight: 900; color: var(--c-green-text);">⛳ 自社: 津カントリー (TCC)</span>
+                    <span class="badge bg-green" style="font-size: 10px; padding: 2px 6px;">⚡ DP勝負価格</span>
+                  </div>
+                  <div style="font-size: 22px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono'; margin: 4px 0;" id="comp-tcc-price">
+                    ¥10,800 <span style="font-size: 12px; color: #6ee7b7;">(昼食付)</span>
+                  </div>
+                  <div style="font-size: 11px; color: #cbd5e1;">ジャンボ尾崎設計 / 名門チャンピオン</div>
+                </div>
+
+                <!-- 競合A: 近隣大衆コース（名四/涼仙系） -->
+                <div style="background: #111a26; border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px; font-weight: 800; color: #94a3b8;">🏢 競合A (近隣大衆コース)</span>
+                    <span style="font-size: 10.5px; color: #94a3b8;">昼食別</span>
+                  </div>
+                  <div style="font-size: 19px; font-weight: 900; color: #cbd5e1; font-family: 'JetBrains Mono'; margin: 4px 0;" id="comp-a-price">
+                    ¥9,800
+                  </div>
+                  <div style="font-size: 11px; color: #64748b;" id="comp-a-diff">差額 +¥1,000でTCC名門＋ランチ付</div>
+                </div>
+
+                <!-- 競合B: 同格名門（三重白山/グレイスヒルズ系） -->
+                <div style="background: #111a26; border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px; font-weight: 800; color: #94a3b8;">🏛️ 競合B (近隣同格名門)</span>
+                    <span style="font-size: 10.5px; color: #94a3b8;">昼食別</span>
+                  </div>
+                  <div style="font-size: 19px; font-weight: 900; color: #f87171; font-family: 'JetBrains Mono'; margin: 4px 0;" id="comp-b-price">
+                    ¥12,500
+                  </div>
+                  <div style="font-size: 11px; color: #64748b;" id="comp-b-diff">TCCが <b>▲¥1,700割安</b> で圧勝</div>
+                </div>
+
+                <!-- 競合C: 名古屋広域ゴルファー流出リゾート -->
+                <div style="background: #111a26; border: 1px solid var(--border); border-radius: 8px; padding: 10px;">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 12px; font-weight: 800; color: #94a3b8;">🏌️ 競合C (名古屋広域リゾート)</span>
+                    <span style="font-size: 10.5px; color: #94a3b8;">昼食付</span>
+                  </div>
+                  <div style="font-size: 19px; font-weight: 900; color: #cbd5e1; font-family: 'JetBrains Mono'; margin: 4px 0;" id="comp-c-price">
+                    ¥13,200
+                  </div>
+                  <div style="font-size: 11px; color: #64748b;" id="comp-c-diff">TCCが <b>▲¥2,400割安</b> で集客</div>
+                </div>
+
+              </div>
+            </div>
+
             <!-- DP設定 ＆ LINEプレビュー ＆ 期待効果（3カラムグリッド） -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 18px;">
+
               
               <!-- ① DP価格設定 -->
               <div style="background: #070c14; border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
@@ -2103,6 +2172,16 @@
     const liftGroupsEl = document.getElementById('dp-lift-groups');
     const liftProfitEl = document.getElementById('dp-lift-profit');
 
+    // 競合比較要素
+    const compTccPriceEl = document.getElementById('comp-tcc-price');
+    const compAPriceEl = document.getElementById('comp-a-price');
+    const compBPriceEl = document.getElementById('comp-b-price');
+    const compCPriceEl = document.getElementById('comp-c-price');
+    const compADiffEl = document.getElementById('comp-a-diff');
+    const compBDiffEl = document.getElementById('comp-b-diff');
+    const compCDiffEl = document.getElementById('comp-c-diff');
+    const compPersuadeTextEl = document.getElementById('comp-persuade-text');
+
     if (!titleEl || !badgeEl) return;
 
     const parts = dateStr.split('-');
@@ -2142,6 +2221,15 @@
       if (lineTextEl) {
         lineTextEl.innerHTML = `<b>【TCC 2ヶ月前早期先回りシークレット ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} ${reason} 早期枠！<br>通常¥14,500 ➔ <b>特別早期割 ¥12,500（限定枠）</b><br>先着8組様限定。ご予約はこちら ➔ [早期プランを見る]`;
       }
+      // 競合レート更新（早期相場）
+      if (compTccPriceEl) compTccPriceEl.innerHTML = '¥12,500 <span style="font-size: 12px; color: #6ee7b7;">(早期割)</span>';
+      if (compAPriceEl) compAPriceEl.textContent = '¥11,000';
+      if (compBPriceEl) compBPriceEl.textContent = '¥14,200';
+      if (compCPriceEl) compCPriceEl.textContent = '¥14,800';
+      if (compADiffEl) compADiffEl.innerHTML = '差額 +¥1,500で名門チャンピオン確保';
+      if (compBDiffEl) compBDiffEl.innerHTML = 'TCCが <b>▲¥1,700割安</b> で先手';
+      if (compCDiffEl) compCDiffEl.innerHTML = 'TCCが <b>▲¥2,300割安</b> で早期獲得';
+      if (compPersuadeTextEl) compPersuadeTextEl.innerHTML = '💡 現場・幹部への説得根拠: 「競合名門（¥14,200）より▲¥1,700安く、2ヶ月前から早期ロック！」';
     } else {
       if (modeTagEl) {
         modeTagEl.textContent = '⚡ 直前ラストミニッツDP';
@@ -2156,6 +2244,15 @@
       if (lineTextEl) {
         lineTextEl.innerHTML = `<b>【TCC平日限定シークレットご優待 ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} 緊急限定オファー！<br>通常¥13,800 ➔ <b>特別優待 ¥10,800（名物ランチ付）</b><br>先着6組様限定。ご予約はこちら ➔ [限定プランを見る]`;
       }
+      // 競合レート更新（直前相場）
+      if (compTccPriceEl) compTccPriceEl.innerHTML = '¥10,800 <span style="font-size: 12px; color: #6ee7b7;">(昼食付)</span>';
+      if (compAPriceEl) compAPriceEl.textContent = '¥9,800';
+      if (compBPriceEl) compBPriceEl.textContent = '¥12,500';
+      if (compCPriceEl) compCPriceEl.textContent = '¥13,200';
+      if (compADiffEl) compADiffEl.innerHTML = '差額 +¥1,000でTCC名門＋ランチ付';
+      if (compBDiffEl) compBDiffEl.innerHTML = 'TCCが <b>▲¥1,700割安</b> で圧勝';
+      if (compCDiffEl) compCDiffEl.innerHTML = 'TCCが <b>▲¥2,400割安</b> で集客';
+      if (compPersuadeTextEl) compPersuadeTextEl.innerHTML = '💡 現場・幹部への説得根拠: 「同格名門より▲¥1,700安く、大衆コース+¥1,000で名門ランチ付！」';
     }
   }
 
