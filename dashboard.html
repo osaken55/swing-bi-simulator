@@ -14,28 +14,20 @@
   <style>
     /* =========================================================
        TCC Executive Cockpit (Design System v2.0 Dark)
-       - Navy: #1B4D6B
-       - Gold: #C9A961
-       - Teal (>=100%): #10b981 / #1D9E75
-       - Amber (90-99.9%): #f59e0b / #EF9F27
-       - Red (<90%): #ef4444 / #E24B4A
-       - Slate (Neutral/Market): #94a3b8
        ========================================================= */
     :root {
-      --bg: #05080d;                /* 漆黒 */
-      --card: #0d1520;              /* スレートネイビー */
+      --bg: #05080d;
+      --card: #0d1520;
       --card-sub: #080d14;
       --card-hover: #141f30;
       --border: #182538;
       --border-strong: #283c56;
 
-      /* TCC ブランド */
       --navy: #1B4D6B;
       --navy-light: #2c6e96;
       --gold: #C9A961;
       --gold-bg: rgba(201, 169, 97, 0.18);
 
-      /* 3色ルール（高輝度） */
       --c-green: #10b981;
       --c-green-bg: rgba(16, 185, 129, 0.22);
       --c-green-text: #34d399;
@@ -96,7 +88,7 @@
     .brand-sub { font-size: 14.5px; color: var(--gold); font-weight: 700; margin-top: 2px; }
 
     /* =========================================================
-       HERO: JAY ABRAHAM REVENUE EQUATION (巨大アイコン ＆ 超特大ラベル)
+       HERO: JAY ABRAHAM REVENUE EQUATION WITH INTEGRATED BULLETS
        ========================================================= */
     .equation-hero {
       background: linear-gradient(180deg, #101a2b 0%, #0a111c 100%);
@@ -147,12 +139,11 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .eq-icon {
       font-size: 32px;
       line-height: 1;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
     }
     .eq-label-text {
       font-size: 22px;
@@ -176,10 +167,40 @@
       font-weight: 900;
       color: #fff;
       line-height: 1.15;
-      margin: 8px 0 10px 0;
+      margin: 6px 0 8px 0;
       letter-spacing: -0.02em;
     }
     .eq-unit { font-size: 19px; font-weight: 800; color: #cbd5e1; margin-left: 4px; }
+
+    /* Embedded Hero Bullet Graph */
+    .hero-bullet {
+      position: relative;
+      height: 18px;
+      background: #151e2b;
+      border-radius: 4px;
+      margin: 8px 0;
+      border: 1px solid #24354d;
+    }
+    .hero-bullet-prev {
+      position: absolute;
+      top: 0; bottom: 0; left: 0;
+      background: #334155;
+      border-radius: 3px;
+    }
+    .hero-bullet-act {
+      position: absolute;
+      top: 4px; bottom: 4px; left: 0;
+      border-radius: 2px;
+    }
+    .hero-bullet-target {
+      position: absolute;
+      top: -3px; bottom: -3px; width: 3.5px;
+      background: #ffffff;
+      border-radius: 1px;
+      transform: translateX(-1.5px);
+      box-shadow: 0 0 6px #fff;
+      z-index: 2;
+    }
     
     .eq-sub {
       font-size: 14.5px;
@@ -189,7 +210,7 @@
       flex-wrap: wrap;
       gap: 8px;
       border-top: 1.5px solid var(--border-strong);
-      padding-top: 10px;
+      padding-top: 8px;
       margin-top: 6px;
     }
 
@@ -245,12 +266,10 @@
     }
     .pers-desc { font-size: 12.5px; font-weight: 600; opacity: 0.85; }
 
-    /* View Content */
     .view-content { display: none; }
     .view-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Cards */
     .card {
       background: var(--card);
       border: 1.5px solid var(--border);
@@ -274,7 +293,7 @@
     .section-en { font-size: 13.5px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; }
 
     /* =========================================================
-       INFOGRAPHIC: 空・雨・傘 (Stephen Few ブレットグラフ & 因果分解)
+       INFOGRAPHIC: 空・雨・傘
        ========================================================= */
     .infographic-box {
       background: var(--card-sub);
@@ -295,15 +314,14 @@
       padding-bottom: 10px;
     }
 
-    /* TCC標準 ブレットグラフ行 */
     .bullet-row {
       display: flex;
       align-items: center;
       gap: 14px;
-      padding: 7px 0;
+      padding: 8px 0;
     }
     .bullet-label {
-      width: 48px;
+      width: 50px;
       font-size: 15px;
       font-weight: 800;
       color: #cbd5e1;
@@ -316,30 +334,22 @@
       height: 28px;
       background: #151e2b;
       border-radius: 4px;
-      overflow: visible;
       border: 1px solid #24354d;
     }
     .bullet-bar-prev {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
+      top: 0; bottom: 0; left: 0;
       background: #334155;
       border-radius: 3px;
     }
     .bullet-bar-actual {
       position: absolute;
-      top: 7px;
-      bottom: 7px;
-      left: 0;
+      top: 7px; bottom: 7px; left: 0;
       border-radius: 3px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.5);
     }
     .bullet-line-target {
       position: absolute;
-      top: -3px;
-      bottom: -3px;
-      width: 4px;
+      top: -3px; bottom: -3px; width: 4px;
       background: #ffffff;
       border-radius: 2px;
       transform: translateX(-2px);
@@ -351,10 +361,8 @@
       flex-shrink: 0;
       text-align: right;
       font-family: 'JetBrains Mono', monospace;
-      font-variant-numeric: tabular-nums;
     }
 
-    /* 数量 vs 単価 因果分解バー */
     .variance-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -377,7 +385,6 @@
       margin-bottom: 6px;
     }
 
-    /* 雨 (リスク要因) インフォグラフィック */
     .risk-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -390,7 +397,6 @@
       padding: 14px 16px;
     }
 
-    /* 傘 (3本の打ち手) インフォグラフィック */
     .action-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -401,7 +407,6 @@
       border: 1.5px solid rgba(16, 185, 129, 0.4);
       border-radius: 10px;
       padding: 16px;
-      position: relative;
     }
 
     /* Table */
@@ -509,11 +514,11 @@
   </div>
 
   <!-- =========================================================
-       HERO: JAY ABRAHAM REVENUE EQUATION (巨大アイコン ＆ 超特大ラベル)
+       HERO: JAY ABRAHAM REVENUE EQUATION WITH INTEGRATED BULLETS
        ========================================================= -->
   <div class="equation-hero">
     <div class="equation-title">
-      <span>🔥 ジェイ・エイブラハムの売上方程式 【1〜4月累計実績】</span>
+      <span>🔥 ジェイ・エイブラハムの売上方程式 【1〜4月累計実績 ＆ ブレット進捗】</span>
     </div>
     <div class="equation-grid">
       
@@ -525,6 +530,14 @@
           <span class="eq-label-sub">Revenue</span>
         </div>
         <div class="eq-val">¥127,398<span class="eq-unit">千円</span></div>
+        
+        <!-- ブレットグラフ (実績 vs 予算ライン vs 前年帯) -->
+        <div class="hero-bullet">
+          <div class="hero-bullet-prev" style="width: 89%;"></div>
+          <div class="hero-bullet-act" style="width: 100%; background: var(--c-green);"></div>
+          <div class="hero-bullet-target" style="left: 99%;"></div>
+        </div>
+
         <div class="eq-sub">
           <span>対予算: <b class="badge bg-green">100.9% 達成 (+116万)</b></span>
           <span>対前年: <b class="badge bg-green">+14.2% (+1,580万)</b></span>
@@ -541,6 +554,14 @@
           <span class="eq-label-sub">Clients</span>
         </div>
         <div class="eq-val">11,450<span class="eq-unit">名</span></div>
+
+        <!-- ブレットグラフ (実績 vs 予算ライン vs 前年帯) -->
+        <div class="hero-bullet">
+          <div class="hero-bullet-prev" style="width: 84%;"></div>
+          <div class="hero-bullet-act" style="width: 100%; background: var(--c-green);"></div>
+          <div class="hero-bullet-target" style="left: 95%;"></div>
+        </div>
+
         <div class="eq-sub">
           <span>対予算: <b class="badge bg-green">105.7% 達成 (+620名)</b></span>
           <span>対前年: <b class="badge bg-green">+18.5% (+1,789名)</b></span>
@@ -557,6 +578,14 @@
           <span class="eq-label-sub" style="color:var(--c-yellow-text); background:rgba(245,158,11,0.15); border:1px solid var(--c-yellow);">Unit Price</span>
         </div>
         <div class="eq-val" style="color:var(--c-yellow-text);">¥11,126<span class="eq-unit">/人</span></div>
+
+        <!-- ブレットグラフ (実績 vs 予算ライン vs 前年帯) -->
+        <div class="hero-bullet">
+          <div class="hero-bullet-prev" style="width: 99%;"></div>
+          <div class="hero-bullet-act" style="width: 95.4%; background: var(--c-yellow);"></div>
+          <div class="hero-bullet-target" style="left: 100%;"></div>
+        </div>
+
         <div class="eq-sub">
           <span>対予算: <b class="badge bg-yellow">95.4% 未達 (-534円)</b></span>
           <span>対前年: <b class="badge bg-yellow">-3.6% (-418円)</b></span>
@@ -590,7 +619,7 @@
     <!-- ======================================================= -->
     <!-- ☀️ 【空】Fact: 時系列ブレットグラフ ＆ 数量vs単価 因果分解 -->
     <!-- ======================================================= -->
-    <div class="infographic-box" style="border-left: 5px solid #3b82f6;">
+    <div class="infographic-box" style="border-left: 5px solid var(--navy-light);">
       <div class="info-header">
         <span style="font-size:24px;">☀️</span>
         <span>【空】経営Fact: 月次売上ブレットグラフ ＆ 予実因果分解</span>
@@ -703,7 +732,7 @@
           <div class="risk-card">
             <div style="font-size:14px; font-weight:800; color:#cbd5e1; margin-bottom:4px;">👤 平日ビジター偏重</div>
             <div style="font-size:22px; font-weight:900; color:var(--c-yellow-text); font-family:'JetBrains Mono';">68% <span style="font-size:14px; color:#cbd5e1;">(+12pt増)</span></div>
-            <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">プレー単価は取れるが昼食・ショップ消費が低調</div>
+            <div style="font-size:13px; color:var(--text-muted); margin-top:4px;">プレー代は取れるが昼食・ショップ消費が低調</div>
           </div>
 
           <div class="risk-card">
@@ -726,7 +755,7 @@
               <span style="font-size:15px; font-weight:900; color:var(--c-green-text);">🏆 ① コア会員防衛</span>
               <span style="font-size:16px; font-weight:900; color:var(--gold); font-family:'JetBrains Mono';">¥5,300万維持</span>
             </div>
-            <div style="font-size:13px; color:#cbd5e1;">年12回来場コア194名の週末優先枠確保</div>
+            <div style="font-size:13px; color:#cbd5e1;">年12回来場コア194名の週末枠確保</div>
           </div>
 
           <div class="action-pillar">
@@ -926,7 +955,6 @@
         <span class="section-en">TACTICAL ACTIONS & 4 UMBRELLAS</span>
       </div>
 
-      <!-- 4つの傘 戦術カード -->
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:24px;">
         <div style="background:var(--card-sub); border-top:5px solid var(--c-green); border-radius:10px; padding:18px; border:1px solid var(--border);">
           <div style="font-weight:900; font-size:17px; color:var(--c-green-text); margin-bottom:8px;">🏆 守る (Champion会員維持)</div>
@@ -974,7 +1002,6 @@
       </div>
 
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
-        <!-- 🔴 先週・昨日できなかった数字（Gap分析） -->
         <div>
           <div style="font-size:18px; font-weight:900; color:var(--c-red-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
             <span>🔴 先週・前日 できなかった数字（Gap分析）</span>
@@ -983,19 +1010,18 @@
           <div style="background:var(--c-red-bg); border:1.5px solid var(--c-red); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
             <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ レストラン客単価: 目標 ¥6,500 ➔ 実績 ¥6,086 (<b style="color:var(--c-red-text);">-414円未達</b>)</div>
             <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
-              ・<b>原因</b>: ランチ時の「おすすめサイドメニュー（特製唐揚げ等）」と「昼食時アルコール」のお声がけがホールで3割程度しか実施できていなかった。
+              ・<b>原因</b>: ランチ時の「おすすめサイドメニュー」とお声がけがホールで3割程度しか実施できていなかった。
             </div>
           </div>
 
           <div style="background:var(--c-red-bg); border:1.5px solid var(--c-red); border-radius:10px; padding:16px 18px; margin-bottom:14px;">
             <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⏱️ 木曜雨天時の稼働率: 目標 85% ➔ 実績 55% (<b style="color:var(--c-red-text);">-30pt未達</b>)</div>
             <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
-              ・<b>原因</b>: 雨天キャンセル（4組）に対し、スループレー希望者への電話振り替え案内が1時間遅れ、空き枠を埋められなかった。
+              ・<b>原因</b>: 雨天キャンセル（4組）に対し、スループレー希望者への電話振り替え案内が遅れた。
             </div>
           </div>
         </div>
 
-        <!-- 🟢 今日・今週 現場リーダーがやること（Action Checklist） -->
         <div>
           <div style="font-size:18px; font-weight:900; color:var(--c-green-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
             <span>🟢 本日・今週 現場リーダーの必達アクション（ToDo）</span>
