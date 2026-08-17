@@ -901,8 +901,39 @@
             <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">・<b>現状</b>: 楽天GORA・GDOの直前安売り枠を50%削減。<br>・<b>打ち手</b>: 自社Web・LINE予約枠（比率46.5%）へシフトし送客手数料を削減。</div>
           </div>
         </div>
+
+        <!-- 🍺 フロー内にもドリルダウン実例を直接配置 -->
+        <div style="margin-top: 20px; background: linear-gradient(180deg, #101c2d 0%, #0a111c 100%); border: 2px solid var(--gold); border-radius: 12px; padding: 18px 20px; box-shadow: 0 0 20px rgba(201,169,97,0.15);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-size: 17px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 22px;">🔍</span>
+              <span>部門ドリルダウン実戦実例：【レストラン】生ビール価格改定の弾力性分析</span>
+            </div>
+            <span class="badge bg-gold" style="font-size: 13px;">年間粗利 +113万円 LIFT</span>
+          </div>
+          <p style="font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 14px;">
+            「値上げすると客離れが起きる」という現場の恐怖を、SwingClub POSデータの<b>価格弾力性シミュレーション</b>で解消したTCCの実戦実例。出数微減を単価増が圧倒し、客離れゼロで年間113万円の粗利を純増。
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+            <div style="background: #080d14; border: 1.5px solid #334155; border-radius: 8px; padding: 12px 14px;">
+              <div style="font-size: 13px; font-weight: 800; color: #94a3b8;">🍺 改定前（旧価格 ¥750）</div>
+              <div style="font-size: 13.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.7;">
+                ・月間出数: <b>1,200 杯</b> ｜ 月商: <b>¥900,000</b><br>
+                ・原価率: <b>35.0%</b> ｜ 月間粗利: <b style="color:#fff;">¥585,000</b>
+              </div>
+            </div>
+            <div style="background: rgba(16,185,129,0.08); border: 1.5px solid var(--c-green); border-radius: 8px; padding: 12px 14px;">
+              <div style="font-size: 13px; font-weight: 800; color: var(--c-green-text);">🚀 改定後（新価格 ¥880 / +130円）</div>
+              <div style="font-size: 13.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.7;">
+                ・月間出数: <b>1,130 杯</b> (<b style="color:var(--c-yellow-text);">-5.8% 軽微な減少</b>)<br>
+                ・月間売上: <b style="color:#fff;">¥994,400</b> ｜ 月間粗利: <b style="color:var(--c-green-text);">¥679,400 (+¥94,400/月)</b>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
 
     <!-- 3. 現場リーダーの視座 -->
     <div id="view-lead" class="view-content">
@@ -1409,8 +1440,16 @@
       }
     });
 
-  }
+  // ページ読み込み時のURL判定（?tab=stock または #stock で自動切替）
+  window.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hash = window.location.hash;
+    if (urlParams.get('tab') === 'stock' || hash === '#stock') {
+      switchMasterMode('mode-stock');
+    }
+  });
 </script>
+
 
 </body>
 </html>
