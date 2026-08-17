@@ -6,53 +6,52 @@
   <title>TSH Beyond-Dashboard | ゴルフ場次世代AI経営コックピット</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800;900&display=swap" rel="stylesheet">
   <style>
     /* =========================================================
-       TCC Design System Tokens (Dark Edition)
-       Base: TCC Navy (#1B4D6B), TCC Gold (#C9A961), Teal (#1D9E75)
+       TCC Executive Cockpit Tokens (High Contrast Dark Edition)
+       Stephen Few / Edward Tufte / TCC Design Tokens v2.0
        ========================================================= */
     :root {
-      --tcc-bg: #080c14;            /* 深層オフブラック */
-      --tcc-card: #111825;          /* TCCダークスレート */
-      --tcc-card-sub: #0d131d;      /* サブ領域 */
-      --tcc-card-hover: #1a2436;
-      --tcc-border: #1e2b3e;        /* 品位ある境界線 */
-      --tcc-border-accent: #2e415b;
-      
-      /* TCC 正典ブランドカラー */
-      --tcc-navy: #1B4D6B;          /* TCC紺（ブランド主軸） */
-      --tcc-navy-light: #2c6e96;
-      --tcc-gold: #C9A961;          /* TCCゴールド（最上位・アクセント） */
-      --tcc-gold-soft: rgba(201, 169, 97, 0.18);
-      
-      /* TCC セマンティックパレット */
-      --tcc-teal: #1D9E75;          /* 達成・好調・緑 */
-      --tcc-teal-light: #5DCAA5;
-      --tcc-amber: #EF9F27;         /* 注意・警戒・橙 */
-      --tcc-coral: #D85A30;
-      --tcc-red: #E24B4A;           /* 未達・危険・赤 */
-      --tcc-red-dark: #B71C1C;
-      --tcc-blue: #378ADD;          /* 情報・運行・青 */
-      --tcc-purple: #534AB7;        /* AI・知能・紫 */
-      --tcc-purple-soft: #AFA9EC;
-      --tcc-gray: #888780;          /* 補助・中立 */
+      --bg: #070a10;                /* 最深層漆黒 */
+      --card-bg: #0f1724;           /* 高品位スレートネイビー */
+      --card-sub: #0a0f18;          /* サブコンテナ */
+      --card-hover: #172233;
+      --border: #1e2c40;            /* コントラスト境界 */
+      --border-light: #2c3f58;
 
-      /* テキスト */
-      --text-main: #f1f5f9;
+      /* 正統TCCブランド色 */
+      --navy: #1B4D6B;
+      --navy-bright: #256b94;
+      --gold: #C9A961;
+      --gold-bg: rgba(201, 169, 97, 0.15);
+
+      /* セマンティック・ステータス（高視認・メリハリ） */
+      --teal: #1D9E75;              /* 達成・好調 */
+      --teal-bg: rgba(29, 158, 117, 0.22);
+      --teal-text: #34d399;
+      --amber: #EF9F27;             /* 注意・微減 */
+      --amber-bg: rgba(239, 159, 39, 0.22);
+      --amber-text: #fbbf24;
+      --red: #E24B4A;               /* 未達・危険 */
+      --red-bg: rgba(226, 75, 74, 0.22);
+      --red-text: #f87171;
+      --blue: #378ADD;              /* 進行・情報 */
+      --blue-bg: rgba(55, 138, 221, 0.2);
+      --blue-text: #60a5fa;
+
+      --text-main: #ffffff;
+      --text-body: #e2e8f0;
       --text-muted: #94a3b8;
-      --text-sub: #64748b;
       --radius: 12px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
-      background: var(--tcc-bg);
+      background: var(--bg);
       color: var(--text-main);
       padding: 16px 12px 100px 12px;
-      /* 基本フォントサイズ2割増し（17.5px基準） */
       font-size: 17.5px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
@@ -63,257 +62,300 @@
       margin: 0 auto;
     }
 
-    /* Top Navigation (TCC Cockpit Header) */
-    .tcc-header {
+    /* Top Navigation */
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--tcc-card);
-      border: 1px solid var(--tcc-border);
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px 20px;
-      margin-bottom: 18px;
+      padding: 16px 22px;
+      margin-bottom: 20px;
       flex-wrap: wrap;
       gap: 14px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
     }
-    .brand-block {
+    .brand-group {
       display: flex;
       align-items: center;
       gap: 14px;
     }
-    .brand-crest {
+    .brand-badge {
       width: 44px;
       height: 44px;
-      background: linear-gradient(135deg, var(--tcc-navy) 0%, var(--tcc-gold) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--gold) 100%);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
+      font-weight: 900;
       color: #fff;
       font-size: 20px;
-      border: 1.5px solid var(--tcc-gold);
-      box-shadow: 0 0 12px rgba(201, 169, 97, 0.3);
+      border: 1.5px solid var(--gold);
+      box-shadow: 0 0 14px rgba(201, 169, 97, 0.4);
       flex-shrink: 0;
     }
-    .brand-title { 
-      font-size: 21px; 
-      font-weight: 800; 
-      color: #fff; 
-      letter-spacing: -0.01em; 
+    .brand-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
       display: flex;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
     }
-    .brand-subtitle { font-size: 14px; color: var(--tcc-gold); font-weight: 600; margin-top: 2px; }
+    .brand-sub { font-size: 14.5px; color: var(--gold); font-weight: 700; margin-top: 2px; }
 
-    /* Hierarchy Perspective Selector (3 Layers) */
-    .perspective-tabs {
-      display: flex;
-      background: var(--tcc-card-sub);
-      border: 1.5px solid var(--tcc-border-accent);
+    /* Perspective Selector Tabs (3 Tiers) */
+    .perspective-nav {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      background: var(--card-sub);
+      border: 2px solid var(--border-light);
       border-radius: 12px;
-      padding: 5px;
-      margin-bottom: 20px;
-      gap: 6px;
-      flex-wrap: wrap;
+      padding: 6px;
+      margin-bottom: 24px;
+      gap: 8px;
     }
-    .pers-btn {
-      flex: 1;
-      min-width: 220px;
+    .pers-tab {
       background: transparent;
       border: none;
       color: var(--text-muted);
-      padding: 12px 16px;
+      padding: 14px 16px;
       border-radius: 8px;
-      font-size: 16px;
-      font-weight: 700;
+      font-size: 16.5px;
+      font-weight: 800;
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 8px;
+      gap: 3px;
       transition: all 0.15s ease;
+      text-align: center;
     }
-    .pers-btn:hover { color: #fff; background: rgba(255,255,255,0.03); }
-    .pers-btn.active {
-      background: var(--tcc-navy);
+    .pers-tab:hover { color: #fff; background: rgba(255,255,255,0.04); }
+    .pers-tab.active {
+      background: var(--navy);
       color: #fff;
-      font-weight: 800;
-      box-shadow: 0 0 12px rgba(27, 77, 107, 0.5);
-      border: 1px solid var(--tcc-gold);
+      box-shadow: 0 0 16px rgba(27, 77, 107, 0.6);
+      border: 1.5px solid var(--gold);
     }
+    .pers-desc { font-size: 12.5px; font-weight: 600; opacity: 0.85; }
 
-    /* Views */
-    .view-section {
-      display: none;
-    }
-    .view-section.active {
-      display: block;
-      animation: fadeIn 0.2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* View Content */
+    .view-content { display: none; }
+    .view-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Cards & Section Headers (TCC Style) */
+    /* Cards */
     .card {
-      background: var(--tcc-card);
-      border: 1px solid var(--tcc-border);
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
       border-radius: var(--radius);
       padding: 22px 20px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     }
-    .section-h {
-      font-size: 20px;
-      font-weight: 800;
+    .section-header {
+      font-size: 21px;
+      font-weight: 900;
       color: #fff;
-      border-left: 4px solid var(--tcc-gold);
-      padding-left: 12px;
+      border-left: 5px solid var(--gold);
+      padding-left: 14px;
       display: flex;
-      align-items: center;
-      gap: 10px;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 18px;
       flex-wrap: wrap;
     }
-    .section-en {
-      font-size: 13.5px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-    }
+    .section-en { font-size: 13.5px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; }
 
-    /* KPI Grid */
+    /* =========================================================
+       HIGH-CONTRAST EXECUTIVE KPI CARDS (Few / Tufte Style)
+       ========================================================= */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
     }
-    .kpi-card {
-      background: var(--tcc-card-sub);
-      border: 1px solid var(--tcc-border);
+    .kpi-box {
+      background: var(--card-sub);
+      border: 1.5px solid var(--border);
       border-radius: 12px;
-      padding: 18px 20px;
+      padding: 20px 22px;
       position: relative;
-      overflow: hidden;
     }
-    .kpi-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 5px; height: 100%;
+    .kpi-box-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
     }
-    .kpi-teal::before { background: var(--tcc-teal); }
-    .kpi-blue::before { background: var(--tcc-blue); }
-    .kpi-gold::before { background: var(--tcc-gold); }
-    .kpi-purple::before { background: var(--tcc-purple); }
-    .kpi-red::before { background: var(--tcc-red); }
+    .kpi-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .status-badge {
+      font-size: 13.5px;
+      font-weight: 900;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .badge-teal { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal); }
+    .badge-red { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red); }
+    .badge-blue { background: var(--blue-bg); color: var(--blue-text); border: 1px solid var(--blue); }
+    .badge-amber { background: var(--amber-bg); color: var(--amber-text); border: 1px solid var(--amber); }
 
-    .kpi-label { font-size: 14px; color: var(--text-muted); font-weight: 700; }
-    .kpi-val { 
-      font-family: 'JetBrains Mono', monospace; 
-      font-size: 28px; 
-      font-weight: 800; 
-      color: #fff; 
-      margin: 6px 0; 
+    /* Giant Numbers with Clear Units */
+    .kpi-main-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 34px;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 1.1;
+      margin: 8px 0 12px 0;
       letter-spacing: -0.02em;
     }
-    .kpi-diff { font-size: 14px; font-weight: 700; }
-    .diff-up { color: var(--tcc-teal-light); }
-    .diff-down { color: var(--tcc-red); }
+    .kpi-unit { font-size: 18px; font-weight: 700; color: #cbd5e1; margin-left: 4px; }
 
-    /* Gap Card (What went wrong) */
-    .gap-box {
-      background: rgba(226, 75, 74, 0.08);
-      border: 1.5px solid rgba(226, 75, 74, 0.35);
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
+    /* Bullet Gauge (Progress vs Budget Bar) */
+    .bullet-gauge {
+      margin-top: 10px;
+      background: #172233;
+      height: 12px;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #24354d;
     }
-    .gap-title {
-      font-weight: 800;
-      color: var(--tcc-red);
-      font-size: 16.5px;
+    .bullet-fill {
+      height: 100%;
+      border-radius: 5px;
+      transition: width 0.3s ease;
+    }
+    .bullet-teal { background: var(--teal); }
+    .bullet-red { background: var(--red); }
+
+    .kpi-sub-line {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
+      justify-content: space-between;
+      font-size: 14.5px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-weight: 600;
     }
 
-    /* Action Checklist Box (What to do today) */
-    .action-box {
-      background: rgba(29, 158, 117, 0.08);
-      border: 1.5px solid rgba(29, 158, 117, 0.35);
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-    }
-    .action-title {
-      font-weight: 800;
-      color: var(--tcc-teal-light);
-      font-size: 16.5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-
-    /* Tables */
-    .table-wrap {
+    /* =========================================================
+       HIGH-CONTRAST FINANCIAL TABLE (Heatmap & Visual Contrast)
+       ========================================================= */
+    .table-container {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       border-radius: 10px;
-      border: 1px solid var(--tcc-border);
+      border: 1.5px solid var(--border);
     }
-    table {
+    table.exec-table {
       width: 100%;
-      min-width: 650px;
+      min-width: 780px;
       border-collapse: collapse;
-      font-size: 15.5px;
+      font-size: 16px;
     }
-    th, td {
-      padding: 13px 15px;
-      border-bottom: 1px solid var(--tcc-border);
+    table.exec-table th {
+      background: #0d1420;
+      color: #cbd5e1;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 14px 16px;
+      border-bottom: 2px solid var(--border-light);
       text-align: right;
     }
-    th {
-      background: var(--tcc-card-sub);
-      color: var(--text-muted);
-      font-weight: 700;
+    table.exec-table td {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--border);
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    table.exec-table th:first-child, table.exec-table td:first-child { text-align: left; }
+    
+    /* Table Heatmap Visuals */
+    .cell-num { font-family: 'JetBrains Mono', monospace; font-weight: 800; }
+    .cell-achieved { color: var(--teal-text); font-weight: 900; }
+    .cell-missed { color: var(--red-text); font-weight: 900; }
+    
+    .pill-rate {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 5px;
       font-size: 14.5px;
+      display: inline-block;
     }
-    th:first-child, td:first-child { text-align: left; }
-    tr:hover { background: rgba(255,255,255,0.03); }
+    .pill-green { background: var(--teal-bg); color: var(--teal-text); border: 1px solid var(--teal); }
+    .pill-red { background: var(--red-bg); color: var(--red-text); border: 1px solid var(--red); }
 
-    /* Action Buttons */
-    .btn {
-      background: var(--tcc-card-hover);
+    /* Total Highlight Row */
+    tr.total-row {
+      background: rgba(27, 77, 107, 0.35) !important;
+      border-top: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      font-weight: 900;
+    }
+    tr.total-row td {
+      font-size: 17.5px;
       color: #fff;
-      border: 1px solid var(--tcc-border-accent);
-      padding: 11px 16px;
-      border-radius: 8px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.15s ease;
+      padding: 16px;
     }
-    .btn:hover { background: var(--tcc-navy); color: #fff; border-color: var(--tcc-gold); }
-    .btn-primary { background: var(--tcc-navy); color: #fff; border-color: var(--tcc-gold); font-weight: 800; }
 
-    /* Responsive Tweaks */
+    /* Diagnosis Box */
+    .diag-card {
+      background: rgba(201, 169, 97, 0.08);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 22px;
+    }
+    .diag-title {
+      font-size: 18.5px;
+      font-weight: 900;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* Action Checklist Box */
+    .gap-card {
+      background: rgba(226, 75, 74, 0.08);
+      border: 2px solid var(--red);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+    .act-card {
+      background: rgba(29, 158, 117, 0.08);
+      border: 2px solid var(--teal);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
       body { padding: 12px 10px 90px 10px; font-size: 16.5px; }
-      .tcc-header { padding: 14px 14px; }
+      .header { padding: 14px; }
       .brand-title { font-size: 19px; }
-      .pers-btn { min-width: 100%; font-size: 15px; }
-      .card { padding: 16px 14px; }
-      .section-h { font-size: 18px; }
-      .kpi-val { font-size: 24px; }
+      .kpi-main-val { font-size: 28px; }
+      .section-header { font-size: 19px; }
     }
   </style>
 </head>
@@ -321,289 +363,326 @@
 
 <div class="container">
   <!-- TOP NAV -->
-  <div class="tcc-header">
-    <div class="brand-block">
-      <div class="brand-crest">TCC</div>
+  <div class="header">
+    <div class="brand-group">
+      <div class="brand-badge">TCC</div>
       <div>
         <div class="brand-title">
           <span>TSH Beyond-Dashboard</span>
-          <span style="font-size:13px; font-weight:800; color:var(--tcc-gold); background:var(--tcc-gold-soft); padding:3px 8px; border-radius:6px; border:1px solid var(--tcc-gold);">Beyond BI Live</span>
+          <span style="font-size:13px; font-weight:900; color:var(--gold); background:var(--gold-bg); padding:3px 8px; border-radius:6px; border:1px solid var(--gold);">Executive Standard</span>
         </div>
-        <div class="brand-subtitle">経営者・支配人・現場リーダーの意思決定をつなぐコックピット</div>
+        <div class="brand-sub">津カントリー倶楽部 経営コックピット（KGI・予算・昨年対比・現場連動）</div>
       </div>
     </div>
   </div>
 
-  <!-- 3-TIER PERSPECTIVE SELECTOR -->
-  <div class="perspective-tabs">
-    <button class="pers-btn active" onclick="switchPers('view-exec')">
+  <!-- PERSPECTIVE TABS (3 TIERS) -->
+  <div class="perspective-nav">
+    <button class="pers-tab active" onclick="setPerspective('view-exec')">
       <span>🎖️ ① 経営者・役員の視座</span>
-      <span style="font-size:12px; opacity:0.8;">(予算・KGI・市場シェア)</span>
+      <span class="pers-desc">【KGI・予算・前年比・市場シェア】</span>
     </button>
-    <button class="pers-btn" onclick="switchPers('view-gm')">
+    <button class="pers-tab" onclick="setPerspective('view-gm')">
       <span>👔 ② 支配人・部門長の視座</span>
-      <span style="font-size:12px; opacity:0.8;">(それでどうする？戦術・傘)</span>
+      <span class="pers-desc">【それでどうする？ 4つの傘戦術】</span>
     </button>
-    <button class="pers-btn" onclick="switchPers('view-lead')">
+    <button class="pers-tab" onclick="setPerspective('view-lead')">
       <span>🏃 ③ 現場リーダーの視座</span>
-      <span style="font-size:12px; opacity:0.8;">(今日すべき事・未達Gap)</span>
+      <span class="pers-desc">【何の数字が未達か？ 今日の必達ToDo】</span>
     </button>
   </div>
 
   <!-- ======================================================== -->
-  <!-- 1. 経営者・役員の視座 (予算 / KGI / 昨年対比 / 外部環境)   -->
+  <!-- 1. 経営者・役員の視座 (KGI ➔ 来場 ➔ 単価 ➔ 三重県市場)    -->
   <!-- ======================================================== -->
-  <div id="view-exec" class="view-section active">
-    <!-- Executive Top KPIs -->
+  <div id="view-exec" class="view-content active">
+
+    <!-- Top 4 Giant KPI Cards (サマリーの順番と下の表の列順が完全一致) -->
     <div class="kpi-grid">
-      <div class="kpi-card kpi-teal">
-        <div class="kpi-label">全社KGI: 1〜4月 累計営業売上</div>
-        <div class="kpi-val">¥127,398,000</div>
-        <div class="kpi-diff diff-up">▲ 予算比 100.9% (予算: ¥12,623万) / 昨対比 +14.2%</div>
+      
+      <!-- ① 売上高 (最重要KGI) -->
+      <div class="kpi-box">
+        <div class="kpi-box-header">
+          <div class="kpi-title">① 営業売上高 (1〜4月累計)</div>
+          <div class="status-badge badge-teal">達成率 100.9%</div>
+        </div>
+        <div class="kpi-main-val">¥127,398<span class="kpi-unit">千円</span></div>
+        <div class="bullet-gauge">
+          <div class="bullet-fill bullet-teal" style="width: 100%;"></div>
+        </div>
+        <div class="kpi-sub-line">
+          <span>予算: ¥126,230千円 (<b style="color:var(--teal-text);">+116万円</b>)</span>
+          <span>前年: ¥113,729千円 (<b style="color:var(--teal-text);">+14.2%</b>)</span>
+        </div>
       </div>
-      <div class="kpi-card kpi-blue">
-        <div class="kpi-label">全社KGI: 1〜4月 累計来場者数</div>
-        <div class="kpi-val">11,450 <span style="font-size:20px;">名</span></div>
-        <div class="kpi-diff diff-up">▲ 予算比 105.7% (予算: 10,830名) / 昨対比 +18.5%</div>
+
+      <!-- ② 来場者数 -->
+      <div class="kpi-box">
+        <div class="kpi-box-header">
+          <div class="kpi-title">② 来場者数 (1〜4月累計)</div>
+          <div class="status-badge badge-teal">達成率 105.7%</div>
+        </div>
+        <div class="kpi-main-val">11,450<span class="kpi-unit">名</span></div>
+        <div class="bullet-gauge">
+          <div class="bullet-fill bullet-teal" style="width: 100%;"></div>
+        </div>
+        <div class="kpi-sub-line">
+          <span>予算: 10,830名 (<b style="color:var(--teal-text);">+620名</b>)</span>
+          <span>前年: 9,661名 (<b style="color:var(--teal-text);">+18.5%</b>)</span>
+        </div>
       </div>
-      <div class="kpi-card kpi-gold">
-        <div class="kpi-label">客単価（4ヶ月加重平均）</div>
-        <div class="kpi-val">¥11,126</div>
-        <div class="kpi-diff diff-down">▼ 予算比 95.4% (予算: ¥11,660) / 昨対比 -3.6%</div>
+
+      <!-- ③ 客単価 (危機要因・赤字ハイライト) -->
+      <div class="kpi-box" style="border: 2px solid var(--red);">
+        <div class="kpi-box-header">
+          <div class="kpi-title" style="color:#fff;">③ 客単価 (加重平均)</div>
+          <div class="status-badge badge-red">未達 95.4%</div>
+        </div>
+        <div class="kpi-main-val" style="color:var(--red-text);">¥11,126<span class="kpi-unit">/人</span></div>
+        <div class="bullet-gauge">
+          <div class="bullet-fill bullet-red" style="width: 95.4%;"></div>
+        </div>
+        <div class="kpi-sub-line">
+          <span>予算: ¥11,660 (<b style="color:var(--red-text);">-534円</b>)</span>
+          <span>前年: ¥11,544 (<b style="color:var(--red-text);">-3.6%</b>)</span>
+        </div>
       </div>
-      <div class="kpi-card kpi-purple">
-        <div class="kpi-label">外部環境: 三重県全51コース中順位</div>
-        <div class="kpi-val">第 12 位 <span style="font-size:16px;">(18H換算)</span></div>
-        <div class="kpi-diff diff-up">▲ 県平均前年比+3.2%に対し、TCCは+18.5%で急伸</div>
+
+      <!-- ④ 外部市場シェア (三重県全51コース中) -->
+      <div class="kpi-box">
+        <div class="kpi-box-header">
+          <div class="kpi-title">④ 三重県連盟 来場順位</div>
+          <div class="status-badge badge-blue">第 12 位 / 51コース</div>
+        </div>
+        <div class="kpi-main-val" style="color:var(--blue-text);">県平均 +3.2%<span class="kpi-unit">に対し</span></div>
+        <div class="bullet-gauge">
+          <div class="bullet-fill" style="width: 100%; background:var(--blue);"></div>
+        </div>
+        <div class="kpi-sub-line">
+          <span>TCCの伸び: <b style="color:var(--teal-text); font-size:16px;">+18.5%</b></span>
+          <span>市場シェア急拡大中</span>
+        </div>
       </div>
+
     </div>
 
-    <!-- 経営判断サマリー -->
-    <div class="card" style="border-left: 5px solid var(--tcc-gold);">
-      <div class="section-h" style="border:none; padding:0; margin-bottom:10px;">
+    <!-- 経営陣 意思決定サマリー -->
+    <div class="diag-card">
+      <div class="diag-title">
         <span>🦅 経営陣・役員会 診断サマリー（KGI・市場対比）</span>
       </div>
-      <div style="font-size:16.5px; color:#e2e8f0; line-height:1.8;">
-        ・<b>総括</b>: 4ヶ月累計売上は<b>¥127,398千円（予算達成率100.9%）</b>と順調。来場者数は前年比+1,789名（+18.5%）と大幅増。<br>
-        ・<b>市場比較</b>: 三重県ゴルフ連盟データ（全51コース）と比較すると、県内平均が前年比+3.2%にとどまる中、TCCは<b>+18.5%</b>と市場シェアを大きく拡大。<br>
-        ・<b>経営課題</b>: 来場増が平日中心のため、客単価（¥11,126）が予算（¥11,660）を-534円下回っている。下期に向けて「客単価の引き上げ」と「自社予約比率の維持」が最重要テーマ。
+      <div style="font-size:16.5px; color:#f1f5f9; line-height:1.8;">
+        ・<b>業績総括</b>: 4ヶ月累計売上は<b>¥127,398千円（予算比100.9% / 前年比+14.2%）</b>。来場者は<b>+1,789名（+18.5%）</b>と絶好調。<br>
+        ・<b>市場比較</b>: 三重県全51コースの市場平均伸び率が+3.2%にとどまる中、TCCは<b>+18.5%</b>と他コースから圧倒的にシェアを奪取。<br>
+        ・<b>経営の急所（ボトルネック）</b>: 来場増が平日ビジター中心のため、客単価（¥11,126）が予算（¥11,660）を<b>-534円下回っている</b>。下期に向けた経営課題は<b>「客単価の改善」</b>に集中する。
       </div>
     </div>
 
-    <!-- 幹部会月報テーブル -->
+    <!-- メリハリある財務・予実テーブル（列順は上のKPIと完全一致） -->
     <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
-        <div class="section-h">
-          <span>📊 2026年 1〜4月 予実・前年対比・客単価推移</span>
-          <span class="section-en">BUDGET VS ACTUAL (YOY)</span>
-        </div>
+      <div class="section-header">
+        <span>📊 2026年 1〜4月 月次予実・前年対比・客単価テーブル</span>
+        <span class="section-en">MONTHLY FINANCIAL BREAKDOWN</span>
       </div>
-      <div class="table-wrap">
-        <table>
+
+      <div class="table-container">
+        <table class="exec-table">
           <thead>
             <tr>
-              <th>月度</th>
-              <th>来場実績 (人)</th>
-              <th>来場前年</th>
-              <th>来場予算</th>
+              <th style="width:110px;">月度</th>
+              <!-- ① 売上高 -->
               <th>売上実績 (千円)</th>
-              <th>売上前年</th>
               <th>売上予算</th>
-              <th>客単価</th>
-              <th>予算達成率</th>
+              <th>売上前年</th>
+              <th>売上達成率</th>
+              <!-- ② 来場者数 -->
+              <th>来場実績 (人)</th>
+              <th>来場予算</th>
+              <th>来場前年</th>
+              <th>来場達成率</th>
+              <!-- ③ 客単価 -->
+              <th>客単価実績</th>
+              <th>客単価予算</th>
+              <th>単価差額</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>1月</td>
-              <td>2,865</td>
-              <td>2,370</td>
-              <td>2,690</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥31,592</td>
-              <td>¥25,358</td>
-              <td>¥29,580</td>
-              <td>¥11,027</td>
-              <td class="diff-up">106.8%</td>
+              <td><b>1月度</b></td>
+              <td class="cell-num cell-achieved">¥31,592</td>
+              <td class="cell-num">¥29,580</td>
+              <td class="cell-num">¥25,358</td>
+              <td><span class="pill-rate pill-green">106.8%</span></td>
+              <td class="cell-num cell-achieved">2,865</td>
+              <td class="cell-num">2,690</td>
+              <td class="cell-num">2,370</td>
+              <td><span class="pill-rate pill-green">106.5%</span></td>
+              <td class="cell-num">¥11,027</td>
+              <td class="cell-num">¥11,000</td>
+              <td class="cell-achieved">+27円</td>
             </tr>
             <tr>
-              <td>2月</td>
-              <td>2,673</td>
-              <td>2,142</td>
-              <td>2,400</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥26,814</td>
-              <td>¥23,138</td>
-              <td>¥26,390</td>
-              <td>¥10,031</td>
-              <td class="diff-up">101.6%</td>
+              <td><b>2月度</b></td>
+              <td class="cell-num cell-achieved">¥26,814</td>
+              <td class="cell-num">¥26,390</td>
+              <td class="cell-num">¥23,138</td>
+              <td><span class="pill-rate pill-green">101.6%</span></td>
+              <td class="cell-num cell-achieved">2,673</td>
+              <td class="cell-num">2,400</td>
+              <td class="cell-num">2,142</td>
+              <td><span class="pill-rate pill-green">111.4%</span></td>
+              <td class="cell-num cell-missed">¥10,031</td>
+              <td class="cell-num">¥11,000</td>
+              <td class="cell-missed">-969円</td>
             </tr>
             <tr>
-              <td>3月</td>
-              <td>3,105</td>
-              <td>2,658</td>
-              <td>2,960</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800;">¥34,375</td>
-              <td>¥33,214</td>
-              <td>¥35,510</td>
-              <td>¥11,071</td>
-              <td class="diff-up">96.8%</td>
+              <td><b>3月度</b></td>
+              <td class="cell-num cell-missed">¥34,375</td>
+              <td class="cell-num">¥35,510</td>
+              <td class="cell-num">¥33,214</td>
+              <td><span class="pill-rate pill-red">96.8%</span></td>
+              <td class="cell-num cell-achieved">3,105</td>
+              <td class="cell-num">2,960</td>
+              <td class="cell-num">2,658</td>
+              <td><span class="pill-rate pill-green">104.9%</span></td>
+              <td class="cell-num cell-missed">¥11,071</td>
+              <td class="cell-num">¥12,000</td>
+              <td class="cell-missed">-929円</td>
             </tr>
             <tr>
-              <td>4月</td>
-              <td>2,807</td>
-              <td>2,491</td>
-              <td>2,780</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-teal-light);">¥34,617</td>
-              <td>¥32,019</td>
-              <td>¥34,750</td>
-              <td>¥12,332</td>
-              <td class="diff-up">99.6%</td>
+              <td><b>4月度</b></td>
+              <td class="cell-num cell-achieved">¥34,617</td>
+              <td class="cell-num">¥34,750</td>
+              <td class="cell-num">¥32,019</td>
+              <td><span class="pill-rate pill-green">99.6%</span></td>
+              <td class="cell-num cell-achieved">2,807</td>
+              <td class="cell-num">2,780</td>
+              <td class="cell-num">2,491</td>
+              <td><span class="pill-rate pill-green">101.0%</span></td>
+              <td class="cell-num cell-missed">¥12,332</td>
+              <td class="cell-num">¥12,500</td>
+              <td class="cell-missed">-168円</td>
             </tr>
-            <tr style="background:rgba(27,77,107,0.3); font-weight:800;">
-              <td>4ヶ月累計</td>
-              <td>11,450</td>
-              <td>9,661 (+18.5%)</td>
-              <td>10,830</td>
-              <td style="font-family:'JetBrains Mono'; color:var(--tcc-gold); font-size:17px;">¥127,398</td>
-              <td>¥113,729</td>
+            <!-- 4ヶ月累計 合計行（太枠・強調ハイライト） -->
+            <tr class="total-row">
+              <td><b>4ヶ月累計</b></td>
+              <td style="color:var(--gold); font-size:19px;">¥127,398</td>
               <td>¥126,230</td>
-              <td>¥11,126</td>
-              <td class="diff-up" style="color:var(--tcc-teal-light); font-size:17px;">100.9% (達成)</td>
+              <td style="color:var(--teal-text);">¥113,729 (+14.2%)</td>
+              <td><span class="pill-rate pill-green" style="font-size:16px;">100.9%</span></td>
+              <td style="color:#fff; font-size:19px;">11,450</td>
+              <td>10,830</td>
+              <td style="color:var(--teal-text);">9,661 (+18.5%)</td>
+              <td><span class="pill-rate pill-green" style="font-size:16px;">105.7%</span></td>
+              <td style="color:var(--red-text); font-size:19px;">¥11,126</td>
+              <td>¥11,660</td>
+              <td style="color:var(--red-text);">-534円</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+
   </div>
 
   <!-- ======================================================== -->
-  <!-- 2. 支配人・部門長の視座 (それでどうする？戦術・4つの傘)   -->
+  <!-- 2. 支配人・部門長の視座 (それでどうする？ 4つの傘戦術)      -->
   <!-- ======================================================== -->
-  <div id="view-gm" class="view-section">
+  <div id="view-gm" class="view-content">
     <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
-        <div class="section-h">
-          <span>👔 支配人の問い：「経営KGIを受けて、今週・今月どうする？」</span>
-          <span class="section-en">TACTICAL ACTIONS & 4 UMBRELLAS</span>
-        </div>
+      <div class="section-header">
+        <span>👔 支配人の問い：「客単価-534円をどう埋める？ 今月どう手を打つ？」</span>
+        <span class="section-en">TACTICAL ACTIONS & 4 UMBRELLAS</span>
       </div>
 
       <!-- 4つの傘 戦術カード -->
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:14px; margin-bottom:20px;">
-        <!-- 傘1: 守る -->
-        <div style="background:var(--tcc-card-sub); border-top:4px solid var(--tcc-teal); border-radius:10px; padding:16px; border:1px solid var(--tcc-border);">
-          <div style="font-weight:800; font-size:16px; color:var(--tcc-teal-light); margin-bottom:6px;">🏆 守る (Champion会員維持)</div>
-          <div style="font-size:14.5px; color:#cbd5e1; line-height:1.7;">
-            ・<b>現状</b>: 年間12回以上来場のコア会員194名が売上の42%を支える。<br>
-            ・<b>打ち手</b>: 週末スタート枠の優先確保と、開場記念杯の特別案内を個別発送。
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:24px;">
+        <div style="background:var(--card-sub); border-top:5px solid var(--teal); border-radius:10px; padding:18px; border:1px solid var(--border);">
+          <div style="font-weight:900; font-size:17px; color:var(--teal-text); margin-bottom:8px;">🏆 守る (Champion会員維持)</div>
+          <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">
+            ・<b>現状</b>: 年12回以上来場のコア会員194名が売上の42%を創出。<br>
+            ・<b>打ち手</b>: 週末スタート枠の優先確保と、開場記念杯の特別案内状を個別発送。
           </div>
         </div>
 
-        <!-- 傘2: 取り戻す -->
-        <div style="background:var(--tcc-card-sub); border-top:4px solid var(--tcc-red); border-radius:10px; padding:16px; border:1px solid var(--tcc-border);">
-          <div style="font-weight:800; font-size:16px; color:var(--tcc-red); margin-bottom:6px;">🚨 取り戻す (高額離反の再活性)</div>
-          <div style="font-size:14.5px; color:#cbd5e1; line-height:1.7;">
-            ・<b>現状</b>: 直近3ヶ月来場なしの正会員が<b>38名</b>（離脱リスク高）。<br>
-            ・<b>打ち手</b>: 支配人・役員からの手書き挨拶状と同伴優待券を送付し復帰を促す。
+        <div style="background:var(--card-sub); border-top:5px solid var(--red); border-radius:10px; padding:18px; border:1px solid var(--border);">
+          <div style="font-weight:900; font-size:17px; color:var(--red-text); margin-bottom:8px;">🚨 取り戻す (高額離反の再活性)</div>
+          <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">
+            ・<b>現状</b>: 直近3ヶ月来場なしの正会員が<b>38名</b>（離脱リスク大）。<br>
+            ・<b>打ち手</b>: 支配人・役員の手書き挨拶状と同伴優待券を送付し復帰を促進。
           </div>
         </div>
 
-        <!-- 傘3: 深耕 -->
-        <div style="background:var(--tcc-card-sub); border-top:4px solid var(--tcc-amber); border-radius:10px; padding:16px; border:1px solid var(--tcc-border);">
-          <div style="font-weight:800; font-size:16px; color:var(--tcc-amber); margin-bottom:6px;">📈 深耕 (来場客の客単価アップ)</div>
-          <div style="font-size:14.5px; color:#cbd5e1; line-height:1.7;">
-            ・<b>現状</b>: 平日ビジターの昼食単価が¥1,450と低調（予算: ¥1,800）。<br>
-            ・<b>打ち手</b>: レストラン冷麺フェアと、コンペ向け特製土産セット（¥2,200）の予約販売。
+        <div style="background:var(--card-sub); border-top:5px solid var(--amber); border-radius:10px; padding:18px; border:1px solid var(--border);">
+          <div style="font-weight:900; font-size:17px; color:var(--amber-text); margin-bottom:8px;">📈 深耕 (客単価+534円回復)</div>
+          <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">
+            ・<b>現状</b>: ビジターの昼食単価が¥1,450と低調（目標: ¥1,800）。<br>
+            ・<b>打ち手</b>: レストラン冷麺フェアと特製スイーツ土産（¥2,200）の予約販売。
           </div>
         </div>
 
-        <!-- 傘4: 追わない -->
-        <div style="background:var(--tcc-card-sub); border-top:4px solid var(--tcc-gray); border-radius:10px; padding:16px; border:1px solid var(--tcc-border);">
-          <div style="font-weight:800; font-size:16px; color:var(--tcc-gray); margin-bottom:6px;">✂️ 追わない (低価格OTAの抑制)</div>
-          <div style="font-size:14.5px; color:#cbd5e1; line-height:1.7;">
-            ・<b>現状</b>: 楽天GORA・GDOの直前安売り枠を前年比50%削減。<br>
-            ・<b>打ち手</b>: 自社Web・LINE予約限定枠（自社比率46.5%）へシフトし送客手数料を削減。
+        <div style="background:var(--card-sub); border-top:5px solid var(--text-muted); border-radius:10px; padding:18px; border:1px solid var(--border);">
+          <div style="font-weight:900; font-size:17px; color:#cbd5e1; margin-bottom:8px;">✂️ 追わない (低価格OTAの抑制)</div>
+          <div style="font-size:15px; color:#cbd5e1; line-height:1.75;">
+            ・<b>現状</b>: 楽天GORA・GDOの直前安売り枠を50%削減。<br>
+            ・<b>打ち手</b>: 自社Web・LINE予約枠（比率46.5%）へシフトし送客手数料を削減。
           </div>
-        </div>
-      </div>
-
-      <!-- 弱日トリアージ連動 -->
-      <div style="background:rgba(239, 159, 39, 0.1); border:1.5px solid var(--tcc-amber); border-radius:10px; padding:16px;">
-        <div style="font-weight:800; color:var(--tcc-amber); font-size:16px; margin-bottom:6px;">⚡ 弱日トリアージ（木曜雨天＆8月下旬の対策）</div>
-        <div style="font-size:15px; color:#f1f5f9; line-height:1.7;">
-          ・<b>課題</b>: 8月27日(木)・28日(金)の午後スタート枠に14組の空き枠が発生予測。<br>
-          ・<b>支配人判断</b>: 過去6ヶ月以内に平日午後枠を利用した同伴ビジター128名へ、LINE限定の特別早割優待を即時配信承認。
         </div>
       </div>
     </div>
   </div>
 
   <!-- ======================================================== -->
-  <!-- 3. 現場リーダーの視座 (今日すべき事・未達Gap分析)        -->
+  <!-- 3. 現場リーダーの視座 (何の数字が未達か？ 今日のToDo)      -->
   <!-- ======================================================== -->
-  <div id="view-lead" class="view-section">
+  <div id="view-lead" class="view-content">
     <div class="card">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
-        <div class="section-h">
-          <span>🏃 現場リーダーの視座：「何の数字ができなかったか？ 今日何をしなくちゃいけないか？」</span>
-          <span class="section-en">GAP ANALYSIS & TODAY'S ACTION</span>
-        </div>
+      <div class="section-header">
+        <span>🏃 現場リーダーの視座：「何の数字ができなかったか？ 今日何をしなくちゃいけないか？」</span>
+        <span class="section-en">GAP ANALYSIS & TODAY'S ACTION</span>
       </div>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:18px;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
         <!-- 🔴 先週・昨日できなかった数字（Gap分析） -->
         <div>
-          <div class="gap-title">
-            <span>🔴 先週・前日 できなかった数字（未達要因）</span>
+          <div style="font-size:18px; font-weight:900; color:var(--red-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+            <span>🔴 先週・前日 できなかった数字（Gap分析）</span>
           </div>
 
-          <div class="gap-box">
-            <div style="font-weight:800; color:#fff; font-size:15.5px; margin-bottom:4px;">🍽️ レストラン客単価: 目標 ¥6,500 ➔ 実績 ¥6,086 (-414円未達)</div>
-            <div style="font-size:14.5px; color:#cbd5e1; line-height:1.6;">
-              ・<b>原因</b>: ランチ時の「おすすめサイドメニュー（特製唐揚げ・冷奴等）」と「昼食時アルコール」のお声がけがホールで3割程度しか実施できていなかった。
+          <div class="gap-card">
+            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ レストラン客単価: 目標 ¥6,500 ➔ 実績 ¥6,086 (-414円未達)</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
+              ・<b>原因</b>: ランチ時の「おすすめサイドメニュー（特製唐揚げ等）」と「昼食時アルコール」のお声がけがホールで3割程度しか実施できていなかった。
             </div>
           </div>
 
-          <div class="gap-box">
-            <div style="font-weight:800; color:#fff; font-size:15.5px; margin-bottom:4px;">⏱️ 木曜雨天時の稼働率: 目標 85% ➔ 実績 55% (-30pt未達)</div>
-            <div style="font-size:14.5px; color:#cbd5e1; line-height:1.6;">
-              ・<b>原因</b>: 当日朝の雨天キャンセル（4組）に対し、スループレー希望者への電話振り替え案内が1時間遅れ、空き枠を埋められなかった。
-            </div>
-          </div>
-
-          <div class="gap-box">
-            <div style="font-weight:800; color:#fff; font-size:15.5px; margin-bottom:4px;">📲 LINE友だち追加数: 目標 50名/週 ➔ 実績 28名 (-22名未達)</div>
-            <div style="font-size:14.5px; color:#cbd5e1; line-height:1.6;">
-              ・<b>原因</b>: チェックイン混雑時にフロントでのQRコード案内POPの提示が漏れていた。
+          <div class="gap-card">
+            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⏱️ 木曜雨天時の稼働率: 目標 85% ➔ 実績 55% (-30pt未達)</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
+              ・<b>原因</b>: 雨天キャンセル（4組）に対し、スループレー希望者への電話振り替え案内が1時間遅れ、空き枠を埋められなかった。
             </div>
           </div>
         </div>
 
         <!-- 🟢 今日・今週 現場リーダーがやること（Action Checklist） -->
         <div>
-          <div class="action-title">
+          <div style="font-size:18px; font-weight:900; color:var(--teal-text); margin-bottom:12px; display:flex; align-items:center; gap:8px;">
             <span>🟢 本日・今週 現場リーダーの必達アクション（ToDo）</span>
           </div>
 
-          <div class="action-box">
-            <div style="font-weight:800; color:#fff; font-size:15.5px; margin-bottom:4px;">⛳ 【マスター室】ハーフ2時間15分運行死守 ＆ 詰まり先回り</div>
-            <div style="font-size:14.5px; color:#cbd5e1; line-height:1.6;">
-              ・<b>本日の組数</b>: 48組（満枠稼働）。<br>
-              ・<b>行動</b>: 8時台のインコース3番・4番で詰まり兆候を先回り検知し、マーシャルカートが迅速にプレーペース誘導を行う。
-            </div>
-          </div>
-
-          <div class="action-box">
-            <div style="font-weight:800; color:#fff; font-size:15.5px; margin-bottom:4px;">🍽️ 【レストラン】昼食時のセットメニュー声掛け100%徹底</div>
-            <div style="font-size:14.5px; color:#cbd5e1; line-height:1.6;">
+          <div class="act-card">
+            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">🍽️ 【レストラン】昼食時のセットメニュー声掛け100%徹底</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
               ・<b>目標</b>: 単価¥6,500回復。<br>
-              ・<b>行動</b>: 朝礼で共有した「冷やし担々麺＋デザートセット（+450円）」のおすすめを全組・全席で笑顔で実施。
+              ・<b>行動</b>: 朝礼で共有した「冷やし担々麺＋デザートセット（+450円）」のおすすめを全席・全組で笑顔で実施。
             </div>
           </div>
 
-          <div class="action-box">
-            <div style="font-weight:800; color:#fff; font-size:15.5px; margin-bottom:4px;">🏨 【フロント】チェックイン時 LINE友だち登録 声掛け（目標: 本日30名）</div>
-            <div style="font-size:14.5px; color:#cbd5e1; line-height:1.6;">
-              ・<b>行動</b>: 同伴ビジター全員に対し、「本日のスコア入力＆次回ワンドリンククーポン」をフックにQRコード案内を確実に手渡し。
+          <div class="act-card">
+            <div style="font-weight:900; color:#fff; font-size:16.5px; margin-bottom:6px;">⛳ 【マスター室】ハーフ2時間15分運行死守 ＆ 詰まり先回り</div>
+            <div style="font-size:15px; color:#cbd5e1; line-height:1.7;">
+              ・<b>本日の組数</b>: 48組（満枠）。<br>
+              ・<b>行動</b>: 8時台のインコース3番・4番で詰まり兆候を先回り検知し、マーシャルカートが迅速にプレーペース誘導を行う。
             </div>
           </div>
         </div>
@@ -614,9 +693,9 @@
 </div>
 
 <script>
-  function switchPers(viewId) {
-    document.querySelectorAll('.pers-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+  function setPerspective(viewId) {
+    document.querySelectorAll('.pers-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.view-content').forEach(s => s.classList.remove('active'));
 
     event.currentTarget.classList.add('active');
     document.getElementById(viewId).classList.add('active');
