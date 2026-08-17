@@ -1228,217 +1228,222 @@
     if (stockChartsInitialized) return;
     stockChartsInitialized = true;
 
-    // 1. デシル分析 パレート図
-    const ctxDecile = document.getElementById('chartDecilePareto').getContext('2d');
-    new Chart(ctxDecile, {
-      type: 'bar',
-      data: {
-        labels: ['デシル1(神会員)', 'デシル2', 'デシル3', 'デシル4', 'デシル5', 'デシル6', 'デシル7', 'デシル8', 'デシル9', 'デシル10'],
-        datasets: [
-          {
-            type: 'line',
-            label: '累積売上構成比 (%)',
-            data: [42.1, 61.8, 74.5, 83.2, 89.4, 93.6, 96.5, 98.3, 99.4, 100.0],
-            borderColor: '#C9A961',
-            borderWidth: 3,
-            pointBackgroundColor: '#C9A961',
-            pointRadius: 5,
-            yAxisID: 'y1'
-          },
-          {
-            type: 'bar',
-            label: 'グループ別売上高 (百万円)',
-            data: [53.4, 25.0, 16.1, 11.0, 7.9, 5.3, 3.7, 2.3, 1.4, 0.8],
-            backgroundColor: [
-              '#C9A961', '#2c6e96', '#2c6e96', '#182538', '#182538',
-              '#182538', '#182538', '#182538', '#182538', '#182538'
-            ],
-            borderRadius: 4,
-            yAxisID: 'y'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: { ticks: { color: '#94a3b8', font: { size: 12, weight: 700 } }, grid: { display: false } },
-          y: {
-            title: { display: true, text: '売上高 (百万円)', color: '#94a3b8' },
-            ticks: { color: '#94a3b8' },
-            grid: { color: 'rgba(255,255,255,0.05)' }
-          },
-          y1: {
-            position: 'right',
-            max: 100,
-            min: 0,
-            title: { display: true, text: '累積比率 (%)', color: '#C9A961' },
-            ticks: { color: '#C9A961', callback: v => v + '%' },
-            grid: { display: false }
-          }
+    try {
+      // 1. デシル分析 パレート図
+      const ctxDecile = document.getElementById('chartDecilePareto').getContext('2d');
+      new Chart(ctxDecile, {
+        type: 'bar',
+        data: {
+          labels: ['デシル1(神会員)', 'デシル2', 'デシル3', 'デシル4', 'デシル5', 'デシル6', 'デシル7', 'デシル8', 'デシル9', 'デシル10'],
+          datasets: [
+            {
+              type: 'line',
+              label: '累積売上構成比 (%)',
+              data: [42.1, 61.8, 74.5, 83.2, 89.4, 93.6, 96.5, 98.3, 99.4, 100.0],
+              borderColor: '#C9A961',
+              borderWidth: 3,
+              pointBackgroundColor: '#C9A961',
+              pointRadius: 5,
+              yAxisID: 'y1'
+            },
+            {
+              type: 'bar',
+              label: 'グループ別売上高 (百万円)',
+              data: [53.4, 25.0, 16.1, 11.0, 7.9, 5.3, 3.7, 2.3, 1.4, 0.8],
+              backgroundColor: [
+                '#C9A961', '#2c6e96', '#2c6e96', '#182538', '#182538',
+                '#182538', '#182538', '#182538', '#182538', '#182538'
+              ],
+              borderRadius: 4,
+              yAxisID: 'y'
+            }
+          ]
         },
-        plugins: {
-          legend: { labels: { color: '#cbd5e1', font: { weight: 700 } } }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { ticks: { color: '#94a3b8', font: { size: 12, weight: 700 } }, grid: { display: false } },
+            y: {
+              title: { display: true, text: '売上高 (百万円)', color: '#94a3b8' },
+              ticks: { color: '#94a3b8' },
+              grid: { color: 'rgba(255,255,255,0.05)' }
+            },
+            y1: {
+              position: 'right',
+              max: 100,
+              min: 0,
+              title: { display: true, text: '累積比率 (%)', color: '#C9A961' },
+              ticks: { color: '#C9A961', callback: v => v + '%' },
+              grid: { display: false }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#cbd5e1', font: { weight: 700 } } }
+          }
         }
-      }
-    });
+      });
 
-    // 2. 10年間 超時系列マクロトレンド
-    const ctxMacro = document.getElementById('chartTenYearMacro').getContext('2d');
-    new Chart(ctxMacro, {
-      data: {
-        labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026(見込)'],
-        datasets: [
-          {
-            type: 'line',
-            label: '客単価 (円)',
-            data: [11850, 11720, 11890, 10950, 11200, 11450, 11800, 12150, 12380, 12450],
-            borderColor: '#f59e0b',
-            borderWidth: 3,
-            pointBackgroundColor: '#f59e0b',
-            yAxisID: 'yUnitPrice'
-          },
-          {
-            type: 'bar',
-            label: '年間来場客数 (千名)',
-            data: [32.1, 32.5, 31.8, 28.5, 35.2, 36.4, 35.8, 34.5, 34.8, 35.2],
-            backgroundColor: 'rgba(27, 77, 107, 0.65)',
-            borderColor: '#2c6e96',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            yAxisID: 'yVisitors'
-          },
-          {
-            type: 'line',
-            label: '年間営業売上高 (百万円)',
-            data: [380, 381, 378, 312, 394, 417, 422, 419, 431, 438],
-            borderColor: '#10b981',
-            backgroundColor: 'rgba(16, 185, 129, 0.12)',
-            fill: true,
-            borderWidth: 2.5,
-            tension: 0.3,
-            yAxisID: 'yRevenue'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: { ticks: { color: '#94a3b8', font: { weight: 700 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
-          yRevenue: {
-            position: 'left',
-            title: { display: true, text: '売上高 (百万円)', color: '#10b981' },
-            ticks: { color: '#10b981' },
-            grid: { color: 'rgba(255,255,255,0.05)' }
-          },
-          yVisitors: {
-            position: 'right',
-            title: { display: true, text: '来場客数 (千名)', color: '#2c6e96' },
-            ticks: { color: '#2c6e96' },
-            grid: { display: false }
-          },
-          yUnitPrice: {
-            position: 'right',
-            display: false,
-            min: 9000,
-            max: 14000
-          }
+      // 2. 10年間 超時系列マクロトレンド
+      const ctxMacro = document.getElementById('chartTenYearMacro').getContext('2d');
+      new Chart(ctxMacro, {
+        data: {
+          labels: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026(見込)'],
+          datasets: [
+            {
+              type: 'line',
+              label: '客単価 (円)',
+              data: [11850, 11720, 11890, 10950, 11200, 11450, 11800, 12150, 12380, 12450],
+              borderColor: '#f59e0b',
+              borderWidth: 3,
+              pointBackgroundColor: '#f59e0b',
+              yAxisID: 'yUnitPrice'
+            },
+            {
+              type: 'bar',
+              label: '年間来場客数 (千名)',
+              data: [32.1, 32.5, 31.8, 28.5, 35.2, 36.4, 35.8, 34.5, 34.8, 35.2],
+              backgroundColor: 'rgba(27, 77, 107, 0.65)',
+              borderColor: '#2c6e96',
+              borderWidth: 1.5,
+              borderRadius: 4,
+              yAxisID: 'yVisitors'
+            },
+            {
+              type: 'line',
+              label: '年間営業売上高 (百万円)',
+              data: [380, 381, 378, 312, 394, 417, 422, 419, 431, 438],
+              borderColor: '#10b981',
+              backgroundColor: 'rgba(16, 185, 129, 0.12)',
+              fill: true,
+              borderWidth: 2.5,
+              tension: 0.3,
+              yAxisID: 'yRevenue'
+            }
+          ]
         },
-        plugins: {
-          legend: { labels: { color: '#cbd5e1', font: { weight: 700 } } }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { ticks: { color: '#94a3b8', font: { weight: 700 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            yRevenue: {
+              position: 'left',
+              title: { display: true, text: '売上高 (百万円)', color: '#10b981' },
+              ticks: { color: '#10b981' },
+              grid: { color: 'rgba(255,255,255,0.05)' }
+            },
+            yVisitors: {
+              position: 'right',
+              title: { display: true, text: '来場客数 (千名)', color: '#2c6e96' },
+              ticks: { color: '#2c6e96' },
+              grid: { display: false }
+            },
+            yUnitPrice: {
+              position: 'right',
+              display: false,
+              min: 9000,
+              max: 14000
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#cbd5e1', font: { weight: 700 } } }
+          }
         }
-      }
-    });
+      });
 
-    // 3. 会員数 ＆ 平均年齢推移
-    const ctxAge = document.getElementById('chartMemberAge').getContext('2d');
-    new Chart(ctxAge, {
-      data: {
-        labels: ['2017', '2019', '2021', '2023', '2025', '2026'],
-        datasets: [
-          {
-            type: 'line',
-            label: '平均年齢 (歳)',
-            data: [61.2, 62.8, 64.5, 66.1, 67.8, 68.4],
-            borderColor: '#ef4444',
-            borderWidth: 3,
-            pointBackgroundColor: '#ef4444',
-            yAxisID: 'yAge'
-          },
-          {
-            type: 'bar',
-            label: '正会員数 (名)',
-            data: [1200, 1140, 1080, 1020, 970, 950],
-            backgroundColor: 'rgba(201, 169, 97, 0.4)',
-            borderColor: '#C9A961',
-            borderWidth: 1.5,
-            borderRadius: 4,
-            yAxisID: 'yCount'
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-          x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
-          yCount: {
-            position: 'left',
-            min: 800,
-            max: 1300,
-            ticks: { color: '#C9A961' },
-            grid: { color: 'rgba(255,255,255,0.05)' }
-          },
-          yAge: {
-            position: 'right',
-            min: 55,
-            max: 75,
-            ticks: { color: '#ef4444' },
-            grid: { display: false }
-          }
+      // 3. 会員数 ＆ 平均年齢推移
+      const ctxAge = document.getElementById('chartMemberAge').getContext('2d');
+      new Chart(ctxAge, {
+        data: {
+          labels: ['2017', '2019', '2021', '2023', '2025', '2026'],
+          datasets: [
+            {
+              type: 'line',
+              label: '平均年齢 (歳)',
+              data: [61.2, 62.8, 64.5, 66.1, 67.8, 68.4],
+              borderColor: '#ef4444',
+              borderWidth: 3,
+              pointBackgroundColor: '#ef4444',
+              yAxisID: 'yAge'
+            },
+            {
+              type: 'bar',
+              label: '正会員数 (名)',
+              data: [1200, 1140, 1080, 1020, 970, 950],
+              backgroundColor: 'rgba(201, 169, 97, 0.4)',
+              borderColor: '#C9A961',
+              borderWidth: 1.5,
+              borderRadius: 4,
+              yAxisID: 'yCount'
+            }
+          ]
         },
-        plugins: {
-          legend: { labels: { color: '#cbd5e1' } }
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+            yCount: {
+              position: 'left',
+              min: 800,
+              max: 1300,
+              ticks: { color: '#C9A961' },
+              grid: { color: 'rgba(255,255,255,0.05)' }
+            },
+            yAge: {
+              position: 'right',
+              min: 55,
+              max: 75,
+              ticks: { color: '#ef4444' },
+              grid: { display: false }
+            }
+          },
+          plugins: {
+            legend: { labels: { color: '#cbd5e1' } }
+          }
         }
-      }
-    });
+      });
 
-    // 4. 部門別売上構成比（年会費・名義書換料を完全統合したストック収益オントロジー）
-    const ctxDept = document.getElementById('chartDeptShare').getContext('2d');
-    new Chart(ctxDept, {
-      type: 'doughnut',
-      data: {
-        labels: [
-          '⛳ プレー代 (52% / ¥228M)',
-          '🍽️ レストラン (22% / ¥96M)',
-          '🏛️ 会員年会費 (11% / ¥48M)',
-          '🛍️ プロショップ (7% / ¥31M)',
-          '🏆 名義書換料・入会金 (5% / ¥22M)',
-          '✨ その他付帯 (3% / ¥15M)'
-        ],
-        datasets: [{
-          data: [52, 22, 11, 7, 5, 3],
-          backgroundColor: [
-            '#1B4D6B', // Navy
-            '#2c6e96', // Navy-light
-            '#C9A961', // Gold (年会費)
-            '#10b981', // Teal (ショップ)
-            '#f59e0b', // Amber (名義書換)
-            '#64748b'  // Slate (その他)
+      // 4. 部門別売上構成比（年会費・名義書換料を完全統合したストック収益オントロジー）
+      const ctxDept = document.getElementById('chartDeptShare').getContext('2d');
+      new Chart(ctxDept, {
+        type: 'doughnut',
+        data: {
+          labels: [
+            '⛳ プレー代 (52% / ¥228M)',
+            '🍽️ レストラン (22% / ¥96M)',
+            '🏛️ 会員年会費 (11% / ¥48M)',
+            '🛍️ プロショップ (7% / ¥31M)',
+            '🏆 名義書換料・入会金 (5% / ¥22M)',
+            '✨ その他付帯 (3% / ¥15M)'
           ],
-          borderColor: '#0d1520',
-          borderWidth: 2.5
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 12.5, weight: 700 }, padding: 10 } }
+          datasets: [{
+            data: [52, 22, 11, 7, 5, 3],
+            backgroundColor: [
+              '#1B4D6B', // Navy
+              '#2c6e96', // Navy-light
+              '#C9A961', // Gold (年会費)
+              '#10b981', // Teal (ショップ)
+              '#f59e0b', // Amber (名義書換)
+              '#64748b'  // Slate (その他)
+            ],
+            borderColor: '#0d1520',
+            borderWidth: 2.5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 12.5, weight: 700 }, padding: 10 } }
+          }
         }
-      }
-    });
+      });
+    } catch(e) {
+      console.error('Stock chart init error:', e);
+    }
+  }
 
   // ページ読み込み時のURL判定（?tab=stock または #stock で自動切替）
   window.addEventListener('DOMContentLoaded', () => {
@@ -1449,7 +1454,6 @@
     }
   });
 </script>
-
 
 </body>
 </html>
