@@ -1083,18 +1083,18 @@
         </div>
       </div>
 
-      <!-- 部門別売上構成比 ABC推移 -->
+      <!-- 部門別売上構成比 ABC推移（年会費・名義書換料を完全統合） -->
       <div class="card" style="margin-bottom:0;">
         <div class="section-header">
-          <span>🍽️ ④ 部門別売上構成比（10年変遷）</span>
-          <span class="section-en">DEPARTMENT REVENUE SHARE</span>
+          <span>🍽️ ④ 部門別売上構成比（10年変遷 ＆ ストック収益）</span>
+          <span class="section-en">DEPARTMENT REVENUE SHARE & STOCK DUES</span>
         </div>
         <div style="background:#090e17; border:1px solid var(--border); border-radius:10px; padding:16px;">
           <div style="position:relative; height:280px;">
             <canvas id="chartDeptShare"></canvas>
           </div>
-          <div style="font-size:13px; color:var(--gold); font-weight:700; margin-top:10px;">
-            💡 レストラン比率が22% ➔ 26%へ拡大。「来場後単価（After Unit）」が収益の柱に成長。
+          <div style="font-size:13.5px; color:var(--gold); font-weight:700; margin-top:12px; line-height:1.6; background:rgba(201,169,97,0.1); border:1px solid var(--gold); border-radius:6px; padding:8px 10px;">
+            🏛️ <b>会員年会費（4,800万 / 11%）＋ 名義書換料（2,200万 / 5%）＝ 計7,000万円（全社売上の16%）</b> が「来場に左右されない強固なストック固定収益」。休眠会員の退会防止と世代交代名変が、この7,000万円の絶対防衛線。
           </div>
         </div>
       </div>
@@ -1313,27 +1313,42 @@
       }
     });
 
-    // 4. 部門別売上構成比
+    // 4. 部門別売上構成比（年会費・名義書換料を完全統合したストック収益オントロジー）
     const ctxDept = document.getElementById('chartDeptShare').getContext('2d');
     new Chart(ctxDept, {
       type: 'doughnut',
       data: {
-        labels: ['プレー代 (62%)', 'レストラン (26%)', 'プロショップ (8%)', 'その他付帯 (4%)'],
+        labels: [
+          '⛳ プレー代 (52% / ¥228M)',
+          '🍽️ レストラン (22% / ¥96M)',
+          '🏛️ 会員年会費 (11% / ¥48M)',
+          '🛍️ プロショップ (7% / ¥31M)',
+          '🏆 名義書換料・入会金 (5% / ¥22M)',
+          '✨ その他付帯 (3% / ¥15M)'
+        ],
         datasets: [{
-          data: [62, 26, 8, 4],
-          backgroundColor: ['#1B4D6B', '#C9A961', '#10b981', '#64748b'],
+          data: [52, 22, 11, 7, 5, 3],
+          backgroundColor: [
+            '#1B4D6B', // Navy
+            '#2c6e96', // Navy-light
+            '#C9A961', // Gold (年会費)
+            '#10b981', // Teal (ショップ)
+            '#f59e0b', // Amber (名義書換)
+            '#64748b'  // Slate (その他)
+          ],
           borderColor: '#0d1520',
-          borderWidth: 3
+          borderWidth: 2.5
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'right', labels: { color: '#cbd5e1', font: { weight: 700 } } }
+          legend: { position: 'right', labels: { color: '#cbd5e1', font: { size: 12.5, weight: 700 }, padding: 10 } }
         }
       }
     });
+
   }
 </script>
 
