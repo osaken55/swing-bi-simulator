@@ -902,65 +902,99 @@
           </div>
         </div>
 
-        <!-- 🍺 フロー内：経営者の視座に立った生ビール価格改定ドリルダウン（月間粗利Before/Afterグラフ全面型） -->
-        <div style="margin-top: 20px; background: #0c1420; border: 2px solid var(--gold); border-radius: 12px; padding: 20px; box-shadow: 0 0 24px rgba(201,169,97,0.2);">
+        <!-- 🍺 フロー内：ビールジョッキ型ピクトグラフ（Before vs After 縦型ジョッキで月間粗利益を直感可視化） -->
+        <div style="margin-top: 20px; background: #0c1420; border: 2px solid var(--gold); border-radius: 12px; padding: 22px 20px; box-shadow: 0 0 28px rgba(201,169,97,0.22);">
           
           <!-- ヘッダー -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
             <div>
-              <div style="font-size: 17px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 22px;">🔍</span>
+              <div style="font-size: 17.5px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 24px;">🍺</span>
                 <span>部門ドリルダウン実例：【レストラン】生ビール価格改定の弾力性分析</span>
               </div>
               <div style="font-size: 13px; color: var(--gold); font-weight: 700; margin-top: 3px;">
                 経営者の最大の不安「値上げで客が減って利益が落ちないか？」をPOSデータで科学的に解消
               </div>
             </div>
-            <span class="badge bg-gold" style="font-size: 13.5px; padding: 6px 14px;">年間営業利益 +113万円 LIFT</span>
+            <span class="badge bg-gold" style="font-size: 14px; padding: 6px 14px;">年間営業利益 +113万円 LIFT</span>
           </div>
 
-          <!-- ① 【最前面】月間粗利益（営業利益）Before ➔ After ビジュアルグラフ -->
-          <div style="background: #060a10; border: 1.5px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 16px;">
-            <div style="font-size: 13.5px; font-weight: 800; color: #94a3b8; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-              <span>💰 【最重要】月間粗利益（手元に残る利益）の Before / After</span>
+          <!-- ① 【最重要】ビールジョッキ型 縦棒ピクトグラフ（Before vs After） -->
+          <div style="background: #060a10; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 18px;">
+            <div style="font-size: 14px; font-weight: 800; color: #94a3b8; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+              <span>💰 【最重要】月間粗利益（手元に残る利益）の ビールジョッキ比較</span>
               <span style="color: var(--c-green-text); font-weight: 900; font-size: 14.5px;">+¥94,400 / 月 (+16.1% 増益) 🚀</span>
             </div>
 
-            <!-- 改定前バー -->
-            <div style="margin-bottom: 10px;">
-              <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #cbd5e1; margin-bottom: 3px;">
-                <span>🍺 改定前（旧価格 ¥750 / 杯）</span>
-                <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: #fff;">¥585,000</span>
-              </div>
-              <div style="height: 26px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex;">
-                <div style="width: 86.1%; background: linear-gradient(90deg, #334155, #64748b); display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 800; color: #fff;">
-                  月間粗利 ¥585,000 (粗利率 65.0%)
+            <!-- ジョッキ比較ステージ -->
+            <div style="display: flex; justify-content: center; align-items: flex-end; gap: 30px; padding: 10px 0 20px 0; border-bottom: 2px dashed rgba(255,255,255,0.1); margin-bottom: 14px; flex-wrap: wrap;">
+              
+              <!-- 【改定前 ジョッキ】 -->
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 13px; font-weight: 800; color: #94a3b8; margin-bottom: 8px;">🍺 改定前 (¥750)</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 900; color: #cbd5e1; margin-bottom: 8px;">¥585,000</div>
+                
+                <!-- ジョッキ本体 -->
+                <div style="position: relative; width: 84px; height: 155px; background: rgba(255,255,255,0.04); border: 3px solid rgba(255,255,255,0.35); border-top: none; border-radius: 0 0 14px 14px; display: flex; flex-direction: column; justify-content: flex-end; padding: 3px; box-shadow: inset 0 0 12px rgba(0,0,0,0.5);">
+                  <!-- ジョッキの取っ手 -->
+                  <div style="position: absolute; right: -22px; top: 35px; width: 20px; height: 75px; border: 3px solid rgba(255,255,255,0.35); border-left: none; border-radius: 0 16px 16px 0;"></div>
+                  <!-- 泡 -->
+                  <div style="height: 28px; background: #ffffff; border-radius: 10px 10px 4px 4px; box-shadow: 0 2px 6px rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; color: #64748b;">泡</div>
+                  <!-- 黄金ビール液 -->
+                  <div style="height: 120px; background: linear-gradient(180deg, #eab308 0%, #b45309 100%); border-radius: 0 0 10px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">
+                    <div style="font-size: 10.5px; font-weight: 800;">ベース粗利</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 900;">¥58.5万</div>
+                  </div>
                 </div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 8px;">出数: 1,200杯</div>
               </div>
-            </div>
 
-            <!-- 改定後バー -->
-            <div style="margin-bottom: 12px;">
-              <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--c-green-text); margin-bottom: 3px;">
-                <span>🚀 改定後（新価格 ¥880 / 杯・+130円改定）</span>
-                <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: var(--c-green-text); font-size: 15px;">¥679,400 (+16.1% 利益増)</span>
-              </div>
-              <div style="height: 30px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex; border: 1.5px solid var(--c-green);">
-                <div style="width: 86.1%; background: linear-gradient(90deg, #15803d, #10b981); display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 800; color: #fff;">
-                  ベース粗利 ¥585,000
+              <!-- 【矢印＆リフトインジケーター】 -->
+              <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 40px;">
+                <div style="background: rgba(16,185,129,0.15); border: 1.5px solid var(--c-green); border-radius: 20px; padding: 6px 14px; text-align: center;">
+                  <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">出数 -5.8% 軽微減</div>
+                  <div style="font-size: 16px; font-weight: 900; color: var(--c-green-text);">利益 +16.1% 🚀</div>
+                  <div style="font-size: 11px; color: var(--gold); font-weight: 800;">単価 +17.3% が圧倒</div>
                 </div>
-                <div style="width: 13.9%; background: linear-gradient(90deg, #C9A961, #eab308); display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 900; color: #000;">
-                  +¥9.4万増
-                </div>
+                <div style="font-size: 26px; color: var(--c-green-text); margin-top: 4px;">➔</div>
               </div>
+
+              <!-- 【改定後 ジョッキ（増益黄金層つき）】 -->
+              <div style="display: flex; flex-direction: column; align-items: center;">
+                <div style="font-size: 13px; font-weight: 800; color: var(--c-green-text); margin-bottom: 8px;">🚀 改定後 (¥880)</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 21px; font-weight: 900; color: var(--c-green-text); margin-bottom: 8px;">¥679,400</div>
+                
+                <!-- ジョッキ本体（背が高く溢れる演出） -->
+                <div style="position: relative; width: 92px; height: 185px; background: rgba(255,255,255,0.06); border: 3.5px solid var(--gold); border-top: none; border-radius: 0 0 16px 16px; display: flex; flex-direction: column; justify-content: flex-end; padding: 3.5px; box-shadow: 0 0 20px rgba(201,169,97,0.3), inset 0 0 12px rgba(0,0,0,0.5);">
+                  <!-- ジョッキの取っ手 -->
+                  <div style="position: absolute; right: -24px; top: 40px; width: 22px; height: 90px; border: 3.5px solid var(--gold); border-left: none; border-radius: 0 18px 18px 0;"></div>
+                  <!-- こぼれ泡 -->
+                  <div style="position: absolute; top: -12px; left: -4px; right: -4px; height: 32px; background: #ffffff; border-radius: 14px 14px 6px 6px; box-shadow: 0 3px 10px rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #166534;">
+                    ✨ たっぷり泡 ✨
+                  </div>
+                  <!-- 上層：純増利益レイヤー（黄金ゴールド） -->
+                  <div style="height: 40px; background: linear-gradient(180deg, #fef08a 0%, #eab308 100%); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; margin-bottom: 2px; box-shadow: 0 0 8px rgba(250,204,21,0.6);">
+                    <div style="font-size: 10px; font-weight: 900; color: #713f12;">利益純増分</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 900; color: #000;">+¥94,400</div>
+                  </div>
+                  <!-- 下層：ベースビール液 -->
+                  <div style="height: 120px; background: linear-gradient(180deg, #eab308 0%, #b45309 100%); border-radius: 0 0 12px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">
+                    <div style="font-size: 10.5px; font-weight: 800;">ベース粗利</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 900;">¥58.5万</div>
+                  </div>
+                </div>
+                <div style="font-size: 12px; color: var(--c-green-text); font-weight: 700; margin-top: 8px;">出数: 1,130杯 (-5.8%)</div>
+              </div>
+
             </div>
 
             <!-- 年間リフト換算 -->
-            <div style="background: rgba(16,185,129,0.1); border: 1px dashed var(--c-green); border-radius: 6px; padding: 7px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px;">
+            <div style="background: rgba(16,185,129,0.1); border: 1.5px dashed var(--c-green); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 8px;">
               <span style="color: #cbd5e1;">🍺 生ビール1品だけの価格改定で、営業利益が年間で純増する金額：</span>
-              <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 900; color: var(--c-green-text);">+¥1,132,800 / 年</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 900; color: var(--c-green-text);">+¥1,132,800 / 年</span>
             </div>
           </div>
+
 
           <!-- ② 因果因数分解：単価 × 出数 ＝ 売上高（3指標グリッド） -->
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
@@ -1200,14 +1234,14 @@
 
     </div>
 
-    <!-- 5. 部門ドリルダウン実戦実例：レストラン生ビール値上げ（月間粗利Before/Afterグラフ全面型） -->
+    <!-- 5. 部門ドリルダウン実戦実例：レストラン生ビール値上げ（ビールジョッキ型ピクトグラフ） -->
     <div class="card" style="border: 2px solid var(--gold); background: #0c1420; box-shadow: 0 0 28px rgba(201, 169, 97, 0.22); padding: 22px 20px;">
       
       <!-- ヘッダー -->
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
         <div>
           <div style="font-size: 18px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 24px;">🔍</span>
+            <span style="font-size: 24px;">🍺</span>
             <span>部門ドリルダウン実例：【レストラン】生ビール価格改定の弾力性分析</span>
           </div>
           <div style="font-size: 13px; color: var(--gold); font-weight: 700; margin-top: 3px;">
@@ -1217,46 +1251,79 @@
         <span class="badge bg-gold" style="font-size: 14px; padding: 6px 14px;">年間営業利益 +113万円 LIFT</span>
       </div>
 
-      <!-- ① 【最前面】月間粗利益（営業利益）Before ➔ After ビジュアルグラフ -->
-      <div style="background: #060a10; border: 1.5px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 18px;">
-        <div style="font-size: 14px; font-weight: 800; color: #94a3b8; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
-          <span>💰 【最重要】月間粗利益（手元に残る利益）の Before / After</span>
-          <span style="color: var(--c-green-text); font-weight: 900; font-size: 15px;">+¥94,400 / 月 (+16.1% 増益) 🚀</span>
+      <!-- ① 【最重要】ビールジョッキ型 縦棒ピクトグラフ（Before vs After） -->
+      <div style="background: #060a10; border: 1.5px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 18px;">
+        <div style="font-size: 14px; font-weight: 800; color: #94a3b8; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+          <span>💰 【最重要】月間粗利益（手元に残る利益）の ビールジョッキ比較</span>
+          <span style="color: var(--c-green-text); font-weight: 900; font-size: 14.5px;">+¥94,400 / 月 (+16.1% 増益) 🚀</span>
         </div>
 
-        <!-- 改定前バー -->
-        <div style="margin-bottom: 12px;">
-          <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">
-            <span>🍺 改定前（旧価格 ¥750 / 杯）</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: #fff;">¥585,000</span>
-          </div>
-          <div style="height: 28px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex;">
-            <div style="width: 86.1%; background: linear-gradient(90deg, #334155, #64748b); display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 800; color: #fff;">
-              月間粗利 ¥585,000 (粗利率 65.0%)
+        <!-- ジョッキ比較ステージ -->
+        <div style="display: flex; justify-content: center; align-items: flex-end; gap: 30px; padding: 10px 0 20px 0; border-bottom: 2px dashed rgba(255,255,255,0.1); margin-bottom: 14px; flex-wrap: wrap;">
+          
+          <!-- 【改定前 ジョッキ】 -->
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 13px; font-weight: 800; color: #94a3b8; margin-bottom: 8px;">🍺 改定前 (¥750)</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 18px; font-weight: 900; color: #cbd5e1; margin-bottom: 8px;">¥585,000</div>
+            
+            <!-- ジョッキ本体 -->
+            <div style="position: relative; width: 84px; height: 155px; background: rgba(255,255,255,0.04); border: 3px solid rgba(255,255,255,0.35); border-top: none; border-radius: 0 0 14px 14px; display: flex; flex-direction: column; justify-content: flex-end; padding: 3px; box-shadow: inset 0 0 12px rgba(0,0,0,0.5);">
+              <!-- ジョッキの取っ手 -->
+              <div style="position: absolute; right: -22px; top: 35px; width: 20px; height: 75px; border: 3px solid rgba(255,255,255,0.35); border-left: none; border-radius: 0 16px 16px 0;"></div>
+              <!-- 泡 -->
+              <div style="height: 28px; background: #ffffff; border-radius: 10px 10px 4px 4px; box-shadow: 0 2px 6px rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 900; color: #64748b;">泡</div>
+              <!-- 黄金ビール液 -->
+              <div style="height: 120px; background: linear-gradient(180deg, #eab308 0%, #b45309 100%); border-radius: 0 0 10px 10px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">
+                <div style="font-size: 10.5px; font-weight: 800;">ベース粗利</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 900;">¥58.5万</div>
+              </div>
             </div>
+            <div style="font-size: 12px; color: #94a3b8; margin-top: 8px;">出数: 1,200杯</div>
           </div>
-        </div>
 
-        <!-- 改定後バー -->
-        <div style="margin-bottom: 14px;">
-          <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; color: var(--c-green-text); margin-bottom: 4px;">
-            <span>🚀 改定後（新価格 ¥880 / 杯・+130円改定）</span>
-            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: var(--c-green-text); font-size: 16px;">¥679,400 (+16.1% 利益増)</span>
-          </div>
-          <div style="height: 32px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex; border: 1.5px solid var(--c-green);">
-            <div style="width: 86.1%; background: linear-gradient(90deg, #15803d, #10b981); display: flex; align-items: center; padding-left: 10px; font-size: 12.5px; font-weight: 800; color: #fff;">
-              ベース粗利 ¥585,000
+          <!-- 【矢印＆リフトインジケーター】 -->
+          <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding-bottom: 40px;">
+            <div style="background: rgba(16,185,129,0.15); border: 1.5px solid var(--c-green); border-radius: 20px; padding: 6px 14px; text-align: center;">
+              <div style="font-size: 11px; color: #94a3b8; font-weight: 700;">出数 -5.8% 軽微減</div>
+              <div style="font-size: 16px; font-weight: 900; color: var(--c-green-text);">利益 +16.1% 🚀</div>
+              <div style="font-size: 11px; color: var(--gold); font-weight: 800;">単価 +17.3% が圧倒</div>
             </div>
-            <div style="width: 13.9%; background: linear-gradient(90deg, #C9A961, #eab308); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #000;">
-              +¥9.4万増
-            </div>
+            <div style="font-size: 26px; color: var(--c-green-text); margin-top: 4px;">➔</div>
           </div>
+
+          <!-- 【改定後 ジョッキ（増益黄金層つき）】 -->
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <div style="font-size: 13px; font-weight: 800; color: var(--c-green-text); margin-bottom: 8px;">🚀 改定後 (¥880)</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 21px; font-weight: 900; color: var(--c-green-text); margin-bottom: 8px;">¥679,400</div>
+            
+            <!-- ジョッキ本体（背が高く溢れる演出） -->
+            <div style="position: relative; width: 92px; height: 185px; background: rgba(255,255,255,0.06); border: 3.5px solid var(--gold); border-top: none; border-radius: 0 0 16px 16px; display: flex; flex-direction: column; justify-content: flex-end; padding: 3.5px; box-shadow: 0 0 20px rgba(201,169,97,0.3), inset 0 0 12px rgba(0,0,0,0.5);">
+              <!-- ジョッキの取っ手 -->
+              <div style="position: absolute; right: -24px; top: 40px; width: 22px; height: 90px; border: 3.5px solid var(--gold); border-left: none; border-radius: 0 18px 18px 0;"></div>
+              <!-- こぼれ泡 -->
+              <div style="position: absolute; top: -12px; left: -4px; right: -4px; height: 32px; background: #ffffff; border-radius: 14px 14px 6px 6px; box-shadow: 0 3px 10px rgba(255,255,255,0.6); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; color: #166534;">
+                ✨ たっぷり泡 ✨
+              </div>
+              <!-- 上層：純増利益レイヤー（黄金ゴールド） -->
+              <div style="height: 40px; background: linear-gradient(180deg, #fef08a 0%, #eab308 100%); border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #000; margin-bottom: 2px; box-shadow: 0 0 8px rgba(250,204,21,0.6);">
+                <div style="font-size: 10px; font-weight: 900; color: #713f12;">利益純増分</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 900; color: #000;">+¥94,400</div>
+              </div>
+              <!-- 下層：ベースビール液 -->
+              <div style="height: 120px; background: linear-gradient(180deg, #eab308 0%, #b45309 100%); border-radius: 0 0 12px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.8);">
+                <div style="font-size: 10.5px; font-weight: 800;">ベース粗利</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 900;">¥58.5万</div>
+              </div>
+            </div>
+            <div style="font-size: 12px; color: var(--c-green-text); font-weight: 700; margin-top: 8px;">出数: 1,130杯 (-5.8%)</div>
+          </div>
+
         </div>
 
         <!-- 年間リフト換算 -->
-        <div style="background: rgba(16,185,129,0.1); border: 1px dashed var(--c-green); border-radius: 8px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+        <div style="background: rgba(16,185,129,0.1); border: 1.5px dashed var(--c-green); border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 8px;">
           <span style="color: #cbd5e1;">🍺 生ビール1品だけの価格改定で、営業利益が年間で純増する金額：</span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 900; color: var(--c-green-text);">+¥1,132,800 / 年</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 17px; font-weight: 900; color: var(--c-green-text);">+¥1,132,800 / 年</span>
         </div>
       </div>
 
@@ -1296,6 +1363,7 @@
       </div>
 
     </div>
+
 
 
 
