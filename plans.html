@@ -888,6 +888,92 @@
       </div>
     </div>
 
+    <!-- ============================================================= -->
+    <!-- ❓ よくある質問（Google AI Style FAQ Accordion）                -->
+    <!-- ============================================================= -->
+    <div class="faq-section" style="margin-top: 48px;">
+      <h2 style="font-family: 'Google Sans', sans-serif; font-size: 26px; font-weight: 700; color: #ffffff; text-align: center; margin-bottom: 8px;">
+        よくある質問（FAQ）
+      </h2>
+      <p style="font-size: 14.5px; color: var(--g-text-secondary); text-align: center; margin-bottom: 32px;">
+        導入方法、料金プラン、セキュリティに関する疑問にお答えします
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 860px; margin: 0 auto;">
+        
+        <!-- FAQ 1 -->
+        <div class="faq-item" style="background: var(--g-surface-dark); border: 1px solid var(--g-border); border-radius: 16px; overflow: hidden; transition: all 0.2s ease;">
+          <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #ffffff; font-family: 'Google Sans', 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 700;">
+            <span>Q1. 既存の基幹システム（SwingClub / Yardage 等）を入替する必要はありますか？</span>
+            <span class="faq-arrow" style="font-size: 20px; transition: transform 0.25s ease; color: var(--g-blue); flex-shrink: 0; margin-left: 16px;">＋</span>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0,0,0,0.2);">
+            <div style="padding: 0 24px 20px 24px; font-size: 14.5px; color: #cbd5e1; line-height: 1.7;">
+              <b>いいえ、既存システムの入替は一切不要です。</b><br>
+              Swing-BIは、現在稼働しているSQL ServerデータベースやCSVデータに安全にアドオン接続するアーキテクチャを採用しています。フロントやマスター室の日常の予約・精算オペレーションを100%変えることなく、即座に経営コックピットを導入いただけます。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="faq-item" style="background: var(--g-surface-dark); border: 1px solid var(--g-border); border-radius: 16px; overflow: hidden; transition: all 0.2s ease;">
+          <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #ffffff; font-family: 'Google Sans', 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 700;">
+            <span>Q2. 「鶴プラン（10年資産カルテ診断 / ¥500,000）」の具体的な進め方と納期は？</span>
+            <span class="faq-arrow" style="font-size: 20px; transition: transform 0.25s ease; color: var(--g-blue); flex-shrink: 0; margin-left: 16px;">＋</span>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0,0,0,0.2);">
+            <div style="padding: 0 24px 20px 24px; font-size: 14.5px; color: #cbd5e1; line-height: 1.7;">
+              貴クラブの過去10年間（延べ数十万人分）の来場明細・会員マスタデータをセキュアにお預かりし、AIエンジンが一括解析します。<br>
+              <b>「会員ポートフォリオ（RFM4象限）」「上位10%偏重リスク（デシルパレート）」「会員高齢化推移」「7,000万円ストック収益構造」</b> を網羅した診断カルテ（Webダッシュボード）と、具体的な改善提言レポートを<b>最短2週間</b>で納品いたします。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="faq-item" style="background: var(--g-surface-dark); border: 1px solid var(--g-border); border-radius: 16px; overflow: hidden; transition: all 0.2s ease;">
+          <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #ffffff; font-family: 'Google Sans', 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 700;">
+            <span>Q3. ダイナミックプライシングやLINE配信で、現場の安売り暴走は防げますか？</span>
+            <span class="faq-arrow" style="font-size: 20px; transition: transform 0.25s ease; color: var(--g-blue); flex-shrink: 0; margin-left: 16px;">＋</span>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0,0,0,0.2);">
+            <div style="padding: 0 24px 20px 24px; font-size: 14.5px; color: #cbd5e1; line-height: 1.7;">
+              <b>完全に防止できます。日本の商慣習に則った「3段 電子稟議決裁機能」を標準搭載しています。</b><br>
+              AIが価格や文案を提案しても、勝手に配信されることはありません。「起案：担当者 ➔ 審査：支配人 ➔ 決裁：社長」の順に画面上で印鑑スタンプが捺印されて初めて配信が実行されるため、責任の所在とブランド価値を厳格に保護します。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div class="faq-item" style="background: var(--g-surface-dark); border: 1px solid var(--g-border); border-radius: 16px; overflow: hidden; transition: all 0.2s ease;">
+          <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #ffffff; font-family: 'Google Sans', 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 700;">
+            <span>Q4. 「松・竹・梅」プランの変更や途中解約は月単位で可能ですか？</span>
+            <span class="faq-arrow" style="font-size: 20px; transition: transform 0.25s ease; color: var(--g-blue); flex-shrink: 0; margin-left: 16px;">＋</span>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0,0,0,0.2);">
+            <div style="padding: 0 24px 20px 24px; font-size: 14.5px; color: #cbd5e1; line-height: 1.7;">
+              <b>はい、月単位でいつでもプラン変更・アップグレードが可能です。</b><br>
+              まずは基本の「梅プラン」や「竹プラン」からスモールスタートし、効果を確認した上で「松プラン（AI自動生成＆LINE配信連動）」へステップアップいただく運用を推奨しております。
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ 5 -->
+        <div class="faq-item" style="background: var(--g-surface-dark); border: 1px solid var(--g-border); border-radius: 16px; overflow: hidden; transition: all 0.2s ease;">
+          <button onclick="toggleFaq(this)" style="width: 100%; text-align: left; background: none; border: none; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; color: #ffffff; font-family: 'Google Sans', 'Noto Sans JP', sans-serif; font-size: 16px; font-weight: 700;">
+            <span>Q5. 顧客個人情報やデータのセキュリティ管理は安全ですか？</span>
+            <span class="faq-arrow" style="font-size: 20px; transition: transform 0.25s ease; color: var(--g-blue); flex-shrink: 0; margin-left: 16px;">＋</span>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1); background: rgba(0,0,0,0.2);">
+            <div style="padding: 0 24px 20px 24px; font-size: 14.5px; color: #cbd5e1; line-height: 1.7;">
+              <b>金融機関水準のセキュリティプロトコルを遵守しています。</b><br>
+              顧客の個人情報（氏名・電話番号・決済情報等）をモデル学習に利用したり外部へ露出させることは一切ありません。通信は全経路SSL/TLSで暗号化され、セグメント配信時も統計的な匿名IDのみを用いて安全に処理されます。
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- FOOTER -->
     <footer class="g-footer">
       <div style="display: flex; align-items: center; gap: 8px;">
@@ -924,7 +1010,27 @@
         viewTsurukame.style.display = 'grid';
       }
     }
+
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const body = item.querySelector('.faq-body');
+      const arrow = btn.querySelector('.faq-arrow');
+      const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+
+      if (isOpen) {
+        body.style.maxHeight = '0px';
+        arrow.textContent = '＋';
+        arrow.style.transform = 'rotate(0deg)';
+        item.style.borderColor = 'var(--g-border)';
+      } else {
+        body.style.maxHeight = body.scrollHeight + 30 + 'px';
+        arrow.textContent = '✕';
+        arrow.style.transform = 'rotate(90deg)';
+        item.style.borderColor = 'var(--g-blue)';
+      }
+    }
   </script>
 
 </body>
 </html>
+
