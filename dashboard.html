@@ -10,10 +10,13 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     /* =========================================================
-       TCC Executive Cockpit (Jay Abraham Formula & Strict 3-Color)
-       - Green: >= 100%
-       - Yellow / Amber: 90% - 99.9%
-       - Red: < 90%
+       TCC Executive Cockpit (Design System v2.0 Dark)
+       - Navy: #1B4D6B
+       - Gold: #C9A961
+       - Teal (>=100%): #10b981 / #1D9E75
+       - Amber (90-99.9%): #f59e0b / #EF9F27
+       - Red (<90%): #ef4444 / #E24B4A
+       - Slate (Neutral/Market): #94a3b8
        ========================================================= */
     :root {
       --bg: #05080d;                /* 漆黒 */
@@ -25,6 +28,7 @@
 
       /* TCC ブランド */
       --navy: #1B4D6B;
+      --navy-light: #2c6e96;
       --gold: #C9A961;
       --gold-bg: rgba(201, 169, 97, 0.18);
 
@@ -38,9 +42,6 @@
       --c-red: #ef4444;
       --c-red-bg: rgba(239, 68, 68, 0.22);
       --c-red-text: #f87171;
-      --c-blue: #3b82f6;
-      --c-blue-bg: rgba(59, 130, 246, 0.22);
-      --c-blue-text: #60a5fa;
 
       --text-main: #ffffff;
       --text-muted: #94a3b8;
@@ -139,7 +140,6 @@
       box-shadow: 0 0 20px rgba(201, 169, 97, 0.15);
     }
 
-    /* 巨大ラベル＆特大アイコン（一目で分かる） */
     .eq-header-label {
       display: flex;
       align-items: center;
@@ -204,7 +204,7 @@
     .bg-green { background: var(--c-green-bg); color: var(--c-green-text); border: 1.5px solid var(--c-green); }
     .bg-yellow { background: var(--c-yellow-bg); color: var(--c-yellow-text); border: 1.5px solid var(--c-yellow); }
     .bg-red { background: var(--c-red-bg); color: var(--c-red-text); border: 1.5px solid var(--c-red); }
-    .bg-blue { background: var(--c-blue-bg); color: var(--c-blue-text); border: 1.5px solid var(--c-blue); }
+    .bg-gold { background: var(--gold-bg); color: var(--gold); border: 1.5px solid var(--gold); }
 
     /* Perspective Tabs */
     .perspective-nav {
@@ -365,7 +365,7 @@
       font-size: 15.5px;
     }
     
-    /* 大見出し行 */
+    /* 大見出し行（TCCデザインシステム Navy/Gold/Slate） */
     .th-major-rev {
       background: #13243a !important;
       border-left: 3px solid var(--gold) !important;
@@ -374,14 +374,14 @@
     }
     .th-major-vis {
       background: #0f1c2d !important;
-      border-left: 3px solid #3b82f6 !important;
-      border-bottom: 2px solid #3b82f6 !important;
+      border-left: 3px solid var(--navy-light) !important;
+      border-bottom: 2px solid var(--navy-light) !important;
       padding: 14px 16px !important;
     }
     .th-major-unit {
       background: #1f1b13 !important;
-      border-left: 3px solid #f59e0b !important;
-      border-bottom: 2px solid #f59e0b !important;
+      border-left: 3px solid var(--c-yellow) !important;
+      border-bottom: 2px solid var(--c-yellow) !important;
       padding: 14px 16px !important;
     }
 
@@ -473,7 +473,7 @@
   </div>
 
   <!-- =========================================================
-       HERO: JAY ABRAHAM REVENUE FORMULA (巨大アイコン ＆ 超特大ラベル)
+       HERO: JAY ABRAHAM REVENUE EQUATION (巨大アイコン ＆ 超特大ラベル)
        ========================================================= -->
   <div class="equation-hero">
     <div class="equation-title">
@@ -551,7 +551,7 @@
   <!-- ======================================================== -->
   <div id="view-exec" class="view-content active">
 
-    <!-- 4 大KPIカード -->
+    <!-- 4 大KPIカード（デザインシステム準拠：不要な青を全廃） -->
     <div class="kpi-grid">
       
       <!-- ① 売上高 -->
@@ -602,19 +602,19 @@
         </div>
       </div>
 
-      <!-- ④ 三重県市場シェア -->
+      <!-- ④ 三重県市場シェア (デザインシステムGold/Teal/Slate準拠) -->
       <div class="kpi-box">
         <div class="kpi-box-header">
           <div class="kpi-title"><span style="font-size:24px;">🏆</span> 三重県連盟 順位</div>
-          <div class="badge bg-blue">第 12 位 / 51コース</div>
+          <div class="badge bg-gold">第 12 位 / 51コース</div>
         </div>
-        <div class="kpi-main-val" style="color:var(--c-blue-text);">県平均 +3.2%<span style="font-size:16px; color:#cbd5e1;">に対し</span></div>
+        <div class="kpi-main-val" style="color:#fff;">第 12 <span style="font-size:18px; color:#cbd5e1;">位 (上位23%)</span></div>
         <div class="bullet-gauge">
-          <div class="bullet-fill" style="width: 100%; background:var(--c-blue);"></div>
+          <div class="bullet-fill" style="width: 100%; background:var(--gold);"></div>
         </div>
         <div class="kpi-sub-line">
-          <span>TCCの伸び: <b style="color:var(--c-green-text); font-size:16px;">+18.5%</b></span>
-          <span>市場シェア急拡大中</span>
+          <span>県平均: <b style="color:var(--text-muted);">+3.2%</b></span>
+          <span>TCC: <b style="color:var(--c-green-text); font-size:16px;">+18.5% (好調)</b></span>
         </div>
       </div>
 
@@ -703,7 +703,7 @@
               <th>前年</th>
               <th>対前年</th>
               <!-- 来場 -->
-              <th style="border-left:3px solid #3b82f6;">実績</th>
+              <th style="border-left:3px solid var(--navy-light);">実績</th>
               <th>予算</th>
               <th>対予算</th>
               <th>前年</th>
@@ -726,7 +726,7 @@
               <td class="cell-num">¥25,358</td>
               <td><span class="badge bg-green">+24.6%</span></td>
               
-              <td class="cell-num" style="border-left:3px solid #3b82f6;">2,865</td>
+              <td class="cell-num" style="border-left:3px solid var(--navy-light);">2,865</td>
               <td class="cell-num">2,690</td>
               <td><span class="badge bg-green">106.5%</span></td>
               <td class="cell-num">2,370</td>
@@ -748,7 +748,7 @@
               <td class="cell-num">¥23,138</td>
               <td><span class="badge bg-green">+15.9%</span></td>
               
-              <td class="cell-num" style="border-left:3px solid #3b82f6;">2,673</td>
+              <td class="cell-num" style="border-left:3px solid var(--navy-light);">2,673</td>
               <td class="cell-num">2,400</td>
               <td><span class="badge bg-green">111.4%</span></td>
               <td class="cell-num">2,142</td>
@@ -770,7 +770,7 @@
               <td class="cell-num">¥33,214</td>
               <td><span class="badge bg-green">+3.5%</span></td>
               
-              <td class="cell-num" style="border-left:3px solid #3b82f6;">3,105</td>
+              <td class="cell-num" style="border-left:3px solid var(--navy-light);">3,105</td>
               <td class="cell-num">2,960</td>
               <td><span class="badge bg-green">104.9%</span></td>
               <td class="cell-num">2,658</td>
@@ -792,7 +792,7 @@
               <td class="cell-num">¥32,019</td>
               <td><span class="badge bg-green">+8.1%</span></td>
               
-              <td class="cell-num" style="border-left:3px solid #3b82f6;">2,807</td>
+              <td class="cell-num" style="border-left:3px solid var(--navy-light);">2,807</td>
               <td class="cell-num">2,780</td>
               <td><span class="badge bg-green">101.0%</span></td>
               <td class="cell-num">2,491</td>
@@ -815,7 +815,7 @@
               <td class="cell-num">¥113,729</td>
               <td><span class="badge bg-green" style="font-size:15px;">+14.2%</span></td>
               <!-- 来場 🟢 -->
-              <td class="cell-num" style="color:#fff; font-size:18px; border-left:3px solid #3b82f6;">11,450</td>
+              <td class="cell-num" style="color:#fff; font-size:18px; border-left:3px solid var(--navy-light);">11,450</td>
               <td class="cell-num">10,830</td>
               <td><span class="badge bg-green" style="font-size:15px;">105.7%</span></td>
               <td class="cell-num">9,661</td>
@@ -950,7 +950,7 @@
     document.getElementById(viewId).classList.add('active');
   }
 
-  // TCC本物準拠のChart.js初期化
+  // TCC本物準拠のChart.js初期化 (Navy/Gold/Teal/Amberデザインシステム)
   window.onload = function() {
     // グラフ1: 月次売上 予実・前年比較 (棒 + ライン)
     const ctxRev = document.getElementById('revChart').getContext('2d');
@@ -998,7 +998,7 @@
       }
     });
 
-    // グラフ2: 来場数 vs 客単価 複合トレンド
+    // グラフ2: 来場数 vs 客単価 複合トレンド (TCC Navy & Amber)
     const ctxCombo = document.getElementById('comboChart').getContext('2d');
     new Chart(ctxCombo, {
       type: 'bar',
@@ -1008,7 +1008,9 @@
           {
             label: '来場者数 (人)',
             data: [2865, 2673, 3105, 2807],
-            backgroundColor: '#3b82f6',
+            backgroundColor: '#1B4D6B',
+            borderColor: '#2c6e96',
+            borderWidth: 1,
             borderRadius: 6,
             yAxisID: 'yVis',
             order: 2
@@ -1038,8 +1040,8 @@
             type: 'linear',
             position: 'left',
             grid: { color: '#1e293b' },
-            ticks: { color: '#60a5fa' },
-            title: { display: true, text: '来場者数 (人)', color: '#60a5fa' }
+            ticks: { color: '#94a3b8' },
+            title: { display: true, text: '来場者数 (人)', color: '#94a3b8' }
           },
           yUnit: {
             type: 'linear',
