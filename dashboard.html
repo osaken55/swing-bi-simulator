@@ -143,6 +143,64 @@
     @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
     /* =========================================================
+       TRIAGE COLOR TILES (色札・医療トリアージスタイル)
+       ========================================================= */
+    .triage-tile {
+      height: 32px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11.5px;
+      font-weight: 800;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+    .triage-tile:hover {
+      transform: scale(1.08);
+      z-index: 5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+    .triage-tile.green {
+      background: #092618;
+      color: #6ee7b7;
+      border: 1px solid rgba(16,185,129,0.3);
+    }
+    .triage-tile.yellow {
+      background: #2b1f06;
+      color: #fde047;
+      border: 1px solid rgba(245,158,11,0.35);
+    }
+    .triage-tile.red {
+      background: #330b11;
+      color: #fca5a5;
+      border: 1px solid rgba(239,68,68,0.5);
+    }
+    .triage-tile.black {
+      background: #141414;
+      color: #ef4444;
+      border: 1.5px solid #ef4444;
+    }
+    .triage-tile.pulse {
+      animation: tilePulse 1.8s infinite;
+    }
+    @keyframes tilePulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.5); }
+      50% { box-shadow: 0 0 10px 2px rgba(239,68,68,0.7); }
+    }
+    .triage-badge {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      display: inline-block;
+    }
+    .triage-badge.green { background: #10b981; }
+    .triage-badge.yellow { background: #f59e0b; }
+    .triage-badge.red { background: #ef4444; }
+    .triage-badge.black { background: #1a1a1a; border: 1px solid #ef4444; }
+
+
+    /* =========================================================
        HERO: 最新月度（4月度確定） 経営コックピット
        ========================================================= */
     .equation-hero {
@@ -1112,201 +1170,275 @@
         <!-- =========================================================
              ⚡ 現場直結実戦武器：弱日トリアージカレンダー ＆ ⚡DP・LINE配信
              ========================================================= -->
+        <!-- =========================================================
+             ⚡ 現場直結実戦武器：3ヶ月パノラマ・弱日色札トリアージ ＆ ⚡DP・LINE配信
+             ========================================================= -->
         <div style="margin-top: 24px; border-top: 1px solid var(--border); padding-top: 20px;">
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
             <div>
-              <div style="font-size: 19px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+              <div style="font-size: 20px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
                 <span style="font-size: 24px;">📅</span>
-                <span>弱日トリアージカレンダー ＆ ⚡ DP（ダイナミックプライシング）・LINE配信連動</span>
+                <span>3ヶ月パノラマ・弱日色札トリアージ ＆ ⚡ DP（ダイナミックプライシング）・LINE配信連動</span>
               </div>
-              <div style="font-size: 13px; color: var(--text-muted); font-weight: 700; margin-top: 3px;">
-                予約進捗 × ☔ 天気予報（降水確率50%↑で自動エスカレート）から空き枠を特定し、その場で変動価格（DP）を設定してLINE配信
+              <div style="font-size: 13.5px; color: var(--text-muted); font-weight: 700; margin-top: 4px;">
+                直近の<b>「ラストミニッツ（雨天・直前枠）」</b>から2〜3ヶ月先の<b>「アーリーバード（早期先回り枠）」</b>まで、医療トリアージ色札で本能的に特定・即時DP
               </div>
             </div>
-            <span class="badge bg-gold" style="font-size: 13px; padding: 5px 12px;">実戦アクション直結（特許級機能）</span>
+            <div style="display: flex; gap: 8px; align-items: center;">
+              <span class="badge bg-gold" style="font-size: 13px; padding: 5px 12px;">3ヶ月先回り経営（特許級機能）</span>
+            </div>
           </div>
 
-          <!-- カレンダー ＆ DP配信 連動2カラムグリッド -->
-          <div style="display: grid; grid-template-columns: 1.15fr 1fr; gap: 20px; align-items: start;">
+          <!-- 3ヶ月パノラマ・トリアージ色札カレンダー（5月・6月・7月 横並び） -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
             
-            <!-- 左カラム：2026年5月 弱日トリアージカレンダー -->
-            <div style="background: var(--card-sub); border: 1px solid var(--border); border-radius: 12px; padding: 16px;">
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                <div style="font-weight: 900; font-size: 16px; color: #fff; display: flex; align-items: center; gap: 6px;">
-                  <span>📅 2026年 5月 予約トリアージ</span>
-                  <span style="font-size: 11.5px; color: var(--text-muted); font-weight: 600;">（目標: 984組 / 現在: 712組）</span>
+            <!-- 5月（当月：直前ラストミニッツ） -->
+            <div style="background: var(--card-sub); border: 1px solid var(--border); border-radius: 12px; padding: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div>
+                  <span style="font-size: 16px; font-weight: 900; color: #fff;">📅 2026年 5月</span>
+                  <span style="font-size: 11.5px; color: var(--cyan-accent); font-weight: 800; margin-left: 6px;">[ラストミニッツ]</span>
                 </div>
-                <div style="display: flex; gap: 6px; font-size: 11px; font-weight: 800;">
-                  <span style="background:var(--c-green-bg); color:var(--c-green-text); padding:2px 6px; border-radius:4px;">🟢安全</span>
-                  <span style="background:var(--c-yellow-bg); color:var(--c-yellow-text); padding:2px 6px; border-radius:4px;">🟡注意</span>
-                  <span style="background:var(--c-red-bg); color:var(--c-red-text); padding:2px 6px; border-radius:4px;">🔴弱日</span>
-                  <span style="background:#1a1a1a; color:var(--c-red-text); border:1px solid var(--c-red); padding:2px 6px; border-radius:4px;">⚫超危険(雨)</span>
-                </div>
+                <div style="font-size: 12px; color: #94a3b8; font-family: 'JetBrains Mono';">712 / 984組 (72%)</div>
               </div>
 
-              <!-- カレンダーグリッド -->
-              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; text-align: center;">
-                <!-- 曜日ヘッダー -->
-                <div style="font-size: 12px; font-weight: 800; color: #94a3b8; padding: 4px 0;">月</div>
-                <div style="font-size: 12px; font-weight: 800; color: #94a3b8; padding: 4px 0;">火</div>
-                <div style="font-size: 12px; font-weight: 800; color: #94a3b8; padding: 4px 0;">水</div>
-                <div style="font-size: 12px; font-weight: 800; color: #94a3b8; padding: 4px 0;">木</div>
-                <div style="font-size: 12px; font-weight: 800; color: #94a3b8; padding: 4px 0;">金</div>
-                <div style="font-size: 12px; font-weight: 800; color: #38bdf8; padding: 4px 0;">土</div>
-                <div style="font-size: 12px; font-weight: 800; color: #f87171; padding: 4px 0;">日</div>
+              <!-- 5月グリッド -->
+              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center;">
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">月</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">火</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">水</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">木</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">金</div>
+                <div style="font-size: 11px; font-weight: 800; color: #38bdf8; padding-bottom: 2px;">土</div>
+                <div style="font-size: 11px; font-weight: 800; color: #f87171; padding-bottom: 2px;">日</div>
 
-                <!-- 空白セル (5/1は金曜日) -->
-                <div style="background: transparent;"></div>
-                <div style="background: transparent;"></div>
-                <div style="background: transparent;"></div>
-                <div style="background: transparent;"></div>
-
-                <!-- 5/1(金) 〜 5/10(日) -->
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#cbd5e1;">1</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">36組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️10%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#38bdf8;">2</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">44組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️0%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#f87171;">3</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">48組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️10%</div>
-                </div>
-
-                <!-- 2週目 -->
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#f87171;">4</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">46組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️0%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#f87171;">5</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">45組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️20%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#f87171;">6</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">42組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☁️30%</div>
-                </div>
-
-                <!-- 5/7(木) 選択中・最大の弱日（GW明け＋雨予報） -->
-                <div style="background:#1f1315; border:2px solid var(--c-red); border-radius:6px; padding:4px 2px; box-shadow:0 0 10px rgba(239,68,68,0.5); cursor:pointer; position:relative;" onclick="selectTriageDay('2026-05-07', 4, 60, 'GW明け弱日')">
-                  <div style="font-size:11px; color:#fff; font-weight:900;">7 👈</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-red-text); font-family:'JetBrains Mono';">4組</div>
-                  <div style="font-size:9.5px; color:var(--c-red-text); font-weight:800;">🌧️60%</div>
-                </div>
-
-                <div style="background:#1f1a10; border:1px solid var(--c-yellow); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#cbd5e1;">8</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-yellow-text); font-family:'JetBrains Mono';">22組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️10%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#38bdf8;">9</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">38組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️0%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#f87171;">10</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">41組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️10%</div>
-                </div>
-
-                <!-- 3週目 -->
-                <div style="background:#1f1a10; border:1px solid var(--c-yellow); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#cbd5e1;">11</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-yellow-text); font-family:'JetBrains Mono';">24組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️20%</div>
-                </div>
-                <div style="background:#1f1315; border:1px solid var(--c-red); border-radius:6px; padding:4px 2px; cursor:pointer;" onclick="selectTriageDay('2026-05-12', 9, 20, '平日閑散')">
-                  <div style="font-size:11px; color:#cbd5e1;">12</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-red-text); font-family:'JetBrains Mono';">9組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️20%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#cbd5e1;">13</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">32組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️10%</div>
-                </div>
-                <div style="background:#1a1a1a; border:1.5px solid var(--c-red); border-radius:6px; padding:4px 2px; cursor:pointer;" onclick="selectTriageDay('2026-05-14', 6, 80, '豪雨予報×弱日')">
-                  <div style="font-size:11px; color:#fff; font-weight:900;">14 ⚡</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-red-text); font-family:'JetBrains Mono';">6組</div>
-                  <div style="font-size:9.5px; color:var(--c-red-text); font-weight:800;">🌧️80%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#cbd5e1;">15</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">34組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️10%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#38bdf8;">16</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">46組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️0%</div>
-                </div>
-                <div style="background:#091e17; border:1px solid var(--c-green); border-radius:6px; padding:4px 2px;">
-                  <div style="font-size:11px; color:#f87171;">17</div>
-                  <div style="font-size:13px; font-weight:900; color:var(--c-green-text); font-family:'JetBrains Mono';">47組</div>
-                  <div style="font-size:9.5px; color:#94a3b8;">☀️10%</div>
-                </div>
-
-                <!-- 4週目以降は省略表示メッセージ -->
-                <div colspan="7" style="grid-column: span 7; font-size: 11.5px; color: var(--text-muted); padding: 8px 0; border-top: 1px dashed var(--border); margin-top: 4px;">
-                  ※ 5/18〜5/31：予約追跡中（月曜18日: 🟡22組、木曜21日: 🟡20組、土日: 🟢満枠基調）
-                </div>
-              </div>
-
-              <div style="font-size: 12px; color: #cbd5e1; margin-top: 10px; line-height: 1.6; background: rgba(0,0,0,0.3); padding: 8px 10px; border-radius: 6px;">
-                💡 <b>トリアージロジック</b>: 平日20組未満・土日30組未満を「🔴弱日」検知。さらに<b>降水確率50%以上で「⚫超危険」へ自動エスカレート</b>。
+                <!-- 空白 -->
+                <div></div><div></div><div></div><div></div>
+                <!-- 1〜3 -->
+                <div class="triage-tile green" title="5/1: 36組 ☀️10%">1</div>
+                <div class="triage-tile green" title="5/2: 44組 ☀️0%">2</div>
+                <div class="triage-tile green" title="5/3: 48組 ☀️10%">3</div>
+                <!-- 4〜10 -->
+                <div class="triage-tile green" title="5/4: 46組 ☀️0%">4</div>
+                <div class="triage-tile green" title="5/5: 45組 ☀️20%">5</div>
+                <div class="triage-tile green" title="5/6: 42組 ☁️30%">6</div>
+                <div class="triage-tile red pulse" style="border: 2px solid var(--c-red); cursor: pointer;" onclick="selectTriageDay('2026-05-07', 4, 60, 'GW明け弱日', 'last-minute')" title="5/7: 🔴4組 🌧️60% (GW明け最大の弱日)">7 👈</div>
+                <div class="triage-tile yellow" title="5/8: 22組 ☀️10%">8</div>
+                <div class="triage-tile green" title="5/9: 38組 ☀️0%">9</div>
+                <div class="triage-tile green" title="5/10: 41組 ☀️10%">10</div>
+                <!-- 11〜17 -->
+                <div class="triage-tile yellow" title="5/11: 24組 ☀️20%">11</div>
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-05-12', 9, 20, '平日閑散', 'last-minute')" title="5/12: 🔴9組 ☀️20%">12</div>
+                <div class="triage-tile green" title="5/13: 32組 ☀️10%">13</div>
+                <div class="triage-tile black" style="cursor: pointer;" onclick="selectTriageDay('2026-05-14', 6, 80, '豪雨予報×弱日', 'last-minute')" title="5/14: ⚫6組 🌧️80% (豪雨超危険)">14 ⚡</div>
+                <div class="triage-tile green" title="5/15: 34組 ☀️10%">15</div>
+                <div class="triage-tile green" title="5/16: 46組 ☀️0%">16</div>
+                <div class="triage-tile green" title="5/17: 47組 ☀️10%">17</div>
+                <!-- 18〜24 -->
+                <div class="triage-tile yellow" title="5/18: 22組">18</div>
+                <div class="triage-tile green" title="5/19: 31組">19</div>
+                <div class="triage-tile green" title="5/20: 35組">20</div>
+                <div class="triage-tile yellow" title="5/21: 20組">21</div>
+                <div class="triage-tile green" title="5/22: 36組">22</div>
+                <div class="triage-tile green" title="5/23: 45組">23</div>
+                <div class="triage-tile green" title="5/24: 44組">24</div>
+                <!-- 25〜31 -->
+                <div class="triage-tile green" title="5/25: 30組">25</div>
+                <div class="triage-tile green" title="5/26: 33組">26</div>
+                <div class="triage-tile green" title="5/27: 34組">27</div>
+                <div class="triage-tile green" title="5/28: 31組">28</div>
+                <div class="triage-tile green" title="5/29: 38組">29</div>
+                <div class="triage-tile green" title="5/30: 48組">30</div>
+                <div class="triage-tile green" title="5/31: 46組">31</div>
               </div>
             </div>
 
-            <!-- 右カラム：⚡ DP（ダイナミックプライシング）＆ LINEシークレット配信パネル -->
-            <div style="background: #0d1520; border: 1.5px solid var(--cyan-accent); border-radius: 12px; padding: 18px; box-shadow: 0 4px 20px rgba(56,189,248,0.15);">
-              
-              <!-- 選択ヘッダー -->
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 10px;">
+            <!-- 6月（翌月：梅雨期アーリーバード） -->
+            <div style="background: var(--card-sub); border: 1px solid var(--border); border-radius: 12px; padding: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                 <div>
-                  <div style="font-size: 12px; color: var(--cyan-accent); font-weight: 800;">⚡ 選択中の弱日ターゲット</div>
-                  <div style="font-size: 19px; font-weight: 900; color: #fff; margin-top: 2px;" id="dp-target-title">
-                    📅 2026年 5月 7日（木）
-                  </div>
+                  <span style="font-size: 16px; font-weight: 900; color: #fff;">📅 2026年 6月</span>
+                  <span style="font-size: 11.5px; color: var(--gold-accent); font-weight: 800; margin-left: 6px;">[アーリーバード]</span>
                 </div>
-                <span class="badge bg-red" id="dp-target-badge" style="font-size: 13px; padding: 4px 10px;">🔴 弱日 (現在4組 / ☔60%)</span>
+                <div style="font-size: 12px; color: #94a3b8; font-family: 'JetBrains Mono';">420 / 928組 (45%)</div>
               </div>
 
-              <!-- ① DP価格設定 -->
-              <div style="background: #070c14; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
-                <div style="font-size: 12.5px; font-weight: 800; color: #94a3b8; margin-bottom: 8px;">
-                  ⚡ ① DP（ダイナミックプライシング）価格設定
+              <!-- 6月グリッド -->
+              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center;">
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">月</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">火</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">水</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">木</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">金</div>
+                <div style="font-size: 11px; font-weight: 800; color: #38bdf8; padding-bottom: 2px;">土</div>
+                <div style="font-size: 11px; font-weight: 800; color: #f87171; padding-bottom: 2px;">日</div>
+
+                <!-- 1〜7 (6/1は月曜) -->
+                <div class="triage-tile yellow" title="6/1: 18組">1</div>
+                <div class="triage-tile yellow" title="6/2: 19組">2</div>
+                <div class="triage-tile green" title="6/3: 28組">3</div>
+                <div class="triage-tile yellow" title="6/4: 17組">4</div>
+                <div class="triage-tile green" title="6/5: 32組">5</div>
+                <div class="triage-tile green" title="6/6: 42組">6</div>
+                <div class="triage-tile green" title="6/7: 41組">7</div>
+                <!-- 8〜14 -->
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-06-08', 8, 40, '梅雨期弱日', 'early-bird')" title="6/8: 🔴8組 (梅雨期弱日)">8</div>
+                <div class="triage-tile yellow" title="6/9: 16組">9</div>
+                <div class="triage-tile green" title="6/10: 26組">10</div>
+                <div class="triage-tile yellow" title="6/11: 15組">11</div>
+                <div class="triage-tile green" title="6/12: 30組">12</div>
+                <div class="triage-tile green" title="6/13: 40組">13</div>
+                <div class="triage-tile green" title="6/14: 39組">14</div>
+                <!-- 15〜21 (6/15 構造的弱日) -->
+                <div class="triage-tile red" style="border: 2px solid var(--c-red); cursor: pointer;" onclick="selectTriageDay('2026-06-15', 5, 50, '6月中旬 構造的弱日', 'early-bird')" title="6/15: 🔴5組 (6月最大の構造的弱日)">15 👈</div>
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-06-16', 7, 30, '平日閑散', 'early-bird')" title="6/16: 🔴7組">16</div>
+                <div class="triage-tile yellow" title="6/17: 18組">17</div>
+                <div class="triage-tile yellow" title="6/18: 14組">18</div>
+                <div class="triage-tile green" title="6/19: 28組">19</div>
+                <div class="triage-tile green" title="6/20: 38組">20</div>
+                <div class="triage-tile green" title="6/21: 37組">21</div>
+                <!-- 22〜28 -->
+                <div class="triage-tile yellow" title="6/22: 16組">22</div>
+                <div class="triage-tile yellow" title="6/23: 15組">23</div>
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-06-24', 7, 30, '平日閑散', 'early-bird')" title="6/24: 🔴7組">24</div>
+                <div class="triage-tile yellow" title="6/25: 18組">25</div>
+                <div class="triage-tile green" title="6/26: 30組">26</div>
+                <div class="triage-tile green" title="6/27: 41組">27</div>
+                <div class="triage-tile green" title="6/28: 40組">28</div>
+                <!-- 29〜30 -->
+                <div class="triage-tile yellow" title="6/29: 15組">29</div>
+                <div class="triage-tile yellow" title="6/30: 17組">30</div>
+                <div></div><div></div><div></div><div></div><div></div>
+              </div>
+            </div>
+
+            <!-- 7月（翌々月：夏枯れ猛暑アーリーバード） -->
+            <div style="background: var(--card-sub); border: 1px solid var(--border); border-radius: 12px; padding: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <div>
+                  <span style="font-size: 16px; font-weight: 900; color: #fff;">📅 2026年 7月</span>
+                  <span style="font-size: 11.5px; color: var(--gold-accent); font-weight: 800; margin-left: 6px;">[アーリーバード]</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                <div style="font-size: 12px; color: #94a3b8; font-family: 'JetBrains Mono';">210 / 700組 (30%)</div>
+              </div>
+
+              <!-- 7月グリッド -->
+              <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; text-align: center;">
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">月</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">火</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">水</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">木</div>
+                <div style="font-size: 11px; font-weight: 800; color: #94a3b8; padding-bottom: 2px;">金</div>
+                <div style="font-size: 11px; font-weight: 800; color: #38bdf8; padding-bottom: 2px;">土</div>
+                <div style="font-size: 11px; font-weight: 800; color: #f87171; padding-bottom: 2px;">日</div>
+
+                <!-- 空白 (7/1は水曜) -->
+                <div></div><div></div>
+                <!-- 1〜5 -->
+                <div class="triage-tile yellow" title="7/1: 12組">1</div>
+                <div class="triage-tile yellow" title="7/2: 11組">2</div>
+                <div class="triage-tile green" title="7/3: 24組">3</div>
+                <div class="triage-tile green" title="7/4: 36組">4</div>
+                <div class="triage-tile green" title="7/5: 35組">5</div>
+                <!-- 6〜12 -->
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-07-06', 4, 20, '7月序盤平日', 'early-bird')" title="7/6: 🔴4組">6</div>
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-07-07', 3, 20, '七夕平日', 'early-bird')" title="7/7: 🔴3組">7</div>
+                <div class="triage-tile yellow" title="7/8: 10組">8</div>
+                <div class="triage-tile yellow" title="7/9: 9組">9</div>
+                <div class="triage-tile green" title="7/10: 22組">10</div>
+                <div class="triage-tile green" title="7/11: 34組">11</div>
+                <div class="triage-tile green" title="7/12: 33組">12</div>
+                <!-- 13〜19 -->
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-07-13', 4, 10, '平日閑散', 'early-bird')" title="7/13: 🔴4組">13</div>
+                <div class="triage-tile red" style="border: 2px solid var(--c-red); cursor: pointer;" onclick="selectTriageDay('2026-07-14', 3, 10, '猛暑平日', 'early-bird')" title="7/14: 🔴3組 (猛暑弱日)">14 👈</div>
+                <div class="triage-tile yellow" title="7/15: 11組">15</div>
+                <div class="triage-tile yellow" title="7/16: 8組">16</div>
+                <div class="triage-tile green" title="7/17: 20組">17</div>
+                <div class="triage-tile green" title="7/18: 32組">18</div>
+                <div class="triage-tile green" title="7/19: 31組">19</div>
+                <!-- 20〜26 -->
+                <div class="triage-tile green" title="7/20(祝): 38組">20</div>
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-07-21', 4, 10, '祝日明け平日', 'early-bird')" title="7/21: 🔴4組">21</div>
+                <div class="triage-tile yellow" title="7/22: 9組">22</div>
+                <div class="triage-tile yellow" title="7/23: 8組">23</div>
+                <div class="triage-tile green" title="7/24: 19組">24</div>
+                <div class="triage-tile green" title="7/25: 30組">25</div>
+                <div class="triage-tile green" title="7/26: 29組">26</div>
+                <!-- 27〜31 -->
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-07-27', 3, 10, '夏枯れ平日', 'early-bird')" title="7/27: 🔴3組">27</div>
+                <div class="triage-tile red" style="cursor: pointer;" onclick="selectTriageDay('2026-07-28', 2, 10, '夏枯れ平日', 'early-bird')" title="7/28: 🔴2組">28</div>
+                <div class="triage-tile yellow" title="7/29: 8組">29</div>
+                <div class="triage-tile yellow" title="7/30: 7組">30</div>
+                <div class="triage-tile green" title="7/31: 20組">31</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- トリアージ凡例 ＆ 色札哲学 -->
+          <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; margin-bottom: 20px; flex-wrap: wrap; gap: 8px;">
+            <div style="display: flex; gap: 12px; font-size: 12px; font-weight: 800;">
+              <span style="display:flex; align-items:center; gap:4px;"><span class="triage-badge green"></span> 🟢 安全（満枠基調）</span>
+              <span style="display:flex; align-items:center; gap:4px;"><span class="triage-badge yellow"></span> 🟡 注意（平日20組/土日30組未満）</span>
+              <span style="display:flex; align-items:center; gap:4px;"><span class="triage-badge red"></span> 🔴 弱日（直前・早期の対策必須）</span>
+              <span style="display:flex; align-items:center; gap:4px;"><span class="triage-badge black"></span> ⚫ 超危険（雨天50%↑×弱日）</span>
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted);">
+              💡 <b>色札をタップ</b>すると、下の「⚡ DP設定 ＆ LINE配信パネル」が即座に連動します
+            </div>
+          </div>
+
+          <!-- =========================================================
+               ⚡ 下部：DP（ダイナミックプライシング）＆ LINEシークレット配信パネル
+               ========================================================= -->
+          <div style="background: #0d1520; border: 1.5px solid var(--cyan-accent); border-radius: 12px; padding: 20px; box-shadow: 0 4px 24px rgba(56,189,248,0.15);">
+            
+            <!-- 選択ヘッダー -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border); padding-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <span style="font-size: 12px; color: var(--cyan-accent); font-weight: 900; background: rgba(56,189,248,0.1); padding: 3px 8px; border-radius: 4px;" id="dp-mode-tag">
+                    ⚡ 直前ラストミニッツDP
+                  </span>
+                  <span style="font-size: 13px; color: #cbd5e1; font-weight: 700;">カレンダーから選択されたターゲット日</span>
+                </div>
+                <div style="font-size: 22px; font-weight: 900; color: #fff; margin-top: 4px;" id="dp-target-title">
+                  📅 2026年 5月 7日（木）
+                </div>
+              </div>
+              <span class="badge bg-red" id="dp-target-badge" style="font-size: 14px; padding: 6px 14px;">🔴 弱日 (現在4組 / ☔60%)</span>
+            </div>
+
+            <!-- DP設定 ＆ LINEプレビュー ＆ 期待効果（3カラムグリッド） -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 18px;">
+              
+              <!-- ① DP価格設定 -->
+              <div style="background: #070c14; border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
+                <div style="font-size: 13px; font-weight: 800; color: #94a3b8; margin-bottom: 10px;">
+                  ⚡ ① DP（変動価格）設定
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
                   <div>
-                    <div style="font-size: 12px; color: #94a3b8; text-decoration: line-through;">通常価格: ¥13,800</div>
-                    <div style="font-size: 24px; font-weight: 900; color: var(--c-green-text); font-family: 'JetBrains Mono';">
+                    <div style="font-size: 12px; color: #94a3b8; text-decoration: line-through;" id="dp-orig-price">通常価格: ¥13,800</div>
+                    <div style="font-size: 26px; font-weight: 900; color: var(--c-green-text); font-family: 'JetBrains Mono';" id="dp-special-price">
                       ¥10,800 <span style="font-size: 14px; color: #fff;">(昼食付)</span>
                     </div>
                   </div>
-                  <div style="text-align: right;">
-                    <span class="badge bg-green" style="font-size: 12px;">▲¥3,000 特別優待</span>
-                    <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 2px;">販売枠数: <b>限定 6組</b></div>
-                  </div>
+                  <span class="badge bg-green" id="dp-discount-badge" style="font-size: 12px;">▲¥3,000 特別優待</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted); border-top: 1px dashed var(--border); padding-top: 6px;">
+                  販売枠数: <b style="color:#fff;" id="dp-slot-count">限定 6組 (24名)</b> / スルー枠優先
                 </div>
               </div>
 
-              <!-- ② LINEシークレットオファー配信文面プレビュー -->
-              <div style="background: #070c14; border: 1px solid var(--border); border-radius: 8px; padding: 12px; margin-bottom: 14px;">
-                <div style="font-size: 12.5px; font-weight: 800; color: #94a3b8; margin-bottom: 6px; display: flex; justify-content: space-between;">
-                  <span>💬 ② LINE友だち限定シークレット配信</span>
-                  <span style="color: var(--cyan-accent); font-size: 11.5px;">対象: 1,247名（平日来場者）</span>
+              <!-- ② LINEシークレット配信文面プレビュー -->
+              <div style="background: #070c14; border: 1px solid var(--border); border-radius: 10px; padding: 14px;">
+                <div style="font-size: 13px; font-weight: 800; color: #94a3b8; margin-bottom: 8px; display: flex; justify-content: space-between;">
+                  <span>💬 ② LINE友だち限定配信</span>
+                  <span style="color: var(--cyan-accent); font-size: 11.5px;" id="dp-target-users">対象: 1,247名</span>
                 </div>
-                <div style="background: #111e2e; border-left: 3px solid #10b981; border-radius: 6px; padding: 10px; font-size: 12.5px; color: #e2e8f0; line-height: 1.6;">
+                <div style="background: #111e2e; border-left: 3px solid #10b981; border-radius: 6px; padding: 10px; font-size: 12px; color: #e2e8f0; line-height: 1.6;" id="dp-line-text">
                   <b>【TCC平日限定シークレットご優待 ⛳】</b><br>
                   5/7(木) GW明け緊急限定オファー！<br>
                   通常¥13,800 ➔ <b>特別優待 ¥10,800（名物ランチ付）</b><br>
@@ -1315,21 +1447,31 @@
               </div>
 
               <!-- ③ 期待効果サマリー -->
-              <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(16,185,129,0.1); border: 1px dashed var(--c-green); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px;">
-                <span style="font-size: 12.5px; color: #cbd5e1;">📈 期待獲得組数 ＆ 売上リフト:</span>
-                <span style="font-family: 'JetBrains Mono'; font-size: 16px; font-weight: 900; color: var(--c-green-text);">
-                  +4組 (16名) / +¥172,800
-                </span>
+              <div style="background: rgba(16,185,129,0.08); border: 1px dashed var(--c-green); border-radius: 10px; padding: 14px; display: flex; flexDirection: column; justify-content: space-between;">
+                <div>
+                  <div style="font-size: 13px; font-weight: 800; color: var(--c-green-text); margin-bottom: 8px;">
+                    📈 ③ 期待獲得組数 ＆ 粗利リフト
+                  </div>
+                  <div style="font-size: 13px; color: #cbd5e1; line-height: 1.6;">
+                    ・予想獲得: <b style="color:#fff; font-size:16px;" id="dp-lift-groups">+4組 (16名)</b><br>
+                    ・追加粗利: <b style="color:var(--c-green-text); font-size:18px; font-family:'JetBrains Mono';" id="dp-lift-profit">+¥172,800</b>
+                  </div>
+                </div>
+                <div style="font-size: 11.5px; color: #94a3b8; margin-top: 6px;">
+                  ※ 空き枠の固定費回収率 +28%
+                </div>
               </div>
 
-              <!-- ④ 配信実行ボタン -->
-              <button onclick="executeLinePromo()" style="width: 100%; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; border: none; border-radius: 8px; padding: 14px; font-size: 15px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 14px rgba(16,185,129,0.4); transition: all 0.2s ease;">
-                <span>📲 ⚡ DP確定 ＆ LINEシークレット配信をセットする</span>
+            </div>
+
+            <!-- アクションボタン -->
+            <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+              <button onclick="executeLinePromo()" style="flex: 1; min-width: 280px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; border: none; border-radius: 8px; padding: 14px; font-size: 16px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; box-shadow: 0 4px 16px rgba(16,185,129,0.4); transition: all 0.2s ease;">
+                <span>📲 ⚡ DP価格確定 ＆ LINEシークレット配信をセットする</span>
               </button>
-              <div style="font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 6px;">
-                ※ セット完了後、支配人・幹部LINEグループへ自動通知されます
+              <div style="font-size: 11.5px; color: var(--text-muted);">
+                ※ 実行すると即座に予約システムへ価格が反映され、幹部LINEグループへ配信レポートが共有されます
               </div>
-
             </div>
 
           </div>
@@ -1337,6 +1479,7 @@
         </div>
       </div>
     </div>
+
 
 
   </div>
@@ -1948,16 +2091,25 @@
     }
   }
 
-  // 弱日トリアージカレンダーの日付選択ハンドラ
-  function selectTriageDay(dateStr, count, rainProb, reason) {
+  // 弱日トリアージカレンダーの日付選択ハンドラ（ラストミニッツ vs アーリーバード動的切替）
+  function selectTriageDay(dateStr, count, rainProb, reason, mode) {
     const titleEl = document.getElementById('dp-target-title');
     const badgeEl = document.getElementById('dp-target-badge');
+    const modeTagEl = document.getElementById('dp-mode-tag');
+    const origPriceEl = document.getElementById('dp-orig-price');
+    const specialPriceEl = document.getElementById('dp-special-price');
+    const discountBadgeEl = document.getElementById('dp-discount-badge');
+    const lineTextEl = document.getElementById('dp-line-text');
+    const liftGroupsEl = document.getElementById('dp-lift-groups');
+    const liftProfitEl = document.getElementById('dp-lift-profit');
+
     if (!titleEl || !badgeEl) return;
 
     const parts = dateStr.split('-');
     const formatted = `${parts[0]}年 ${parseInt(parts[1])}月 ${parseInt(parts[2])}日`;
     titleEl.textContent = `📅 ${formatted}`;
 
+    // トリアージバッジ判定
     if (rainProb >= 50) {
       badgeEl.className = 'badge bg-red';
       badgeEl.textContent = `⚫ 超危険 (予約 ${count}組 / ☔${rainProb}%)`;
@@ -1974,6 +2126,37 @@
       badgeEl.style.background = 'var(--c-yellow-bg)';
       badgeEl.style.border = '1px solid var(--c-yellow)';
     }
+
+    // ラストミニッツ vs アーリーバード の連動切り替え
+    if (mode === 'early-bird') {
+      if (modeTagEl) {
+        modeTagEl.textContent = '🕊️ 早期先回りアーリーバードDP';
+        modeTagEl.style.color = 'var(--gold-accent)';
+        modeTagEl.style.background = 'rgba(201,169,97,0.15)';
+      }
+      if (origPriceEl) origPriceEl.textContent = '通常価格: ¥14,500';
+      if (specialPriceEl) specialPriceEl.innerHTML = '¥12,500 <span style="font-size: 14px; color: #fff;">(早期割)</span>';
+      if (discountBadgeEl) discountBadgeEl.textContent = '▲¥2,000 早期先回り優待';
+      if (liftGroupsEl) liftGroupsEl.textContent = '+6組 (24名)';
+      if (liftProfitEl) liftProfitEl.textContent = '+¥300,000';
+      if (lineTextEl) {
+        lineTextEl.innerHTML = `<b>【TCC 2ヶ月前早期先回りシークレット ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} ${reason} 早期枠！<br>通常¥14,500 ➔ <b>特別早期割 ¥12,500（限定枠）</b><br>先着8組様限定。ご予約はこちら ➔ [早期プランを見る]`;
+      }
+    } else {
+      if (modeTagEl) {
+        modeTagEl.textContent = '⚡ 直前ラストミニッツDP';
+        modeTagEl.style.color = 'var(--cyan-accent)';
+        modeTagEl.style.background = 'rgba(56,189,248,0.1)';
+      }
+      if (origPriceEl) origPriceEl.textContent = '通常価格: ¥13,800';
+      if (specialPriceEl) specialPriceEl.innerHTML = '¥10,800 <span style="font-size: 14px; color: #fff;">(昼食付)</span>';
+      if (discountBadgeEl) discountBadgeEl.textContent = '▲¥3,000 特別優待';
+      if (liftGroupsEl) liftGroupsEl.textContent = '+4組 (16名)';
+      if (liftProfitEl) liftProfitEl.textContent = '+¥172,800';
+      if (lineTextEl) {
+        lineTextEl.innerHTML = `<b>【TCC平日限定シークレットご優待 ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} 緊急限定オファー！<br>通常¥13,800 ➔ <b>特別優待 ¥10,800（名物ランチ付）</b><br>先着6組様限定。ご予約はこちら ➔ [限定プランを見る]`;
+      }
+    }
   }
 
   // LINEシークレット配信実行ハンドラ
@@ -1982,7 +2165,7 @@
     const dateText = titleEl ? titleEl.textContent.replace('📅 ', '').trim() : '指定日';
     
     // トースト風のアラート
-    alert(`✅ 【配信予約完了】\n\n${dateText} の「⚡ DP特別価格 ¥10,800（昼食付）」を適用し、LINE友だち 1,247名へシークレット配信をセットしました！\n\n📲 支配人・幹部LINEグループへ配信通知を自動送信しました。`);
+    alert(`✅ 【配信予約完了】\n\n${dateText} の「⚡ DP特別価格」を適用し、LINE友だち 1,247名へシークレット配信をセットしました！\n\n📲 支配人・幹部LINEグループへ配信通知を自動送信しました。`);
   }
 
   // ページ読み込み時のURL判定（?tab=stock または #stock で自動切替）
