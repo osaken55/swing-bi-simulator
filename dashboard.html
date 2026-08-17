@@ -3,39 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>TSH Beyond-Dashboard | ゴルフ場次世代AI経営コックピット</title>
+  <title>TSH Beyond-Dashboard | TCCデザインシステム準拠ダーク版</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    /* =========================================================
+       TCC Design System Tokens (Dark Edition)
+       Base: TCC Navy (#1B4D6B), TCC Gold (#C9A961), Teal (#1D9E75)
+       ========================================================= */
     :root {
-      --bg-dark: #080c14;
-      --bg-card: #111827;
-      --bg-card-hover: #1f293d;
-      --bg-card-sub: #0c1322;
-      --border: #1f293d;
-      --border-accent: #374151;
-      --primary: #10b981;
-      --primary-glow: rgba(16, 185, 129, 0.2);
-      --cyan: #06b6d4;
-      --cyan-glow: rgba(6, 182, 212, 0.2);
-      --amber: #f59e0b;
-      --purple: #a855f7;
-      --rose: #f43f5e;
-      --text-main: #f8fafc;
+      --tcc-bg: #0a0e17;            /* 深層オフブラック */
+      --tcc-card: #131b26;          /* TCCダークスレート */
+      --tcc-card-sub: #0e1520;      /* サブ領域 */
+      --tcc-card-hover: #1c2738;
+      --tcc-border: #223044;        /* 品位ある境界線 */
+      --tcc-border-accent: #334460;
+      
+      /* TCC 正典ブランドカラー */
+      --tcc-navy: #1B4D6B;          /* TCC紺（ブランド主軸） */
+      --tcc-navy-light: #2c6e96;
+      --tcc-gold: #C9A961;          /* TCCゴールド（最上位・アクセント） */
+      --tcc-gold-soft: rgba(201, 169, 97, 0.2);
+      
+      /* TCC セマンティックパレット */
+      --tcc-teal: #1D9E75;          /* 達成・好調・緑 */
+      --tcc-teal-light: #5DCAA5;
+      --tcc-amber: #EF9F27;         /* 注意・警戒・橙 */
+      --tcc-coral: #D85A30;
+      --tcc-red: #E24B4A;           /* 未達・危険・赤 */
+      --tcc-red-dark: #B71C1C;
+      --tcc-blue: #378ADD;          /* 情報・運行・青 */
+      --tcc-purple: #534AB7;        /* AI・知能・紫 */
+      --tcc-purple-soft: #AFA9EC;
+      --tcc-gray: #888780;          /* 補助・中立 */
+
+      /* テキスト */
+      --text-main: #f1f5f9;
       --text-muted: #94a3b8;
       --text-sub: #64748b;
-      --radius: 14px;
+      --radius: 12px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; touch-action: manipulation; }
     body {
-      font-family: 'Inter', 'Noto Sans JP', sans-serif;
-      background: var(--bg-dark);
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans JP', 'Hiragino Sans', sans-serif;
+      background: var(--tcc-bg);
       color: var(--text-main);
       padding: 16px 12px 80px 12px;
-      /* 基本フォントサイズを2割増し（14px ➔ 17.5px） */
+      /* 基本フォントサイズ2割増し（17.5px基準） */
       font-size: 17.5px;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
@@ -46,58 +63,61 @@
       margin: 0 auto;
     }
 
-    /* Top Navigation Bar */
-    .top-nav {
+    /* Top Navigation (TCC Cockpit Header) */
+    .tcc-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: var(--tcc-card);
+      border: 1px solid var(--tcc-border);
       border-radius: var(--radius);
       padding: 16px 20px;
       margin-bottom: 18px;
       flex-wrap: wrap;
       gap: 14px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
-    .brand-logo {
+    .brand-block {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
-    .brand-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 100%);
+    .brand-crest {
+      width: 42px;
+      height: 42px;
+      background: linear-gradient(135deg, var(--tcc-navy) 0%, var(--tcc-gold) 100%);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      color: #080c14;
+      color: #fff;
       font-size: 20px;
+      border: 1.5px solid var(--tcc-gold);
+      box-shadow: 0 0 10px rgba(201, 169, 97, 0.3);
       flex-shrink: 0;
     }
     .brand-title { 
       font-size: 21px; 
       font-weight: 800; 
       color: #fff; 
-      letter-spacing: -0.02em; 
+      letter-spacing: -0.01em; 
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
-    .brand-subtitle { font-size: 14px; color: var(--text-muted); margin-top: 2px; }
+    .brand-subtitle { font-size: 14px; color: var(--tcc-gold); font-weight: 600; margin-top: 2px; }
 
-    /* Course / Group Switcher */
+    /* View Switcher */
     .view-switcher {
       display: flex;
-      background: var(--bg-dark);
-      border: 1px solid var(--border);
+      background: var(--tcc-bg);
+      border: 1px solid var(--tcc-border);
       border-radius: 10px;
       padding: 4px;
       width: 100%;
-      max-width: 400px;
+      max-width: 420px;
     }
     .switch-btn {
       flex: 1;
@@ -113,9 +133,10 @@
       text-align: center;
     }
     .switch-btn.active {
-      background: var(--primary);
-      color: #080c14;
+      background: var(--tcc-navy);
+      color: #fff;
       font-weight: 800;
+      border: 1px solid var(--tcc-navy-light);
     }
 
     /* Tab Navigation (5 Modules) */
@@ -131,8 +152,8 @@
     .module-tabs::-webkit-scrollbar { display: none; }
 
     .tab-btn {
-      background: var(--bg-card);
-      border: 1.5px solid var(--border);
+      background: var(--tcc-card);
+      border: 1.5px solid var(--tcc-border);
       color: var(--text-muted);
       padding: 14px 20px;
       border-radius: 12px;
@@ -146,12 +167,12 @@
       transition: all 0.15s ease;
       flex-shrink: 0;
     }
-    .tab-btn:hover { border-color: var(--border-accent); color: #fff; }
+    .tab-btn:hover { border-color: var(--tcc-gold); color: #fff; }
     .tab-btn.active {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: var(--primary);
+      background: rgba(27, 77, 107, 0.3);
+      border-color: var(--tcc-gold);
       color: #fff;
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+      box-shadow: 0 0 14px rgba(201, 169, 97, 0.2);
     }
     .tab-badge {
       font-size: 12px;
@@ -159,8 +180,8 @@
       border-radius: 6px;
       font-weight: 800;
     }
-    .badge-std { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
-    .badge-pro { background: rgba(245, 158, 11, 0.25); color: #fde68a; border: 1px solid var(--amber); }
+    .badge-std { background: #1c2738; color: #cbd5e1; border: 1px solid #334460; }
+    .badge-pro { background: var(--tcc-gold-soft); color: #fde68a; border: 1px solid var(--tcc-gold); }
 
     /* Module Section */
     .module-section {
@@ -175,34 +196,32 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards & Grids */
+    /* Cards & Section Headers (TCC Style: Left Accent Bar) */
     .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
+      background: var(--tcc-card);
+      border: 1px solid var(--tcc-border);
       border-radius: var(--radius);
       padding: 22px 20px;
       margin-bottom: 20px;
     }
-    .card-header {
+    .section-h {
+      font-size: 20px;
+      font-weight: 800;
+      color: #fff;
+      border-left: 4px solid var(--tcc-gold);
+      padding-left: 12px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 18px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-      flex-wrap: wrap;
-      gap: 12px;
+      gap: 10px;
     }
-    .card-title { 
-      font-size: 20px; 
-      font-weight: 800; 
-      color: #fff; 
-      display: flex; 
-      align-items: center; 
-      gap: 10px; 
+    .section-en {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
     }
 
-    /* KPI Highlight Grid */
+    /* KPI Cards */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -210,8 +229,8 @@
       margin-bottom: 20px;
     }
     .kpi-card {
-      background: var(--bg-card-sub);
-      border: 1px solid var(--border);
+      background: var(--tcc-card-sub);
+      border: 1px solid var(--tcc-border);
       border-radius: 12px;
       padding: 18px 20px;
       position: relative;
@@ -222,10 +241,10 @@
       position: absolute;
       top: 0; left: 0; width: 5px; height: 100%;
     }
-    .kpi-green::before { background: var(--primary); }
-    .kpi-cyan::before { background: var(--cyan); }
-    .kpi-amber::before { background: var(--amber); }
-    .kpi-purple::before { background: var(--purple); }
+    .kpi-teal::before { background: var(--tcc-teal); }
+    .kpi-blue::before { background: var(--tcc-blue); }
+    .kpi-gold::before { background: var(--tcc-gold); }
+    .kpi-purple::before { background: var(--tcc-purple); }
 
     .kpi-label { font-size: 14.5px; color: var(--text-muted); font-weight: 700; }
     .kpi-val { 
@@ -237,18 +256,18 @@
       letter-spacing: -0.02em;
     }
     .kpi-diff { font-size: 14.5px; font-weight: 700; }
-    .diff-up { color: #34d399; }
-    .diff-down { color: #fb7185; }
+    .diff-up { color: var(--tcc-teal-light); }
+    .diff-down { color: var(--tcc-red); }
 
-    /* AI 4 Manager Cards Grid */
+    /* 4 AI Managers Grid */
     .ai-manager-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 18px;
     }
     .ai-card {
-      background: var(--bg-card-sub);
-      border: 1px solid var(--border);
+      background: var(--tcc-card-sub);
+      border: 1px solid var(--tcc-border);
       border-radius: 12px;
       padding: 20px;
       display: flex;
@@ -268,11 +287,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 22px;
       flex-shrink: 0;
     }
     .ai-name { font-size: 18px; font-weight: 800; color: #fff; }
-    .ai-role { font-size: 13.5px; color: var(--text-muted); }
+    .ai-role { font-size: 13.5px; color: var(--text-muted); font-weight: 600; }
     .ai-body { 
       font-size: 16.5px; 
       color: #e2e8f0; 
@@ -280,8 +299,8 @@
       margin-bottom: 16px; 
     }
     .ai-action {
-      background: rgba(255,255,255,0.05);
-      border-left: 4px solid var(--primary);
+      background: rgba(255,255,255,0.04);
+      border-left: 4px solid var(--tcc-gold);
       padding: 12px 14px;
       border-radius: 6px;
       font-size: 15px;
@@ -294,7 +313,7 @@
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       border-radius: 10px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--tcc-border);
     }
     table {
       width: 100%;
@@ -304,11 +323,11 @@
     }
     th, td {
       padding: 14px 16px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--tcc-border);
       text-align: right;
     }
     th {
-      background: var(--bg-card-sub);
+      background: var(--tcc-card-sub);
       color: var(--text-muted);
       font-weight: 700;
       font-size: 15px;
@@ -323,9 +342,9 @@
       flex-wrap: wrap;
     }
     .btn {
-      background: var(--bg-card-hover);
+      background: var(--tcc-card-hover);
       color: #fff;
-      border: 1px solid var(--border-accent);
+      border: 1px solid var(--tcc-border-accent);
       padding: 12px 18px;
       border-radius: 8px;
       font-size: 15.5px;
@@ -336,13 +355,13 @@
       gap: 8px;
       transition: all 0.15s ease;
     }
-    .btn:hover { background: var(--primary); color: #080c14; border-color: var(--primary); }
-    .btn-primary { background: var(--primary); color: #080c14; border-color: var(--primary); font-weight: 800; }
+    .btn:hover { background: var(--tcc-navy); color: #fff; border-color: var(--tcc-gold); }
+    .btn-primary { background: var(--tcc-navy); color: #fff; border-color: var(--tcc-gold); font-weight: 800; }
 
     /* CRM Pipeline Box */
     .crm-box {
-      background: rgba(168, 85, 247, 0.1);
-      border: 1.5px solid rgba(168, 85, 247, 0.4);
+      background: rgba(83, 74, 183, 0.12);
+      border: 1.5px solid rgba(175, 169, 236, 0.4);
       border-radius: 12px;
       padding: 20px;
       margin-top: 18px;
@@ -351,11 +370,11 @@
     /* Responsive Mobile Tweaks */
     @media (max-width: 768px) {
       body { padding: 12px 10px 90px 10px; font-size: 16.5px; }
-      .top-nav { padding: 14px 14px; }
+      .tcc-header { padding: 14px 14px; }
       .brand-title { font-size: 19px; }
       .view-switcher { max-width: 100%; }
       .card { padding: 16px 14px; }
-      .card-title { font-size: 18px; }
+      .section-h { font-size: 18px; }
       .kpi-val { font-size: 28px; }
       .ai-manager-grid { grid-template-columns: 1fr; }
     }
@@ -364,14 +383,14 @@
 <body>
 
 <div class="container">
-  <!-- TOP NAV -->
-  <div class="top-nav">
-    <div class="brand-logo">
-      <div class="brand-icon">8</div>
+  <!-- TOP NAV (TCC Cockpit Header) -->
+  <div class="tcc-header">
+    <div class="brand-block">
+      <div class="brand-crest">TCC</div>
       <div>
         <div class="brand-title">
           <span>TSH Beyond-Dashboard</span>
-          <span style="font-size:13px; font-weight:800; color:var(--primary); background:rgba(16,185,129,0.18); padding:3px 8px; border-radius:6px; border:1px solid var(--primary);">v2.5 Live</span>
+          <span style="font-size:13px; font-weight:800; color:var(--tcc-gold); background:var(--tcc-gold-soft); padding:3px 8px; border-radius:6px; border:1px solid var(--tcc-gold);">TCC Design System v2.0 Dark</span>
         </div>
         <div class="brand-subtitle">8Angels.ai — ゴルフ場次世代AI経営コックピット</div>
       </div>
@@ -396,7 +415,7 @@
     </button>
     <button class="tab-btn" onclick="switchTab('tab-ai-managers')">
       <span>🧠 ③ 4支配人AIサマリー</span>
-      <span class="tab-badge badge-pro" style="background:rgba(16,185,129,0.25); color:#a7f3d0; border:1px solid var(--primary);">★目玉機能</span>
+      <span class="tab-badge badge-pro" style="background:rgba(29,158,117,0.25); color:var(--tcc-teal-light); border:1px solid var(--tcc-teal);">★目玉機能</span>
     </button>
     <button class="tab-btn" onclick="switchTab('tab-customers')">
       <span>👥 ④ 顧客・リピート分析</span>
@@ -404,7 +423,7 @@
     </button>
     <button class="tab-btn" onclick="switchTab('tab-crm')">
       <span>🔮 ⑤ AI売上予測＆CRM</span>
-      <span class="tab-badge badge-pro" style="background:rgba(168,85,247,0.25); color:#e9d5ff; border:1px solid var(--purple);">松・鶴</span>
+      <span class="tab-badge badge-pro" style="background:rgba(83,74,183,0.25); color:var(--tcc-purple-soft); border:1px solid var(--tcc-purple);">松・鶴</span>
     </button>
   </div>
 
@@ -414,17 +433,17 @@
   <div id="tab-live" class="module-section active">
     <!-- Live KPIs -->
     <div class="kpi-grid">
-      <div class="kpi-card kpi-green">
+      <div class="kpi-card kpi-teal">
         <div class="kpi-label">本日の総売上（速報）</div>
         <div class="kpi-val" id="live-total-sales">¥4,280,000</div>
         <div class="kpi-diff diff-up">▲ 前年同曜日比 +12.4%</div>
       </div>
-      <div class="kpi-card kpi-cyan">
+      <div class="kpi-card kpi-blue">
         <div class="kpi-label">来場人数 / 組数</div>
         <div class="kpi-val" id="live-players">184 <span style="font-size:20px;">名</span> / 48 <span style="font-size:20px;">組</span></div>
         <div class="kpi-diff diff-up">▲ 稼働率 96.0% (満枠稼働)</div>
       </div>
-      <div class="kpi-card kpi-amber">
+      <div class="kpi-card kpi-gold">
         <div class="kpi-label">客単価（総合）</div>
         <div class="kpi-val" id="live-unit-price">¥23,260</div>
         <div class="kpi-diff diff-up">▲ 昼食＋物販単価が上昇</div>
@@ -440,9 +459,12 @@
     <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:18px;">
       <!-- Department Sales Card -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">🛍️ 部門別 売上構成（リアルタイム集計）</div>
-          <span style="font-size:14px; font-weight:700; color:var(--primary);">Swing-CLOUD 自動同期</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <div class="section-h">
+            <span>🛍️ 部門別 売上構成</span>
+            <span class="section-en">DEPARTMENT BREAKDOWN</span>
+          </div>
+          <span style="font-size:14px; font-weight:700; color:var(--tcc-teal-light);">Swing-CLOUD 自動同期</span>
         </div>
         <table style="min-width: 100%;">
           <thead>
@@ -462,13 +484,13 @@
             </tr>
             <tr>
               <td>🍽️ レストラン飲食</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--amber);">¥1,120,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-amber);">¥1,120,000</td>
               <td>¥6,086</td>
               <td class="diff-up">+16.2%</td>
             </tr>
             <tr>
               <td>🏌️ プロショップ・物販</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--cyan);">¥520,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-blue);">¥520,000</td>
               <td>¥2,826</td>
               <td class="diff-up">+18.0%</td>
             </tr>
@@ -478,8 +500,11 @@
 
       <!-- Time of Day Chart -->
       <div class="card">
-        <div class="card-header">
-          <div class="card-title">⏱️ スタート時間帯別 進行＆来場ペース</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+          <div class="section-h">
+            <span>⏱️ スタート時間帯別 運行ペース</span>
+            <span class="section-en">HOURLY PACE</span>
+          </div>
           <span style="font-size:14px; color:var(--text-muted);">ハーフ平均: 2時間12分 (良好)</span>
         </div>
         <div style="height: 220px; position: relative;">
@@ -494,10 +519,13 @@
   <!-- ========================================== -->
   <div id="tab-weekly" class="module-section">
     <div class="card">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
         <div>
-          <div class="card-title">📑 2026年 第33週（8/10〜8/16）営業実績＆前年対比週報</div>
-          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px;">SwingClubデータからワンクリック完全自動生成（支配人のExcel手作業ゼロ）</div>
+          <div class="section-h">
+            <span>📑 2026年 第33週 営業実績＆前年対比週報</span>
+            <span class="section-en">WEEKLY REPORT AUTO</span>
+          </div>
+          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px; padding-left:16px;">SwingClubデータからワンクリック完全自動生成（支配人のExcel手作業ゼロ）</div>
         </div>
         <div class="btn-row">
           <button class="btn btn-primary" onclick="alert('PDFレポートを出力しました（A4・3枚）')">📥 PDFレポート出力</button>
@@ -556,7 +584,7 @@
               <td>🌧️ 雨</td>
               <td>24組</td>
               <td>92名</td>
-              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--rose);">¥1,740,000</td>
+              <td style="font-family:'JetBrains Mono'; font-weight:800; color:var(--tcc-red);">¥1,740,000</td>
               <td>¥18,913</td>
               <td class="diff-down">82%</td>
               <td class="diff-down">-12.0%</td>
@@ -591,12 +619,12 @@
               <td class="diff-up">110%</td>
               <td class="diff-up">+12.1%</td>
             </tr>
-            <tr style="background: rgba(16,185,129,0.12); font-weight:800;">
+            <tr style="background: rgba(29,158,117,0.12); font-weight:800;">
               <td>当週 週間合計</td>
               <td>—</td>
               <td>301組</td>
               <td>1,176名</td>
-              <td style="font-family:'JetBrains Mono'; color:#34d399; font-size:18px;">¥26,590,000</td>
+              <td style="font-family:'JetBrains Mono'; color:var(--tcc-teal-light); font-size:18px;">¥26,590,000</td>
               <td>¥22,610</td>
               <td class="diff-up" style="font-size:18px;">107.5%</td>
               <td class="diff-up" style="font-size:18px;">+9.8%</td>
@@ -612,20 +640,20 @@
   <!-- ========================================== -->
   <div id="tab-ai-managers" class="module-section">
     <div class="card">
-      <div class="card-header">
-        <div>
-          <div class="card-title">🧠 4支配人 AIサマリー（AI経営参謀エージェント）</div>
-          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px;">Gemini 2.5 Flashが蓄積データを多角的に深層分析し、次週の具体的アクションを提示</div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <div class="section-h">
+          <span>🧠 4支配人 AIサマリー</span>
+          <span class="section-en">AI EXECUTIVE ADVISORS</span>
         </div>
-        <span style="font-size:13px; background:rgba(16,185,129,0.2); color:#34d399; padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--primary);">8Angels.ai Engine</span>
+        <span style="font-size:13px; background:var(--tcc-gold-soft); color:var(--tcc-gold); padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--tcc-gold);">8Angels.ai Engine</span>
       </div>
 
       <div class="ai-manager-grid">
         <!-- 1. Strategy Manager -->
-        <div class="ai-card" style="border-top: 4px solid var(--cyan);">
+        <div class="ai-card" style="border-top: 4px solid var(--tcc-navy-light);">
           <div>
             <div class="ai-card-header">
-              <div class="ai-avatar" style="background:rgba(6,182,212,0.2); color:var(--cyan);">🦅</div>
+              <div class="ai-avatar" style="background:rgba(27,77,107,0.3); color:var(--tcc-blue);">🦅</div>
               <div>
                 <div class="ai-name">戦略支配人 AI</div>
                 <div class="ai-role">全体トレンド・前年対比・予実診断</div>
@@ -641,10 +669,10 @@
         </div>
 
         <!-- 2. Sales Manager -->
-        <div class="ai-card" style="border-top: 4px solid var(--amber);">
+        <div class="ai-card" style="border-top: 4px solid var(--tcc-amber);">
           <div>
             <div class="ai-card-header">
-              <div class="ai-avatar" style="background:rgba(245,158,11,0.2); color:var(--amber);">🎯</div>
+              <div class="ai-avatar" style="background:rgba(239,159,39,0.2); color:var(--tcc-amber);">🎯</div>
               <div>
                 <div class="ai-name">営業支配人 AI</div>
                 <div class="ai-role">予約経路・自社Web比率・組単価最適化</div>
@@ -660,10 +688,10 @@
         </div>
 
         <!-- 3. Operations Manager -->
-        <div class="ai-card" style="border-top: 4px solid var(--primary);">
+        <div class="ai-card" style="border-top: 4px solid var(--tcc-teal);">
           <div>
             <div class="ai-card-header">
-              <div class="ai-avatar" style="background:rgba(16,185,129,0.2); color:var(--primary);">⚙️</div>
+              <div class="ai-avatar" style="background:rgba(29,158,117,0.2); color:var(--tcc-teal);">⚙️</div>
               <div>
                 <div class="ai-name">業務支配人 AI</div>
                 <div class="ai-role">進行ペース・キャパシティ・天候トリアージ</div>
@@ -679,10 +707,10 @@
         </div>
 
         <!-- 4. Financial Manager -->
-        <div class="ai-card" style="border-top: 4px solid var(--purple);">
+        <div class="ai-card" style="border-top: 4px solid var(--tcc-purple);">
           <div>
             <div class="ai-card-header">
-              <div class="ai-avatar" style="background:rgba(168,85,247,0.2); color:var(--purple);">💰</div>
+              <div class="ai-avatar" style="background:rgba(83,74,183,0.2); color:var(--tcc-purple-soft);">💰</div>
               <div>
                 <div class="ai-name">財務支配人 AI</div>
                 <div class="ai-role">部門別採算・レストラン・プロショップ収益</div>
@@ -705,14 +733,17 @@
   <!-- ========================================== -->
   <div id="tab-customers" class="module-section">
     <div class="card">
-      <div class="card-header">
-        <div class="card-title">👥 顧客属性 ＆ リピート分析（会員/ビジター動向）</div>
-        <span style="font-size:14px; font-weight:700; color:var(--cyan);">総登録顧客: 34,200名</span>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+        <div class="section-h">
+          <span>👥 顧客属性 ＆ リピート分析</span>
+          <span class="section-en">CUSTOMER RETENTION</span>
+        </div>
+        <span style="font-size:14px; font-weight:700; color:var(--tcc-blue);">総登録顧客: 34,200名</span>
       </div>
 
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:18px;">
         <!-- Pie Chart -->
-        <div style="background:var(--bg-card-sub); padding:20px; border-radius:12px; border:1px solid var(--border);">
+        <div style="background:var(--tcc-card-sub); padding:20px; border-radius:12px; border:1px solid var(--tcc-border);">
           <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:#fff;">会員区分別 来場比率</div>
           <div style="height: 220px; position: relative;">
             <canvas id="memberPieChart"></canvas>
@@ -720,10 +751,10 @@
         </div>
 
         <!-- Dormant Member Alert -->
-        <div style="background:var(--bg-card-sub); padding:20px; border-radius:12px; border:1px solid var(--border);">
-          <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:#fb7185;">⚠️ 休眠会員・離脱リスク検知</div>
+        <div style="background:var(--tcc-card-sub); padding:20px; border-radius:12px; border:1px solid var(--tcc-border);">
+          <div style="font-weight:800; font-size:16px; margin-bottom:12px; color:var(--tcc-red);">⚠️ 休眠会員・離脱リスク検知</div>
           <div style="font-size:15.5px; color:#cbd5e1; line-height:1.75;">
-            ・<b>直近3ヶ月来場なしの正会員</b>: <b style="color:#fb7185; font-size:17px;">38名</b>（前月比 +4名）<br>
+            ・<b>直近3ヶ月来場なしの正会員</b>: <b style="color:var(--tcc-red); font-size:17px;">38名</b>（前月比 +4名）<br>
             ・<b>年配アクティブ会員（平日中心）</b>: 平均月2.4回 ➔ 1.8回へ微減<br>
             ・<b>AI推奨アクション</b>: 秋季開場記念杯の特別ご案内状を個別発送
           </div>
@@ -738,28 +769,31 @@
   <!-- ========================================== -->
   <div id="tab-crm" class="module-section">
     <div class="card">
-      <div class="card-header">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
         <div>
-          <div class="card-title">🔮 8月度 月末売上着地 AI予測 ＆ CRM自動追客連携</div>
-          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px;">予約先食いデータと天候予測・過去実績から着地数値を高精度AIシミュレーション</div>
+          <div class="section-h">
+            <span>🔮 8月度 月末売上着地 AI予測 ＆ CRM自動追客</span>
+            <span class="section-en">FORECAST & CRM</span>
+          </div>
+          <div style="font-size:14.5px; color:var(--text-muted); margin-top:4px; padding-left:16px;">予約先食いデータと天候予測・過去実績から着地数値を高精度AIシミュレーション</div>
         </div>
-        <span style="font-size:13px; background:rgba(168,85,247,0.2); color:#e9d5ff; padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--purple);">AI Forecast Engine</span>
+        <span style="font-size:13px; background:rgba(83,74,183,0.25); color:var(--tcc-purple-soft); padding:4px 10px; border-radius:6px; font-weight:800; border:1px solid var(--tcc-purple);">AI Forecast Engine</span>
       </div>
 
       <div class="kpi-grid">
         <div class="kpi-card kpi-purple">
           <div class="kpi-label">8月末 着地売上予測（AI）</div>
-          <div class="kpi-val" style="color:#d8b4fe;">¥48,500,000</div>
+          <div class="kpi-val" style="color:var(--tcc-purple-soft);">¥48,500,000</div>
           <div class="kpi-diff diff-up">▲ 予算達成見込 103.2%</div>
         </div>
-        <div class="kpi-card kpi-cyan">
+        <div class="kpi-card kpi-blue">
           <div class="kpi-label">月間着地 来場人数予測</div>
           <div class="kpi-val">2,240 <span style="font-size:20px;">名</span></div>
           <div class="kpi-diff diff-up">▲ 前年同月比 +6.5%</div>
         </div>
-        <div class="kpi-card kpi-green">
+        <div class="kpi-card kpi-gold">
           <div class="kpi-label">空き枠アラート（3週間後）</div>
-          <div class="kpi-val" style="color:var(--amber);">8/27 (木) 14枠</div>
+          <div class="kpi-val" style="color:var(--tcc-amber);">8/27 (木) 14枠</div>
           <div class="kpi-diff diff-down">▼ 埋まりペース遅れ検知</div>
         </div>
       </div>
@@ -768,7 +802,7 @@
       <div class="crm-box">
         <div style="font-weight:800; color:#fff; font-size:17px; margin-bottom:8px; display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
           <span>📲 LINE公式アカウント CRM自動追客シナリオ連動</span>
-          <span style="font-size:12px; background:var(--purple); color:#fff; padding:3px 8px; border-radius:4px; font-weight:700;">Staged 承認待ち</span>
+          <span style="font-size:12px; background:var(--tcc-purple); color:#fff; padding:3px 8px; border-radius:4px; font-weight:700;">Staged 承認待ち</span>
         </div>
         <div style="font-size:15.5px; color:#f1f5f9; line-height:1.75; margin-bottom:14px;">
           【AI検知】8月27日(木)・28日(金)の午後スタート枠に空き枠が発生しています。<br>
@@ -824,7 +858,7 @@
         datasets: [{
           label: 'スタート組数',
           data: [6, 12, 14, 8, 4, 3, 1],
-          backgroundColor: '#10b981',
+          backgroundColor: '#1D9E75',
           borderRadius: 6
         }]
       },
@@ -834,7 +868,7 @@
         plugins: { legend: { display: false } },
         scales: {
           x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 13 } } },
-          y: { grid: { color: '#1e293b' }, ticks: { color: '#94a3b8', font: { size: 13 } } }
+          y: { grid: { color: '#223044' }, ticks: { color: '#94a3b8', font: { size: 13 } } }
         }
       }
     });
@@ -851,7 +885,7 @@
         labels: ['正会員 (42%)', '平日会員 (18%)', 'ビジター (40%)'],
         datasets: [{
           data: [42, 18, 40],
-          backgroundColor: ['#10b981', '#06b6d4', '#a855f7'],
+          backgroundColor: ['#1D9E75', '#378ADD', '#534AB7'],
           borderWidth: 0
         }]
       },
