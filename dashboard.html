@@ -2256,13 +2256,44 @@
     }
   }
 
-  // LINEシークレット配信実行ハンドラ
-  function executeLinePromo() {
+  // LINEシークレット配信モーダル制御
+  function openLinePromoModal() {
     const titleEl = document.getElementById('dp-target-title');
     const dateText = titleEl ? titleEl.textContent.replace('📅 ', '').trim() : '指定日';
+    const specialPriceEl = document.getElementById('dp-special-price');
+    const priceText = specialPriceEl ? specialPriceEl.textContent.replace('(昼食付)', '').replace('(早期割)', '').trim() : '¥10,800';
+    const modeTagEl = document.getElementById('dp-mode-tag');
+    const isEarly = modeTagEl && modeTagEl.textContent.includes('アーリーバード');
+
+    document.getElementById('modal-target-date').textContent = `💬 ${dateText} 向け 配信発動`;
     
-    // トースト風のアラート
-    alert(`✅ 【配信予約完了】\n\n${dateText} の「⚡ DP特別価格」を適用し、LINE友だち 1,247名へシークレット配信をセットしました！\n\n📲 支配人・幹部LINEグループへ配信通知を自動送信しました。`);
+    if (isEarly) {
+      document.getElementById('modal-status-text').innerHTML = `現在 5組 / <span style="color:#ef4444; font-weight:800;">🔴 危険</span>  2ヶ月前・早期先回り枠（梅雨期構造的弱日）`;
+      document.getElementById('modal-textarea').value = `【TCC会員様限定・2ヶ月前早期シークレット配信】\n\n${dateText} に特別プランのご案内です。\n\n🎁 早期先回り優待 通常¥14,500 ➔ ${priceText}（先着8組様）\n🎁 名物ランチ付 ＆ カートフィ込\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`;
+    } else {
+      document.getElementById('modal-status-text').innerHTML = `現在 4組 / <span style="color:#ef4444; font-weight:800;">🔴 危険</span>  直前弱日・降水確率60%（GW明け緊急枠）`;
+      document.getElementById('modal-textarea').value = `【TCC会員様限定・シークレット配信】\n\n${dateText} に特別プランのご案内です。\n\n🎁 昼食付・生ビール付 通常¥13,800 ➔ ${priceText}（先着6組様）\n🎁 バッグサーブ付 ＆ スループレー優先\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`;
+    }
+
+    const modal = document.getElementById('line-promo-modal');
+    if (modal) modal.style.display = 'flex';
+  }
+
+  function closeLinePromoModal() {
+    const modal = document.getElementById('line-promo-modal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function submitLinePromo() {
+    closeLinePromoModal();
+    const titleEl = document.getElementById('dp-target-title');
+    const dateText = titleEl ? titleEl.textContent.replace('📅 ', '').trim() : '指定日';
+    alert(`🎉 【LINEシークレット配信 完了】\n\n${dateText} 向けの限定オファーを LINE友だち 1,247名へ送信しました！\n\n📲 支配人・幹部LINEグループへ配信結果レポートを自動共有しました。`);
+  }
+
+  // LINEシークレット配信実行ハンドラ（モーダル立ち上げ）
+  function executeLinePromo() {
+    openLinePromoModal();
   }
 
   // ページ読み込み時のURL判定（?tab=stock または #stock で自動切替）
@@ -2276,5 +2307,70 @@
 
 </script>
 
+<!-- ================================================================= -->
+<!-- 💬 LINE配信発動モーダルポップアップ（オサケンさん激賞・実戦モック）   -->
+<!-- ================================================================= -->
+<div id="line-promo-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(5px); z-index: 99999; align-items: center; justify-content: center; padding: 16px;" onclick="if(event.target===this) closeLinePromoModal();">
+  
+  <div style="background: #ffffff; color: #1e293b; border-radius: 14px; max-width: 580px; width: 100%; padding: 22px 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7); animation: modalPop 0.2s cubic-bezier(0.16, 1, 0.3, 1);">
+    
+    <!-- ヘッダー -->
+    <div style="margin-bottom: 12px;">
+      <h3 style="font-size: 20px; font-weight: 900; color: #0f172a; margin: 0 0 6px 0;" id="modal-target-date">
+        💬 2026-05-07（木） 向け 配信発動
+      </h3>
+      <div style="font-size: 13.5px; color: #64748b;" id="modal-status-text">
+        現在 4組 / <span style="color: #ef4444; font-weight: 800;">🔴 危険</span> 平日・直前弱日
+      </div>
+    </div>
+
+    <!-- 配信文案（AI生成・編集可） -->
+    <div style="margin-bottom: 14px;">
+      <div style="font-size: 13px; font-weight: 800; color: #475569; margin-bottom: 6px;">
+        配信文案（AI生成・編集可）
+      </div>
+      <textarea id="modal-textarea" style="width: 100%; height: 180px; padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13.5px; line-height: 1.65; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; resize: vertical; box-sizing: border-box; outline: none; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='#10b981'" onblur="this.style.borderColor='#cbd5e1'">
+【TCC会員様限定・シークレット配信】
+
+2026-05-07（木）に特別プランのご案内です。
+
+🎁 昼食付・生ビール付 通常¥13,800 ➔ ¥10,800（先着6組様）
+🎁 バッグサーブ付 ＆ スループレー優先
+🎁 本メッセージ経由限定URL
+
+※ 枠が埋まり次第終了となります。
+ご予約はこちら ➔ https://tcc-golf.jp/secret-promo
+      </textarea>
+    </div>
+
+    <!-- フッター情報 ＆ ボタン -->
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; padding-top: 14px; flex-wrap: wrap; gap: 12px;">
+      <div style="font-size: 12.5px; color: #64748b; display: flex; align-items: center; gap: 8px;">
+        <span>📩 配信対象: <b>約1,247人</b></span>
+        <span>🏷️ セグメント: <b>友達全員</b></span>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <button onclick="closeLinePromoModal()" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 8px; padding: 9px 18px; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s ease;">
+          キャンセル
+        </button>
+        <button onclick="submitLinePromo()" style="background: #06c755; color: #ffffff; border: none; border-radius: 8px; padding: 9px 20px; font-size: 14px; font-weight: 900; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 12px rgba(6,199,85,0.35); transition: all 0.15s ease;">
+          <span>📩 配信する</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<style>
+  @keyframes modalPop {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+</style>
+
 </body>
 </html>
+
