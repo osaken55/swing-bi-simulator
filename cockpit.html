@@ -902,37 +902,105 @@
           </div>
         </div>
 
-        <!-- 🍺 フロー内にもドリルダウン実例を直接配置 -->
-        <div style="margin-top: 20px; background: linear-gradient(180deg, #101c2d 0%, #0a111c 100%); border: 2px solid var(--gold); border-radius: 12px; padding: 18px 20px; box-shadow: 0 0 20px rgba(201,169,97,0.15);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-            <div style="font-size: 17px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 22px;">🔍</span>
-              <span>部門ドリルダウン実戦実例：【レストラン】生ビール価格改定の弾力性分析</span>
-            </div>
-            <span class="badge bg-gold" style="font-size: 13px;">年間粗利 +113万円 LIFT</span>
-          </div>
-          <p style="font-size: 14px; color: #cbd5e1; line-height: 1.6; margin-bottom: 14px;">
-            「値上げすると客離れが起きる」という現場の恐怖を、SwingClub POSデータの<b>価格弾力性シミュレーション</b>で解消したTCCの実戦実例。出数微減を単価増が圧倒し、客離れゼロで年間113万円の粗利を純増。
-          </p>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
-            <div style="background: #080d14; border: 1.5px solid #334155; border-radius: 8px; padding: 12px 14px;">
-              <div style="font-size: 13px; font-weight: 800; color: #94a3b8;">🍺 改定前（旧価格 ¥750）</div>
-              <div style="font-size: 13.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.7;">
-                ・月間出数: <b>1,200 杯</b> ｜ 月商: <b>¥900,000</b><br>
-                ・原価率: <b>35.0%</b> ｜ 月間粗利: <b style="color:#fff;">¥585,000</b>
+        <!-- 🍺 フロー内：経営者の視座に立った生ビール価格改定ドリルダウン（月間粗利Before/Afterグラフ全面型） -->
+        <div style="margin-top: 20px; background: #0c1420; border: 2px solid var(--gold); border-radius: 12px; padding: 20px; box-shadow: 0 0 24px rgba(201,169,97,0.2);">
+          
+          <!-- ヘッダー -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <div style="font-size: 17px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 22px;">🔍</span>
+                <span>部門ドリルダウン実例：【レストラン】生ビール価格改定の弾力性分析</span>
+              </div>
+              <div style="font-size: 13px; color: var(--gold); font-weight: 700; margin-top: 3px;">
+                経営者の最大の不安「値上げで客が減って利益が落ちないか？」をPOSデータで科学的に解消
               </div>
             </div>
-            <div style="background: rgba(16,185,129,0.08); border: 1.5px solid var(--c-green); border-radius: 8px; padding: 12px 14px;">
-              <div style="font-size: 13px; font-weight: 800; color: var(--c-green-text);">🚀 改定後（新価格 ¥880 / +130円）</div>
-              <div style="font-size: 13.5px; color: #cbd5e1; margin-top: 4px; line-height: 1.7;">
-                ・月間出数: <b>1,130 杯</b> (<b style="color:var(--c-yellow-text);">-5.8% 軽微な減少</b>)<br>
-                ・月間売上: <b style="color:#fff;">¥994,400</b> ｜ 月間粗利: <b style="color:var(--c-green-text);">¥679,400 (+¥94,400/月)</b>
+            <span class="badge bg-gold" style="font-size: 13.5px; padding: 6px 14px;">年間営業利益 +113万円 LIFT</span>
+          </div>
+
+          <!-- ① 【最前面】月間粗利益（営業利益）Before ➔ After ビジュアルグラフ -->
+          <div style="background: #060a10; border: 1.5px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 16px;">
+            <div style="font-size: 13.5px; font-weight: 800; color: #94a3b8; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <span>💰 【最重要】月間粗利益（手元に残る利益）の Before / After</span>
+              <span style="color: var(--c-green-text); font-weight: 900; font-size: 14.5px;">+¥94,400 / 月 (+16.1% 増益) 🚀</span>
+            </div>
+
+            <!-- 改定前バー -->
+            <div style="margin-bottom: 10px;">
+              <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: #cbd5e1; margin-bottom: 3px;">
+                <span>🍺 改定前（旧価格 ¥750 / 杯）</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: #fff;">¥585,000</span>
+              </div>
+              <div style="height: 26px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex;">
+                <div style="width: 86.1%; background: linear-gradient(90deg, #334155, #64748b); display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 800; color: #fff;">
+                  月間粗利 ¥585,000 (粗利率 65.0%)
+                </div>
               </div>
             </div>
+
+            <!-- 改定後バー -->
+            <div style="margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; color: var(--c-green-text); margin-bottom: 3px;">
+                <span>🚀 改定後（新価格 ¥880 / 杯・+130円改定）</span>
+                <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: var(--c-green-text); font-size: 15px;">¥679,400 (+16.1% 利益増)</span>
+              </div>
+              <div style="height: 30px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex; border: 1.5px solid var(--c-green);">
+                <div style="width: 86.1%; background: linear-gradient(90deg, #15803d, #10b981); display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 800; color: #fff;">
+                  ベース粗利 ¥585,000
+                </div>
+                <div style="width: 13.9%; background: linear-gradient(90deg, #C9A961, #eab308); display: flex; align-items: center; justify-content: center; font-size: 11.5px; font-weight: 900; color: #000;">
+                  +¥9.4万増
+                </div>
+              </div>
+            </div>
+
+            <!-- 年間リフト換算 -->
+            <div style="background: rgba(16,185,129,0.1); border: 1px dashed var(--c-green); border-radius: 6px; padding: 7px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 12.5px;">
+              <span style="color: #cbd5e1;">🍺 生ビール1品だけの価格改定で、営業利益が年間で純増する金額：</span>
+              <span style="font-family: 'JetBrains Mono', monospace; font-size: 15px; font-weight: 900; color: var(--c-green-text);">+¥1,132,800 / 年</span>
+            </div>
           </div>
+
+          <!-- ② 因果因数分解：単価 × 出数 ＝ 売上高（3指標グリッド） -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+            
+            <!-- 単価 -->
+            <div style="background: #060a10; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;">
+              <div style="font-size: 11.5px; color: #94a3b8; font-weight: 700;">🍺 販売単価（Price）</div>
+              <div style="display: flex; align-items: baseline; gap: 6px; margin: 3px 0;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 900; color: #fff;">¥880</span>
+                <span style="font-size: 11.5px; color: var(--c-green-text); font-weight: 800;">+17.3% (+¥130)</span>
+              </div>
+              <div style="font-size: 11.5px; color: #94a3b8;">旧価格: ¥750 ➔ 新価格: ¥880</div>
+            </div>
+
+            <!-- 出数 -->
+            <div style="background: #060a10; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;">
+              <div style="font-size: 11.5px; color: #94a3b8; font-weight: 700;">👥 月間出数（Volume）</div>
+              <div style="display: flex; align-items: baseline; gap: 6px; margin: 3px 0;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 900; color: #fff;">1,130 <span style="font-size: 12px;">杯</span></span>
+                <span style="font-size: 11.5px; color: var(--c-yellow-text); font-weight: 800;">-5.8% (-70杯)</span>
+              </div>
+              <div style="font-size: 11.5px; color: var(--c-yellow-text); font-weight: 700;">わずか5.8%減（客離れなし）</div>
+            </div>
+
+            <!-- 月商 -->
+            <div style="background: #060a10; border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;">
+              <div style="font-size: 11.5px; color: #94a3b8; font-weight: 700;">💰 月間売上高（Revenue）</div>
+              <div style="display: flex; align-items: baseline; gap: 6px; margin: 3px 0;">
+                <span style="font-family: 'JetBrains Mono', monospace; font-size: 20px; font-weight: 900; color: #fff;">¥994,400</span>
+                <span style="font-size: 11.5px; color: var(--c-green-text); font-weight: 800;">+10.5% (+¥9.4万)</span>
+              </div>
+              <div style="font-size: 11.5px; color: #94a3b8;">旧月商: ¥900,000 ➔ 増収達成</div>
+            </div>
+
+          </div>
+
         </div>
       </div>
     </div>
+
 
 
     <!-- 3. 現場リーダーの視座 -->
@@ -1132,66 +1200,103 @@
 
     </div>
 
-    <!-- 5. 部門ドリルダウン実戦実例：レストラン生ビール値上げ（プライシング科学） -->
-    <div class="card" style="border: 2px solid var(--gold); background: linear-gradient(180deg, #101c2d 0%, #0a111c 100%); box-shadow: 0 0 24px rgba(201, 169, 97, 0.2);">
-      <div class="section-header" style="border-left-color: var(--gold); margin-bottom: 12px;">
-        <span>🔍 部門ドリルダウン実例：【レストラン】生ビール価格改定の弾力性分析</span>
-        <span class="section-en">PRICING ELASTICITY DRILL-DOWN (TCC REAL CASE)</span>
-      </div>
+    <!-- 5. 部門ドリルダウン実戦実例：レストラン生ビール値上げ（月間粗利Before/Afterグラフ全面型） -->
+    <div class="card" style="border: 2px solid var(--gold); background: #0c1420; box-shadow: 0 0 28px rgba(201, 169, 97, 0.22); padding: 22px 20px;">
       
-      <p style="font-size: 14.5px; color: #cbd5e1; line-height: 1.65; margin-bottom: 18px;">
-        「値上げすると客離れが起きるのではないか？」という現場の恐怖を、SwingClub POSデータの<b>価格弾力性シミュレーション</b>で解消したTCCの実戦実例。出数の微減を単価アップが完全に凌駕し、年間113万円の営業利益を純増させました。
-      </p>
-
-      <!-- Before vs After 比較グリッド -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 18px;">
-        
-        <!-- 改定前 -->
-        <div style="background: #080d14; border: 1.5px solid #334155; border-radius: 10px; padding: 16px 18px;">
-          <div style="font-size: 13.5px; font-weight: 800; color: #94a3b8; margin-bottom: 6px;">🍺 改定前（旧価格）</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 900; color: #fff; margin-bottom: 10px;">
-            ¥750 <span style="font-size: 15px; color: #94a3b8;">/ 杯</span>
+      <!-- ヘッダー -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+        <div>
+          <div style="font-size: 18px; font-weight: 900; color: #fff; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 24px;">🔍</span>
+            <span>部門ドリルダウン実例：【レストラン】生ビール価格改定の弾力性分析</span>
           </div>
-          <div style="font-size: 14px; color: #cbd5e1; line-height: 1.8;">
-            ・月間出数: <b>1,200 杯</b><br>
-            ・月間売上: <b>¥900,000</b><br>
-            ・原価率: <b>35.0%</b> (原価 ¥262.5)<br>
-            ・月間粗利: <b style="color: #fff;">¥585,000</b>
+          <div style="font-size: 13px; color: var(--gold); font-weight: 700; margin-top: 3px;">
+            経営者の最大の不安「値上げで客が減って利益が落ちないか？」をPOSデータで科学的に解消
           </div>
         </div>
-
-        <!-- 改定後 -->
-        <div style="background: rgba(16, 185, 129, 0.08); border: 2px solid var(--c-green); border-radius: 10px; padding: 16px 18px; position: relative;">
-          <div style="position: absolute; top: 12px; right: 14px;">
-            <span class="badge bg-green" style="font-size: 12px;">+130円改定</span>
-          </div>
-          <div style="font-size: 13.5px; font-weight: 800; color: var(--c-green-text); margin-bottom: 6px;">🚀 改定後（新価格 ＆ 実績）</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 900; color: var(--c-green-text); margin-bottom: 10px;">
-            ¥880 <span style="font-size: 15px; color: #cbd5e1;">/ 杯 (+17.3%)</span>
-          </div>
-          <div style="font-size: 14px; color: #cbd5e1; line-height: 1.8;">
-            ・月間出数: <b>1,130 杯</b> (<b style="color: var(--c-yellow-text);">-5.8% 軽微な減少</b>)<br>
-            ・月間売上: <b style="color: #fff;">¥994,400</b> (<b style="color: var(--c-green-text);">+10.5% 増収</b>)<br>
-            ・原価率: <b>29.8%</b> (<b style="color: var(--c-green-text);">粗利率 +5.2pt改善</b>)<br>
-            ・月間粗利: <b style="color: var(--c-green-text); font-size: 16px;">¥679,400</b> (<b style="color: var(--c-green-text);">+¥94,400/月</b>)
-          </div>
-        </div>
-
+        <span class="badge bg-gold" style="font-size: 14px; padding: 6px 14px;">年間営業利益 +113万円 LIFT</span>
       </div>
 
-      <!-- 結論バッジ -->
-      <div style="background: rgba(201, 169, 97, 0.12); border: 1.5px solid var(--gold); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span style="font-size: 24px;">🏆</span>
-          <div>
-            <div style="font-size: 16px; font-weight: 900; color: #fff;">生ビール1品だけで【年間粗利 +¥1,132,800 純増】</div>
-            <div style="font-size: 12.5px; color: var(--gold); font-weight: 700;">客離れ（出数減）を単価アップが圧倒。SwingClub POSから単品弾力性を即座にシミュレーション可能</div>
+      <!-- ① 【最前面】月間粗利益（営業利益）Before ➔ After ビジュアルグラフ -->
+      <div style="background: #060a10; border: 1.5px solid var(--border); border-radius: 12px; padding: 18px 20px; margin-bottom: 18px;">
+        <div style="font-size: 14px; font-weight: 800; color: #94a3b8; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center;">
+          <span>💰 【最重要】月間粗利益（手元に残る利益）の Before / After</span>
+          <span style="color: var(--c-green-text); font-weight: 900; font-size: 15px;">+¥94,400 / 月 (+16.1% 増益) 🚀</span>
+        </div>
+
+        <!-- 改定前バー -->
+        <div style="margin-bottom: 12px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 4px;">
+            <span>🍺 改定前（旧価格 ¥750 / 杯）</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: #fff;">¥585,000</span>
+          </div>
+          <div style="height: 28px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex;">
+            <div style="width: 86.1%; background: linear-gradient(90deg, #334155, #64748b); display: flex; align-items: center; padding-left: 10px; font-size: 12px; font-weight: 800; color: #fff;">
+              月間粗利 ¥585,000 (粗利率 65.0%)
+            </div>
           </div>
         </div>
-        <span class="badge bg-gold" style="font-size: 14px; padding: 6px 12px;">年間 +113万円 LIFT</span>
+
+        <!-- 改定後バー -->
+        <div style="margin-bottom: 14px;">
+          <div style="display: flex; justify-content: space-between; font-size: 13.5px; font-weight: 700; color: var(--c-green-text); margin-bottom: 4px;">
+            <span>🚀 改定後（新価格 ¥880 / 杯・+130円改定）</span>
+            <span style="font-family: 'JetBrains Mono', monospace; font-weight: 900; color: var(--c-green-text); font-size: 16px;">¥679,400 (+16.1% 利益増)</span>
+          </div>
+          <div style="height: 32px; background: rgba(255,255,255,0.05); border-radius: 6px; overflow: hidden; display: flex; border: 1.5px solid var(--c-green);">
+            <div style="width: 86.1%; background: linear-gradient(90deg, #15803d, #10b981); display: flex; align-items: center; padding-left: 10px; font-size: 12.5px; font-weight: 800; color: #fff;">
+              ベース粗利 ¥585,000
+            </div>
+            <div style="width: 13.9%; background: linear-gradient(90deg, #C9A961, #eab308); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: #000;">
+              +¥9.4万増
+            </div>
+          </div>
+        </div>
+
+        <!-- 年間リフト換算 -->
+        <div style="background: rgba(16,185,129,0.1); border: 1px dashed var(--c-green); border-radius: 8px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+          <span style="color: #cbd5e1;">🍺 生ビール1品だけの価格改定で、営業利益が年間で純増する金額：</span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 900; color: var(--c-green-text);">+¥1,132,800 / 年</span>
+        </div>
+      </div>
+
+      <!-- ② 因果因数分解：単価 × 出数 ＝ 売上高（3指標グリッド） -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+        
+        <!-- 単価 -->
+        <div style="background: #060a10; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;">
+          <div style="font-size: 12px; color: #94a3b8; font-weight: 700;">🍺 販売単価（Price）</div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 900; color: #fff;">¥880</span>
+            <span style="font-size: 12px; color: var(--c-green-text); font-weight: 800;">+17.3% (+¥130)</span>
+          </div>
+          <div style="font-size: 12px; color: #94a3b8;">旧価格: ¥750 ➔ 新価格: ¥880</div>
+        </div>
+
+        <!-- 出数 -->
+        <div style="background: #060a10; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;">
+          <div style="font-size: 12px; color: #94a3b8; font-weight: 700;">👥 月間出数（Volume）</div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 900; color: #fff;">1,130 <span style="font-size: 13px;">杯</span></span>
+            <span style="font-size: 12px; color: var(--c-yellow-text); font-weight: 800;">-5.8% (-70杯)</span>
+          </div>
+          <div style="font-size: 12px; color: var(--c-yellow-text); font-weight: 700;">わずか5.8%減（客離れなし）</div>
+        </div>
+
+        <!-- 月商 -->
+        <div style="background: #060a10; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;">
+          <div style="font-size: 12px; color: #94a3b8; font-weight: 700;">💰 月間売上高（Revenue）</div>
+          <div style="display: flex; align-items: baseline; gap: 8px; margin: 4px 0;">
+            <span style="font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 900; color: #fff;">¥994,400</span>
+            <span style="font-size: 12px; color: var(--c-green-text); font-weight: 800;">+10.5% (+¥9.4万)</span>
+          </div>
+          <div style="font-size: 12px; color: #94a3b8;">旧月商: ¥900,000 ➔ 増収達成</div>
+        </div>
+
       </div>
 
     </div>
+
 
 
 </div>
