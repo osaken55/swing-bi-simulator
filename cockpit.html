@@ -611,6 +611,7 @@
       table.exec-table td.col-sticky-month { width: 70px; min-width: 70px; font-size: 13.5px; }
     }
   </style>
+  <script src="auth.js"></script>
 </head>
 <body>
 
@@ -618,38 +619,35 @@
   <!-- TOP NAV -->
   <div class="header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
     <div class="brand-group">
-      <div class="brand-crest">TCC</div>
+      <div class="brand-crest">BI</div>
       <div>
         <div class="brand-title">
           <span>TSH Beyond-Dashboard</span>
           <span style="font-size:13px; font-weight:800; color:var(--text-muted); background:var(--card-sub); padding:3px 8px; border-radius:6px; border:1px solid var(--border);">Executive Cockpit</span>
         </div>
-        <div class="brand-sub">津カントリー倶楽部 経営コックピット（フロー月次LIVE ＆ ストック10年データ資産カルテ）</div>
+        <div class="brand-sub">実証ゴルフ場 経営コックピット（※検証用ダミーデータ）（フロー月次LIVE ＆ ストック10年データ資産カルテ）</div>
       </div>
     </div>
 
     <!-- ヘッダー右側：バージョン情報 ＆ プラン・ROIシミュレーター導線 -->
-    <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-      <a href="plans.html" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); color: #d8b4fe; font-size: 12.5px; font-weight: 800; padding: 6px 12px; border-radius: 8px; text-decoration: none; transition: all 0.15s ease;">
-        <span>✨ 松竹梅・鶴亀プラン</span>
-        <span style="font-size: 13px;">➔</span>
+    
+    <!-- 4-TABS GLOBAL NAV -->
+    <div style="display: flex; align-items: center; gap: 4px; background: #080d14; padding: 4px; border-radius: 10px; border: 1px solid #1e293b; flex-wrap: wrap;">
+      <a href="dashboard.html" style="text-decoration: none; font-size: 12.5px; font-weight: 800; padding: 6px 12px; border-radius: 6px; transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 5px; background: #141f2e; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+        <span>📊 経営ダッシュボード</span>
       </a>
-
-      <a href="simulator.html" style="display: inline-flex; align-items: center; gap: 5px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); color: #6ee7b7; font-size: 12.5px; font-weight: 800; padding: 6px 12px; border-radius: 8px; text-decoration: none; transition: all 0.15s ease;">
-        <span>📊 TSH様 ROI試算</span>
-        <span style="font-size: 13px;">➔</span>
+      <a href="slides.html" style="text-decoration: none; font-size: 12.5px; font-weight: 800; padding: 6px 12px; border-radius: 6px; transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 5px; color: #94a3b8; border: 1px solid transparent;">
+        <span>📑 説明スライド＆動画</span>
       </a>
-
-      <div style="text-align: right;">
-        <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 4px 10px; border-radius: 20px;">
-          <span style="width: 8px; height: 8px; border-radius: 50%; background: #10b981; box-shadow: 0 0 6px #10b981; display: inline-block;"></span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 900; color: var(--cyan-accent); letter-spacing: 0.03em;">v3.0.0</span>
-          <span style="font-size: 11px; color: var(--text-muted); font-weight: 700;">(2026.08)</span>
-        </div>
-        <div style="font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 3px;">
-          Swing-BI Enterprise Architecture
-        </div>
-      </div>
+      <a href="plans.html" style="text-decoration: none; font-size: 12.5px; font-weight: 800; padding: 6px 12px; border-radius: 6px; transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 5px; color: #94a3b8; border: 1px solid transparent;">
+        <span>💎 松竹梅・鶴亀プラン</span>
+      </a>
+      <a href="simulator.html" style="text-decoration: none; font-size: 12.5px; font-weight: 800; padding: 6px 12px; border-radius: 6px; transition: all 0.15s ease; display: inline-flex; align-items: center; gap: 5px; color: #94a3b8; border: 1px solid transparent;">
+        <span>📈 TSH様 ROI試算</span>
+      </a>
+      <button onclick="tshLogout()" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.35); color: #f87171; font-size: 11.5px; font-weight: 700; padding: 6px 10px; border-radius: 6px; cursor: pointer; margin-left: 4px;" title="ロックしてログアウト">🔒 ロック</button>
+    </div>
+  </div>
     </div>
   </div>
 
@@ -1454,7 +1452,7 @@
                 <!-- 自社: TCC（勝負DP価格） -->
                 <div style="background: #092618; border: 1.5px solid var(--c-green); border-radius: 8px; padding: 10px; box-shadow: 0 0 12px rgba(16,185,129,0.25);">
                   <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 12px; font-weight: 900; color: var(--c-green-text);">⛳ 自社: 津カントリー (TCC)</span>
+                    <span style="font-size: 12px; font-weight: 900; color: var(--c-green-text);">⛳ 自社: ゴルフ場 (TCC)</span>
                     <span class="badge bg-green" style="font-size: 10px; padding: 2px 6px;">⚡ DP勝負価格</span>
                   </div>
                   <div style="font-size: 22px; font-weight: 900; color: #fff; font-family: 'JetBrains Mono'; margin: 4px 0;" id="comp-tcc-price">
@@ -1532,7 +1530,7 @@
                   <span style="color: var(--cyan-accent); font-size: 11.5px;" id="dp-target-users">対象: 1,247名</span>
                 </div>
                 <div style="background: #111e2e; border-left: 3px solid #10b981; border-radius: 6px; padding: 10px; font-size: 12px; color: #e2e8f0; line-height: 1.6;" id="dp-line-text">
-                  <b>【TCC平日限定シークレットご優待 ⛳】</b><br>
+                  <b>【平日限定シークレットご優待 ⛳】</b><br>
                   5/7(木) GW明け緊急限定オファー！<br>
                   通常¥13,800 ➔ <b>特別優待 ¥10,800（名物ランチ付）</b><br>
                   先着6組様限定。ご予約はこちら ➔ [限定プランを見る]
@@ -2256,7 +2254,7 @@
       if (liftGroupsEl) liftGroupsEl.textContent = '+6組 (24名)';
       if (liftProfitEl) liftProfitEl.textContent = '+¥300,000';
       if (lineTextEl) {
-        lineTextEl.innerHTML = `<b>【TCC 2ヶ月前早期先回りシークレット ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} ${reason} 早期枠！<br>通常¥14,500 ➔ <b>特別早期割 ¥12,500（限定枠）</b><br>先着8組様限定。ご予約はこちら ➔ [早期プランを見る]`;
+        lineTextEl.innerHTML = `<b>【 2ヶ月前早期先回りシークレット ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} ${reason} 早期枠！<br>通常¥14,500 ➔ <b>特別早期割 ¥12,500（限定枠）</b><br>先着8組様限定。ご予約はこちら ➔ [早期プランを見る]`;
       }
       // 競合レート更新（早期相場）
       if (compTccPriceEl) compTccPriceEl.innerHTML = '¥12,500 <span style="font-size: 12px; color: #6ee7b7;">(早期割)</span>';
@@ -2279,7 +2277,7 @@
       if (liftGroupsEl) liftGroupsEl.textContent = '+4組 (16名)';
       if (liftProfitEl) liftProfitEl.textContent = '+¥172,800';
       if (lineTextEl) {
-        lineTextEl.innerHTML = `<b>【TCC平日限定シークレットご優待 ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} 緊急限定オファー！<br>通常¥13,800 ➔ <b>特別優待 ¥10,800（名物ランチ付）</b><br>先着6組様限定。ご予約はこちら ➔ [限定プランを見る]`;
+        lineTextEl.innerHTML = `<b>【平日限定シークレットご優待 ⛳】</b><br>${parseInt(parts[1])}/${parseInt(parts[2])} 緊急限定オファー！<br>通常¥13,800 ➔ <b>特別優待 ¥10,800（名物ランチ付）</b><br>先着6組様限定。ご予約はこちら ➔ [限定プランを見る]`;
       }
       // 競合レート更新（直前相場）
       if (compTccPriceEl) compTccPriceEl.innerHTML = '¥10,800 <span style="font-size: 12px; color: #6ee7b7;">(昼食付)</span>';
@@ -2297,19 +2295,19 @@
   let aiToneIndex = 0;
   const aiToneDrafts = {
     'last-minute': [
-      `【TCC会員様限定・緊急シークレット配信】\n\n2026-05-07（木）に特別プランのご案内です。\n\n🎁 昼食付・生ビール付 通常¥13,800 ➔ ¥10,800（先着6組様）\n🎁 バッグサーブ付 ＆ スループレー優先\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`,
+      `【会員様限定・緊急シークレット配信】\n\n2026-05-07（木）に特別プランのご案内です。\n\n🎁 昼食付・生ビール付 通常¥13,800 ➔ ¥10,800（先着6組様）\n🎁 バッグサーブ付 ＆ スループレー優先\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`,
       `【特別ご優待】5/7(木) 名匠ジャンボ尾崎設計コースを特別価格で。\n\n新緑薫る絶好のコンディション。GW明けの静かなコースで贅沢な1日を。\n\n✨ 平日特別プラン: ¥10,800（絶品名物ランチ＆生ビール1杯付）\n✨ キャディ付ご相談可・快適スムーズ進行\n\n▼ Web即時予約（シークレット枠）\nhttps://tcc-golf.jp/secret-promo`,
       `🔥【直前タイムセール】5/7(木) 緊急空き枠解放！\n\n通常価格 ¥13,800 ➔ ⚡ 3,000円OFF【¥10,800 (昼食付)】\n限定【先着6組様】限りの特別枠です。\n\n早い者勝ちとなりますので、お早めにどうぞ！\n今すぐ予約 ➔ https://tcc-golf.jp/secret-promo`
     ],
     'early-bird': [
-      `【TCC会員様限定・2ヶ月前早期シークレット配信】\n\n2026-06-15（月）に特別プランのご案内です。\n\n🎁 早期先回り優待 通常¥14,500 ➔ ¥12,500（先着8組様）\n🎁 名物ランチ付 ＆ カートフィ込\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`,
+      `【会員様限定・2ヶ月前早期シークレット配信】\n\n2026-06-15（月）に特別プランのご案内です。\n\n🎁 早期先回り優待 通常¥14,500 ➔ ¥12,500（先着8組様）\n🎁 名物ランチ付 ＆ カートフィ込\n🎁 本メッセージ経由限定URL\n\n※ 枠が埋まり次第終了となります。\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`,
       `【アーリーバード先行予約】6/15(月) 初夏の爽快プレー先行受付\n\n2ヶ月前だからできる特別プライス。\n\n🏌️‍♂️ 早期限定枠: ¥12,500（ランチ付）\n🏌️‍♂️ 8組様限定・お仲間とのコンペにも最適です。\n\n▼ 先行シークレット予約URL\nhttps://tcc-golf.jp/secret-promo`,
       `✨【6月ベストシーズン早期割】6/15(月) シークレットオファー\n\n通常¥14,500 ➔ 早期特別価格 ¥12,500（▲¥2,000優待）\n名物ランチ付の充実プラン。\n\nご予約はこちら ➔ https://tcc-golf.jp/secret-promo`
     ]
   };
 
   // 印鑑ステータス
-  let stampState = { osada: false, kitamura: false, kojima: false };
+  let stampState = { osada: false, minamimura: false, ooshima: false };
 
   // LINEシークレット配信モーダル制御
   function openLinePromoModal() {
@@ -2329,10 +2327,10 @@
     }
 
     // 印鑑リセット（最初は未捺印）
-    stampState = { osada: false, kitamura: false, kojima: false };
+    stampState = { osada: false, minamimura: false, ooshima: false };
     updateStampUI('stamp-osada', false, '長田', '担当起案');
-    updateStampUI('stamp-kitamura', false, '北村', '支配人確認');
-    updateStampUI('stamp-kojima', false, '小島', '社長決裁');
+    updateStampUI('stamp-minamimura', false, '南村', '支配人確認');
+    updateStampUI('stamp-ooshima', false, '大島', '社長決裁');
 
     const modal = document.getElementById('line-promo-modal');
     if (modal) modal.style.display = 'flex';
@@ -2382,10 +2380,10 @@
     const todayStr = '26.05.07';
     if (who === 'osada') {
       updateStampUI('stamp-osada', stampState.osada, '長田', stampState.osada ? todayStr : '担当起案');
-    } else if (who === 'kitamura') {
-      updateStampUI('stamp-kitamura', stampState.kitamura, '北村', stampState.kitamura ? todayStr : '支配人確認');
-    } else if (who === 'kojima') {
-      updateStampUI('stamp-kojima', stampState.kojima, '小島', stampState.kojima ? todayStr : '社長決裁');
+    } else if (who === 'minamimura') {
+      updateStampUI('stamp-minamimura', stampState.minamimura, '南村', stampState.minamimura ? todayStr : '支配人確認');
+    } else if (who === 'ooshima') {
+      updateStampUI('stamp-ooshima', stampState.ooshima, '大島', stampState.ooshima ? todayStr : '社長決裁');
     }
   }
 
@@ -2419,15 +2417,15 @@
 
   function submitLinePromo() {
     // 決裁チェック
-    if (!stampState.osada && !stampState.kitamura && !stampState.kojima) {
-      alert('⚠️ 【稟議未決裁】\n\n価格改定配信を行う前に、担当者（長田）、支配人（北村）、または社長（小島）の印鑑をタップして決裁（捺印）してください。');
+    if (!stampState.osada && !stampState.minamimura && !stampState.ooshima) {
+      alert('⚠️ 【稟議未決裁】\n\n価格改定配信を行う前に、担当者（長田）、支配人（南村）、または社長（大島）の印鑑をタップして決裁（捺印）してください。');
       return;
     }
 
     closeLinePromoModal();
     const titleEl = document.getElementById('dp-target-title');
     const dateText = titleEl ? titleEl.textContent.replace('📅 ', '').trim() : '指定日';
-    alert(`🎉 【LINEシークレット配信 完了（決裁済）】\n\n${dateText} 向けの限定オファーを LINE友だちへ送信しました！\n\n📋 稟議決裁: 長田(起案) ➔ 北村(支配人) ➔ 小島(社長決裁)\n📲 支配人・幹部LINEグループへ配信完了レポートを自動共有しました。`);
+    alert(`🎉 【LINEシークレット配信 完了（決裁済）】\n\n${dateText} 向けの限定オファーを LINE友だちへ送信しました！\n\n📋 稟議決裁: 長田(起案) ➔ 南村(支配人) ➔ 大島(社長決裁)\n📲 支配人・幹部LINEグループへ配信完了レポートを自動共有しました。`);
   }
 
   // LINEシークレット配信実行ハンドラ（モーダル立ち上げ）
@@ -2490,7 +2488,7 @@
         <span style="font-size: 11.5px; color: #64748b;">※ 限定URLは自動付与</span>
       </div>
       <textarea id="modal-textarea" style="width: 100%; height: 145px; padding: 10px 12px; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 13px; line-height: 1.6; color: #1e293b; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; resize: vertical; box-sizing: border-box; outline: none; transition: border-color 0.2s ease;" onfocus="this.style.borderColor='#10b981'" onblur="this.style.borderColor='#cbd5e1'">
-【TCC会員様限定・シークレット配信】
+【会員様限定・シークレット配信】
 
 2026-05-07（木）に特別プランのご案内です。
 
@@ -2529,26 +2527,26 @@
 
         <div style="font-size: 16px; color: #cbd5e1; font-weight: 900;">➔</div>
 
-        <!-- ② 支配人: 北村 -->
+        <!-- ② 支配人: 南村 -->
         <div style="text-align: center;">
-          <div id="stamp-kitamura" onclick="toggleStamp('kitamura')" style="width: 66px; height: 66px; border-radius: 50%; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;">
+          <div id="stamp-minamimura" onclick="toggleStamp('minamimura')" style="width: 66px; height: 66px; border-radius: 50%; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;">
             <div style="font-size: 10px; font-weight: 700; color: #94a3b8;">未決</div>
-            <div style="font-size: 14px; font-weight: 800; color: #64748b;">北村</div>
+            <div style="font-size: 14px; font-weight: 800; color: #64748b;">南村</div>
             <div style="font-size: 9px; color: #94a3b8;">支配人確認</div>
           </div>
-          <div style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 4px;">審査：北村</div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 4px;">審査：南村</div>
         </div>
 
         <div style="font-size: 16px; color: #cbd5e1; font-weight: 900;">➔</div>
 
-        <!-- ③ 社長: 小島 -->
+        <!-- ③ 社長: 大島 -->
         <div style="text-align: center;">
-          <div id="stamp-kojima" onclick="toggleStamp('kojima')" style="width: 66px; height: 66px; border-radius: 50%; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;">
+          <div id="stamp-ooshima" onclick="toggleStamp('ooshima')" style="width: 66px; height: 66px; border-radius: 50%; border: 2px dashed #cbd5e1; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto; cursor: pointer; transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); user-select: none;">
             <div style="font-size: 10px; font-weight: 700; color: #94a3b8;">未決</div>
-            <div style="font-size: 14px; font-weight: 800; color: #64748b;">小島</div>
+            <div style="font-size: 14px; font-weight: 800; color: #64748b;">大島</div>
             <div style="font-size: 9px; color: #94a3b8;">社長決裁</div>
           </div>
-          <div style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 4px;">決裁：小島</div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 700; margin-top: 4px;">決裁：大島</div>
         </div>
 
       </div>

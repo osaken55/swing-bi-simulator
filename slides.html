@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TSH Beyond-Dashboard 説明スライド＆動画 | 東京システムハウス様 提案資料</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+  <script src="auth.js"></script>
+  <style>
+    :root {
+      --bg: #070a0f;
+      --surface: #0e1520;
+      --surface-card: #141f2e;
+      --border: #223247;
+      --accent: #38bdf8;
+      --gold: #C9A961;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --sidebar-width: 440px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Noto Sans JP', sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* TOP HEADER BAR */
+    header.deck-header {
+      height: 54px;
+      background: rgba(14, 21, 32, 0.95);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+    .brand-title {
+      font-size: 14.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-tag {
+      background: rgba(201, 169, 97, 0.15);
+      color: var(--gold);
+      border: 1px solid rgba(201, 169, 97, 0.4);
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* 4-TABS NAVIGATION */
+    .nav-tabs-wrap {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: #080d14;
+      padding: 3px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .tab-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .tab-link:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    .tab-link.active {
+      background: var(--surface-card);
+      color: var(--accent);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 11px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .btn.active {
+      background: var(--accent);
+      color: #041e49;
+      border-color: var(--accent);
+    }
+    .btn.video-btn {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #fff;
+      border-color: #10b981;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+    }
+    .btn.video-btn:hover {
+      background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    }
+
+    /* MAIN CONTAINER */
+    .deck-container {
+      flex: 1;
+      display: flex;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* SLIDE STAGE */
+    .stage {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      position: relative;
+      background: radial-gradient(circle at center, #0c1524 0%, #05080d 100%);
+    }
+
+    .slide-wrapper {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16 / 9;
+      position: relative;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: opacity 0.15s ease-out;
+    }
+
+    /* FLOATING NAV CONTROLS */
+    .nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(14, 21, 32, 0.7);
+      border: 1px solid var(--border);
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      backdrop-filter: blur(4px);
+      z-index: 10;
+    }
+    .nav-arrow:hover {
+      background: var(--surface-card);
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.1);
+    }
+    .nav-arrow.prev { left: 24px; }
+    .nav-arrow.next { right: 24px; }
+
+    /* SPEAKER NOTES SIDEBAR */
+    .notes-sidebar {
+      width: var(--sidebar-width);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 50;
+      user-select: text;
+    }
+    .notes-sidebar.hidden {
+      display: none;
+    }
+    .notes-header {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--gold);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface-card);
+    }
+    .notes-body {
+      flex: 1;
+      padding: 20px 18px;
+      overflow-y: auto;
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+    .notes-section-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 10px;
+      border-left: 3px solid var(--accent);
+      padding-left: 8px;
+    }
+    .notes-talk-box {
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 16px;
+      color: #e0f2fe;
+      font-size: 13.5px;
+    }
+    .notes-talk-box b {
+      color: #38bdf8;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 12px;
+    }
+
+    /* GRID MODAL VIEW */
+    .grid-modal {
+      position: fixed;
+      top: 54px;
+      bottom: 48px;
+      left: 0;
+      right: 0;
+      background: rgba(7, 10, 15, 0.95);
+      backdrop-filter: blur(12px);
+      z-index: 200;
+      padding: 24px;
+      overflow-y: auto;
+      display: none;
+    }
+    .grid-modal.active { display: block; }
+    .grid-container {
+      max-width: 1380px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .grid-card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .grid-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+    }
+    .grid-card.current {
+      border-color: var(--gold);
+      box-shadow: 0 0 16px rgba(201, 169, 97, 0.4);
+    }
+    .grid-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+    .grid-caption {
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      background: var(--surface-card);
+    }
+
+    /* VIDEO MODAL */
+    .video-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(16px);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .video-modal.active { display: flex; }
+    .video-modal-content {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.9);
+      position: relative;
+    }
+    .video-modal-header {
+      padding: 14px 20px;
+      background: var(--surface-card);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .video-player-wrap {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+    .video-player-wrap video {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* FOOTER BAR */
+    footer.deck-footer {
+      height: 48px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      z-index: 100;
+      font-size: 13px;
+    }
+    .progress-info {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .progress-bar-wrap {
+      width: 160px;
+      height: 6px;
+      background: #1e293b;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background: var(--accent);
+      width: 4.7%;
+      transition: width 0.2s ease;
+    }
+    .shortcuts-help {
+      color: var(--text-muted);
+      font-size: 12px;
+      display: flex;
+      gap: 12px;
+    }
+    .key-badge {
+      background: #1e293b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER WITH 4 TABS -->
+  <header class="deck-header">
+    <div class="brand-title">
+      <span>TSH Beyond-Dashboard</span>
+      <span class="badge-tag">TSH 北村部長 様 宛て</span>
+    </div>
+
+    <!-- 4 TABS NAVIGATION -->
+    <nav class="nav-tabs-wrap">
+      <a href="dashboard.html" class="tab-link">📊 経営ダッシュボード</a>
+      <a href="slides.html" class="tab-link active">📑 説明スライド＆動画</a>
+      <a href="plans.html" class="tab-link">💎 松竹梅・鶴亀プラン</a>
+      <a href="simulator.html" class="tab-link">📈 TSH様 ROI試算</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn video-btn" onclick="openVideoModal()">
+        <span>🎬 解説動画を再生 (ElevenLabs v3 / 6分29秒)</span>
+      </button>
+      <button class="btn" id="btn-grid" onclick="toggleGrid()">
+        <span>📑 一覧 (G)</span>
+      </button>
+      <button class="btn active" id="btn-notes" onclick="toggleNotes()">
+        <span>🎙️ トーク解説 (S)</span>
+      </button>
+      <button class="btn" onclick="toggleFullscreen()">
+        <span>⛶ 全画面 (F)</span>
+      </button>
+      <button class="btn" onclick="tshLogout()" title="ログアウトしてロック" style="color:#ef4444; border-color:rgba(239, 68, 68, 0.4);">
+        <span>🔒 ロック</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN DECK CONTAINER -->
+  <div class="deck-container">
+    <!-- STAGE AREA -->
+    <div class="stage" onclick="handleStageClick(event)">
+      <button class="nav-arrow prev" onclick="prevSlide(event)">❮</button>
+      <button class="nav-arrow next" onclick="nextSlide(event)">❯</button>
+
+      <div class="slide-wrapper">
+        <img id="main-slide-img" class="slide-img" src="slides_img/slide-01.png" alt="Slide Image">
+      </div>
+    </div>
+
+    <!-- SPEAKER NOTES SIDEBAR -->
+    <aside class="notes-sidebar" id="notes-sidebar">
+      <div class="notes-header">
+        <span id="notes-slide-num">SLIDE 01 / 21</span>
+        <span style="font-size:12px; color:var(--text-muted);">スピーカーノート（しおり社長 音声ナレーション同期）</span>
+      </div>
+      <div class="notes-body" id="notes-content"></div>
+    </aside>
+  </div>
+
+  <!-- GRID VIEW MODAL -->
+  <div class="grid-modal" id="grid-modal">
+    <div class="grid-container" id="grid-container"></div>
+  </div>
+
+  <!-- VIDEO PLAYER MODAL -->
+  <div class="video-modal" id="video-modal" onclick="closeVideoModal(event)">
+    <div class="video-modal-content" onclick="event.stopPropagation()">
+      <div class="video-modal-header">
+        <div style="font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px;">
+          <span>🎬 TSH Beyond-Dashboard 説明動画（ナレーション: 小島しおり社長 / ElevenLabs v3 / 1.02x）</span>
+        </div>
+        <button class="btn" onclick="closeVideoModal()">✕ 閉じる (Esc)</button>
+      </div>
+      <div class="video-player-wrap">
+        <video id="deck-video" controls preload="metadata" src="TSH_Beyond-Dashboard_説明動画_しおり音声_v3_1.02x.mp4"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER BAR -->
+  <footer class="deck-footer">
+    <div class="progress-info">
+      <span id="footer-page-text">01 / 21</span>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-inner" id="progress-bar-inner"></div>
+      </div>
+      <span id="footer-slide-title" style="color:var(--text); margin-left:10px; font-weight:700; font-size:13px;">表紙</span>
+    </div>
+
+    <div class="shortcuts-help">
+      <span><span class="key-badge">←</span> <span class="key-badge">→</span> / <span class="key-badge">Space</span> スライド移動</span>
+      <span><span class="key-badge">S</span> トークノート</span>
+      <span><span class="key-badge">G</span> サムネイル</span>
+      <span><span class="key-badge">V</span> 動画再生</span>
+      <span><span class="key-badge">F</span> 全画面</span>
+    </div>
+  </footer>
+
+  <script>
+    const SLIDES_DATA = [
+      {
+        id: 1,
+        file: "slides_img/slide-01.png",
+        title: "表紙: 基幹の10年データを、経営の意思決定に変える",
+        talk: "東京システムハウス様、いつも大変お世話になっております。ゴルフ場コンサル、AIエキスパートの長田です。本日は、スイングクラブ・クラウドにそのまま載せられる経営コックピット層、TSH Beyond-Dashboardのご提案です。実証ゴルフ場でのモックアップ画面を交えて、ご説明いたします。",
+        points: [
+          "SwingClub-Cloudにそのまま載る経営コックピット層",
+          "実証ゴルフ場でのモックアップ画面によるご説明（※データは検証用ダミー）",
+          "登壇者: ゴルフ場コンサルAIエキスパート 長田 賢一郎"
+        ]
+      },
+      {
+        id: 2,
+        file: "slides_img/slide-02.png",
+        title: "本資料の位置づけ（協業可能性のたたき台）",
+        talk: "本資料は売り込みではなく、現場と基幹を知り尽くした皆様との、協業のたたき台です。なお、画面上の数値はすべて検証用のダミーサンプルです。既存基幹の入替は一切不要で、上に軽量な一枚を載せる構想について、率直なご意見をいただければ幸いです。",
+        points: [
+          "宛先: 東京システムハウス様（経営層・ゴルフシステムサービス部の皆様）",
+          "目的: SwingClub/Yardageの上に載せる経営コックピットのコンセプト検証と協業打診",
+          "スコープ: 既存基幹の入替・変更は一切なし（アドオン接続・数値はダミー）"
+        ]
+      },
+      {
+        id: 3,
+        file: "slides_img/slide-03.png",
+        title: "目次 (AGENDA)",
+        talk: "本日のアジェンダです。なぜBeyond Dashboardなのかという背景から、日常のフロー、10年資産のストック、そして松竹梅、鶴亀の事業モデル案まで、順を追ってご説明いたします。",
+        points: [
+          "01 なぜ「Beyond Dashboard」か（背景と狙い）",
+          "02 全体アーキテクチャ（フロー×ストック二層構造）",
+          "03 フロー編：月次LIVE経営コックピット",
+          "04 ストック編：10年データ資産カルテ",
+          "05 事業モデル案：松竹梅・鶴亀プラン",
+          "06 まとめ・ご相談したい論点"
+        ]
+      },
+      {
+        id: 4,
+        file: "slides_img/slide-04.png",
+        title: "01 なぜ「Beyond Dashboard」か",
+        talk: "スイングクラブには、10年分、延べ数十万人規模の貴重な一次データが蓄積されています。しかし紙の月報では集計値にとどまり、翌月の打ち手までは翻訳されにくいのが実情です。この10年データを、記録から意思決定に変える最後の一枚をご提案します。",
+        points: [
+          "10年分・延べ数十万人規模の一次データはゴルフ業界で稀有な資産",
+          "紙の月報では「集計値」にとどまり、翌月の打ち手に翻訳されにくい",
+          "基幹データが「記録」から「意思決定」へ変わる最後の一枚を標準オプションに"
+        ]
+      },
+      {
+        id: 5,
+        file: "slides_img/slide-05.png",
+        title: "02 全体アーキテクチャ ― フロー×ストックの二層構造",
+        talk: "全体アーキテクチャは二層構造です。フロントやマスター室の業務、そしてスイングクラブのデータベースは一切変更しません。読み取り接続により、月次予実を回すフローと、10年の資産を診るストックを可視化します。",
+        points: [
+          "現場オペレーション層: フロント・マスター室業務（一切変更なし）",
+          "基幹システム層: SwingClub / Yardage (SQL Server)（入替不要・読取接続）",
+          "経営コックピット層: Swing-BI（基幹データを経営の言葉・因果・アクションに翻訳）"
+        ]
+      },
+      {
+        id: 6,
+        file: "slides_img/slide-06.png",
+        title: "03 フロー編: トップ画面 ― 月次経営サマリーと確定方程式",
+        talk: "コックピットのトップ画面です。売上イコール、客数かける単価の確定方程式と、ブレットグラフにより、当月の達成状況と要因が一目で直感把握できます。上部のタブで、フローとストックを切り替えます。",
+        points: [
+          "「売上＝客数×単価」の確定方程式で一画面集約",
+          "Stephen Few流ブレットグラフで実績・予算・前年比を直感把握",
+          "3つの数字だけで経営会議が始められる入口設計（※ダミーデータ）"
+        ]
+      },
+      {
+        id: 7,
+        file: "slides_img/slide-07.png",
+        title: "03 フロー編: 経営者視座 ― 空雨傘分析",
+        talk: "経営者視座です。月次売上の事実から、数量要因、単価要因への因果分解、平日ビジター偏重などの構造的リスク、そして3大アクションまでを1画面で直結させ、会議資料の作成工数を削減します。",
+        points: [
+          "【空】月次売上ブレットグラフと予実の因果分解（数量要因 vs 単価要因）",
+          "【雨】構造的リスク（平日ビジター偏重・会員休眠化の兆候）",
+          "【傘】3大アクションと期待効果（コア会員防衛・休眠復帰・来場後単価改善）"
+        ]
+      },
+      {
+        id: 8,
+        file: "slides_img/slide-08.png",
+        title: "03 フロー編: 支配人視座 ― 4つの傘戦術と価格弾力性シミュレーター",
+        talk: "支配人視座では、守る、取り戻す、深耕、追わない、の4戦術で今月の打ち手を整理します。生ビールの価格改定シミュレーションでは、値上げによる利益向上をPOSデータで科学的に示し、現場の不安を解消します。",
+        points: [
+          "「守る／取り戻す／深耕／追わない」の4戦術フレームで打ち手を整理",
+          "生ビール価格改定の弾力性解析実例（単価+17.3%・出数-5.8%で年間利益+113万）",
+          "「客が減って利益が落ちないか？」という現場の心理的不安をPOSデータで解消"
+        ]
+      },
+      {
+        id: 9,
+        file: "slides_img/slide-09.png",
+        title: "03 フロー編: 現場リーダー視座 ― GAP分析と3ヶ月色札トリアージ",
+        talk: "現場リーダーには、今日やるべきアクションだけを提示します。下段のカレンダーでは、3ヶ月先までの弱日を、医療トリアージ式の色札で直感表示し、先回り経営の起点とします。",
+        points: [
+          "現場リーダーには「何の数字が未達か・今日何をするか」だけを提示",
+          "3ヶ月先までの予約充足を医療トリアージ式色札（安全／注意／弱日／超危険）で表示",
+          "弱日をタップすると即座にDP・LINE配信パネルに直結する先回り経営"
+        ]
+      },
+      {
+        id: 10,
+        file: "slides_img/slide-10.png",
+        title: "03 フロー編: ダイナミックプライシング ― 競合レート比較と変動価格設定",
+        talk: "弱日を選択すると、近隣競合のレートをリアルタイム比較し、名門コースより割安といった説得根拠とともに、根拠ある変動価格と期待粗利を自動算出します。",
+        points: [
+          "近隣競合3社の同日・同時間帯レートをリアルタイム比較",
+          "「同格名門より▲1,700円安い」といった現場・幹部への説得根拠を自動生成",
+          "期待獲得組数と追加粗利をシミュレーション"
+        ]
+      },
+      {
+        id: 11,
+        file: "slides_img/slide-11.png",
+        title: "03 フロー編: LINEセグメント配信 ― AI文案生成と3段電子稟議",
+        talk: "変動価格は、LINEのセグメント限定で配信します。AIが生成した文案に対し、起案の長田、審査の南村支配人、決裁の大島社長と、3段の電子印鑑が揃って初めて配信されるため、安売り暴走を完全に防ぎます。",
+        points: [
+          "LINE友だちへのセグメント限定配信（平日アクティブ／直近ゲスト／休眠復帰）",
+          "AIが文案を自動生成し、ブラウザ上で手直し可能",
+          "「起案:長田 → 審査:南村 → 決裁:大島」の3段電子印鑑でガバナンスと責任所在を明確化"
+        ]
+      },
+      {
+        id: 12,
+        file: "slides_img/slide-12.png",
+        title: "03 フロー編: 配信完了 ― 決裁ログ記録と幹部自動共有",
+        talk: "決裁が完了すると配信が実行され、承認ログが保全されるとともに、幹部LINEグループへ完了レポートが自動共有されます。ガバナンスを保ったまま、スピード経営を実行します。",
+        points: [
+          "誰が起案し、誰が承認したかの稟議ログを完全保全（長田➔南村➔大島）",
+          "支配人・幹部LINEグループへ配信完了レポートを自動共有",
+          "ガバナンスを保ったままスピード経営を実行"
+        ]
+      },
+      {
+        id: 13,
+        file: "slides_img/slide-13.png",
+        title: "04 ストック編: 10年データ資産カルテ ― RFM会員ポートフォリオ診断",
+        talk: "ここからがストック編です。過去10年、延べ32万人のデータを一括解析し、会員を4象限に分類。売上の4割を支える神会員や、離脱寸前の会員を、名寄せレベルで可視化します。",
+        points: [
+          "10年・延べ32.8万人のデータを一括解析するワンタイム診断（※ダミーデータ）",
+          "会員をRFM 4象限（Champions／At Risk／Promising／Hibernating）に分類",
+          "売上の42%を支える神会員と、離脱寸前の会員を名寄せレベルで可視化"
+        ]
+      },
+      {
+        id: 14,
+        file: "slides_img/slide-14.png",
+        title: "04 ストック編: デシル分析パレート図と高齢化クライシス",
+        talk: "上位10パーセント偏重のパレート構造に加え、正会員の平均年齢が61歳から68歳へと上昇。あと5年で年間35名がリタイアする時限リスクを提示し、世代交代の必要性を明確にします。",
+        points: [
+          "上位10%の会員が売上の42.1%を創出する偏重構造（パレート曲線）",
+          "平均年齢の上昇（61.2歳→68.4歳）と正会員数の減少を重ねて提示",
+          "「あと5年で年間約35名が75歳超リタイア」という時限リスクを経営アジェンダ化"
+        ]
+      },
+      {
+        id: 15,
+        file: "slides_img/slide-15.png",
+        title: "04 ストック編: 部門別収益構造 ― ストック固定収益の絶対防衛線",
+        talk: "部門別収益では、年会費と名義書換料の計7,000万円を、来場に左右されないストック固定収益の絶対防衛線として定義。この防衛線を守る重要性を示します。",
+        points: [
+          "6部門の売上構成比を10年変遷つきで俯瞰",
+          "年会費＋名義書換料＝計7,000万円（全社売上の16%）を固定収益の絶対防衛線として定義",
+          "休眠会員の退会防止と名義書換の促進がこの防衛線を守る構造を提示"
+        ]
+      },
+      {
+        id: 16,
+        file: "slides_img/slide-16.png",
+        title: "04 ストック編: 10年 超時系列マクロトレンド",
+        talk: "10年間の推移を、安定期、コロナ期、高付加価値化の3局面で総括。客数を制御しながら客単価を引き上げる、現在の戦略成果を1枚で証明します。",
+        points: [
+          "「安定期 → コロナ打撃・特需 → 単価高付加価値化」の3局面で10年を総括",
+          "来場数を適正制御しつつ客単価を引き上げる戦略の結実を証明",
+          "経営者が自クラブの10年の歩みを1枚で語れる診断カルテの総括"
+        ]
+      },
+      {
+        id: 17,
+        file: "slides_img/slide-17.png",
+        title: "05 事業モデル案: 料金プラン ― 松竹梅（月次SaaSコックピット）",
+        talk: "月次サーズは、梅3万円、竹5万円、松8万円の3段階です。月報ペーパーレス化からAI・稟議機能まで、クラブの規模やITリテラシーに合わせて、無理なく導入いただけます。",
+        points: [
+          "梅（3万円/月）: 月報ペーパーレス化と予実管理",
+          "竹（5万円/月）: 4支配人サマリー＋価格弾力性シミュレーター",
+          "松（8万円/月）: 競合レート比較＋AI文案生成＋LINE配信＋3段電子稟議"
+        ]
+      },
+      {
+        id: 18,
+        file: "slides_img/slide-18.png",
+        title: "05 事業モデル案: 全プラン機能比較マトリクス",
+        talk: "全プランの機能比較マトリクスです。TSH様の営業現場でそのまま使える一覧表となっており、梅から竹、松へのアップセル動線を可視化しています。",
+        points: [
+          "機能×プランの対応を1枚で可視化",
+          "営業現場でそのまま使えるアップセル動線（梅→竹→松→鶴）",
+          "項目の粒度や名称はTSH様の営業実務に合わせて調整可能"
+        ]
+      },
+      {
+        id: 19,
+        file: "slides_img/slide-19.png",
+        title: "05 事業モデル案: 鶴・亀プラン ― ワンタイム診断とOEM展開",
+        talk: "本提案の本丸となるプランです。鶴は50万円のワンタイム10年診断。そして亀は、全国240コースへのスイングクラブ直結OEM展開で、月額50パーセントのレベニューシェアを想定しています。",
+        points: [
+          "鶴（50万円）: 10年データの一括診断カルテ（最短2週間納品）",
+          "亀（500万円）: SwingClub SQL Server直結基盤開発＆全国240コースOEM展開",
+          "TSH様の既存顧客基盤がそのまま販売網になり、初期利益＋月額50%レベニューシェア"
+        ]
+      },
+      {
+        id: 20,
+        file: "slides_img/slide-20.png",
+        title: "05 事業モデル案: FAQ ― 導入時に必ず出るご質問への回答",
+        talk: "基幹システムの入替が一切不要であることや、3段稟議による安売り暴走の防止など、導入時によくある疑問を先回りで解消しています。",
+        points: [
+          "既存基幹システムの入替は一切不要（アドオン接続）",
+          "3段稟議の捺印なしには配信されない安売り暴走の完全防止",
+          "SQL Serverデータや個人情報のセキュアな取り扱い"
+        ]
+      },
+      {
+        id: 21,
+        file: "slides_img/slide-21.png",
+        title: "06 まとめ ― ご相談したい論点 (Next Step)",
+        talk: "まとめとして、スイングクラブのクラウドロードマップとの親和性、データ接続仕様、そして1〜2コースでの鶴プラン試行について、ぜひ率直なご意見をいただければ幸いです。",
+        points: [
+          "① 製品コンセプト: 基幹データを「記録」から「意思決定」へ翻訳（二層構造）",
+          "② 実証フィールド: ゴルフ場を実証フィールドとして構築済み（※データはダミー）",
+          "③ ご相談論点: (1) クラウドロードマップ親和性 (2) データ接続仕様 (3) 1〜2コースでの鶴プラン試行",
+          "登壇者: ゴルフ場コンサルAIエキスパート 長田 賢一郎"
+        ]
+      }
+    ];
+
+    let currentIndex = 0;
+
+    function renderSlide(index) {
+      if (index < 0 || index >= SLIDES_DATA.length) return;
+      currentIndex = index;
+      const data = SLIDES_DATA[index];
+
+      const img = document.getElementById('main-slide-img');
+      img.style.opacity = 0;
+      setTimeout(() => {
+        img.src = data.file;
+        img.style.opacity = 1;
+      }, 100);
+
+      document.getElementById('footer-page-text').textContent = `${String(data.id).padStart(2, '0')} / ${SLIDES_DATA.length}`;
+      document.getElementById('footer-slide-title').textContent = data.title;
+      const progressPercent = ((data.id) / SLIDES_DATA.length) * 100;
+      document.getElementById('progress-bar-inner').style.width = `${progressPercent}%`;
+
+      document.getElementById('notes-slide-num').textContent = `SLIDE ${String(data.id).padStart(2, '0')} / ${SLIDES_DATA.length}`;
+      
+      let pointsHtml = data.points.map(p => `<li>${p}</li>`).join('');
+      document.getElementById('notes-content').innerHTML = `
+        <div class="notes-section-title">${data.title}</div>
+        <div class="notes-talk-box">
+          <b>🎙️ 小島しおり社長 音声ナレーション原稿（ElevenLabs v3 / 1.02x）</b>
+          ${data.talk}
+        </div>
+        <div style="font-size:13px; font-weight:700; color:var(--text-muted); margin-bottom:6px;">📌 スライドの要点・解説</div>
+        <ul style="padding-left:18px; color:#cbd5e1; font-size:13px; line-height:1.7;">
+          ${pointsHtml}
+        </ul>
+      `;
+
+      document.querySelectorAll('.grid-card').forEach((card, idx) => {
+        if (idx === index) card.classList.add('current');
+        else card.classList.remove('current');
+      });
+    }
+
+    function nextSlide(e) {
+      if (e) e.stopPropagation();
+      if (currentIndex < SLIDES_DATA.length - 1) renderSlide(currentIndex + 1);
+    }
+
+    function prevSlide(e) {
+      if (e) e.stopPropagation();
+      if (currentIndex > 0) renderSlide(currentIndex - 1);
+    }
+
+    function toggleNotes() {
+      const sidebar = document.getElementById('notes-sidebar');
+      const btn = document.getElementById('btn-notes');
+      sidebar.classList.toggle('hidden');
+      btn.classList.toggle('active');
+    }
+
+    function toggleGrid() {
+      const modal = document.getElementById('grid-modal');
+      const btn = document.getElementById('btn-grid');
+      modal.classList.toggle('active');
+      btn.classList.toggle('active');
+    }
+
+    function openVideoModal() {
+      const modal = document.getElementById('video-modal');
+      const video = document.getElementById('deck-video');
+      modal.classList.add('active');
+      video.play().catch(() => {});
+    }
+
+    function closeVideoModal(e) {
+      const modal = document.getElementById('video-modal');
+      const video = document.getElementById('deck-video');
+      modal.classList.remove('active');
+      video.pause();
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        document.exitFullscreen().catch(() => {});
+      }
+    }
+
+    function handleStageClick(e) {
+      if (e.target.closest('.nav-arrow')) return;
+      const stage = document.querySelector('.stage');
+      const rect = stage.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      if (clickX > rect.width * 0.65) nextSlide();
+      else if (clickX < rect.width * 0.35) prevSlide();
+    }
+
+    function initGrid() {
+      const container = document.getElementById('grid-container');
+      container.innerHTML = '';
+      SLIDES_DATA.forEach((s, idx) => {
+        const card = document.createElement('div');
+        card.className = `grid-card ${idx === 0 ? 'current' : ''}`;
+        card.onclick = () => {
+          renderSlide(idx);
+          toggleGrid();
+        };
+        card.innerHTML = `
+          <img class="grid-thumb" src="${s.file}" alt="${s.title}">
+          <div class="grid-caption">${String(s.id).padStart(2, '0')}. ${s.title}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown' || e.key === 'l') nextSlide();
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp' || e.key === 'h') prevSlide();
+      else if (e.key === 's' || e.key === 'S' || e.key === 'n' || e.key === 'N') toggleNotes();
+      else if (e.key === 'g' || e.key === 'G') toggleGrid();
+      else if (e.key === 'v' || e.key === 'V') openVideoModal();
+      else if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+      else if (e.key === 'Escape') {
+        const vModal = document.getElementById('video-modal');
+        if (vModal.classList.contains('active')) closeVideoModal();
+        const gModal = document.getElementById('grid-modal');
+        if (gModal.classList.contains('active')) toggleGrid();
+      }
+    });
+
+    initGrid();
+    renderSlide(0);
+  </script>
+</body>
+</html>
