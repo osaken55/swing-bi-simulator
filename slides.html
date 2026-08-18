@@ -33,81 +33,89 @@
       user-select: none;
     }
 
-    /* TOP HEADER BAR */
+    /* TOP HEADER BAR - 視認性・押しやすさを極限まで高めたプレミアムヘッダー */
     header.deck-header {
-      height: 60px;
-      background: rgba(14, 21, 32, 0.95);
-      border-bottom: 1px solid var(--border);
+      height: 68px;
+      background: rgba(14, 21, 32, 0.98);
+      border-bottom: 1.5px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
+      padding: 0 24px;
       z-index: 100;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
     .brand-title {
-      font-size: 16px;
+      font-size: 17.5px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: -0.3px;
+    }
+    .badge-tag {
+      background: rgba(201, 169, 97, 0.18);
+      color: #e5c880;
+      border: 1.5px solid rgba(201, 169, 97, 0.5);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12.5px;
       font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* GLOBAL NAV LINKS (CENTER) */
+    .global-nav-center {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .badge-tag {
-      background: rgba(201, 169, 97, 0.15);
-      color: var(--gold);
-      border: 1px solid rgba(201, 169, 97, 0.4);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', monospace;
-    }
-    
-    /* 4-TABS NAVIGATION */
-    .nav-tabs-wrap {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      background: #080d14;
-      padding: 3px;
+    .nav-btn-link {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid #2a3d56;
+      color: #cbd5e1;
+      padding: 9px 16px;
       border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-    .tab-link {
-      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 800;
       text-decoration: none;
-      font-size: 13.5px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 6px;
-      transition: all 0.15s ease;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+      transition: all 0.2s ease;
     }
-    .tab-link:hover {
+    .nav-btn-link:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: #38bdf8;
       color: #fff;
-      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-1px);
     }
-    .tab-link.active {
-      background: var(--surface-card);
-      color: var(--accent);
-      border: 1px solid rgba(56, 189, 248, 0.3);
+    .nav-btn-link.highlight {
+      background: rgba(168, 85, 247, 0.12);
+      border-color: rgba(168, 85, 247, 0.4);
+      color: #e9d5ff;
+    }
+    .nav-btn-link.highlight:hover {
+      background: rgba(168, 85, 247, 0.25);
+      border-color: #c084fc;
+      color: #fff;
     }
 
+    /* HEADER ACTIONS (RIGHT) */
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
     .btn {
-      background: var(--surface-card);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 8px 14px;
-      border-radius: 6px;
+      background: #141f30;
+      border: 1.5px solid #2a3d56;
+      color: #f1f5f9;
+      padding: 9px 15px;
+      border-radius: 8px;
       font-size: 13.5px;
-      font-weight: 700;
+      font-weight: 800;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -116,23 +124,38 @@
       text-decoration: none;
     }
     .btn:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.1);
       border-color: var(--accent);
       color: #fff;
     }
     .btn.active {
       background: var(--accent);
-      color: #041e49;
+      color: #031738;
       border-color: var(--accent);
+      font-weight: 900;
     }
     .btn.video-btn {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
       color: #fff;
-      border-color: #10b981;
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+      border-color: #34d399;
+      font-weight: 900;
+      font-size: 14px;
+      padding: 9px 18px;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
     }
     .btn.video-btn:hover {
       background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+      transform: translateY(-1px);
+    }
+    .btn.lock-btn {
+      background: rgba(239, 68, 68, 0.12);
+      border-color: rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+    }
+    .btn.lock-btn:hover {
+      background: rgba(239, 68, 68, 0.25);
+      border-color: #ef4444;
+      color: #fff;
     }
 
     
@@ -186,8 +209,9 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
+      font-size: 24px;
       border-radius: 50%;
       background: rgba(14, 21, 32, 0.7);
       border: 1px solid var(--border);
@@ -418,20 +442,21 @@
 </head>
 <body>
 
-  <!-- TOP HEADER WITH 4 TABS -->
+  <!-- TOP HEADER -->
   <header class="deck-header">
     <div class="brand-title">
       <span>TSH Beyond-Dashboard</span>
       <span class="badge-tag">TSH 北村部長 様 宛て</span>
     </div>
 
-    <!-- GLOBAL NAV LINKS -->
-    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-      <a href="dashboard.html" class="btn">📊 経営ダッシュボード実機 ➔</a>
-      <a href="plans.html" class="btn">✨ 松竹梅・鶴亀プラン ➔</a>
-      <a href="simulator.html" class="btn">📈 TSH様 ROI試算 ➔</a>
+    <!-- CENTER NAV LINKS -->
+    <div class="global-nav-center">
+      <a href="dashboard.html" class="nav-btn-link">📊 経営ダッシュボード実機 ➔</a>
+      <a href="plans.html" class="nav-btn-link highlight">✨ 松竹梅・鶴亀プラン ➔</a>
+      <a href="simulator.html" class="nav-btn-link">📈 TSH様 ROI試算 ➔</a>
     </div>
 
+    <!-- RIGHT ACTIONS -->
     <div class="header-actions">
       <button class="btn video-btn" onclick="openVideoModal()">
         <span>🎬 解説動画を再生 (ElevenLabs v3 / 6分29秒)</span>
@@ -445,7 +470,7 @@
       <button class="btn" onclick="toggleFullscreen()">
         <span>⛶ 全画面 (F)</span>
       </button>
-      <button class="btn" onclick="tshLogout()" title="ログアウトしてロック" style="color:#ef4444; border-color:rgba(239, 68, 68, 0.4);">
+      <button class="btn lock-btn" onclick="tshLogout()" title="ログアウトしてロック">
         <span>🔒 ロック</span>
       </button>
     </div>
