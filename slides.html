@@ -18,7 +18,7 @@
       --gold: #C9A961;
       --text: #f8fafc;
       --text-muted: #94a3b8;
-      --sidebar-width: 440px;
+      --sidebar-width: 480px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,7 +35,7 @@
 
     /* TOP HEADER BAR */
     header.deck-header {
-      height: 54px;
+      height: 60px;
       background: rgba(14, 21, 32, 0.95);
       border-bottom: 1px solid var(--border);
       display: flex;
@@ -46,7 +46,7 @@
       backdrop-filter: blur(8px);
     }
     .brand-title {
-      font-size: 14.5px;
+      font-size: 16px;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -76,7 +76,7 @@
     .tab-link {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 12px;
+      font-size: 13.5px;
       font-weight: 700;
       padding: 6px 12px;
       border-radius: 6px;
@@ -104,9 +104,9 @@
       background: var(--surface-card);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 6px 11px;
+      padding: 8px 14px;
       border-radius: 6px;
-      font-size: 12px;
+      font-size: 13.5px;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
@@ -135,33 +135,39 @@
       background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
     }
 
+    
     /* MAIN CONTAINER */
     .deck-container {
       flex: 1;
       display: flex;
       position: relative;
       overflow: hidden;
+      width: 100vw;
     }
 
-    /* SLIDE STAGE */
+    /* SLIDE STAGE - 画面いっぱいに最大表示するフルシアターレイアウト */
     .stage {
       flex: 1;
+      min-width: 0;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: 24px 32px;
       position: relative;
-      background: radial-gradient(circle at center, #0c1524 0%, #05080d 100%);
+      background: radial-gradient(circle at center, #0e1726 0%, #05080d 100%);
+      overflow: hidden;
+      box-sizing: border-box;
     }
 
     .slide-wrapper {
-      width: 100%;
-      max-width: 1280px;
+      max-width: 100%;
+      max-height: 100%;
       aspect-ratio: 16 / 9;
+      width: auto;
+      height: 100%;
       position: relative;
-      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--border);
-      border-radius: 10px;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.9), 0 0 0 1.5px rgba(56, 189, 248, 0.3);
+      border-radius: 12px;
       overflow: hidden;
       background: #000;
       display: flex;
@@ -173,10 +179,9 @@
       width: 100%;
       height: 100%;
       object-fit: contain;
-      transition: opacity 0.15s ease-out;
+      display: block;
     }
-
-    /* FLOATING NAV CONTROLS */
+/* FLOATING NAV CONTROLS */
     .nav-arrow {
       position: absolute;
       top: 50%;
@@ -221,7 +226,7 @@
     .notes-header {
       padding: 14px 18px;
       border-bottom: 1px solid var(--border);
-      font-size: 13.5px;
+      font-size: 15px;
       font-weight: 800;
       color: var(--gold);
       display: flex;
@@ -233,8 +238,8 @@
       flex: 1;
       padding: 20px 18px;
       overflow-y: auto;
-      font-size: 14.5px;
-      line-height: 1.7;
+      font-size: 15.5px;
+      line-height: 1.8;
     }
     .notes-section-title {
       font-size: 16px;
@@ -251,13 +256,13 @@
       padding: 12px 14px;
       margin-bottom: 16px;
       color: #e0f2fe;
-      font-size: 13.5px;
+      font-size: 15px;
     }
     .notes-talk-box b {
       color: #38bdf8;
       display: block;
       margin-bottom: 4px;
-      font-size: 12px;
+      font-size: 13.5px;
     }
 
     /* GRID MODAL VIEW */
@@ -308,7 +313,7 @@
     }
     .grid-caption {
       padding: 8px 10px;
-      font-size: 12px;
+      font-size: 13.5px;
       font-weight: 700;
       color: var(--text-muted);
       white-space: nowrap;
@@ -397,7 +402,7 @@
     }
     .shortcuts-help {
       color: var(--text-muted);
-      font-size: 12px;
+      font-size: 13.5px;
       display: flex;
       gap: 12px;
     }
