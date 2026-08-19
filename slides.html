@@ -539,7 +539,7 @@
     <aside class="notes-sidebar" id="notes-sidebar">
       <div class="notes-header">
         <span id="notes-slide-num">SLIDE 01 / 21</span>
-        <span style="font-size:12px; color:var(--text-muted);">スピーカーノート（しおり社長 音声ナレーション同期）</span>
+        <span style="font-size:12px; color:var(--text-muted);">スピーカーノート（AI音声ナレーション同期）</span>
       </div>
       <div class="notes-body" id="notes-content"></div>
     </aside>
@@ -555,12 +555,12 @@
     <div class="video-modal-content" onclick="event.stopPropagation()">
       <div class="video-modal-header">
         <div style="font-size:15px; font-weight:800; display:flex; align-items:center; gap:8px;">
-          <span>🎬 TSH Beyond-Dashboard 説明動画（ナレーション: 小島しおり社長 / ElevenLabs v3 / 1.02x）</span>
+          <span>🎬 TSH Beyond-Dashboard 説明動画（AI音声ナレーション / 1.02x）</span>
         </div>
         <button class="btn" onclick="closeVideoModal()">✕ 閉じる (Esc)</button>
       </div>
       <div class="video-player-wrap">
-        <video id="deck-video" controls preload="metadata" src="TSH_Beyond-Dashboard_説明動画_しおり音声_v3_1.02x.mp4"></video>
+        <video id="deck-video" controls preload="metadata" src="video_sales_shiori.mp4"></video>
       </div>
     </div>
   </div>
@@ -848,7 +848,7 @@
       document.getElementById('notes-content').innerHTML = `
         <div class="notes-section-title">${data.title}</div>
         <div class="notes-talk-box">
-          <b>🎙️ 小島しおり社長 音声ナレーション原稿（ElevenLabs v3 / 1.02x）</b>
+          <b>🎙️ プレゼンテーション ナレーション原稿（1.02x）</b>
           ${data.talk}
         </div>
         <div style="font-size:13px; font-weight:700; color:var(--text-muted); margin-bottom:6px;">📌 スライドの要点・解説</div>
