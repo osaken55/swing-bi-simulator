@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TSH Beyond-Dashboard プレゼンテーション動画シアター (2バージョン並置)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+  <script src="auth.js"></script>
+  <style>
+    :root {
+      --bg: #070a0f;
+      --surface: #0d1522;
+      --surface-card: #121c2d;
+      --border: #22344c;
+      --accent: #38bdf8;
+      --gold: #e5c880;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP HEADER */
+    header.top-header {
+      height: 68px;
+      background: rgba(14, 21, 32, 0.98);
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+    .brand-title {
+      font-size: 17.5px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .badge-tag {
+      background: rgba(201, 169, 97, 0.18);
+      color: #e5c880;
+      border: 1.5px solid rgba(201, 169, 97, 0.5);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 800;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid #2a3d56;
+      color: #cbd5e1;
+      padding: 9px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: #38bdf8;
+      color: #fff;
+    }
+    .nav-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      border-color: #38bdf8;
+      color: #fff;
+      font-weight: 900;
+    }
+    .btn-lock {
+      background: rgba(239, 68, 68, 0.12);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* MAIN CONTAINER */
+    main.theater-wrap {
+      flex: 1;
+      max-width: 1700px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .theater-heading {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .theater-heading h1 {
+      font-size: 26px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .theater-heading p {
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    /* DUAL VIDEO GRID */
+    .video-dual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    @media (max-width: 1100px) {
+      .video-dual-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .video-card {
+      background: var(--surface-card);
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .video-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .video-card-header {
+      padding: 16px 20px;
+      background: var(--surface);
+      border-bottom: 1.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .v-title {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .v-badge-sales {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.5);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .v-badge-exec {
+      background: rgba(168, 85, 247, 0.2);
+      color: #c084fc;
+      border: 1px solid rgba(168, 85, 247, 0.5);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .video-player-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      position: relative;
+    }
+    .video-player-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .video-card-body {
+      padding: 18px 20px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 14px;
+      line-height: 1.7;
+      color: #cbd5e1;
+      flex: 1;
+    }
+    .video-card-body b {
+      color: #fff;
+    }
+
+    /* FOOTER */
+    footer.simple-footer {
+      padding: 20px 24px;
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="top-header">
+    <div class="brand-title">
+      <span>TSH Beyond-Dashboard</span>
+      <span class="badge-tag">TSH 北村部長 様 宛て</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="dashboard.html" class="nav-btn">📊 経営ダッシュボード ➔</a>
+      <a href="slides.html" class="nav-btn">📑 説明スライド ➔</a>
+      <a href="videos.html" class="nav-btn active">🎬 プレゼン動画 (2本並置)</a>
+      <a href="plans.html" class="nav-btn">✨ 松竹梅・鶴亀プラン ➔</a>
+      <a href="simulator.html" class="nav-btn">📈 TSH様 ROI試算 ➔</a>
+      <button class="btn-lock" onclick="tshLogout()" title="ログアウトしてロック">🔒 ロック</button>
+    </div>
+  </header>
+
+  <!-- MAIN THEATER -->
+  <main class="theater-wrap">
+    <div class="theater-heading">
+      <h1>🎬 TSH Beyond-Dashboard プレゼンテーション動画シアター</h1>
+      <p>対象者（営業部門／経営層・役員）に合わせて最適な動画をお選びいただけます。再生ボタン（▶）を押すとすぐに再生されます。</p>
+    </div>
+
+    <div class="video-dual-grid">
+      
+      <!-- 左: ① 営業部長向け動画 -->
+      <div class="video-card">
+        <div class="video-card-header">
+          <div class="v-title">
+            <span>👔 ① 営業部長向け動画</span>
+          </div>
+          <span class="v-badge-sales">小島しおり社長 音声 (1.02x / 6分29秒)</span>
+        </div>
+        <div class="video-player-frame">
+          <video controls preload="metadata" playsinline>
+            <source src="video_sales_shiori.mp4" type="video/mp4">
+            お使いのブラウザは動画再生に対応していません。
+          </video>
+        </div>
+        <div class="video-card-body">
+          <b>【主な対象】</b>: TSH北村ゴルフ部長・現場導入担当者様<br>
+          <b>【ポイント】</b>: 小島しおり社長の品格あるナレーション（ElevenLabs v3 × 1.02x）。現場のリアルな悩み、SwingClub-Cloudとの親和性、サポート負荷40%削減のメリットに共感するプレゼンです。
+        </div>
+      </div>
+
+      <!-- 右: ② 経営層・役員向け動画 -->
+      <div class="video-card">
+        <div class="video-card-header">
+          <div class="v-title">
+            <span>🏛️ ② 経営層・役員向け動画</span>
+          </div>
+          <span class="v-badge-exec">字幕テロップ付き (公式解説 / 5分55秒)</span>
+        </div>
+        <div class="video-player-frame">
+          <video controls preload="metadata" playsinline>
+            <source src="video_executive_subtitled.mp4" type="video/mp4">
+            お使いのブラウザは動画再生に対応していません。
+          </video>
+        </div>
+        <div class="video-card-body">
+          <b>【主な対象】</b>: TSH経営会議・取締役会・投資判断者様<br>
+          <b>【ポイント】</b>: 全編黒帯字幕テロップ付きの格調高い公式アナウンス。確定方程式（売上＝客数×単価）、10年データ資産カルテ、松竹梅鶴亀プラン、年間投資回収ROIを論理的に解説します。
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="simple-footer">
+    TSH Beyond-Dashboard v3.0 (モックアップ) — 社外秘・関係者限定公開
+  </footer>
+
+</body>
+</html>
