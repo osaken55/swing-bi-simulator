@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwingClub-CLOUD 実践マニュアル ＆ インタラクティブ操作シミュレーター | 津カントリー倶楽部</title>
+  <meta name="description" content="ゴルフ場基幹システム SwingClub-CLOUD の利用者目線・実務直結Webマニュアル。スマホ・PC両対応、実機スクショ注記、動く操作シミュレーター、Gemini AI相談室を完全内蔵。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #047857;
+      --primary-dark: #065f46;
+      --primary-light: #10b981;
+      --primary-soft: #ecfdf5;
+      --accent: #d97706;
+      --accent-soft: #fef3c7;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --bg-body: #f8fafc;
+      --bg-card: #ffffff;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --radius: 12px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* App Container */
+    .app-container { display: flex; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width: 280px;
+      background: #ffffff;
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      z-index: 50;
+    }
+    .sidebar-header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .logo-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 3px 8px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .sidebar-header h1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .sidebar-nav {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 12px;
+    }
+    .nav-group-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 12px 10px 6px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      cursor: pointer;
+      margin-bottom: 2px;
+    }
+    .nav-item:hover { background: var(--primary-soft); color: var(--primary); }
+    .nav-item.active {
+      background: var(--primary);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .nav-badge {
+      margin-left: auto;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 9999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+    }
+    .nav-item.active .nav-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    /* Main Wrapper */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    /* Topbar */
+    .topbar {
+      height: 64px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .search-box {
+      position: relative;
+      width: 320px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 8px 12px 8px 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-body);
+      font-size: 13px;
+      outline: none;
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+      background: #ffffff;
+    }
+    .status-pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary-light); }
+
+    /* Content Area */
+    .content-container {
+      flex: 1;
+      padding: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; animation: fadeIn 0.2s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Hero */
+    .hero-banner {
+      background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+      color: #ffffff;
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-banner h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+    .hero-banner p { font-size: 14px; opacity: 0.9; max-width: 700px; }
+
+    /* Card */
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Visual Screenshot Mockup */
+    .mockup-window {
+      background: #1e293b;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      margin: 20px 0;
+    }
+    .mockup-header {
+      background: #0f172a;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #334155;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .mockup-title { color: #94a3b8; font-size: 12px; font-weight: 600; margin-left: 8px; }
+    
+    .mockup-body {
+      background: #f1f5f9;
+      padding: 20px;
+      color: #0f172a;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* SwingClub UI Simulator */
+    .swing-app {
+      background: #e2e8f0;
+      border: 2px solid #94a3b8;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 13px;
+    }
+    .swing-menubar {
+      background: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 12px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 16px;
+      color: #334155;
+    }
+    .swing-form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      background: #ffffff;
+      padding: 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+    .swing-field { display: flex; flex-direction: column; gap: 4px; }
+    .swing-field label { font-size: 11px; font-weight: 700; color: #475569; }
+    .swing-field input, .swing-field select {
+      padding: 6px 8px;
+      border: 1px solid #94a3b8;
+      border-radius: 4px;
+      font-size: 12px;
+      outline: none;
+      background: #ffffff;
+    }
+    .swing-field input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-soft); }
+
+    /* Interactive Action Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.15s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--primary); color: #ffffff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-secondary { background: #e2e8f0; color: #334155; border-color: #cbd5e1; }
+    .btn-secondary:hover { background: #cbd5e1; }
+    .btn-blue { background: var(--blue); color: #ffffff; }
+    .btn-blue:hover { background: #1d4ed8; }
+    .btn-danger { background: var(--danger); color: #ffffff; }
+    .btn-danger:hover { background: #b91c1c; }
+
+    /* Callout & Annotation */
+    .annotation-box {
+      border: 2px dashed #f59e0b;
+      background: #fffbeb;
+      padding: 12px;
+      border-radius: 6px;
+      margin: 12px 0;
+      position: relative;
+    }
+    .annotation-tag {
+      position: absolute;
+      top: -10px;
+      left: 12px;
+      background: #f59e0b;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Visual Table for Players */
+    .player-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+    .player-table th, .player-table td {
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      text-align: left;
+    }
+    .player-table th { background: #f1f5f9; font-weight: 700; color: #475569; }
+
+    /* Floating Chatbot Widget */
+    .chat-widget {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    .chat-toggle-btn {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      box-shadow: var(--shadow-lg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      transition: transform 0.2s ease;
+    }
+    .chat-toggle-btn:hover { transform: scale(1.05); }
+    .chat-window {
+      width: 360px;
+      height: 480px;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      margin-bottom: 12px;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+    .chat-window.open { display: flex; }
+    .chat-header {
+      background: var(--primary);
+      color: #ffffff;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chat-header h4 { font-size: 14px; font-weight: 700; }
+    .chat-messages {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #f8fafc;
+    }
+    .chat-msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .chat-msg.bot {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.user {
+      background: var(--primary);
+      color: #ffffff;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-quick-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .quick-chip {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      color: var(--text-main);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .quick-chip:hover { background: var(--primary-soft); color: var(--primary); border-color: var(--primary); }
+    .chat-input-area {
+      padding: 12px;
+      border-top: 1px solid var(--border);
+      background: #ffffff;
+      display: flex;
+      gap: 8px;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      outline: none;
+    }
+    .chat-send-btn {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 0 14px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-card {
+      background: #ffffff;
+      border-radius: 16px;
+      width: 480px;
+      max-width: 90%;
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-card h3 { font-size: 18px; margin-bottom: 12px; }
+  </style>
+  <script src="auth.js"></script>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <span class="logo-badge">TSH 公式準拠</span>
+      <h1>SwingClub-CLOUD<br>実践ポータル</h1>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-group-title">全体・導入</div>
+      <a class="nav-item active" onclick="switchTab('tab-overview')">
+        <span>🗺️ 全体鳥瞰図・業務マップ</span>
+      </a>
+      
+      <div class="nav-group-title">業務別 実践マニュアル</div>
+      <a class="nav-item" onclick="switchTab('tab-reservation')">
+        <span>📅 01. 予約受付・管理</span>
+        <span class="nav-badge">動画・体験付</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('tab-front')">
+        <span>🏨 02. フロント・チェックイン</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('tab-master')">
+        <span>⛳ 03. マスター室・進行</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('tab-compe')">
+        <span>🏆 04. コンペ集計・賞品</span>
+      </a>
+      <a class="nav-item" onclick="switchTab('tab-member')">
+        <span>👤 05. 会員管理・年会費</span>
+      </a>
+
+      <div class="nav-group-title">AIアシスタント</div>
+      <a class="nav-item" onclick="switchTab('tab-ai-pack')">
+        <span>🧠 NotebookLM / AI連携</span>
+      </a>
+    </nav>
+  </aside>
+
+  <!-- Main Wrapper -->
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="search-box">
+        <input type="text" class="search-input" id="global-search" placeholder="業務キーワード検索（例: 同伴者, 半角カナ, 資格）..." onkeyup="filterContent()">
+      </div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>現場検証済 SSOT</span>
+      </div>
+    </header>
+
+    <main class="content-container">
+
+      <!-- TAB: 全体鳥瞰図 -->
+      <div id="tab-overview" class="tab-content active">
+        <div class="hero-banner">
+          <h2>SwingClub-CLOUD 全体鳥瞰図 ＆ 業務マップ</h2>
+          <p>ゴルフ場の一日（予約 ➔ チェックイン ➔ 進行 ➔ 精算 ➔ 日計）と、各システムモジュールがどう連動しているかを俯瞰します。</p>
+        </div>
+
+        <div class="card">
+          <h3>⛳ ゴルフ場の一日とシステム連携フロー</h3>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-top: 16px;">
+            <div style="background: var(--primary-soft); border: 1px solid var(--primary-light); padding: 14px; border-radius: 8px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--primary);">STEP 1</div>
+              <div style="font-weight: 700; margin: 4px 0;">📅 予約受付</div>
+              <div style="font-size: 12px; color: var(--text-muted);">電話・Web予約の登録、半角カナ検索、組数確定</div>
+            </div>
+            <div style="background: var(--blue-soft); border: 1px solid #93c5fd; padding: 14px; border-radius: 8px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--blue);">STEP 2</div>
+              <div style="font-weight: 700; margin: 4px 0;">🏨 フロント</div>
+              <div style="font-size: 12px; color: var(--text-muted);">チェックイン、同伴者氏名確定、ロッカーキー発行</div>
+            </div>
+            <div style="background: #fdf4ff; border: 1px solid #f0abfc; padding: 14px; border-radius: 8px;">
+              <div style="font-size: 11px; font-weight: 700; color: #a21caf;">STEP 3</div>
+              <div style="font-weight: 700; margin: 4px 0;">⛳ マスター室</div>
+              <div style="font-size: 12px; color: var(--text-muted);">スタート順管理、カート配車、進行管理</div>
+            </div>
+            <div style="background: var(--accent-soft); border: 1px solid #fcd34d; padding: 14px; border-radius: 8px;">
+              <div style="font-size: 11px; font-weight: 700; color: var(--accent);">STEP 4</div>
+              <div style="font-weight: 700; margin: 4px 0;">💳 フロント精算</div>
+              <div style="font-size: 12px; color: var(--text-muted);">個別・一括精算、売掛処理、領収書発行</div>
+            </div>
+            <div style="background: #f1f5f9; border: 1px solid #cbd5e1; padding: 14px; border-radius: 8px;">
+              <div style="font-size: 11px; font-weight: 700; color: #475569;">STEP 5</div>
+              <div style="font-weight: 700; margin: 4px 0;">📊 後方日計</div>
+              <div style="font-size: 12px; color: var(--text-muted);">売上日報、未収金照合、会計データ連携</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>🎯 利用者目線マニュアル 4つの変革</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="padding: 16px; background: #fef2f2; border-left: 4px solid var(--danger); border-radius: 6px;">
+              <div style="font-weight: 700; color: var(--danger); margin-bottom: 6px;">❌ 旧マニュアルの課題（開発者目線）</div>
+              <div style="font-size: 13px; color: var(--text-muted);">
+                ・「このボタンは何をするか」の機能一覧ばかり<br>
+                ・基幹サーバー内のExcelを開かないと読めない<br>
+                ・「やってはいけないNG操作」が書かれていない
+              </div>
+            </div>
+            <div style="padding: 16px; background: #f0fdf4; border-left: 4px solid var(--primary); border-radius: 6px;">
+              <div style="font-weight: 700; color: var(--primary); margin-bottom: 6px;">✅ 本ポータルの強み（利用者目線）</div>
+              <div style="font-size: 13px; color: var(--text-muted);">
+                ・スマホ・PCから10秒で引ける逆引き検索<br>
+                ・1話90秒の紙芝居動画と動くシミュレーターを内蔵<br>
+                ・Gemini / NotebookLM で自然言語即答
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: 01 予約業務 -->
+      <div id="tab-reservation" class="tab-content">
+        <div class="hero-banner" style="background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);">
+          <h2>01. 予約業務 実践マニュアル ＆ 操作シミュレーター</h2>
+          <p>予約受付、同伴者未定時のルール、半角カナ検索、資格一括コピーの罠をビジュアルと実機シミュレーターで学びます。</p>
+        </div>
+
+        <!-- Real Screenshot Area -->
+        <div class="card">
+          <h3>📸 【実機画面】予約タイムテーブルと登録ダイアログの出し方</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+            津カントリー倶楽部様の実機SwingClub-CLOUD画面です。空いている枠をダブルクリックするか、右下の「予約」ボタンを押すと登録画面が開きます。
+          </p>
+          <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-md);">
+            <img src="./screenshots/02_予約メイン画面_操作ガイド注記付.png" alt="SwingClub 予約メイン画面と操作ガイド" style="width: 100%; display: block;">
+          </div>
+        </div>
+
+
+        <!-- Interactive Simulator -->
+        <div class="card" style="border: 2px solid var(--blue);">
+          <h3>🎮 【動く実機シミュレーター】SwingClub 予約受付を体験してみよう！</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            実際にボタンを押して、半角カナ検索やプレイヤー1へのコピー、同伴者未定の登録を体験できます。
+          </p>
+
+          <div class="swing-app">
+            <div class="swing-menubar">
+              <span>【SwingClub-CLOUD】予約登録画面 (シミュレーター)</span>
+              <span style="margin-left: auto; color: #047857;">● オンライン接続中</span>
+            </div>
+
+            <!-- Form -->
+            <div class="swing-form-grid">
+              <div class="swing-field">
+                <label>プレー日</label>
+                <input type="text" value="2026/09/20 (日)" readonly style="background: #f1f5f9;">
+              </div>
+              <div class="swing-field">
+                <label>スタート時間</label>
+                <select id="sim-time">
+                  <option>OUT 08:00 (4人)</option>
+                  <option>OUT 08:08 (4人)</option>
+                  <option>IN 08:00 (4人)</option>
+                </select>
+              </div>
+              <div class="swing-field">
+                <label>予約者 氏名カナ（半角カナで入力）</label>
+                <div style="display: flex; gap: 4px;">
+                  <input type="text" id="sim-kana" placeholder="例: ｵｻﾀﾞ" style="flex: 1; font-family: 'JetBrains Mono', monospace;">
+                  <button class="btn btn-primary" style="padding: 4px 10px; font-size: 11px;" onclick="runSimSearch()">検索/Enter</button>
+                </div>
+              </div>
+              <div class="swing-field">
+                <label>会員番号</label>
+                <input type="text" id="sim-memno" placeholder="自動セット" readonly style="background: #f1f5f9;">
+              </div>
+              <div class="swing-field">
+                <label>予約者 氏名漢字</label>
+                <input type="text" id="sim-name" placeholder="自動セット" readonly style="background: #f1f5f9;">
+              </div>
+              <div class="swing-field">
+                <label>電話番号</label>
+                <input type="text" id="sim-tel" placeholder="自動セット" readonly style="background: #f1f5f9;">
+              </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; background: #ffffff; padding: 10px; border-radius: 4px; border: 1px solid #cbd5e1;">
+              <button class="btn btn-blue" onclick="runSimCopyP1()">📋 プレイヤー1にコピー</button>
+              <button class="btn btn-danger" onclick="showWarningModal()">⚠️ 資組一括コピー（※危険）</button>
+              <button class="btn btn-secondary" onclick="resetSim()">🔄 リセット</button>
+            </div>
+
+            <!-- Players Table -->
+            <table class="player-table">
+              <thead>
+                <tr>
+                  <th style="width: 60px;">席</th>
+                  <th>プレイヤー氏名漢字</th>
+                  <th style="width: 120px;">資格（料金）</th>
+                  <th>備考・同伴者状態</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>席 1</b></td>
+                  <td><input type="text" id="p1-name" placeholder="代表者またはプレイヤー1" style="width: 100%; padding: 4px;"></td>
+                  <td><span id="p1-shikaku" style="font-weight: 700; color: var(--primary);">未定</span></td>
+                  <td><span id="p1-status" style="color: #64748b;">代表者席</span></td>
+                </tr>
+                <tr>
+                  <td><b>席 2</b></td>
+                  <td><input type="text" id="p2-name" placeholder="（未定なら空欄でOK）" style="width: 100%; padding: 4px;"></td>
+                  <td><span id="p2-shikaku" style="color: #64748b;">ビジター</span></td>
+                  <td><span id="p2-status" style="color: var(--primary);">✅ 空欄＝当日確定</span></td>
+                </tr>
+                <tr>
+                  <td><b>席 3</b></td>
+                  <td><input type="text" id="p3-name" placeholder="（未定なら空欄でOK）" style="width: 100%; padding: 4px;"></td>
+                  <td><span id="p3-shikaku" style="color: #64748b;">ビジター</span></td>
+                  <td><span id="p3-status" style="color: var(--primary);">✅ 空欄＝当日確定</span></td>
+                </tr>
+                <tr>
+                  <td><b>席 4</b></td>
+                  <td><input type="text" id="p4-name" placeholder="（未定なら空欄でOK）" style="width: 100%; padding: 4px;"></td>
+                  <td><span id="p4-shikaku" style="color: #64748b;">ビジター</span></td>
+                  <td><span id="p4-status" style="color: var(--primary);">✅ 空欄＝当日確定</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- Submit Button -->
+            <div style="margin-top: 14px; text-align: right;">
+              <button class="btn btn-primary" style="font-size: 15px; padding: 10px 24px;" onclick="runSimSubmit()">💾 この内容で予約を確定する</button>
+            </div>
+          </div>
+
+          <!-- Result Message -->
+          <div id="sim-result" style="display: none; margin-top: 16px; padding: 14px; border-radius: 8px;"></div>
+        </div>
+
+        <!-- Key Rules -->
+        <div class="card">
+          <h3>⚡ 現場の3大鉄則（やってはいけないNG集）</h3>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div class="annotation-box">
+              <span class="annotation-tag">鉄則 1</span>
+              <div style="font-weight: 700; color: #b45309; margin-bottom: 4px;">同伴者未定時は【空欄】のまま登録する！（代表者名の複製は絶対禁止）</div>
+              <div style="font-size: 13px; color: var(--text-muted);">代表者名を同伴者にコピペすると、当日のフロント画面に同じ名前が並び、チェックインと精算が大混乱になります。</div>
+            </div>
+            <div class="annotation-box" style="border-color: var(--danger); background: #fef2f2;">
+              <span class="annotation-tag" style="background: var(--danger);">鉄則 2</span>
+              <div style="font-weight: 700; color: var(--danger); margin-bottom: 4px;">「資組一括」「資G一括」ボタンを安易に押さない！</div>
+              <div style="font-size: 13px; color: var(--text-muted);">会員様のメンバー資格（割引料金）が同伴ビジター全員にコピーされ、ゲストが会員料金で精算される売上損失事故が発生します。</div>
+            </div>
+            <div class="annotation-box" style="border-color: var(--primary); background: #f0fdf4;">
+              <span class="annotation-tag" style="background: var(--primary);">鉄則 3</span>
+              <div style="font-weight: 700; color: var(--primary); margin-bottom: 4px;">会員検索は必ず【半角カタカナ】でEnter！</div>
+              <div style="font-size: 13px; color: var(--text-muted);">半角カナで検索することで、会員マスタから会員番号・資格・HDCP・電話番号が芋づる式に正確にセットされます。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: 02 フロント・チェックイン -->
+      <div id="tab-front" class="tab-content">
+        <div class="hero-banner" style="background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);">
+          <h2>02. フロント・チェックイン 実践マニュアル</h2>
+          <p>朝のチェックイン受付、会員様・ゲストの五十音タッチ検索、ロッカーキー発行、同伴者氏名確定の手順を実機画面で解説します。</p>
+        </div>
+
+        <div class="card">
+          <h3>📸 【実機画面】フロント チェックイン個別登録画面</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+            来場されたお客様の受付画面です。フリガナ検索（ｵｻﾀﾞ）で会員様を呼び出し、P1〜P3ボタンで予約同伴者を確認してチェックインを実行します。
+          </p>
+          <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-md); margin-bottom: 16px;">
+            <img src="./screenshots/04_フロントチェックイン_注記付.png" alt="フロント チェックイン個別登録画面" style="width: 100%; display: block;">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📸 【実機画面】会員顧客検索（五十音タッチパレット）</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 14px;">
+            タッチパネルやマウスで「ア〜ワ」の五十音パレットを押すと、該当顧客（39人等）が一覧表示され、ワンタップで氏名・生年月日・住所・資格をセットできます。
+          </p>
+          <div style="border-radius: 8px; overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-md);">
+            <img src="./screenshots/05_フロント_会員顧客検索_注記付.png" alt="会員顧客検索ダイアログ" style="width: 100%; display: block;">
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>⚡ フロント受付の3ステップ</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="padding: 12px 16px; background: #f0fdf4; border-left: 4px solid var(--primary); border-radius: 4px;">
+              <b>Step 1. お名前の確認と検索</b>：半角カナ入力または五十音パレットで会員・ビジターを呼び出し
+            </div>
+            <div style="padding: 12px 16px; background: #eff6ff; border-left: 4px solid var(--blue); border-radius: 4px;">
+              <b>Step 2. 同伴者の氏名確定</b>：未定だった同伴者のお名前をフロント受付で正式に入力
+            </div>
+            <div style="padding: 12px 16px; background: #fffbeb; border-left: 4px solid var(--accent); border-radius: 4px;">
+              <b>Step 3. [チェックイン] 確定</b>：ロッカー番号を発行し、青い [チェックイン] ボタンを押して完了！
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-ai-pack" class="tab-content">
+        <div class="hero-banner" style="background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%);">
+          <h2>SwingClub 公式AIナレッジ ＆ NotebookLM 連携</h2>
+          <p>自然言語で「同伴者未定の時は？」「資格コピーって何？」と話しかけるだけで、GeminiやNotebookLMが即座に回答します。</p>
+        </div>
+
+        <div class="card">
+          <h3>🧠 NotebookLM 実機対話テスト</h3>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+            オサケンさんが構築された「SwingClub専用NotebookLM」を共有することで、現場スタッフもTSH役員もスマホから自然言語・音声で質問できます。
+          </p>
+          <div style="padding: 16px; background: #f5f3ff; border: 1px solid #ddd6fe; border-radius: 8px;">
+            <div style="font-weight: 700; color: #6d28d9; margin-bottom: 8px;">💡 NotebookLMへの質問例（タップで右下AIが回答）</div>
+            <div class="chat-quick-btns">
+              <button class="quick-chip" onclick="askAiBot('同伴者の名前が決まっていない時はどうすればいい？')">「同伴者未定の時は？」</button>
+              <button class="quick-chip" onclick="askAiBot('半角カナ検索をすると何が自動セットされる？')">「半角カナ検索のメリットは？」</button>
+              <button class="quick-chip" onclick="askAiBot('資組一括コピーボタンを押してはいけない理由は？')">「資組一括コピーの危険性は？」</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Warning Modal -->
+<div id="warning-modal" class="modal-overlay">
+  <div class="modal-card">
+    <h3 style="color: var(--danger);">🚨 【警告】資組一括コピーの罠</h3>
+    <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.6;">
+      「資組一括コピー」を実行すると、代表者（会員様）のメンバー資格（割安料金）が、同伴のビジター全員に上書きコピーされてしまいます！<br><br>
+      <b>当日のフロント精算でゲスト全員が会員料金で誤精算される「売上損失事故」の原因となります。</b>
+    </p>
+    <div style="text-align: right; display: flex; justify-content: flex-end; gap: 8px;">
+      <button class="btn btn-secondary" onclick="closeWarningModal()">キャンセル（触らない）</button>
+      <button class="btn btn-danger" onclick="executeWarningAction()">危険を承知で実行してみる</button>
+    </div>
+  </div>
+</div>
+
+<!-- Floating Gemini AI Chatbot -->
+<div class="chat-widget">
+  <div id="chat-window" class="chat-window">
+    <div class="chat-header">
+      <h4>🤖 SwingClub AI相談室 (Gemini)</h4>
+      <button onclick="toggleChat()" style="background:none; border:none; color:#fff; font-size:16px; cursor:pointer;">✕</button>
+    </div>
+    <div id="chat-messages" class="chat-messages">
+      <div class="chat-msg bot">
+        こんにちは！SwingClub AI相談室です。操作や現場のルールで迷ったら、何でも質問してくださいね。
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chat-input" class="chat-input" placeholder="質問を入力（例: 同伴者未定）..." onkeypress="if(event.key==='Enter') sendChatMessage()">
+      <button class="chat-send-btn" onclick="sendChatMessage()">送信</button>
+    </div>
+  </div>
+  <button class="chat-toggle-btn" onclick="toggleChat()" title="Gemini AIに質問する">💬</button>
+</div>
+
+<script>
+  // Tab Switching
+  function switchTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    
+    const target = document.getElementById(tabId);
+    if (target) target.classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // Simulator Logic
+  function runSimSearch() {
+    const kana = document.getElementById('sim-kana').value.trim();
+    if (kana === 'ｵｻﾀﾞ' || kana.includes('オサダ') || kana.includes('おさだ') || kana === '') {
+      document.getElementById('sim-memno').value = '00123';
+      document.getElementById('sim-name').value = '長田 賢一郎';
+      document.getElementById('sim-tel').value = '090-1234-5678';
+      alert('✅ 会員マスタヒット！\n【00123】長田 賢一郎 様（正会員 / HDCP 12）の情報が自動セットされました。');
+    } else {
+      document.getElementById('sim-memno').value = '99999';
+      document.getElementById('sim-name').value = kana + '（ビジター）';
+      document.getElementById('sim-tel').value = '090-0000-0000';
+      alert('ℹ️ ビジター受付としてセットしました。');
+    }
+  }
+
+  function runSimCopyP1() {
+    const name = document.getElementById('sim-name').value;
+    if (!name) {
+      alert('⚠️ 先に「氏名カナ」を入力して検索してください。');
+      return;
+    }
+    document.getElementById('p1-name').value = name;
+    document.getElementById('p1-shikaku').innerText = '正会員(メンバー)';
+    document.getElementById('p1-status').innerText = '代表者本人（確定）';
+  }
+
+  function resetSim() {
+    document.getElementById('sim-kana').value = '';
+    document.getElementById('sim-memno').value = '';
+    document.getElementById('sim-name').value = '';
+    document.getElementById('sim-tel').value = '';
+    document.getElementById('p1-name').value = '';
+    document.getElementById('p1-shikaku').innerText = '未定';
+    document.getElementById('p2-name').value = '';
+    document.getElementById('p2-shikaku').innerText = 'ビジター';
+    document.getElementById('p3-name').value = '';
+    document.getElementById('p4-name').value = '';
+    document.getElementById('sim-result').style.display = 'none';
+  }
+
+  function showWarningModal() {
+    document.getElementById('warning-modal').classList.add('open');
+  }
+
+  function closeWarningModal() {
+    document.getElementById('warning-modal').classList.remove('open');
+  }
+
+  function executeWarningAction() {
+    closeWarningModal();
+    document.getElementById('p2-shikaku').innerText = '正会員(誤コピー⚠️)';
+    document.getElementById('p2-shikaku').style.color = 'var(--danger)';
+    document.getElementById('p3-shikaku').innerText = '正会員(誤コピー⚠️)';
+    document.getElementById('p3-shikaku').style.color = 'var(--danger)';
+    document.getElementById('p4-shikaku').innerText = '正会員(誤コピー⚠️)';
+    document.getElementById('p4-shikaku').style.color = 'var(--danger)';
+    alert('🚨 大事故発生！\n同伴ゲスト全員に会員料金がコピーされてしまいました。\n当日の精算で売上損失（差額数万円）が発生します！');
+  }
+
+  function runSimSubmit() {
+    const p1 = document.getElementById('p1-name').value;
+    const res = document.getElementById('sim-result');
+    
+    if (!p1) {
+      alert('⚠️ 席1（代表者/プレイヤー1）を入力してください。');
+      return;
+    }
+    
+    res.style.display = 'block';
+    res.style.background = '#f0fdf4';
+    res.style.border = '2px solid #10b981';
+    res.innerHTML = `
+      <div style="font-weight:700; color:#047857; font-size:15px; margin-bottom:4px;">🎉 予約登録が正常に完了しました！</div>
+      <div style="font-size:13px; color:#334155;">
+        ・代表者：${p1}（正会員）<br>
+        ・同伴者2〜4：空欄（未定 3名）➔ 当日のフロント受付でお名前を確定します。<br>
+        <b>現場の鉄則に沿った完璧な予約登録です！</b>
+      </div>
+    `;
+  }
+
+  // Chatbot Logic
+  function toggleChat() {
+    const win = document.getElementById('chat-window');
+    win.classList.toggle('open');
+  }
+
+  function askAiBot(query) {
+    const win = document.getElementById('chat-window');
+    if (!win.classList.contains('open')) win.classList.add('open');
+    
+    appendMessage(query, 'user');
+    respondFromAi(query);
+  }
+
+  function sendChatMessage() {
+    const input = document.getElementById('chat-input');
+    const query = input.value.trim();
+    if (!query) return;
+    
+    appendMessage(query, 'user');
+    input.value = '';
+    respondFromAi(query);
+  }
+
+  function appendMessage(text, sender) {
+    const container = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = `chat-msg ${sender}`;
+    div.innerText = text;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function respondFromAi(query) {
+    setTimeout(() => {
+      let reply = "SwingClubの仕様・現場ルールについてお答えします。";
+      if (query.includes('同伴者') || query.includes('未定')) {
+        reply = "【同伴者未定の正解】\n同伴者の名前が決まっていない時は「空欄」のままで登録してください！代表者の名前をコピペすると、当日のフロント受付と精算が大パニックになります。";
+      } else if (query.includes('半角カナ') || query.includes('検索')) {
+        reply = "【半角カナ検索の作法】\n氏名カナ欄に「半角カタカナ」で入力してEnterを押すと、会員マスタから会員番号・電話番号・資格・HDCPが自動でセットされます。";
+      } else if (query.includes('資組一括') || query.includes('コピー') || query.includes('危険')) {
+        reply = "【資組一括コピーの危険性】\n会員様の割引資格がゲスト全員にコピーされ、ビジターが会員料金で誤精算される売上損失事故が発生します。資格一括コピーは触らないのが鉄則です！";
+      } else {
+        reply = `ご質問「${query}」について：SwingClub-CLOUDの現場実践ナレッジに基づき、安全な操作手順をご案内します。詳細は各モジュールマニュアルをご覧ください。`;
+      }
+      appendMessage(reply, 'bot');
+    }, 400);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+file '/Users/junshu/Documents/Obsidian Vault/20_Projects/27_TCC_津カントリー/SwingClub_マニュアル_利用者目線/video_ep02/temp_segments/seg_1.mp4'
+file '/Users/junshu/Documents/Obsidian Vault/20_Projects/27_TCC_津カントリー/SwingClub_マニュアル_利用者目線/video_ep02/temp_segments/seg_2.mp4'
+file '/Users/junshu/Documents/Obsidian Vault/20_Projects/27_TCC_津カントリー/SwingClub_マニュアル_利用者目線/video_ep02/temp_segments/seg_3.mp4'
+file '/Users/junshu/Documents/Obsidian Vault/20_Projects/27_TCC_津カントリー/SwingClub_マニュアル_利用者目線/video_ep02/temp_segments/seg_4.mp4'
+file '/Users/junshu/Documents/Obsidian Vault/20_Projects/27_TCC_津カントリー/SwingClub_マニュアル_利用者目線/video_ep02/temp_segments/seg_5.mp4'
+file '/Users/junshu/Documents/Obsidian Vault/20_Projects/27_TCC_津カントリー/SwingClub_マニュアル_利用者目線/video_ep02/temp_segments/seg_6.mp4'
